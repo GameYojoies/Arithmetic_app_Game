@@ -339,13 +339,15 @@
         }
 
 
-        this.getHistoryWithdraw = function (type) {
+        this.getHistoryWithdraw = function (type,eventType) {
 
+            console.log(type,eventType,"gggg");
             //清空再进
             $('#w_his_purchase').trigger('click');
             $("#w_his_purchase_loop").html("");
             //-----------
             var loadData = 1
+            eventType = eventType || "";
             var pageCount = 1
             $('#inputHistorywallet').val(pageCount)
             var limit = 9
@@ -362,7 +364,7 @@
                 // $('#w_his_purchase_loop').html("");
                 $.ajax({
                     type: "get",
-                    url: API_SERVER + `/v1/wallet/history?page=${loadData}&limit=${limit}&walletType=${type}`,
+                    url: API_SERVER + `/v1/wallet/history?page=${loadData}&limit=${limit}&walletType=${type}&eventType=${eventType}`,
                     headers: {
                         'Authorization': 'Bearer ' + token.token,
                     },

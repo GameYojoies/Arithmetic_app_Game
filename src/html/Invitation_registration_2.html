@@ -1,0 +1,216 @@
+<div class="menuPage bg-my" id="invitation_registration_rewardsPage"
+    style="position: absolute; background:#F8F8F8; background-repeat: no-repeat; background-size: cover;">
+    <div id="invitation_registration_rewards_header">
+    </div>
+    <div id="scroller_invitation_registration_rewards">
+        <div id="invitation_registration_rewards_body"
+            style="width: 100%; display: flex; align-items: center; flex-direction: column; ">
+            <div style="height: 10px;"></div>
+            <div
+                style="position: relative; height: auto; width: 100%; margin:  0 auto; display: flex;flex-direction: column;align-items: center;">
+                <img style="width: 100%; " src="./pic/reward/bg.png" alt="">
+                <div style="    position: absolute;top: 75px;display: flex;flex-direction: column;color: #fff;">
+                    <button style="font-size: 20px; background: linear-gradient(180deg, rgba(255, 213, 74, 1) -19.44%, rgba(254, 193, 41, 1) 37.92%, rgba(254, 194, 0, 1) 89.81%);
+                    border-radius: 15px; padding: 5px 50px; border: none; color: #fff; font-weight: 500;">注册即奖励</button>
+
+
+
+
+
+
+                </div>
+
+
+                <div
+                    style="position: absolute;top: 30%;display: flex; flex-direction: column; padding: 20px; background-color: #fff; gap: 10px; width: 85%; border-radius: 10px;">
+
+                    <div style="display: flex; font-size: 20px; font-weight: bold;">
+                        <span>奖励 : </span>
+                        <span>1000元</span>
+                    </div>
+                    <div style="display: flex; padding: 0 10px; gap: 10px;">
+                        <span>条件1</span>
+                        <span style="padding:2px 0px; width: 80%; background-color: #FFF5D9 ; text-align: center;">
+                            <span style="color: #EA372A;">邀约 <span style="color: #EA372A;"
+                                    id="count_invite"></span>人</span> 注册实名</span>
+                    </div>
+                    <div style="display: flex; padding: 0 10px; gap: 10px;">
+                        <span>条件1</span>
+                        <span style="padding:2px 0px; width: 80%; background-color: #FFF5D9 ;text-align: center;">
+                            <span style="color: #EA372A;">新邀请注册有 <span style="color: #EA372A;"
+                                    id="count_active">5</span> 人</span> 体验产品</span>
+                    </div>
+
+                </div>
+
+                <div
+                    style="   width: 75%;   position: absolute;top: 47%;display: flex;flex-direction: column;color: #fff;">
+                    <button id="history_eventType"
+                        style="font-size: 24px; background: linear-gradient(180deg, rgba(255, 213, 74, 1) -19.44%, rgba(254, 193, 41, 1) 37.92%, rgba(254, 194, 0, 1) 89.81%);
+                    border-radius: 15px; padding: 10px; border: none; color: #FE2725; font-weight: 500;">领取1000元</button>
+
+                </div>
+
+                <div
+                    style="position: absolute;top: 55%;display: flex; flex-direction: column; padding: 20px; background-color: #fff; gap: 10px; width: 85%; border-radius: 10px;align-items: center;">
+
+                    <div
+                        style="display: flex; font-size: 16px; font-weight: 500; flex-direction: column;gap: 15px; width: 95%; justify-content: center;">
+
+                        <div style="display: flex;justify-content: space-between;">
+                            <span>新邀请注册（已实名）</span>
+                            <span>15人</span>
+                        </div>
+                        <div style="display: flex;justify-content: space-between;">
+                            <span>新赠体验用户</span>
+                            <span>3人</span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div
+                    style="   width: 75%;   position: absolute;top: 72%;display: flex;flex-direction: column;color: #fff;">
+                    <button id="goToinvite" style="font-size: 24px; background: linear-gradient(180deg, rgba(255, 213, 74, 1) -19.44%, rgba(254, 193, 41, 1) 37.92%, rgba(254, 194, 0, 1) 89.81%);
+                border-radius: 15px; padding: 10px; border: none; color: #FE2725; font-weight: 500;">立即邀约</button>
+
+                </div>
+
+
+                <div
+                    style="position: absolute;top: 80%;display: flex; flex-direction: column; padding: 10px; background-color: #fff; gap: 10px; width: 90%; border-radius: 10px;align-items: center;">
+
+                    <div style="display: flex; flex-direction: column;gap: 10px; width:100%; justify-content: center; ">
+
+                        <div style="display: flex; font-weight: 500; flex-direction: column; gap: 10px; width: 100%;">
+                            <span style="font-size: 18px;">规则</span>
+                            <span style="font-size: 14px;">1、活动从2024年3月20日开始，活动只对新注册用户有效</span>
+                            <span style="font-size: 14px;">2、奖励每天发至工资钱包，提现24小时内到账。</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+
+    <script>
+        var invitation_registration_rewardsObj = new invitation_registration_rewards();
+        invitation_registration_rewardsObj.init();
+
+        function invitation_registration_rewards() {
+            var myScroll;
+            this.init = function () {
+                pageInit("invitation_registration_rewardsPage");
+                headerInit("invitation_registration_rewards", "邀约注册奖励")
+
+                $("#scroller_invitation_registration_rewards").css({
+                    "width": w,
+                    "height": h - headH,
+                    "overflow": "hidden"
+
+                });
+                myScroll = new IScroll('#scroller_invitation_registration_rewards', {
+                    probeType: 1,
+                    mouseWheel: true
+                });
+
+                $("#goToinvite").unbind().click(function () {
+
+                    pageShow("invitePage");
+                    inviteObj.call();
+
+                })
+                $("#history_eventType").unbind().click(function () {
+                    pageShow("wallet_product_historyPage")
+                    wallet_product_historyObj.getHistoryWithdraw(23,270)
+               
+                })
+
+
+
+            }
+            this.call = function () {
+                // getHistory()
+                profile_invite()
+                $('#invitation_registration_rewards_Page').transition({
+                    x: w
+                }, 0);
+            }
+
+
+            function getHistory() {
+                var getToken = window.localStorage.getItem('token');
+                var token = JSON.parse(getToken);
+
+                $.ajax({
+                    type: 'get',
+                    url: API_SERVER + '/v1/wallet/history?walletType=23&eventType=270',
+                    headers: {
+                        'Authorization': 'Bearer ' + token.token,
+                    },
+                    async: true,
+                    timeout: 100000,
+                    success: function (data) {
+                        if (data.code == 0) {
+
+                        }
+                        else {
+
+                        }
+                    },
+
+                    error: function (xmlhttprequest, error) {
+                        loaderObj.unShow();
+                        msgPageObj.show(NSLang('sys.serverError') + ': ' + error);
+                    },
+                });
+            }
+
+            function profile_invite() {
+                var getToken = window.localStorage.getItem('token');
+                var token = JSON.parse(getToken);
+
+                $.ajax({
+                    type: 'get',
+                    url: API_SERVER + '/v1/profile/invite-signup',
+                    headers: {
+                        'Authorization': 'Bearer ' + token.token,
+                    },
+                    async: true,
+                    timeout: 100000,
+                    success: function (data) {
+
+                        if (data.code == 0) {
+                            data = data.result
+
+                            $('#count_invite').text(data.invite)
+                            $('#count_active').text(data.active)
+
+
+                        }
+                        else {
+
+                        }
+                    },
+
+                    error: function (xmlhttprequest, error) {
+                        loaderObj.unShow();
+                        msgPageObj.show(NSLang('sys.serverError') + ': ' + error);
+                    },
+                });
+            }
+
+
+
+
+
+        }
+    </script>

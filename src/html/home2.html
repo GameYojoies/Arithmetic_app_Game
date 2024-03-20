@@ -92,6 +92,10 @@
                     <swiper-container class="mySwiper" pagination="true" pagination-clickable="true"
                         autoplay-delay="5000" autoplay-disable-on-interaction="false" loop="false" initial-slide="0"
                         style="border-radius: 8px; overflow: hidden;">
+                        <swiper-slide "
+                            style="height: auto;  width:95%; border-radius: 8px; overflow: hidden;display: flex;justify-content: center;">
+                            <img src="./pic/home/banner-3-20.png" style="width:95%; height: auto; border-radius: 8px;">
+                        </swiper-slide>
                         <swiper-slide id="videoOpen"
                             style="height: auto;  width:95%; border-radius: 8px; overflow: hidden;display: flex;justify-content: center;">
                             <img src="./pic/home/bg-video.png" style="width:95%; height: auto; border-radius: 8px;">
@@ -466,8 +470,11 @@
 
             });
             $("#invitation_registration").unbind().click(function () {
-                pageShow("invitation_registrationPage");
-                invitation_registrationObj.call()
+                pageShow("invitation_registration_rewardsPage");
+                
+                invitation_registration_rewardsObj.call()
+                // pageShow("invitation_registrationPage");
+                // invitation_registrationObj.call()
 
 
             });
