@@ -1,0 +1,77 @@
+<div class="menuPage bg-my" id="paymentsPage" style="position: absolute;background:#FAFAFA;">
+    <div id="payments_header">
+    </div>
+    <div id="scroller_payments">
+        <div id="payments_body"
+            style="height: 800px; width: 100%; display: flex; align-items: center; flex-direction: column; ">
+            <div style="width: 90%; margin-top: 5%; height: 150px; gap: 15px; background: #fff; box-shadow: 1px 3px 8px 0px rgba(0, 0, 0, 0.12);
+            border-radius: 10px;" class="flexCenter_c">
+                <div id="go_to_bank_payment" class="flexCenter"
+                    style="     width: 50%;
+                    gap: 20px; border-radius: 10px; padding: 10px 30px; box-shadow: 1px 3px 8px 0px rgba(0, 0, 0, 0.12);">
+                    <img id="bank_icons" alt="" style="width: 25px;">
+                    <span style="font-size: 18px;">银行卡</span>
+                </div>
+
+                <div id="go_to_alipay_payment" class="flexCenter"
+                    style="     width: 50%;
+                     gap: 20px;border-radius: 10px; padding: 10px 30px; box-shadow: 1px 3px 8px 0px rgba(0, 0, 0, 0.12);">
+                    <img id="alipay_icons" alt="" style="width: 25px;">
+                    <span style="font-size: 18px;">支付宝</span>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var paymentsObj = new payments();
+    paymentsObj.init();
+
+    function payments() {
+        var myScroll;
+        this.init = function () {
+            pageInit("paymentsPage");
+            headerInit("payments", "支付")
+            $("#payments_Page").css({ "width": w, "height": h });
+            $("#scroller_payments").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+
+            myScroll = new IScroll('#scroller_payments', { probeType: 1, mouseWheel: true });
+
+            $('#bank_icons').attr("src", picRes['bank_icon.png'])
+            $('#alipay_icons').attr("src", picRes['alipay_icon.png'])
+
+
+            $("#go_to_bank_payment").unbind().click(function () {
+                pageShow("bank_cardPage");
+                bank_cardObj.getFinancialBank()
+
+            });
+
+            $("#go_to_alipay_payment").unbind().click(function () {
+                pageShow("alipay_cardPage");
+                alipay_cardObj.getFinancialAlipay()
+
+            });
+
+
+            
+
+
+
+        }
+        this.call = function () {
+
+            $('#payments_Page').transition({
+                x: w
+            }, 0);
+        }
+
+
+
+    }
+
+</script>

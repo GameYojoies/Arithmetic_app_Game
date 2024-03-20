@@ -1,0 +1,40 @@
+<div class="menuPage bg-my" id="promotionPage"
+    style="position: absolute;background:#FAFAFA; background-repeat: no-repeat; background-size: cover;">
+    <div id="promotion_header">
+    </div>
+    <div id="scroller_promotion">
+        <div id="promotion_body" style="height: 800px; width: 100%; display: flex; align-items: center; flex-direction: column;">
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var promotionObj = new promotion();
+    promotionObj.init();
+
+    function promotion() {
+        var myScroll;
+        this.init = function () {
+            pageInit("promotionPage");
+            headerInit("promotion", "推广海报")
+            $("#promotion_Page").css({ "width": w, "height": h });
+            $("#scroller_promotion").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+           
+            myScroll = new IScroll('#scroller_promotion', { probeType: 1, mouseWheel: true });
+
+
+        }
+        this.call = function () {
+
+            $('#promotion_Page').transition({
+                x: w
+            }, 0);
+        }
+
+
+
+    }
+
+</script>

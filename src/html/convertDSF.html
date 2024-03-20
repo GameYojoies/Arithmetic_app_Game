@@ -1,0 +1,487 @@
+<div id="convert_DSFPage" style="position: absolute;background: #FAFAFA;">
+
+    <div id="convert_DSF_header">
+    </div>
+
+    <div id="scroller_convert_DSF" style="overflow: hidden; display: flex; flex-direction: column;">
+
+        <div id="convert_DSF_body" style="height: auto; flex-direction: column; display: flex;">
+            <div class="bodybox"
+                style="width: 100%; height: auto; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+
+                <div style="height: 10px;"></div>
+
+                <div
+                    style="width:90%; height: auto;  background:#fff; box-shadow: 1px 3px 8px 1px #0000001F; display: flex;  flex-direction: column; border-radius: 12px; justify-content: start ;align-items: center;">
+
+                    <div style="height: 20px;"></div>
+
+                    <div style=" display: flex; width: 95%; padding-left: 5%;  ">
+                        <span id="tranfer_DSF_cips_span" style=" height: 17px;font-size: 14px;color: #1E232C;">
+                            Dept Settlement Fund
+                        </span>
+                    </div>
+
+                    <div style="height: 20px;"></div>
+
+                    <div style=" display: flex; justify-content: center; width: 100%; position: relative;">
+                        <input id="convert_DSF_dept"
+                            style="padding-left: 18px; width: 90%; height: 48px; background: #FFFFFF;border: 1px solid #E8ECF4;border-radius: 8px; font-size: large;"
+                            type="text" class="Amount">
+                        <span style="position: absolute; top: 15px; right: 30px;">YUAN</span>
+                    </div>
+
+                    <div style="width: 85%;height: 25px; display: flex; align-items: center; justify-content: start;">
+                        <span style="color: #FF5757; font-size: 12px; display: none;" id="DSF_not_enough">没有足够的积分</span>
+                    </div>
+
+                    <div style="height: 20px;"></div>
+
+                    <div style="width: 90%; height: 70px; flex-direction: column; gap: 5px; font-size:14px;"
+                        class="flexCenter">
+                        <span id="">需要消耗：</span>
+
+
+                    </div>
+
+                    <div style="height:20px;"></div>
+
+                    <div class="flexCenter" style="gap: 10px;">
+                        <div id="show_point_DSF" style="font-size: 26px; color: #457BFF; font-weight: bold;">0</div>
+                        <span style="color:#808080;" id="DSF_span_points">积分</span>
+                    </div>
+
+                    <div style="height:20px;"></div>
+
+                    <div style="width: 90%; height: 70px; flex-direction: column; gap: 5px; font-size: 14px;"
+                        class="flexCenter">
+                        <span id="">需要消耗：</span>
+
+                    </div>
+
+                    <div style="height:20px;"></div>
+
+                    <div class="flexCenter" style="gap: 10px;">
+                        <div id="show_cips_DSF" style="font-size: 26px; color: #457BFF; font-weight: bold;">0</div>
+                        <span style="color:#808080;" id="DSF_span_dsf">债务清算基金</span>
+                    </div>
+
+                    <div style="height:35px;"></div>
+
+                    <div style="gap: 5px; width: 85%;display: flex; flex-direction: row; align-items: center;">
+                        <img id="DSF_img1" style="height: 15px; width: 15px;" loading="lazy">
+                        <span id="DSF_span1" style="font-size: 12px;" loading="lazy"> The fee is deducted per each
+                            transaction.</span>
+                    </div>
+
+
+
+                    <div style="height: 15px;"></div>
+
+                    <div id="covert_money_DSF"
+                        style="width: 85%; height: 48px; background: var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%));
+              border-radius: 8px;border: none; display: flex; align-items: center; text-align: center; justify-content: center; ">
+
+                        <span style=" color: #FFFFFF;"><b id="convert_DSF_span2">Convert</b></span>
+                    </div>
+
+                    <div style="height: 20px;"></div>
+
+                </div>
+
+                <div style="height: 100px;"></div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- bg_shadow -->
+    <div id="bg_back_convert"
+        style="display: none; visibility: visible; height: 100%; width: 100%; z-index: 3;position: absolute;left: 0px;top: 0px;background-color: #000000;opacity: 0.4;justify-content: center;align-items: center;">
+    </div>
+
+    <!-- pop_code 6 digit -->
+    <div id="pop_up_check_code_convert"
+        style="display: none; z-index: 4;width: 100%; height: 100%; position: absolute; top: 0; left: 0;"
+        class="flexCenter_c">
+
+        <!-- code 6 digit -->
+        <div id="convert_code"
+            style="display: flex; border-radius: 10px; height: 330px; width: 85%; background: #fff; color: #414655;"
+            class="flexTop_c">
+            <div style="height: 20px;"></div>
+            <span style="font-weight: 600;">安全校验</span>
+            <div style="height: 20px;"></div>
+            <span style="font-size: 16px;">为了保障您的账户安全，请输入资金密码</span>
+            <div style="height: 20px;"></div>
+
+            <div style="width: 90%;" class="flexCenter">
+                <form id="otpForm" class="flexCenter" style="gap: 5px;">
+                    <input id="convert_digit1" class="code-input3" type="text" pattern="\d" maxlength="1" required
+                        style="width: 35px; height: 40px; text-align: center; border-radius: 4px; border: 1px solid #D5DADF" />
+                    <input id="convert_digit2" class="code-input3" type="text" pattern="\d" maxlength="1" required
+                        style="width: 35px; height: 40px; text-align: center; border-radius: 4px; border: 1px solid #D5DADF" />
+                    <input id="convert_digit3" class="code-input3" type="text" pattern="\d" maxlength="1" required
+                        style="width: 35px; height: 40px; text-align: center; border-radius: 4px; border: 1px solid #D5DADF" />
+                    <input id="convert_digit4" class="code-input3" type="text" pattern="\d" maxlength="1" required
+                        style="width: 35px; height: 40px; text-align: center; border-radius: 4px; border: 1px solid #D5DADF" />
+                    <input id="convert_digit5" class="code-input3" type="text" pattern="\d" maxlength="1" required
+                        style="width: 35px; height: 40px; text-align: center; border-radius: 4px; border: 1px solid #D5DADF" />
+                    <input id="convert_digit6" class="code-input3" type="text" pattern="\d" maxlength="1" required
+                        style="width: 35px; height: 40px; text-align: center; border-radius: 4px; border: 1px solid #D5DADF" />
+                </form>
+            </div>
+            <div style="height: 30px;"></div>
+
+            <div
+                style="width: 90%; font-size: 16px; display: flex; flex-direction: column; align-items:start; justify-content: left; gap: 5px;">
+                <span>重要提醒：</span>
+                <span>本次充值手续费1.00元，实际到账1,495.00元。</span>
+            </div>
+
+            <div style="height: 25px;"></div>
+            <div style="height: 40px; gap:30px ; font-weight: 500;" class="flexCenter">
+                <div id="btn_convert_cancel"
+                    style="border-radius: 34px; height: 36px; width: 120px; color: #E31D1A; border: 1px solid #E31D1A; font-size: 16px;"
+                    class="flexCenter">
+                    <span>取消</span>
+                </div>
+                <div id="btn_convert_confirm"
+                    style="border-radius: 34px; height: 36px; width: 120px; background: #E31D1A; color: #fff; font-size: 16px;"
+                    class="flexCenter">
+                    <span>确认</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- success -->
+        <div id="convert_seccess"
+            style="display: none; border-radius: 10px; height: 200px; width: 85%; background: #fff; color: #414655;"
+            class="flexTop_c">
+            <div style="height: 60px;"></div>
+            <span style="font-size: 18px;">充值成功！</span>
+            <div style="height: 30px;"></div>
+            <div id="btn_convert_success"
+                style="border-radius: 34px; height: 36px; width: 120px; background: #E31D1A; color: #fff; font-size: 16px;"
+                class="flexCenter">
+                <span>确认</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var convert_DSFObj = new convert_DSF();
+    convert_DSFObj.init();
+
+    function convert_DSF() {
+
+        var myScroll;
+
+        this.init = function () {
+            pageInit("convert_DSFPage");
+            headerInit("convert_DSF", "兑换")
+
+            $("#DSF_img1").attr({ "src": picRes['DSF_img1.png'] });
+            $("#scroller_convert_DSF").css({ "width": w, "height": h - headH });
+
+
+            myScroll = new IScroll('#scroller_convert_DSF', { probeType: 1, mouseWheel: true });
+
+            myScroll.on('scrollStart', function () {
+                $('input').prop('readonly', true).css('cursor', 'not-allowed');
+            });
+
+            myScroll.on('scrollEnd', function () {
+                $("input").prop('readonly', false).css('cursor', 'auto');
+            });
+
+
+            $("#convert_DSF_dept").keypress(function (event) {
+                var ew = event.which;
+                if (48 <= ew && ew <= 57)
+                    return true;
+                return false;
+            });
+
+            $("#convert_DSF_header_left").click(function () {
+                cleanInput()
+
+            });
+
+
+        }
+
+        // move Text
+        function moveToNext(currentInput) {
+            var maxLength = parseInt(currentInput.attr("maxlength"), 10);
+            var currentLength = currentInput.val().length;
+
+            if (currentLength === maxLength) {
+                // Move focus to the next input field
+                currentInput.next(".code-input3").focus();
+            }
+        }
+
+
+        this.call = function () {
+            pageShow('convert_DSFPage')
+
+        }
+
+        this.getdata = function (data) {
+
+
+            $("#convert_DSF_dept").on("input", function () {
+
+                var inputAmount = $("#convert_DSF_dept").val()
+                $("#show_point_DSF").text(inputAmount * data.debtRate)
+                $("#show_cips_DSF").text(parseFloat(inputAmount).toFixed(2))
+
+                if (inputAmount == "") {
+                    $("#show_point_DSF").text("0")
+                    $("#show_cips_DSF").text("0")
+                }
+                // if (inputAmount * data.debtRate <= data.points) {
+                //     $('#DSF_not_enough').css({ "display": "none" })
+                //     $('#show_point_DSF').css({ "color": "#457BFF" })
+                //     $('#show_cips_DSF').css({ "color": "#457BFF" })
+                // }
+
+                // if (inputAmount * data.debtRate > data.points) {
+                //     $('#DSF_not_enough').css({ "display": "flex" })
+                //     $('#show_point_DSF').css({ "color": "#FF5757" })
+                //     $('#show_cips_DSF').css({ "color": "#FF5757" })
+                // }
+
+
+            });
+
+            $("#covert_money_DSF").unbind().click(function () {
+                tranferCIPS();
+            })
+
+            function tranferCIPS() {
+
+                var amountDSF = $("#convert_DSF_dept")
+                var type = $("#convert_DSF_type")
+
+                if (amountDSF.val() == "") {
+                    msgPageObj.show('输入完整信息')
+                }
+
+                if (data.debt == '0' && amountDSF.val() != "") {
+                    msgPageObj.show(NSLang('DSF.nohave'))
+                }
+
+                if (amountDSF.val() * data.debtRate > data.points) {
+                    msgPageObj.show(NSLang('DSF.over'))
+                }
+
+
+                // if ((amountDSF.val() != "") && (amountDSF.val() * data.debtRate <= data.points) && data.debt != '0') {
+
+                //     msgObj.show(`<div style="font-weight:bold; margin-top:10px;">${NSLang('DSF.confirm')}</div>` + '<br>' + amountDSF.val() + 'CIPS',
+                //         function () {
+                //             loaderObj.show();
+                //             get2FAconvert_DSF();
+                //             msgObj.unShow();
+                //         })
+                // }
+
+                if ((amountDSF.val() != "") && data.debt != '0') {
+
+                    msgObj.show(`<div style="font-weight:bold; margin-top:10px;">是否兑换？</div>` + '<br>' + amountDSF.val() + 'YUAN',
+                        function () {
+                            loaderObj.show();
+                            get2FAconvert_DSF();
+                            msgObj.unShow();
+                        })
+                }
+            }
+        }
+
+
+
+        function get2FAconvert_DSF() {
+            var Token = localStorage.getItem('token')
+            var obj = JSON.parse(Token);
+            $.ajax({
+                type: "get",
+                url: API_SERVER + "/v1/twoFA",
+                headers: {
+                    'Authorization': 'Bearer ' + obj.token
+                },
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+
+                success: function (data) {
+                    loaderObj.show();
+                    if (data.result.status == false) {
+                        loaderObj.unShow();
+
+                        msgObj.show('您尚未开启交易密码', function () {
+                            msgObj.unShow()
+                            pageShow('settingPage')
+                        })
+
+                    }
+
+                    if (data.result.status == true) {
+                        loaderObj.unShow();
+                        popUp2FA()
+                    }
+
+                },
+                error: function (xmlhttprequest, error) {
+                    console.log(error, xmlhttprequest);
+
+                }
+            });
+
+        }
+
+        function popUp2FA() {
+
+            $("#pop_up_check_code_convert, #bg_back_convert, #convert_code").css({ "display": "flex" });
+            $("#convert_seccess").css({ "display": "none" });
+
+            $('#btn_convert_cancel,#convert_seccess').unbind().click(function () {
+                $("#pop_up_check_code_convert, #bg_back_convert").css({ "display": "none" });
+            })
+
+            $('#btn_convert_confirm').unbind().click(function () {
+                verify2faconvert_DSF()
+
+            })
+
+            // input code
+            $(".code-input3").on("input", function () {
+                moveToNext($(this));
+            });
+
+            $(".code-input3").on("keydown", function (e) {
+                if (e.which === 8 && $(this).val().length === 0) {
+                    // Backspace pressed and input field is empty
+                    $(this).prev(".code-input3").focus();
+                }
+            });
+        }
+
+        function verify2faconvert_DSF() {
+
+            var getToken = localStorage.getItem('token')
+            var token = JSON.parse(getToken)
+            var code1 = parseFloat($('#convert_digit1').val())
+            var code2 = parseFloat($('#convert_digit2').val())
+            var code3 = parseFloat($('#convert_digit3').val())
+            var code4 = parseFloat($('#convert_digit4').val())
+            var code5 = parseFloat($('#convert_digit5').val())
+            var code6 = parseFloat($('#convert_digit6').val())
+
+            var mData = {
+                "password": `${code1}${code2}${code3}${code4}${code5}${code6}`,
+            }
+            $.ajax({
+                type: "post",
+                url: API_SERVER + "/v1/twoFA/verify",
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                data: JSON.stringify(mData),
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                beforeSend: function (xmlhttprequest) { },
+                success: function (data) {
+                    loaderObj.unShow();
+
+                    if (data.code == 0) {
+                        msgObj.unShow()
+                        setTimeout(() => {
+                            postconvert_DSFCIPS()
+                        }, 500)
+
+                    }
+                    else {
+                        msgPageObj.show(getStatusCode(data.code))
+                    }
+                },
+                error: function (xmlhttprequest, error) {
+
+                },
+
+            });
+        }
+
+        function postconvert_DSFCIPS() {
+            loaderObj.show();
+            var getToken = localStorage.getItem('token')
+            var token = JSON.parse(getToken)
+            var amountDSF = $("#convert_DSF_dept").val()
+
+            var mData = {
+                "type": 20, //use point
+                "amount": amountDSF,
+
+            }
+
+            $.ajax({
+                type: "post",
+                url: API_SERVER + "/v1/debtSettlementFund/apply",
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                data: JSON.stringify(mData),
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                beforeSend: function (xmlhttprequest) {
+                },
+                success: function (data) {
+
+                    loaderObj.unShow();
+                    if (data.code == 0) {
+
+                        $("#convert_code").css({ "display": "none" });
+                        $("#convert_seccess").css({ "display": "flex" });
+                        cleanInput();
+                        walletObj.call();
+                    }
+                    else {
+                        msgPageObj.show(getStatusCode(data.code))
+                    }
+
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+                    cleanInput();
+                },
+                complete: function () {
+                }
+            });
+
+        }
+
+
+        function cleanInput() {
+            $("#convert_DSF_dept").val('');
+            $("#convert_DSF_amount").text('');
+            $("#convert_DSF_type").val('20');
+
+        }
+
+    }
+
+</script>

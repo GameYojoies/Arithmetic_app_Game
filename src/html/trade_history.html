@@ -1,0 +1,257 @@
+<div class="menuPage bg-my" id="trade_historyPage" style="position: absolute; background: #FAFAFA;">
+    <div id="trade_history_header">
+    </div>
+
+
+    <div id="trade_history_body" style="height: auto; width: 100%;" class="flexTop_c">
+
+        <div style="height: 20px;"></div>
+        <div style="width: 90%; height: 30px;" class="flexTop_c">
+
+            <div
+                style="width: 100%; display: flex; gap: 20px; justify-content: start; font-size: 18px; color: #333333;">
+                <span class="selected-tab" id="trade_content1">全部订单</span>
+                <span id="trade_content2">待处理</span>
+                <span id="trade_content3">已完成</span>
+            </div>
+
+        </div>
+
+        <div style="height: 20px;"></div>
+
+        <!-- Loop product history -->
+        <div id="scroller_trade_history">
+            <div id="loop_produchistory_history" style="height: auto; width: 100%;" class="flexTop_c">
+
+            </div>
+        </div>
+
+        <div style="height: 15px;"></div>
+    </div>
+</div>
+
+
+<script>
+    var trade_historyObj = new trade_history();
+    trade_historyObj.init();
+
+    function trade_history() {
+        var myScroll;
+        this.init = function () {
+            pageInit("trade_historyPage");
+            headerInit("trade_history", "购买记录")
+            $("#trade_history_Page").css({ "width": w, "height": h });
+            $("#scroller_trade_history").css({ "width": w, "height": h - headH - 70, "overflow": "hidden" });
+
+            $('.trade_icon1').attr("src", picRes['trade_icon1'])
+            // $('#trade_icon2').attr("src", picRes['trade_icon2'])
+            // $('#trade_icon3').attr("src", picRes['trade_icon3'])
+
+            myScroll = new IScroll('#scroller_trade_history', { probeType: 1, mouseWheel: true });
+
+            $('#trade_content1').unbind().click(function () {
+                $('#trade_content1').addClass('selected-tab');
+                checkId('#trade_content1');
+                trade_historyObj.getHistory("All")
+            });
+            $('#trade_content2').unbind().click(function () {
+                $('#trade_content2').addClass('selected-tab');
+                checkId('#trade_content2');
+                trade_historyObj.getHistory(10)
+            });
+            $('#trade_content3').unbind().click(function () {
+                $('#trade_content3').addClass('selected-tab');
+                checkId('#trade_content3');
+                trade_historyObj.getHistory(40)
+            });
+
+            function checkId(id) {
+
+                for (var m = 1; m <= 3; m++) {
+                    if (`#trade_content${m}` !== id) {
+                        $(`#trade_content${m}`).removeClass('selected-tab');
+                    }
+                }
+            }
+
+        }
+
+        this.getHistory = function (state) {
+            console.log(state);
+            var collect_data = []
+            var str = ""
+
+            var getToken = window.localStorage.getItem('token')
+            var token = JSON.parse(getToken)
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + `/v1/orders?page=1&limit=1000`,
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+
+                    if (state == "All") {
+                        collect_data.push(data.result)
+                    }
+                    if (state != "All") {
+                        var data = data.result.filter(data => data.state === state);
+                        collect_data.push(alipay_card)
+                    }
+
+                    if (collect_data[0].length == 0) {
+                        str += '<div style="height: 400px" class="flexCenter"><img src="./pic/icons/nodata_icons.png" style="width:110px;"></div>';
+                        $("#loop_produchistory_history").html(str);
+                        var myScroll = new IScroll('#scroller_trade_history', { probeType: 1, mouseWheel: true, });
+
+                    }
+
+
+                    if (data.records != 0) {
+                        function generateHistoryContent(data) {
+                            str += '<div id="histroyContent" style="font-size:14px; width:90%;border-top:1px solid #E4E4E4;">'
+                            str += '<div style="display: flex;height: auto; flex-direction: column;width: 100% ;position: relative;padding:10px 0; " >'
+                            str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                            str += ' <span style="margin-bottom:5px; width: 20% ;margin-top:2px;" >' + '产品名称' + '</span>' + '<span style="  width: 80%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.productName) + '</span>'
+                            str += '</div>'
+                            str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                            str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '生效时间' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.begin == null ? '-' : data.begin) + '</span>'
+                            str += '</div>'
+                            str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                            str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '结束时间' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.end == null ? '-' : data.end) + '</span>'
+                            str += '</div>'
+                            str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                            str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '价格' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.productPrice) + (data.walletType == 10 ? ' USDT' : data.walletType == 20 ? ' CNY' : ' CNY') + '</span>'
+                            str += '</div>'
+                            str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                            str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '收益' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.earningsYield) + ' CNY' + '</span>'
+                            str += '</div>'
+                            str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                            str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '产品名称' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.cycle) + ' <span style="margin-left: 5px;">天</span>' + '</span>'
+                            str += '</div>'
+                            str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                            str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '状态' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.state == '40' ? '<span style="color:#0fe10d" ;>已完成</span>' : data.state == '30' ? ' <span style="color:#0c7e0a; ">已激活</span>' : data.state == '20' ? ' <span style="color:red;">失败</span>' : ' <span style="color:#ef701d ;">待定</span>') + '</span>'
+                            str += '</div>'
+                            str += '</div>'
+                            str += '</div>'
+                            return str;
+                        }
+                        $.each(collect_data[0], function (index, data) {
+                            if (state == "All" || state == data.state) {
+                                var historyContent = generateHistoryContent(data);
+                                $("#loop_produchistory_history").html(historyContent);
+
+                            }
+                        });
+                        // $.each(collect_data[0], function (index, data) {
+                        //     if (state == "All") {
+                        //         str += '<div id="histroyContent" style="font-size:14px; width:90%;">'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: column;border-radius: 10px ;width: 90% ;background:#fff;margin: 0 auto;padding: 10px;position: relative; box-shadow: 0px 5px 5px 0px #0B203914;" >'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 20% ;margin-top:2px;" >' + '产品名称' + '</span>' + '<span style="  width: 80%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.productName) + '</span>'
+                        //         str += '</div>'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '生效时间' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.begin == null ? '-' : data.begin) + '</span>'
+                        //         str += '</div>'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '结束时间' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.end == null ? '-' : data.end) + '</span>'
+                        //         str += '</div>'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '价格' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.productPrice) + (data.walletType == 10 ? ' USDT' : data.walletType == 20 ? ' CNY' : ' CNY') + '</span>'
+                        //         str += '</div>'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '收益' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.earningsYield) + ' CNY' + '</span>'
+                        //         str += '</div>'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '产品名称' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.cycle) + ' <span style="margin-left: 5px;">天</span>' + '</span>'
+                        //         str += '</div>'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '状态' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.state == '40' ? '<span style="color:#0fe10d" ;>已完成</span>' : data.state == '30' ? ' <span style="color:#0c7e0a; ">已激活</span>' : data.state == '20' ? ' <span style="color:red ;">失败</span>' : ' <span style="color:#ef701d ;">待定</span>') + '</span>'
+                        //         str += '</div>'
+                        //         str += '</div>'
+                        //         str += '</div>'
+                        //         str += '<div style="height:10px;"></div>'
+                        //     }
+
+                        //     if (state == 10) {
+                        //         str += '<div id="histroyContent" style="font-size:14px; width:90%;">'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: column;border-radius: 10px ;width: 90% ;background:#fff;margin: 0 auto;padding: 10px;position: relative; box-shadow: 0px 5px 5px 0px #0B203914;" >'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 20% ;margin-top:2px;" >' + '产品名称' + '</span>' + '<span style="  width: 80%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.productName) + '</span>'
+                        //         str += '</div>'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '生效时间' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.begin == null ? '-' : data.begin) + '</span>'
+                        //         str += '</div>'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '结束时间' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.end == null ? '-' : data.end) + '</span>'
+                        //         str += '</div>'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '价格' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.productPrice) + (data.walletType == 10 ? ' USDT' : data.walletType == 20 ? ' CNY' : ' CNY') + '</span>'
+                        //         str += '</div>'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '收益' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.earningsYield) + ' CNY' + '</span>'
+                        //         str += '</div>'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '产品名称' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.cycle) + ' <span style="margin-left: 5px;">天</span>' + '</span>'
+                        //         str += '</div>'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '状态' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.state == '40' ? '<span style="color:#0fe10d" ;>已完成</span>' : data.state == '30' ? ' <span style="color:#0c7e0a; ">已激活</span>' : data.state == '20' ? ' <span style="color:red ;">失败</span>' : ' <span style="color:#ef701d ;">待定</span>') + '</span>'
+                        //         str += '</div>'
+                        //         str += '</div>'
+                        //         str += '</div>'
+                        //         str += '<div style="height:10px;"></div>'
+                        //     } if (state == 40) {
+                        //         str += '<div id="histroyContent" style="font-size:14px; width:90%;">'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: column;border-radius: 10px ;width: 90% ;background:#fff;margin: 0 auto;padding: 10px;position: relative; box-shadow: 0px 5px 5px 0px #0B203914;" >'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 20% ;margin-top:2px;" >' + '产品名称' + '</span>' + '<span style="  width: 80%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.productName) + '</span>'
+                        //         str += '</div>'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '生效时间' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.begin == null ? '-' : data.begin) + '</span>'
+                        //         str += '</div>'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '结束时间' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.end == null ? '-' : data.end) + '</span>'
+                        //         str += '</div>'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '价格' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.productPrice) + (data.walletType == 10 ? ' USDT' : data.walletType == 20 ? ' CNY' : ' CNY') + '</span>'
+                        //         str += '</div>'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '收益' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.earningsYield) + ' CNY' + '</span>'
+                        //         str += '</div>'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '产品名称' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.cycle) + ' <span style="margin-left: 5px;">天</span>' + '</span>'
+                        //         str += '</div>'
+                        //         str += '<div style="display: flex;height: auto; flex-direction: row;">'
+                        //         str += ' <span style="margin-bottom:5px; width: 60% ;margin-top:2px;" >' + '状态' + '</span>' + '<span style="  width: 40%; display: flex;align-items: center;    justify-content: flex-end;">' + (data.state == '40' ? '<span style="color:#0fe10d" ;>已完成</span>' : data.state == '30' ? ' <span style="color:#0c7e0a; ">已激活</span>' : data.state == '20' ? ' <span style="color:red ;">失败</span>' : ' <span style="color:#ef701d ;">待定</span>') + '</span>'
+                        //         str += '</div>'
+                        //         str += '</div>'
+                        //         str += '</div>'
+                        //         str += '<div style="height:10px;"></div>'
+                        //     }
+                        // })
+
+                        $('.trade_icon1').attr("src", picRes['trade_icon1'])
+                        var myScroll = new IScroll('#scroller_trade_history', { probeType: 1, mouseWheel: true, });
+
+
+                    }
+
+                }
+
+            })
+        }
+
+
+        this.call = function () {
+            $('#trade_historyPage').transition({
+                x: w
+            }, 0);
+        }
+
+
+
+    }
+
+</script>

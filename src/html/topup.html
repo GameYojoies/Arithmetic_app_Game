@@ -1,0 +1,843 @@
+<style>
+    .underLine {
+        border-bottom: 2px solid #E31D1A;
+        color: #414655;
+        font-weight: bold;
+    }
+
+    .select_money {
+        width: 24px;
+        height: 21px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background-size: contain;
+        background-image: url('./pic/topup/select.png');
+    }
+
+    .round {
+        position: relative;
+    }
+
+    .round label {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        cursor: pointer;
+        height: 17px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 17px;
+    }
+
+    .round label:after {
+        border: 2px solid #fff;
+        border-top: none;
+        border-right: none;
+        content: "";
+        height: 4px;
+        left: 4px;
+        opacity: 0;
+        position: absolute;
+        top: 4px;
+        transform: rotate(-45deg);
+        width: 7px;
+    }
+
+    .round input[type="checkbox"] {
+        visibility: hidden;
+    }
+
+    .round input[type="checkbox"]:checked+label {
+        background-color: #EA372A;
+        border-color: #EA372A;
+    }
+
+    .round input[type="checkbox"]:checked+label:after {
+        opacity: 1;
+    }
+</style>
+
+<div class="menuPage bg-my" id="topupPage" style="position: absolute;background:#FAFAFA; font-weight: bold;">
+    <div id="topup_header">
+    </div>
+
+    <div id="scroller_topup">
+        <div id="topup_body" style="height: auto; width: 100%;" class="flexTop_c">
+
+            <!-- header content -->
+            <div style="width: 90%; height: 90px;position: relative; " class="flexSpac">
+
+                <img src="./pic/topup/bg_topup.png" alt=""
+                    style="height: 100%; width: 100%; position: absolute; z-index: -1;">
+
+                <div class="flexCenter_c" style="gap: 10px; color: #fff; align-items: start; padding-left:20px;">
+                    <span style="font-size: 18px;">钱包余额</span>
+                    <span id="topup_money" style="font-weight: bold; font-size: 26px;">0</span>
+                </div>
+                <div id="go_assets_history" style="color:#EE3E2F; font-size: 18px; font-weight: bold; padding: 10px; background: #fff; border-radius: 6px ;
+                margin-right: 20px;" class="flexCenter">
+                    <span>资产明细</span>
+
+                </div>
+            </div>
+            <!-- Input money -->
+            <div style="height: 15px;"></div>
+            <div style="width: 100%; height: 200px ; background: #fff;" class="flexCenter">
+                <div style="width: 90%; gap: 10px; font-size: 16px;" class="flexCenter_c">
+
+                    <div style="width: 100%; font-size: 18px; color: #414655;">
+                        <span>存款金额</span>
+                    </div>
+
+                    <div id="deposit_amount_list"
+                        style="width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px;">
+
+                    </div>
+
+                    <div id="deposit_amount_A"
+                        style="width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px;">
+                        <div id="select_money1"
+                            style="border: 2px solid #EC3B2D; height: 35px; color: #414655; font-weight: bold; border-radius: 4px; position: relative;"
+                            class="flexCenter">
+                            <span>￥100</span>
+                            <div id="pic_select_money1" class="select_money">
+                            </div>
+                        </div>
+                        <div id="select_money2"
+                            style="border: 2px solid #DDDDDD ; height: 35px; color: #414655; font-weight: bold; border-radius: 4px; position: relative;"
+                            class="flexCenter">
+                            <span>￥200</span>
+                            <div id="pic_select_money2">
+                            </div>
+                        </div>
+                        <div id="select_money3"
+                            style="border: 2px solid #DDDDDD ; height: 35px; color: #414655; font-weight: bold; border-radius: 4px; position: relative;"
+                            class="flexCenter">
+                            <span>￥300</span>
+                            <div id="pic_select_money3">
+                            </div>
+                        </div>
+                        <div id="select_money4"
+                            style="border: 2px solid #DDDDDD ; height: 35px; color: #414655; font-weight: bold; border-radius: 4px; position: relative;"
+                            class="flexCenter">
+                            <span>￥500</span>
+                            <div id="pic_select_money4">
+                            </div>
+                        </div>
+                        <div id="select_money5"
+                            style="border: 2px solid #DDDDDD ; height: 35px; color: #414655; font-weight: bold; border-radius: 4px; position: relative;"
+                            class="flexCenter">
+                            <span>￥1000</span>
+                            <div id="pic_select_money5">
+                            </div>
+                        </div>
+                        <div id="select_money6"
+                            style="border: 2px solid #DDDDDD ; height: 35px; color: #414655; font-weight: bold; border-radius: 4px; position: relative;"
+                            class="flexCenter">
+                            <span>￥5000</span>
+                            <div id="pic_select_money6">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <input name="" placeholder="请输入充值金额" pattern="/^-?\d+\.?\d*$/" type="number" id="input_money_topup"
+                        value="100" onKeyPress="if(this.value.length==100) return false;"
+                        style="margin-top: 20px; font-size: 18px; outline: none; padding: 10px; width: 95%; height: 45px; border-radius: 4px; background:#e6e3e3 ; border: 1px solid #e6e3e3"></input>
+
+
+                </div>
+
+
+            </div>
+
+            <!-- payment method -->
+            <div style="height: 15px;"></div>
+            <div style="width: 100%; height: auto ; background: #fff; padding: 15px 0;" class="flexCenter">
+                <div style="width: 90%; height: 100% ; " class="flexTop_c">
+                    <span style="width: 100%; font-size: 18px; color: #414655;">支付方式</span>
+                    <div style="height: 10px;"></div>
+                    <div style="width: 100%; color:#414655; font-size: 16px;" class="flexSpac">
+                        <span id="get_medthod1" class="underLine">微信支付</span>
+                        <!-- <span id="get_medthod2" >银行卡</span> -->
+                        <span id="get_medthod3">支付宝</span>
+                        <span id="get_medthod4">银联/云闪付</span>
+                    </div>
+
+                    <!-- Click change medthod -->
+                    <!-- <div style="height: 20px;"></div>
+                    <div style="width: 100%;" class="flexSpac">
+                        <span style="color:#414655; font-size: 16px;">银行卡</span>
+
+                        <div style="border-radius: 4px; border: 1px solid #EC3A2C ; padding: 5px; font-size: 14px; color: #EC3A2C; gap: 5px; "
+                            class="flexCenter" id="go_bank_card">
+                            <img src="./pic/topup/plus.png" alt="" style="width: 15px; height: 15px;">
+                            <span>添加银行卡</span>
+                        </div>
+
+                    </div> -->
+
+                    <div style="height: 10px;"></div>
+                    <div class="line_app" style="width:100%; margin: 5px 0;"></div>
+
+                    <!-- lood medthod payment -->
+                    <!-- <div style="width: 100%; gap: 5px; margin-top: 10px;" id="lood_all_detail_payment_medthod"
+                        class="flexTop_c">
+
+                        <div style="width: 100%;" class="flexSpac">
+                            <div style="width: 65%; gap: 10px;" class="flexCenter">
+                                <img src="./pic/topup/payment.png" alt="" style="width: 20px; height: 20px;">
+                                <span>中国农业是超长超长超长超长超长超长超长超长超长</span>
+                            </div>
+                            <div class="flexCenter">
+                                <span>xxxxx</span>
+                                <input type="radio" name="select_bank_topup">
+                            </div>
+
+                        </div>
+
+
+                    </div> -->
+
+                    <div id="online_deposit_show" style="width: 100%; gap: 10px; margin-top: 10px;" class="flexTop_c">
+
+                    </div>
+
+                    <!-- Top up now -->
+                    <div style="height: 45px;"></div>
+                    <div id="sure_to_comfirm_topUp"
+                        style="width: 100%; height: 42px; background: linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%); border-radius: 42px;"
+                        class="flexCenter">
+                        <span style="font-size:18px; color: #fff;">立即充值</span>
+                    </div>
+
+                    <div style="height: 15px;"></div>
+                    <span style="color:#EA372A; font-size: 16px;">如需帮助，请联系在线客服</span>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <!-- bg_shadow -->
+    <div id="bg_back"
+        style="display: none; visibility: visible; height: 100%; width: 100%; z-index: 3;position: absolute;left: 0px;top: 0px;background-color: #000000;opacity: 0.4;justify-content: center;align-items: center;">
+    </div>
+
+    <!-- pop_code 6 digit -->
+    <div id="pop_up_check_code"
+        style="display: none; z-index: 4;width: 100%; height: 100%; position: absolute; top: 0; left: 0;"
+        class="flexCenter_c">
+
+        <!-- code 6 digit -->
+        <div id="top_up_code"
+            style="display: flex; border-radius: 10px; height: 330px; width: 85%; background: #fff; color: #414655;"
+            class="flexTop_c">
+            <div style="height: 20px;"></div>
+            <span style="font-weight: 600;">安全校验</span>
+            <div style="height: 20px;"></div>
+            <span style="font-size: 16px;">为了保障您的账户安全，请输入资金密码</span>
+            <div style="height: 20px;"></div>
+
+            <div style="width: 90%;" class="flexCenter">
+                <form id="otpForm" class="flexCenter" style="gap: 5px;">
+                    <input id="top_digit1" class="code-input2" type="text" pattern="\d" maxlength="1" required
+                        style="width: 35px; height: 40px; text-align: center; border-radius: 4px; border: 1px solid #D5DADF" />
+                    <input id="top_digit2" class="code-input2" type="text" pattern="\d" maxlength="1" required
+                        style="width: 35px; height: 40px; text-align: center; border-radius: 4px; border: 1px solid #D5DADF" />
+                    <input id="top_digit3" class="code-input2" type="text" pattern="\d" maxlength="1" required
+                        style="width: 35px; height: 40px; text-align: center; border-radius: 4px; border: 1px solid #D5DADF" />
+                    <input id="top_digit4" class="code-input2" type="text" pattern="\d" maxlength="1" required
+                        style="width: 35px; height: 40px; text-align: center; border-radius: 4px; border: 1px solid #D5DADF" />
+                    <input id="top_digit5" class="code-input2" type="text" pattern="\d" maxlength="1" required
+                        style="width: 35px; height: 40px; text-align: center; border-radius: 4px; border: 1px solid #D5DADF" />
+                    <input id="top_digit6" class="code-input2" type="text" pattern="\d" maxlength="1" required
+                        style="width: 35px; height: 40px; text-align: center; border-radius: 4px; border: 1px solid #D5DADF" />
+                </form>
+            </div>
+            <div style="height: 30px;"></div>
+
+            <div
+                style="width: 90%; font-size: 16px; display: flex; flex-direction: column; align-items:start; justify-content: left; gap: 5px;">
+                <span>重要提醒：</span>
+                <span>本次充值手续费1.00元，实际到账1,495.00元。</span>
+            </div>
+
+            <div style="height: 25px;"></div>
+            <div style="height: 40px; gap:30px ; font-weight: 500;" class="flexCenter">
+                <div id="btn_top_up_cancel"
+                    style="border-radius: 34px; height: 36px; width: 120px; color: #E31D1A; border: 1px solid #E31D1A; font-size: 16px;"
+                    class="flexCenter">
+                    <span>取消</span>
+                </div>
+                <div id="btn_top_up_confirm"
+                    style="border-radius: 34px; height: 36px; width: 120px; background: #E31D1A; color: #fff; font-size: 16px;"
+                    class="flexCenter">
+                    <span>确认</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- success -->
+        <div id="top_up_seccess"
+            style="display: none; border-radius: 10px; height: 200px; width: 85%; background: #fff; color: #414655;"
+            class="flexTop_c">
+            <div style="height: 60px;"></div>
+            <span style="font-size: 18px;">充值成功！</span>
+            <div style="height: 30px;"></div>
+            <div id="btn_top_up_success"
+                style="border-radius: 34px; height: 36px; width: 120px; background: #E31D1A; color: #fff; font-size: 16px;"
+                class="flexCenter">
+                <span>确认</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var topupObj = new topup();
+    topupObj.init();
+
+    function topup() {
+        var myScroll;
+        var selectedChannel = null;
+        this.init = function () {
+            pageInit("topupPage");
+            headerInit("topup", "充值")
+            $("#topup_Page").css({ "width": w, "height": h });
+            $("#scroller_topup").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+
+            myScroll = new IScroll('#scroller_topup', { probeType: 1, mouseWheel: true });
+
+            $('#topup_header_left').unbind().click(function () {
+                $('#input_money_topup').val("")
+                pageUnShow("topupPage")
+            })
+            $('#go_bank_card').unbind().click(function () {
+                pageShow("bank_cardPage")
+                bank_cardObj.getFinancialBank()
+            })
+            $('#go_assets_history').unbind().click(function () {
+                // pageShow("assets_historyPage")
+                // assets_historyObj.call()
+                mainObj.menuwallet();
+            })
+
+
+            $("#input_money_topup").keypress(function (event) {
+                var ew = event.which;
+                if (48 <= ew && ew <= 57)
+                    return true;
+                return false;
+            });
+
+            // for (let i = 1; i <= 4; i++) {
+            //     $(`#get_medthod${i}`).unbind().click(function () {
+            //         updategetPayment(`#get_medthod${i}`, i);
+            //     });
+            // }
+
+            for (let i = 1; i <= 6; i++) {
+                $(`#select_money${i}`).unbind().click(function () {
+                    updategetSelectMoney(`#select_money${i}`, i);
+                    $(`#input_money_topup`).val(function () {
+                        switch (i) {
+                            case 1:
+                                return 100;
+                            case 2:
+                                return 200;
+                            case 3:
+                                return 300;
+                            case 4:
+                                return 500;
+                            case 5:
+                                return 1000;
+                            case 6:
+                                return 5000;
+                            default:
+                                return 0;
+                        }
+                    });
+                });
+            }
+
+
+            $('#btn_top_up_cancel,#top_up_seccess').unbind().click(function () {
+                $("#pop_up_check_code, #bg_back").css({ "display": "none" });
+            })
+
+            $('#sure_to_comfirm_topUp').unbind().click(function () {
+                // $("#pop_up_check_code, #bg_back, #top_up_code").css({ "display": "flex" });
+                // $("#top_up_seccess").css({ "display": "none" });
+
+            })
+
+
+            // input code
+            $(".code-input2").on("input", function () {
+                moveToNext($(this));
+            });
+
+            $(".code-input2").on("keydown", function (e) {
+                if (e.which === 8 && $(this).val().length === 0) {
+                    // Backspace pressed and input field is empty
+                    $(this).prev(".code-input2").focus();
+                }
+            });
+
+            // Switch funtion
+            $("#get_medthod1").unbind().click(function () {
+                $(".NoType").css({ "display": "none" });
+                $(".WeChat").css({ "display": "flex" });
+                $(".UnionPay").css({ "display": "none" });
+                $(".Alipay").css({ "display": "none" });
+                $('.single-checkbox').not(this).prop("checked", false);
+                $(this).addClass('underLine')
+                $("#get_medthod3, #get_medthod4").removeClass('underLine')
+                selectedChannel = null;
+            })
+            $("#get_medthod3").unbind().click(function () {
+                $(".NoType").css({ "display": "none" });
+                $(".WeChat").css({ "display": "none" });
+                $(".Alipay").css({ "display": "flex" });
+                $(".UnionPay").css({ "display": "none" });
+                $('.single-checkbox').not(this).prop("checked", false);
+                $(this).addClass('underLine')
+                $("#get_medthod1, #get_medthod4").removeClass('underLine')
+                selectedChannel = null;
+            })
+            $("#get_medthod4").unbind().click(function () {
+                $(".NoType").css({ "display": "none" });
+                $(".WeChat").css({ "display": "none" });
+                $(".Alipay").css({ "display": "none" });
+                $(".UnionPay").css({ "display": "flex" });
+                $('.single-checkbox').not(this).prop("checked", false);
+                $(this).addClass('underLine')
+                $("#get_medthod3, #get_medthod1").removeClass('underLine')
+                selectedChannel = null;
+            })
+
+
+        }
+
+        // function top up cips ref for open new page
+        function getChannels() {
+
+            // $("#online_deposit_select").html('');
+            // $("#online_deposit_select").append('<option value="0">请选择</option>');
+            var getToken = window.localStorage.getItem("token");
+            var token = JSON.parse(getToken);
+
+            $.ajax({
+                type: "get",
+                url: API_SERVER + "/v1/payments",
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+
+                async: true,
+                timeout: 100000,
+                beforeSend: function (xmlhttprequest) {
+                },
+                success: function (data) {
+
+
+                    if (data.code == 0) {
+                        var channelStr = '';
+                        var str = '';
+                        var pic = []
+                        var arr = data.result;
+                        for (var i = 0; i < arr.length; i++) {
+                            var item = arr[i];
+                            var channelsArr = arr[i].channels;
+                            for (var j = 0; j < channelsArr.length; j++) {
+
+                                // getAmountsForm传递amounts数组值
+                                var getAmountsForm = channelsArr[j].amounts;
+                                // console.log(getAmountsForm, "==========================存款金额=111============================");
+
+                                var amountStream = '';
+                                if (getAmountsForm.length > 0) {
+                                    for (var n = 0; n < getAmountsForm.length; n++) {
+
+                                        amountStream = amountStream + getAmountsForm[n] + '-';
+
+
+                                    }
+
+                                } else {
+                                    amountStream = '0';
+                                }
+
+                                // var letterStr = channelsArr[j].name + '-' + channelsArr[j].limit;
+                                // $("#online_deposit_select").append('<option value="' + channelsArr[j].id + '">' + letterStr + '</option>');
+
+                                str += `<div class="${channelsArr[j].group == "" ? "NoType" : channelsArr[j].group == "微信" ? "WeChat" : channelsArr[j].group == "银联" ? "UnionPay" : "Alipay"}"
+                                        style="width: 95%; height: 50px; border-radius: 5px; background: #fff; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; display: flex; align-items: center; justify-content: center; flex-direction: row;">
+                                        <div style="width: 20%; " class="flexCenter">
+                                            <img id="logo_deposit_img${channelsArr[j].id}" src="pic/icons/${channelsArr[j].group == "" ? "NoType" : channelsArr[j].group == "微信" ? "wechat.png" : channelsArr[j].group == "银联" ? "union.png" : "ali.png"}" style="height: 24px;width: 24px; border-radius: 100%;">
+                                        </div>
+                                        <div style="width: 60%;">
+                                            <div style="font-size: 16px;">${channelsArr[j].name}</div>
+                                            <div style="color: #dadada; font-size: 12px; gap:3px;">
+                                                <span>单笔</span>
+                                                <span style="padding-left:3px;" id="${channelsArr[j].id}" >${channelsArr[j].limit}</span>
+                                            </div>
+
+                                        </div>
+                                        <div style="width: 20%;" class="flexCenter">                  
+                                                <div class="round">
+                                                    <input value="${channelsArr[j].id}_${channelsArr[j].limit}_${amountStream}" type="checkbox" id="checkbox${channelsArr[j].id}" class="single-checkbox" />
+                                                    <label for="checkbox${channelsArr[j].id}"></label>
+                                                </div>
+                                        </div>
+                                    </div>`
+                                pic.push({ "id": channelsArr[j].id });
+
+                            }
+                        }
+
+                        setTimeout(() => {
+
+                            $("#online_deposit_show").html(str);
+
+                            $(".NoType").css({ "display": "none" });
+                            $(".WeChat").css({ "display": "flex" });
+                            $(".UnionPay").css({ "display": "none" });
+                            $(".Alipay").css({ "display": "none" });
+                            myScroll = new IScroll("#scroller_topup", { probeType: 1, mouseWheel: true, });
+
+                            $('.single-checkbox').unbind();
+                            $('.single-checkbox').click(function () {
+
+
+
+
+                                if ($(this).is(":checked")) {
+                                    // If the current checkbox is checked, uncheck all other checkboxes
+                                    $('.single-checkbox').not(this).prop("checked", false);
+                                    console.log('===112233====>' + $(this).val());
+                                    selectedChannel = $(this).val();
+
+                                    var AmountsVal = selectedChannel.split('_');
+                                    var getPartAmounts = AmountsVal[2];
+                                    console.log('===445566====>' + getPartAmounts);
+                                    // getAmountsSelet(getPartAmounts);
+                                    // if (getAmountsForm.length > 0) {
+                                    //     $("#deposit_amount").css({ "display": "none" });
+                                    // } else {
+                                    //     $("#deposit_amount").css({ "display": "flex" });
+                                    // }
+
+
+                                } else {
+                                    selectedChannel = null;
+
+                                }
+                            });
+
+                        }, 200)
+
+                        //判断付款金额功能
+                        // function getAmountsSelet(getPartAmounts) {
+                        //     if (getPartAmounts.length > 1) {
+                        //         console.log("存款金额不显示:", getPartAmounts, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                        //         $("#deposit_amount_A").css({ "display": "none" });
+
+                        //         // 清空原有内容
+                        //         $("#deposit_amount_list").empty();
+
+
+
+                        //         for (var m = 0; m < getPartAmounts.length; m++) {
+                        //             var amountA = getPartAmounts.split(', ');
+                        //             var amountB = getPartAmounts.split('-');
+                                    
+
+                        //             var divHtml = `
+                        //             <div id="" style="border: 2px solid #EC3B2D; height: 35px; color: #414655; font-weight: bold; border-radius: 4px; position: relative;" class="flexCenter">
+                        //                 <span>￥${amountB}</span>
+                        //                 <div id="" class="select_money"></div>
+                        //             </div>`;
+                        //             $("#deposit_amount_list").append(divHtml);
+                        //         }
+                        //     } else {
+                        //         console.log("存款金额动态显示", ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                        //         $("#deposit_amount_A").css({ "display": "grid" });
+                        //     }
+                        // }
+
+
+                        
+
+
+                        $("#sure_to_comfirm_topUp").unbind()
+                        $("#sure_to_comfirm_topUp").on("click", function () {
+
+                            if (selectedChannel == null) {
+                                msgPageObj.show('请选择支付通道！');
+                                return;
+                            }
+
+                            var accessToken = localStorage.getItem("token");
+                            var channelArrVal = selectedChannel.split('_');
+                            var onlineValue = channelArrVal[0];
+
+                            var selectText = channelArrVal[1];
+
+                            var arrSelect = selectText.split('-');
+                            var min = Number(arrSelect[0]);
+                            var max = Number(arrSelect[1]);
+                            var payAmount = Number($("#input_money_topup").val());
+
+                            var isValidPayAmount = false;
+                            if ((min <= payAmount) && (max >= payAmount)) {
+                                isValidPayAmount = true;
+                            }
+                            if (!isValidPayAmount) {
+                                msgPageObj.show('支付金额不符合规则！')
+                                return;
+                            }
+                            var onlineAmount = $("#input_money_topup").val();
+                            var u = navigator.userAgent;
+                            var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+                            loaderObj.show();
+                            setTimeout(function () {
+                                if (onlineAmount == "") {
+                                    msgPageObj.show('请填写需要充值的金额')
+                                    loaderObj.unShow();
+                                }
+                                else if (isiOS) {
+                                    console.log(onlineValue, "=======================================================");
+                                    window.location.href = "onlinePay.html?onlineWay=" + onlineValue + "&onlineSum=" + onlineAmount + "&token=" + accessToken + "&wt=1";
+                                    loaderObj.unShow();
+                                } else {
+                                    window.open(url = "onlinePay.html?onlineWay=" + onlineValue + "&onlineSum=" + onlineAmount + "&token=" + accessToken);
+                                    loaderObj.unShow();
+                                }
+                            }, 1000);
+
+
+
+                        })
+                    }
+
+                },
+                error: function (xmlhttprequest, error) {
+                    console.log(error);
+                },
+                complete: function () {
+                }
+            });
+
+        }
+
+        // post yop up
+        function postTopUp(id, name, cardName, cardNum) {
+
+            loaderObj.show();
+            var getToken = localStorage.getItem("token");
+            var token = JSON.parse(getToken);
+            var amount = parseFloat($('#input_money_topup').val())
+
+            var mData = {
+                type: 10,
+                bankName: name,
+                cardNumber: cardNum,
+                cardName: cardName,
+                amount: amount,
+                remark: ""
+            };
+
+
+            $.ajax({
+                type: "post",
+                url: API_SERVER + "/v1/bankInfo/apply/deposit",
+                headers: {
+                    Authorization: "Bearer " + token.token,
+                },
+                data: JSON.stringify(mData),
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                beforeSend: function (xmlhttprequest) { },
+                success: function (data) {
+                    loaderObj.unShow();
+                    msgPageObj.show(getStatusCode(data.code), function () {
+                        if (data.code == 0) {
+                            walletObj.getWallet()
+                        }
+                    })
+
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+
+                    cleanInput();
+                },
+
+            });
+        }
+
+        // move Text
+        function moveToNext(currentInput) {
+            var maxLength = parseInt(currentInput.attr("maxlength"), 10);
+            var currentLength = currentInput.val().length;
+
+            if (currentLength === maxLength) {
+                // Move focus to the next input field
+                currentInput.next(".code-input2").focus();
+            }
+        }
+
+        // medtod select
+        // function updategetPayment(menuId, id) {
+
+        //     $(menuId).addClass('underLine')
+        //     for (let i = 1; i <= 4; i++) {
+        //         if (`#get_medthod${i}` !== menuId) {
+        //             $(`#get_medthod${i}`).removeClass('underLine')
+        //         }
+        //     }
+        // }
+
+        // medtod select money
+        function updategetSelectMoney(menuId, id) {
+
+            $(menuId).css({ "border": "2px solid #EC3B2D" });
+
+            for (let b = 1; b <= 6; b++) {
+                if (`#select_money${b}` !== menuId) {
+                    $(`#pic_select_money${b}`).removeClass('select_money')
+                    $(`#select_money${b}`).css({ "border": "2px solid #DDDDDD" })
+                } else {
+                    $(`#pic_select_money${b}`).addClass('select_money')
+                }
+            }
+        }
+
+        // get bank data
+        this.getBankAll = function () {
+
+            str = ""
+            data_id = []
+            collect_Bank = []
+            var getToken = window.localStorage.getItem("token");
+            var token = JSON.parse(getToken);
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/financialOrganization',
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+
+                    var Bank_card = data.result.filter(data => data.type === 10);
+                    collect_Bank.push(Bank_card)
+
+                    if (collect_Bank[0].length == 0) {
+                        str += '<div style="height: 50px;" class="flexCenter">没有数据</div>';
+                        $("#lood_all_detail_payment_medthod").html(str);
+                    }
+
+                    else if (collect_Bank[0].lenght != 0) {
+
+
+                        $.each(collect_Bank[0], function (index, data) {
+
+
+                            var longNumber = data.cardNumber;
+                            var firstFourDigits = longNumber.substr(0, 4);
+                            var maskedNumber = longNumber.replace(/^.{4}/, "****");
+                            var maskedNumber2 = maskedNumber.substr(0, 8)
+
+                            var num = formatCardNumber(maskedNumber2)
+
+                            str += '<div style="width: 100%;" class="flexSpac">'
+
+                            str += '<div class="flexCenter" style="width: 65%; gap: 10px; justify-content: left;" >'
+                            str += '<img src="./pic/topup/payment.png" alt="" style="width: 20px; height: 20px;">'
+                            str += '<span style="font-size:16px;">' + data.bankName + '</span>'
+                            str += '</div>'
+
+                            str += '<div class="flexCenter">'
+                            str += '<span style="font-size:16px;">' + num + '</span>'
+                            str += '<input type="radio" name="select_bank_topup" value="' + data.id + '">'
+                            str += '</div>'
+
+                            str += '</div>'
+
+
+                        })
+
+
+                        $("#lood_all_detail_payment_medthod").html(str)
+                        myScroll = new IScroll('#scroller_topup', { probeType: 1, mouseWheel: true });
+
+
+                        $('#btn_top_up_confirm').unbind().click(function () {
+                            $("#top_up_code").css({ "display": "none" });
+                            $("#top_up_seccess").css({ "display": "flex" });
+
+                            var selectVal = $("input[name='select_bank_topup']:checked").val()
+
+                            var checkedBank = collect_Bank[0].filter(data => data.id === parseFloat(selectVal));
+
+                            postTopUp(checkedBank[0].id, checkedBank[0].bankName, checkedBank[0].cardName, checkedBank[0].cardNumber,)
+
+                        })
+
+
+
+
+                    }
+
+                    if (data.code != 0) {
+                        msgPageObj.show(getStatusCode(data.code))
+                    }
+                },
+
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+                    cleanInput();
+                },
+            })
+        }
+
+        // format card num
+        function formatCardNumber(cardNumber) {
+
+            if (cardNumber !== null && cardNumber !== undefined) {
+
+                var formattedNumber = cardNumber.replace(/\s/g, '').replace(/(.{4})/g, '$1 ');
+                return formattedNumber.trim(); // Remove leading/trailing whitespace
+            } else {
+                return '';
+            }
+        }
+
+        this.call = function () {
+            topupObj.getBankAll();
+            getChannels();
+            $('#topup_Page').transition({
+                x: w
+            }, 0);
+        }
+
+
+
+    }
+
+</script>

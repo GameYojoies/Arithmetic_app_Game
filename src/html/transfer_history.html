@@ -1,0 +1,355 @@
+<div class="menuPage bg-my" id="history_transferPage"
+    style="position: absolute; z-index: 10; background:#ffffff; background-repeat: no-repeat; background-size: cover;">
+    <div id="history_transfer_header">
+    </div>
+    <div id="scroller_history_transfer">
+        <div id="history_transfer_body"
+            style="width: 100%; display: flex; align-items: center; flex-direction: column; ">
+            <div id="content_history_transfer" style="width: 100%;">
+
+            </div>
+            <div style="height: 60px;"></div>
+        </div>
+
+    </div>
+    <div class="pagTab" style="  position: absolute;
+    bottom: 0; display: flex;align-items: center; font-size: 16px; font-weight:bold;
+    justify-content: space-between;" id="search-page">
+        <div id="prevTransfer" class="btnPageTeam" style="margin-left: 5%;">
+            &#60;</div>
+        <div id="dropdwnoTabHistory" class="flexCenter">
+
+            <div style="border: none;background: var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%));color: white;
+             padding: 5px 7px;border-radius: 5px;font-weight: bold;" id="click_to_select_date">
+                <span>选择日期</span>
+
+            </div>
+
+            <input id="inputHistoryTransfer" type="number"
+                style="font-weight: bold; width:30px;text-align: center;margin-right: 10px;border: none;border-radius: 5px; font-size: 16px;">/
+            &nbsp;<span id="maxPageTransfer"></span>&nbsp;&nbsp;<button id="goTransferPage" style="border: none; background: var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%));
+             color: white;padding: 5px 7px;border-radius: 5px;font-weight: bold;">访问</button>
+
+
+        </div>
+        <div id="nextTransfer" class="btnPageTeam" style="margin-right: 5%;">&#62;</div>
+
+    </div>
+    <script>
+        var history_transferObj = new history_transfer();
+        history_transferObj.init();
+        function history_transfer() {
+            var myScroll;
+            this.init = function () {
+                pageInit("history_transferPage");
+                headerInit("history_transfer", "金额转帐记录")
+
+                $("#scroller_history_transfer").css({
+                    "width": w,
+                    "height": h - headH,
+                    "overflow": "hidden"
+
+                });
+                myScroll = new IScroll('#scroller_history_transfer', {
+                    probeType: 1,
+                    mouseWheel: true
+                });
+
+            }
+            this.call = function () {
+
+                $('#history_transfer_Page').transition({
+                    x: w
+                }, 0);
+            }
+            this.GetTransferHistory = function () {
+                var getToken = window.localStorage.getItem('token')
+                var token = JSON.parse(getToken);
+                var limit = 10
+                var loadData = 1
+                var pageCount = 1
+                $('#inputHistoryTransfer').val(pageCount)
+                GetTransfer_History();
+                function GetTransfer_History() {
+                    $.ajax({
+                        type: "get",
+                        url: API_SERVER + `/v1/wallet/transfer?page=${loadData}&limit=${limit}`,
+                        headers: {
+                            'Authorization': 'Bearer ' + token.token,
+                        },
+                        contentType: "application/json",
+                        dataType: "json",
+                        async: true,
+                        timeout: 100000,
+                        success: function (data) {
+                            if (data.code == 0) {
+                                $("#goTransferPage").unbind().click(function () {
+                                    // Parse the input value as a float
+                                    var inputPage = parseFloat($("#inputHistoryTransfer").val());
+                                    if (isNaN(inputPage)) {
+                                        msgPageObj.show("请输入您想要访问的页面"); // Display "Please enter the page you want to visit"
+                                    } else {
+                                        loadData = inputPage; // Set loadData to the input value (assuming these are global variables)
+                                        pageCount = inputPage; // Set pageCount to the input value (assuming these are global variables)
+                                        $('#content_history_transfer').html("");
+                                        GetTransfer_History();
+                                    }
+                                });
+                                $('#nextTransfer').unbind().click(function () {
+                                    loadData += 1
+                                    pageCount += 1
+                                    $('#content_history_transfer').html("");
+                                    GetTransfer_History()
+                                    $('#inputHistoryTransfer').val(pageCount)
+
+                                })
+                                $('#prevTransfer').unbind().click(function () {
+                                    loadData -= 1
+                                    pageCount -= 1
+                                    $('#content_history_transfer').html("");
+                                    GetTransfer_History()
+                                    $('#inputHistoryTransfer').val(pageCount)
+                                })
+                                if (pageCount == 1) {
+                                    $('#prevTransfer').css({ 'visibility': 'hidden' })
+                                }
+                                else if (pageCount != 1) {
+                                    $('#prevTransfer').css({ 'visibility': 'visible' })
+
+                                }
+                                if (pageCount == Math.ceil(data.records / limit)) {
+                                    $('#nextTransfer').css({ 'visibility': 'hidden' })
+                                }
+                                else if (pageCount != Math.ceil(data.records / limit)) {
+                                    $('#nextTransfer').css({ 'visibility': 'visible' })
+                                }
+                                $('#maxPageTransfer').text(Math.ceil(data.records / limit) == 0 ? '1' : Math.ceil(data.records / limit))
+                                $('#inputHistoryTransfer').unbind().on('input', function () {
+                                    var inputValue = parseInt($(this).val(), 10);
+                                    if (inputValue < 1 || inputValue > Math.ceil(data.records / limit) || isNaN(inputValue)) {
+                                        $(this).val(""); // Clear the input value
+                                    }
+                                    console.log(inputValue);
+                                });
+                                loaderObj.unShow();
+                                if (data.records == 0) {
+                                    str += '<div style="height: 400px" class="flexCenter"><img src="./pic/icons/nodata_icons.png" style="width:110px;"></div>';
+                                    $("#content_history_transfer").html(str);
+
+                                }
+                                if (data.records != 0) {
+                                    $('#content_history_transfer').html("");
+                                    str = ''
+                                    $.each(data.result, function (index, data) {
+                                        var finalAllDate = moment(data.cdt).format("YYYY-MM-DD HH:mm:ss");
+                                        var seletGroup = data.group;
+                                        if (data.group == 10) {
+                                            seletGroup = '算力+工业'
+                                        } else if (data.group == 20) {
+                                            seletGroup = '算力+教育'
+                                        } else if (data.group == 30) {
+                                            seletGroup = '算力+金融'
+                                        } else if (data.group == 40) {
+                                            seletGroup = '算力+医疗'
+                                        } else if (data.group == 50) {
+                                            seletGroup = '算力+交通'
+                                        } else if (data.group == 60) {
+                                            seletGroup = '算力+能源'
+                                        } else if (data.group == 70) {
+                                            seletGroup = '民族企业助力区'
+                                        } else if (data.group == null) {
+                                            seletGroup = ''
+                                        }
+                                        console.log(seletGroup, data.group, '+++++++++++++++++===+++++++++++++++++++++')
+                                        var typeName;
+                                        switch (data.walletType) {
+                                            case 20:
+                                                typeName = '产品收益';
+                                                break;
+                                            case 21:
+                                                typeName = '推荐佣金';
+                                                break;
+                                            case 26:
+                                                typeName = '会员等级奖励';
+                                                break;
+                                            case 23:
+                                                typeName = '工资';
+                                                break;
+                                            case 24:
+                                                typeName = '会议奖励';
+                                                break;
+                                            case 25:
+                                                typeName = '签到钱包';
+                                                break;
+                                            case 30:
+                                                typeName = '算力金额';
+                                                break;
+                                            default:
+                                                typeName = '';
+                                                break;
+                                        }
+
+                                        var eventTypeText;
+                                        switch (data.type) {
+                                            // case 10:
+                                            //     eventTypeDescription = '每日返利';
+                                            //     break;
+                                            // case 20:
+                                            //     eventTypeDescription = '产品周期结束';
+                                            //     break;
+                                            // case 30:
+                                            //     eventTypeDescription = '提前结束';
+                                            //     break;
+                                            // case 31:
+                                            //     eventTypeDescription = '撤销订单';
+                                            //     break;
+                                            // case 40:
+                                            //     eventTypeDescription = '用户申请';//(充值,提现)
+                                            //     break;
+                                            // case 50:
+                                            //     eventTypeDescription = '充值成功';
+                                            //     break;
+                                            case 60:
+                                                eventTypeText = '转出';
+                                                break;
+                                            case 70:
+                                                eventTypeText = '转入';
+                                                break;
+                                            // case 90:
+                                            //     if (typeName = 30) {
+                                            //         typeName = '';
+                                            //         eventTypeDescription = '购买产品：' + seletGroup;
+                                            //     }
+                                            //     break;
+                                            // case 100:
+                                            //     eventTypeDescription = '购买2型';
+                                            //     break;
+                                            // case 110:
+                                            //     eventTypeDescription = '直推奖';
+                                            //     break;
+                                            // case 120:
+                                            //     eventTypeDescription = '管理奖';
+                                            //     break;
+                                            // case 121:
+                                            //     eventTypeDescription = '平级奖';
+                                            //     break;
+                                            // case 122:
+                                            //     eventTypeDescription = '合伙人分红奖';
+                                            //     break;
+                                            // case 123:
+                                            //     eventTypeDescription = '兑换';
+                                            //     break;
+                                            // case 140:
+                                            //     eventTypeDescription = '兑换算力券';
+                                            //     break;
+                                            // case 150:
+                                            //     eventTypeDescription = 'II型申购';
+                                            //     break;
+                                            // case 160:
+                                            //     eventTypeDescription = 'II型申购拒绝';
+                                            //     break;
+                                            // case 170:
+                                            //     eventTypeDescription = 'II型部份申购';
+                                            //     break;
+                                            // case 180:
+                                            //     eventTypeDescription = '年度贡献奖';
+                                            //     break;
+                                            // case 190:
+                                            //     eventTypeDescription = '注册发放';
+                                            //     break;
+                                            // case 200:
+                                            //     eventTypeDescription = '签到发放';
+                                            //     break;
+                                            // case 210:
+                                            //     eventTypeDescription = '收益加速';
+                                            //     break;
+                                            // case 220:
+                                            //     eventTypeDescription = '每月直推奖励';
+                                            //     break;
+                                            // case 230:
+                                            //     eventTypeDescription = '日激活奖励';
+                                            //     break;
+                                            // default:
+                                            //     eventTypeDescription = '';
+                                            //     break;
+                                        }
+
+                                        var levelDescription;
+                                        switch (data.level) {
+                                            case 1:
+                                                levelDescription = '一级';
+                                                break;
+                                            case 2:
+                                                levelDescription = '二级';
+                                                break;
+                                            case 3:
+                                                levelDescription = '三级';
+                                                break;
+
+                                            default:
+                                                levelDescription = '';
+                                                break;
+                                        }
+
+
+
+                                        // check money out
+                                        var moneyOut = data.type
+                                        if (moneyOut == 60) {
+                                            moneyOut = 1
+                                        } else {
+                                            moneyOut = 0
+                                        }
+
+
+                                        str += ' <div  style="font-weight:bold; background: #fff; width: 100%;  height: 70px;align-items: center;gap: 5px; display: flex; box-shadow: 0px 0px 8px 0px rgba(92, 122, 181, 0.25);" class="go_each_detail' + data.id + '">'
+                                        str += '<div style="height: 50px; width: 50px; padding-left: 5px; " class="flexCenter">'
+                                        str += '<img src="' + (data.type == 70 ? './pic/history_trade/transfer2.png' : './pic/history_trade/transfer1.png') + '" style="width: 32px; height: 32px;">';
+                                        str += ' </div>'
+                                        str += '<div style="display: flex; flex-direction: column; width: 80%; gap: 10px;">'
+                                        str += '<div style=" display: flex;justify-content: space-between;">'
+                                        str += '<span style="color: #414655;  font-size: 16px;">' + (typeName) + (eventTypeText) + (levelDescription) + '</span>'
+                                        str += '<div class="flexCenter" style="gap: 10px;">'
+                                        str += '<span style="color: #6C7BA8;  font-size: 16px;"><span style=" ' + (data.state == 40 ? 'color:#60EB1F;">完成' : data.state == 10 ? 'color:#FA8642;"> 待确认' : data.state == 30 ? 'color:#FA3939;">已拒绝' : 'color:#0000;">完成') + '</span>' + '</span>'
+                                        str += '</div>'
+                                        str += '</div>'
+                                        str += '<div style=" display: flex;justify-content: space-between;">'
+                                        str += '<span style="color: #6C7BA8;  font-size: 16px;">' + finalAllDate + '</span>'
+                                        str += '<span style="' + (moneyOut == 1 ? "color: #EA372A;" : "color: #414655;") + '  font-size: 16px;">' + (moneyOut == 1 ? "-" + parseFloat(data.amount).toFixed(2) : parseFloat(data.amount).toFixed(2)) + '</span>'
+                                        str += '</div>'
+                                        str += '</div>'
+
+                                        // str += ' <div style="height: auto; width: 25px; " class="flexCenter">'
+                                        // str += '<img class="nexticon" style="width: 9px;height: 11px;">'
+                                        // str += '</div>'
+
+                                        str += '</div>'
+
+
+                                    })
+                                    myScroll.refresh();
+                                    $('#content_history_transfer').html(str);
+                                    $('.nexticon').attr("src", picRes['nexticon.png'])
+                                    myScroll = new IScroll('#scroller_history_transfer', { probeType: 1, mouseWheel: true });
+                                }
+
+                            }
+                            else {
+                                loaderObj.unShow();
+                                msgPageObj.show(getStatusCode(data.code))
+                            }
+
+                        },
+                        error: function (xmlhttprequest, error) {
+                            loaderObj.unShow();
+                            msgPageObj.show(NSLang('sys.serverError'))
+                        },
+
+                    });
+                }
+            }
+
+
+
+        }
+    </script>

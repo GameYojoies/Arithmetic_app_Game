@@ -1,0 +1,63 @@
+<div class="menuPage bg-my" id="about_detail_6Page"
+    style="position: absolute; z-index: 10; background:#ffffff; background-repeat: no-repeat; background-size: cover;">
+    <div id="about_detail_6_header">
+    </div>
+    <div id="scroller_about_detail_6">
+        <div id="about_detail_6_body" style="width: 100%; display: flex; align-items: center; flex-direction: column; ">
+
+            <div
+                id="about_detail_6Obj_img" style="width: 100%; justify-content: center; align-items: center; gap: 20px; background-color: #f8f8f8;flex-direction: column; display: flex;  ">
+
+
+                <!-- <div style="height: auto;  width:100%;  ">
+                    <img src="./pic/about/bg.png"
+                        style="width:100%; height: auto; background-size: cover;border-radius: 8px;">
+                </div> -->
+
+
+                <!-- <div style=" padding: 10px; width: 100%;"> -->
+                <!-- box -->
+                
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+</div>
+
+</div>
+
+<script>
+    var about_detail_6Obj = new about_detail_6();
+    about_detail_6Obj.init();
+
+    function about_detail_6() {
+        var myScroll;
+        this.init = function () {
+            pageInit("about_detail_6Page");
+            headerInit("about_detail_6", "政策解读")
+            $("#about_detail_6_Page").css({ "width": w, "height": h });
+            $("#scroller_about_detail_6").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+setTimeout(() => {
+    
+    myScroll = new IScroll('#scroller_about_detail_6', { probeType: 1, mouseWheel: true });
+}, 200);
+
+        }
+        this.call = function () {
+            $("#about_detail_6Obj_img").html('<img src="./pic/about/about_6.jpg" style="width: 100%; ">');
+            $('#about_detail_6_Page').transition({
+                x: w
+            }, 0);
+            refreshSrollObj(myScroll);
+        }
+
+
+
+    }
+
+</script>

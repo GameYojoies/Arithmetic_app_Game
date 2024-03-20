@@ -1,0 +1,135 @@
+<div class="menuPage bg-my" id="withdraw_historyPage" style="position: absolute; background: #FAFAFA;">
+    <div id="withdraw_history_header">
+    </div>
+
+    <div id="scroller_withdraw_history">
+        <div id="withdraw_history_body"
+            style="height: auto; width: 100%; display: flex; align-items: center; flex-direction: column;">
+
+            <div id="loop_data_withdraw_history" style="width: 100%;" class="flexTop_c">
+                <div style="height: 50px;" class="flexCenter">没有数据</div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var withdraw_historyObj = new withdraw_history();
+    withdraw_historyObj.init();
+
+    function withdraw_history() {
+        var myScroll;
+        this.init = function () {
+            pageInit("withdraw_historyPage");
+            headerInit("withdraw_history", "提现")
+            $("#withdraw_historyPage").css({ "width": w, "height": h });
+            $("#scroller_withdraw_history").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+
+            myScroll = new IScroll('#scroller_withdraw_history', { probeType: 1, mouseWheel: true });
+
+        }
+
+
+        this.loopWithdraw = function (type) {
+
+            var str = []
+
+            collect_walletType = []
+
+            var getToken = window.localStorage.getItem('token')
+            var token = JSON.parse(getToken);
+
+            $.ajax({
+                type: "get",
+                url: API_SERVER + "/v1/wallet/history?type=20&page=1&limit=100",
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+
+                    if (data.code == 0) {
+
+                        loaderObj.unShow();
+
+                        var walletType_details = data.result.filter(data => data.walletType === type);
+                        collect_walletType.push(walletType_details)
+
+                        if (collect_walletType[0].length == 0) {
+                            str += '<div style="height: 400px" class="flexCenter"><img src="./pic/icons/nodata_icons.png" style="width:110px;"></div>';
+                            $("#loop_data_withdraw_history").html(str);
+                        }
+
+                        if (collect_walletType[0].length != 0) {
+
+                            $.each(collect_walletType[0], function (index, data) {
+
+                                var finalAllDate = moment(data.cdt).format("YYYY-MM-DD HH:mm:ss");
+
+
+                                str += '<div style="margin-bottom:12px; width:95%; font-weight:bold;">'
+                                str += ' <div style="display: flex;align-items:center;width: 90%;height: 55px;margin:0 auto; background: #ffffff; border-radius: 8px; box-shadow: 0px 5px 5px 0px #0B203914;">'
+                                str += '  <span style="width: 10px;height: 55px;top: 0px;border-radius: 7px 0 0 7px; background:' + (data.type == 20 ? '#FA3939;' : '#60EB1F;') + '"></span>'
+                                str += '  <div style="width:100%;display:flex;justify-content:space-between;padding:0 12px">'
+                                str += '   <div style="display:flex;flex-direction:column;justify-content:space-between; gap:8px;">'
+                                str += '<div style="display:flex; flex-direction:row;">'
+                                str += '    <span style="width: auto px;height: 17px;top: 8px;font-size: 18px;line-height: 17px;display: flex;align-items: center;color: #1E232C;">提现</span>' + '<span style ="height: 17px;top: 8px;font-size: 12px;line-height: 17px;display: flex;align-items: center; margin-left: 5px; ' + (data.state == 40 ? 'color:#60EB1F;">已完成' : data.state == 10 ? 'color:#FA8642;">待定' : data.state == 30 ? 'color:#FA3939;">提现失败' : 'color:#0000;">失败' + '</span>')
+                                str += '</div>'
+                                str += '    <span style=" width: 140px;height: 12px;top: 32px;font-size: 14px;line-height: 12px;color: rgba(30, 35, 44, 0.5); margin-bottom 20px">' + finalAllDate + '</span>'
+
+                                str += '   </div>'
+                                str += '   <div style="display:flex;flex-direction:column;justify-content:center">'
+                                str += '    <span  id="Ustd"style="width: auto;height: 22px;font-size: 18px;line-height: 22px;color: #1E232C;"><b >' + parseFloat(data.amount).toFixed(2) + ' 元</b></span>'
+
+                                str += '   </div>'
+                                str += '  </div>'
+                                str += ' </div>'
+                                str += '</div>'
+                                str += '</div>'
+
+                            })
+
+                            $('#loop_data_withdraw_history').html(str);
+                           
+
+                            myScroll = new IScroll('#scroller_withdraw_history', { probeType: 1, mouseWheel: true });
+
+                        }
+
+                    }
+                    else {
+                        msgPageObj.show(getStatusCode(data.code))
+
+                    }
+
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+                    cleanInput();
+                },
+
+            });
+
+        }
+
+
+
+
+        this.call = function () {
+            $('#withdraw_historyPage').transition({
+                x: w
+            }, 0);
+
+        }
+
+
+
+    }
+
+</script>

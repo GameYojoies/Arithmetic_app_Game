@@ -1,0 +1,102 @@
+<div class="menuPage bg-my" id="wallet_product_detailPage" style="position: absolute; background: #FAFAFA; z-index: 5;">
+    <div id="wallet_product_detail_header">
+    </div>
+
+    <div id="scroller_wallet_product_detail">
+        <div id="wallet_product_detail_body" style="height: 900px; width: 100%; background: #F8F8F8;" class="flexTop_c">
+
+            <div style="height: 10px;"></div>
+
+            <div style="height: 400px; width: 90%; gap: 10px; border-radius: 10px; background: #fff;border: 0.5px solid #FFFFFF ; font-size: 16px; color: #414655; box-shadow: 0px 0px 8px 0px rgba(92, 122, 181, 0.25);"
+                class="flexTop_c">
+                <span style="font-size: 26px; color:#414655 ; margin-top: 20px;">￥ <span id="w_h_amount">0</span> </span>
+                <hr style="width: 90%;">
+                <div style="width: 90%; height: 30px;" class="flexSpac">
+                    <span>交易编号</span>
+                    <div>
+                        <span>2022022815330813357856</span>
+                    </div>
+                </div>
+                <div style="width: 90%; height: 30px;" class="flexSpac">
+                    <span>交易时间</span>
+                    <span id="w_h_time">2022-02-28 15:33:08</span>
+                </div>
+                <div style="width: 90%; height: 30px;" class="flexSpac">
+                    <span>交易类型</span>
+                    <span>取款</span>
+                </div>
+                <div style="width: 90%; height: 30px;" class="flexSpac">
+                    <span>交易方式</span>
+                    <span>支付宝支付</span>
+                </div>
+                <div style="width: 90%; height: 30px;" class="flexSpac">
+                    <span>币种</span>
+                    <span>RMB</span>
+                </div>
+                <div style="width: 90%; height: 30px;" class="flexSpac">
+                    <span>状态</span>
+                    <span id="w_h_state">失败</span>
+                </div>
+                <div style="width: 90%; height: 30px;" class="flexSpac">
+                    <span>收款银行</span>
+                    <span>建设银行</span>
+                </div>
+                <div style="width: 90%; height: 30px;" class="flexSpac">
+                    <span>收款卡号</span>
+                    <span>**** **** **** 8888</span>
+                </div>
+            </div>
+
+            <div style="height: 15px;"></div>
+            <div>
+                <span style="color:#6C7BA8 ;">如需帮助，请联系 </span>
+                <span style="color:#E31D1A ; padding-left: 10px;">人工客服</span>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+</div>
+
+
+<script>
+    var wallet_product_detailObj = new wallet_product_detail();
+    wallet_product_detailObj.init();
+
+    function wallet_product_detail() {
+        var myScroll;
+        this.init = function () {
+            pageInit("wallet_product_detailPage");
+            headerInit("wallet_product_detail", "产品收益记录")
+            $("#wallet_product_detail_Page").css({ "width": w, "height": h });
+            $("#scroller_wallet_product_detail").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+
+            myScroll = new IScroll('#scroller_wallet_product_detail', { probeType: 1, mouseWheel: true });
+
+        }
+
+        this.getDatailHistory = function(id, amount, state, time) {
+
+            console.log(id, amount, state, time);
+
+            $("#w_h_amount").html(amount)
+            $("#w_h_time").html(time)
+            $("#w_h_state").html('<span style="' + (state == 40 ? 'color:#60EB1F;">已完成' : state == 10 ? 'color:#FA8642;">待定' : state == 30 ? 'color:#FA3939;">提现失败' : 'color:#0000;">失败') + '</span>')
+
+        }
+
+        this.call = function () {
+            $('#wallet_product_detailPage').transition({
+                x: w
+            }, 0);
+        }
+
+
+
+    }
+
+</script>

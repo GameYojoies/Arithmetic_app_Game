@@ -1,0 +1,180 @@
+<div class="menuPage bg-my" id="alipay_addPage" style="position: absolute; background: #FAFAFA;">
+    <div id="alipay_add_header">
+    </div>
+
+    <!-- alipay detail add -->
+    <div id="scroller_alipay_add">
+        <div id="alipay_add_body"
+            style="height: 900px; width: 100%; display: flex; align-items: center; flex-direction: column;">
+
+            <div style="padding: 7px; font-size: 16px; width: 100%; background: #FF37371A; color: #FF5454; height: 40px; gap: 4px;"
+                class="flexLeft">
+                <img id="warn_icons" alt="" style="height: 16px; height: 16px;">
+                <span style=" padding: 5px; margin: 5px;">请保持支付宝账号与此支付宝持有人姓名一致，否则无法提款</span>
+            </div>
+
+
+            <div style="width: 90%;">
+                <div style="height: 20px;"></div>
+                <span style="color: #2F3244; font-size: 18px; font-weight: bold;">支付宝账号</span>
+                <div style="height: 10px;"></div>
+                <input id="alipay_card_number" type="text" placeholder="请输入支付宝账号" pattern="/^-?\d+\.?\d*$/"
+                    onKeyPress="if(this.value.length==19) return false;"
+                    style="font-size: 20px; padding:0 5%; border: 1px solid #82848F ;width: 90%; height: 44px; border-radius: 4px; background: transparent;">
+            </div>
+
+            <div style="width: 90%;">
+                <div style="height: 20px;"></div>
+                <span style="color: #2F3244; font-size: 18px; font-weight: bold;">支付宝名</span>
+                <div style="height: 10px;"></div>
+                <input id="alipay_card_name" type="text" placeholder="请输入支付宝名"
+                    style="font-size: 20px; padding:0 5%; border: 1px solid #82848F ;width: 90%; height: 44px; border-radius: 4px; background: transparent;">
+            </div>
+
+            <div style="height: 45px;"></div>
+            <div style="width: 90%; height: 45px; border-radius: 6px; color: #fff; font-weight: bold; background: linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%);"
+                class="flexCenter" id="submit_to_add_alipay">
+                <span style="font-size: 20px;">绑定</span>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+<script>
+    var alipay_addObj = new alipay_add();
+    alipay_addObj.init();
+
+    function alipay_add() {
+        var myScroll;
+        this.init = function () {
+            pageInit("alipay_addPage");
+            headerInit("alipay_add", "添加支付宝")
+            $("#alipay_add_Page").css({ "width": w, "height": h });
+            $("#scroller_alipay_add").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+
+            myScroll = new IScroll('#scroller_alipay_add', { probeType: 1, mouseWheel: true });
+
+            $("#alipay_card_number").keypress(function (event) {
+                var ew = event.which;
+                if (48 <= ew && ew <= 57)
+                    return true;
+                return false;
+            });
+            $("#alipay_username, #alipay_card_name").on("input", function () {
+                // ดึงค่าที่ผู้ใช้ป้อนเข้ามา
+                var inputValue = $(this).val();
+
+                // กรองและกำจัดตัวเลข
+                var filteredValue = inputValue.replace(/[0-9]/g, '');
+
+                // นำค่าที่กรองแล้วกลับไปที่ input field
+                $(this).val(filteredValue);
+            });
+
+            $('#warn_icons').attr("src", picRes['warn.png'])
+
+            $('#submit_to_add_alipay').click(function () {
+                submitAddalipay();
+            })
+        }
+
+        // submit add alipay
+        function submitAddalipay() {
+            var alipay_num = $("#alipay_card_number").val()
+            var alipay_card_name = $("#alipay_card_name").val()
+
+            var getToken = window.localStorage.getItem("token");
+            var token = JSON.parse(getToken);
+
+            mData = {
+                "type": "20",
+                "bankName": "ALIPAY",
+                "cardNumber": alipay_num,
+                "cardName": alipay_card_name
+            }
+
+            if (alipay_num == "" || alipay_card_name == "") {
+                msgPageObj.show("输入完整信息");
+            }
+
+
+            if (alipay_num != "" && alipay_card_name != "") {
+                postAddAlipay();
+            }
+
+            function postAddAlipay() {
+                loaderObj.show();
+                $.ajax({
+                    type: "post",
+                    url: API_SERVER + "/v1/financialOrganization",
+                    headers: {
+                        'Authorization': 'Bearer ' + token.token
+                    },
+                    data: JSON.stringify(mData),
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: true,
+                    timeout: 100000,
+                    beforeSend: function (xmlhttprequest) {
+                    },
+                    success: function (data) {
+
+                        loaderObj.unShow();
+                        if (data.code == 0) {
+                            msgPageObj.show('支付宝绑定成功')
+                            setTimeout(() => {
+                                msgPageObj.unShow();
+                                loaderObj.show();
+                                setTimeout(() => {
+                                    $('#alipay_addPage').transition({
+                                        x: 0
+                                    }, 0);
+                                    alipay_cardObj.getFinancialAlipay()
+                                    earnObj.getFinancialPayments()
+                                    cleanInput()
+                                    loaderObj.unShow();
+                                }, 700);
+                            }, 1000);
+                        }
+                        else {
+                            msgPageObj.show(getStatusCode(data.code))
+                        }
+                    },
+                    error: function (xmlhttprequest, error) {
+                        loaderObj.unShow();
+                        msgPageObj.show(NSLang('sys.serverError'))
+                        cleanInput();
+                    },
+                });
+            }
+
+            function cleanInput() {
+                $("#alipay_username").val("")
+                $("#alipay_card_number").val("")
+                $("#alipay_card_name").val("")
+
+            }
+
+
+        }
+
+        this.call = function () {
+
+            $('#alipay_addPage').transition({
+                x: w
+            }, 0);
+        }
+
+
+
+    }
+
+</script>

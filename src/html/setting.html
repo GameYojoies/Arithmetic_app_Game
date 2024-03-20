@@ -1,0 +1,273 @@
+<div id="settingPage" style="background-color: #F8F8F8; position: absolute;">
+
+
+    <div id="setting_header"></div>
+    <div id="setting_scroll" style="width: 100%; overflow: hidden;">
+        <div id="setting_body"
+            style="display: flex;background-color: #ffff;  padding: 20px 0; flex-direction: column; gap: 20px; align-items: center;">
+            <div
+                style="display: flex; flex-direction: column; width: 100%;  background-color: #FFF;    align-items: center;padding-bottom: 10px; ">
+
+                <div style="height: 10px ;"></div>
+                <div id="profile_go_detail"
+                    style="display: flex; justify-content: space-between; align-items: center;  width: 90%; height: 60px;">
+                    <span>头像</span>
+                    <div
+                        style="width: 50px;height: 50px;border-radius: 100px;border: 2px solid #eb1313;overflow: hidden;">
+                        <img src="./pic/profile/box4-item1.png" class="profile_img"
+                            style="object-fit: cover;width: inherit;" alt="profile">
+                    </div>
+                </div>
+                <div class="line_app" style="width:90%; margin: 10px 0;"></div>
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center;  width: 90%; height: 50px;">
+                    <span>用户名</span>
+                    <span style="color: #6C7BA8;" id="show_name_setting"></span>
+                </div>
+                <div class="line_app" style="width:90%; margin: 10px 0;"></div>
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center;  width: 90%; height: 50px;">
+                    <span>ID</span>
+                    <span style="color: #6C7BA8;" id="show_id_setting"></span>
+                </div>
+                <div class="line_app" style="width:90%; margin: 10px 0;"></div>
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center;  width: 90%; height: 50px;">
+                    <span>身份证号码</span>
+                    <span style="color: #6C7BA8;" id="show_id_card_setting"></span>
+                </div>
+                <div class="line_app" style="width:90%; margin: 10px 0;"></div>
+
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center;  width: 90%; height: 50px;">
+                    <span>电话</span>
+                    <span style="color: #6C7BA8;" id="show_phone_setting"></span>
+
+                </div>
+                <div class="line_app" style="width:90%; margin: 10px 0;"></div>
+
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center;  width: 90%; height: 50px;">
+                    <span>姓名</span>
+                    <span style="color: #6C7BA8;" id="show_name2_setting"></span>
+
+                </div>
+                <div class="line_app" style="width:90%; margin: 10px 0;"></div>
+                <div id="2FA_Open"
+                    style="display: flex; justify-content: space-between; align-items: center;  width: 90%; height: 50px;">
+                    <span>交易密码</span>
+                    <span id="show_status_activate"></span>
+
+                </div>
+                <div class="line_app" style="width:90%; margin: 10px 0;"></div>
+                <div id="show_reset_login_setting_account"
+                    style="display: flex; justify-content: space-between; align-items: center;  width: 90%; height: 50px;">
+                    <span>修改登录密码</span>
+                    <img style="color: #6C7BA8;" class="rigth_arrow">
+                </div>
+                <div class="line_app" style="width:90%; margin: 10px 0;"></div>
+
+                <div id="show_reset_pin_setting_account"
+                    style="display: flex; justify-content: space-between; align-items: center;  width: 90%; height: 50px;">
+                    <span>修改交易密码</span>
+                    <img style="color: #6C7BA8;" class="rigth_arrow">
+                </div>
+                <div class="line_app" style="width:90%; margin: 10px 0;"></div>
+
+
+
+            </div>
+            <button id="logout" style="border-radius: var(--1, 8px); width: 80%; height: 50px; color: #FFF; font-size: 18px;
+            background: var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%));border: none;">安全退出</button>
+        </div>
+    </div>
+</div>
+<script>
+
+    var settingObj = new setting();
+    settingObj.init();
+
+    function setting() {
+
+        this.init = function () {
+
+
+            setAllUILang("setting")
+            pageInit("settingPage");
+            headerInit("setting", "设置")
+            $("#setting_scroll").css({ "width": w, "height": h - headH });
+
+            setTimeout(() => {
+                myScroll = new IScroll('#setting_scroll', { probeType: 1, mouseWheel: true });
+            }, 300);
+
+            $('#setting_back').attr("src", picRes['back_arrow.png'])
+            $('#setting_header_right_right').html('<img  id="setting_phone" style="width:28px;">')
+            $('#setting_header_right_right').addClass("flexCenter")
+            $('#setting_phone').attr("src", picRes['setting.png'])
+
+            // $('#profile_go_detail').click(function () {
+            //
+            //     pageShow("setting_detailPage")
+            // })
+            $('#setting_header_left').click(function () {
+                pageUnShow("trade_historyPage")
+                // mainObj.menuprofile();
+
+            })
+            $('#logout').click(function () {
+                loaderObj.show()
+                $("#body_content_team").css({ "display": "none" });
+                localStorage.removeItem('token');
+                myteamObj.ClearStatusMyTeam();
+                setTimeout(() => {
+                    pageUnShow("settingPage")
+                    pageShow("loginPage");
+                    loaderObj.unShow()
+                }, 200);
+                // window.location.reload();
+            })
+
+            $('#show_reset_login_setting_account').click(function () {
+                pageShow("reset_passwordPage")
+            })
+
+            $('#show_reset_pin_setting_account').click(function () {
+                var text = $('#show_status_activate').text()
+                console.log(text);
+                if (text === '未设置') {
+                    msgObj.show(`您没有设置交易密码，请设置交易密码`,
+                        function () {
+                            handleClick();
+
+                        })
+                } else {
+                    pageShow("reset_password_pinPage")
+
+                }
+            })
+
+        }
+
+        function handleClick(checkbox) {
+            get2FA()
+            msgObj.show(
+                '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width: 100%;"><div id="Setup2FA" style="margin-bottom:20px">设置交易密码</div><input style="width:100%;height:30px" id="Set2FA_Input" type="password"/></div>', function () {
+                    // console.log('=======console fun=====');
+
+
+                    if ($("#Set2FA_Input").val() != '' && $("#Set2FA_Input").val().length >= 6) {
+                        msgObj.unShow();
+                        // $('#switch_on').prop('checked', true);
+                        $('#2FA_Open').off('click');
+                        Enable2FA()
+                        // $("#Set2FA_Input").val('i am coming !');
+                    } else {
+                        msgObj.unShow();
+                        // msgPageObj.show(NSLang('setting.setPass2FAErr'));
+                        msgPageObj.show('密码不能为空且必须大于6位');
+                        
+                        // $('#switch_on').prop('checked', false);
+
+                    }
+                }, function () {
+                    msgObj.unShow();
+                    // $('#switch_on').prop('checked', false);
+
+                });
+
+            // $("#Set2FA_Input").keypress(function (event) {
+            //     var ew = event.which;
+            //     if (48 <= ew && ew <= 57)
+            //         return true;
+            //     return false;
+            // });
+
+        }
+
+        function Enable2FA() {
+            var Token = localStorage.getItem('token')
+            var obj = JSON.parse(Token);
+
+            var mData = {
+                "password": $("#Set2FA_Input").val()
+            }
+            $.ajax({
+                type: "post",
+
+                url: API_SERVER + "/v1/twoFA",
+                headers: {
+                    'Authorization': 'Bearer ' + obj.token
+                },
+                data: JSON.stringify(mData),
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000, beforeSend: function (xmlhttprequest) {
+                },
+                success: function (data) {
+
+                    msgObj.show("交易密码激活！", function () {
+                        msgObj.unShow();
+                        $('#show_status_activate').text("已启用").css("color", "#43d143")
+                    }, function () {
+                        msgObj.unShow();
+                    });
+
+
+                },
+
+                error: function (xhr, status, error) {
+
+                }
+            });
+
+
+        }
+
+        function get2FA() {
+            var Token = localStorage.getItem('token')
+            var obj = JSON.parse(Token);
+            $.ajax({
+                type: "get",
+                url: API_SERVER + "/v1/twoFA",
+                headers: {
+                    'Authorization': 'Bearer ' + obj.token
+                },
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+
+                success: function (data) {
+
+                    if (data.result.status == false) {
+                        // $('#switch_on').prop('checked', true);
+                        $('#show_status_activate').text("未设置").css("color", "#6C7BA8")
+                        $("#2FA_Open").click(function () {
+                            handleClick();
+                        });
+
+                    }
+                    if (data.result.status == true) {
+                        $('#show_status_activate').text("已启用").css("color", "#43d143")
+                    }else{
+                        
+                    }
+                    
+                },
+                error: function (xmlhttprequest, error) {
+                    console.log(error, xmlhttprequest);
+
+                }
+            });
+        }
+
+
+        this.call = function () {
+            get2FA()
+        }
+
+    }
+
+</script>

@@ -1,0 +1,1072 @@
+<style>
+    .pagTab {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 50px;
+        justify-content: space-between;
+    }
+
+    .btnPageTeam {
+        background: var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%));
+        border-radius: 10px;
+        font-size: 20px;
+        color: #fff;
+        width: 30px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+
+    .picker {
+        display: flex;
+        position: relative;
+        border-top: 1rem solid white;
+        border-bottom: 1rem solid white;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        font-size: calc(.5rem + 2.4vw);
+        position: relative;
+        font-weight: 400;
+        overflow: hidden;
+    }
+
+    .picker:before,
+    .picker:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1.4em;
+        pointer-events: none;
+    }
+
+    .picker:before {
+        top: -.2em;
+        height: 1.4em;
+        background: linear-gradient(white, rgba(255, 255, 255, .7));
+    }
+
+    .picker:after {
+        bottom: -.2em;
+        height: 1.4em;
+        background: linear-gradient(rgba(255, 255, 255, .7), white);
+    }
+
+
+
+    .button-container {
+        text-align: center;
+        padding-top: 3rem;
+        width: 100%;
+    }
+
+    .bg-red {
+        background-color: #EA372A;
+        border-radius: 10px;
+        padding: 0 10px;
+        color: #fff;
+        font-weight: bold;
+    }
+</style>
+<div class="menuPage bg-my" id="wallet_product_historyPage" style="position: absolute; background: #FAFAFA;">
+    <div id="wallet_product_history_header">
+    </div>
+    <!-- <div
+        style="margin-top: 10px; display: flex;gap: 100px;font-size: 16px;font-style: normal;font-weight: 500;width: 80%;margin: 0 auto;justify-content: center;">
+        <div id="w_his_purchase" class="selected-tab">购买记录</div>
+        <div id="w_his_earn">收益记录</div>
+    </div> -->
+    <div id="scroller_wallet_product_history">
+        <div id="wallet_product_history_body" style="font-weight: bold; height: auto; width: 100%; background: #F8F8F8;"
+            class="flexTop_c">
+            <div id="w_his_purchase_loop" style="display: flex; width: 100%; gap: 10px; margin-top: 25px;height: auto;"
+                class="flexTop_c">
+                <span>没有数据</span>
+
+            </div>
+            <!-- loop earn -->
+            <!-- <div id="w_his_earn_loop" style="width: 100%; gap: 10px;  margin-top: 25px;height: 100px;"
+                class="flexTop_c">
+                <span>没有数据</span>
+
+
+            </div> -->
+
+
+            <div style="height: 20px;"></div>
+            <!-- <span style="font-size: 16px; color: #606FFF; display: none;" id="h_quantity_history_show">共 <span
+                    id="h_quantity_history"></span> 条记录</span> -->
+
+
+        </div>
+    </div>
+
+    <div class="pagTab" style=" display: flex;align-items: center; font-size: 16px; font-weight:bold;
+   justify-content: space-between;" id="search-page">
+        <div id="prevHistorywallet" class="btnPageTeam" style="margin-left: 5%;">
+            &#60;</div>
+        <div id="dropdwnoTabHistory" class="flexCenter">
+
+            <div style="border: none;background: var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%));color: white;
+            padding: 5px 7px;border-radius: 5px;font-weight: bold;" id="click_to_select_date">
+                <span>选择日期</span>
+
+            </div>
+
+            <input id="inputHistorywallet" type="number"
+                style="font-weight: bold; width:30px;text-align: center;margin-right: 10px;border: none;border-radius: 5px; font-size: 16px;">/
+            &nbsp;<span id="maxPageHistorywallet"></span>&nbsp;&nbsp;<button id="goHistoryPage" style="border: none; background: var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%));
+            color: white;padding: 5px 7px;border-radius: 5px;font-weight: bold;">访问</button>
+
+
+        </div>
+        <div id="nextHistorywallet" class="btnPageTeam" style="margin-right: 5%;">&#62;</div>
+
+    </div>
+
+    <div id="show_select_date" style="display: none; height: 200px; width: 100%;  background: #fff;
+        box-shadow: 0px 0px 8px 0px rgba(92, 122, 181, 0.25); border-radius: 15px; position: absolute; bottom: 0; "
+        class="flexTop_c">
+
+        <div class="flexSpac" style="width: 70%; margin-top: 15px ; font-size: 18px; font-weight: bold; ">
+            <span style="color: #E31D1A;" id="cancel_date">取消</span>
+            <span>请选择日期</span>
+            <span style="color: #E31D1A;" id="confirm_date">完成</span>
+
+        </div>
+        <div class="picker flexCenter" style="width: 100%;">
+
+            <div id="scroller_picker-years">
+                <div class="picker-years flexTop_c" style="width: 100%; height: auto;">
+                    <div style="height: 25px;"></div>
+                    <div class="flexTop_c tab_years" style="gap: 5px;">
+                        <span>2015</span>
+                        <span>2016</span>
+                        <span>2017</span>
+                        <span>2018</span>
+                        <span>2019</span>
+                        <span>2020</span>
+                        <span>2021</span>
+                        <span>2022</span>
+                        <span>2023</span>
+                        <span>2024</span>
+                        <span>2025</span>
+                        <span>2026</span>
+                        <span>2027</span>
+                        <span>2028</span>
+                    </div>
+                    <div style="height: 25px;"></div>
+                </div>
+            </div>
+
+            <div id="scroller_picker-month">
+
+                <div class="picker-month flexTop_c" style="width: 100%; height: auto;">
+                    <div style="height: 25px;"></div>
+                    <div class="flexTop_c tab_month" style="gap: 5px;">
+
+                    </div>
+                    <div style="height: 25px;"></div>
+                </div>
+            </div>
+            <div id="scroller_picker-days">
+
+                <div class="picker-days flexTop_c" style="width: 100%; height: auto;">
+                    <div style="height: 25px;"></div>
+                    <div class="flexTop_c tab_days" style="gap: 5px;">
+                        <!-- <span>1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                        <span>6</span>
+                        <span>7</span>
+                        <span>8</span>
+                        <span>9</span>
+                        <span>10</span>
+                        <span>11</span>
+                        <span>12</span> -->
+                    </div>
+                    <div style="height: 25px;"></div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+    var wallet_product_historyObj = new wallet_product_history();
+    wallet_product_historyObj.init();
+
+    function wallet_product_history() {
+        var myScroll;
+
+        var seletGroup;
+        var width_2 = "33.3333333333%";
+
+        var typeHis
+
+        this.init = function () {
+            pageInit("wallet_product_historyPage");
+            headerInit("wallet_product_history", "产品收益记录")
+            // $("#wallet_product_historyPage").css({ "width": w, "height": h });
+            $("#scroller_picker-years").css({ "height": 120, "width": width_2, "overflow": "hidden" });
+            $("#scroller_picker-month").css({ "height": 120, "width": width_2, "overflow": "hidden" });
+            $("#scroller_picker-days").css({ "height": 120, "width": width_2, "overflow": "hidden" });
+
+
+            $("#scroller_wallet_product_history").css({ "width": w, "height": h - headH - 50, "overflow": "hidden" });
+
+            myScroll = new IScroll('#scroller_wallet_product_history', { probeType: 1, mouseWheel: true });
+
+
+
+            // $("#w_his_earn").click(function () {
+            //     $("#w_his_earn").addClass("selected-tab");
+            //     $("#w_his_purchase").removeClass("selected-tab");
+            //     $("#w_his_earn_loop").css({ "display": "flex" });
+            //     $("#w_his_purchase_loop").css({ "display": "none" });
+            //     $(".pagTab").css({ "display": "none" });
+
+
+            // });
+
+            // $("#w_his_purchase").click(function () {
+            //     $(".pagTab").css({ "display": "flex" });
+            //     $("#w_his_purchase").addClass("selected-tab");
+            //     $("#w_his_earn").removeClass("selected-tab");
+            //     $("#w_his_earn_loop").css({ "display": "none" });
+            //     $("#w_his_purchase_loop").css({ "display": "flex" });
+            // });
+            $("#click_to_select_date").unbind().click(function () {
+                $("#show_select_date").css({ "display": "flex" });
+
+                $('.tab_years span, .tab_month span,.tab_days span').removeClass('bg-red');
+
+                setTimeout(() => {
+                    myScroll = new IScroll('#scroller_picker-years', { probeType: 1, mouseWheel: true });
+                    myScroll = new IScroll('#scroller_picker-month', { probeType: 1, mouseWheel: true });
+                    myScroll = new IScroll('#scroller_picker-days', { probeType: 1, mouseWheel: true });
+                }, 500);
+
+                getTabDate();
+
+            });
+
+            $("#cancel_date").unbind().click(function () {
+                $("#show_select_date").css({ "display": "none" });
+            })
+
+
+
+        }
+
+        this.call = function () {
+
+            $("#scroller_wallet_product_history").transition({
+                x: w
+            }, 0);
+
+            // $("#w_his_purchase_loop").html("");
+            // $("#w_his_earn_loop").html("");
+            // $("#h_quantity_history_show").html("");
+
+            myScroll.refresh();
+
+        }
+
+        function getTabDate() {
+
+            var year
+            var month
+            var day
+
+            $('.tab_days').html("");
+            $('.tab_month').html("");
+
+            for (var i = 1; i <= 31; i++) {
+                var day = i < 10 ? '0' + i : i;
+                $('.tab_days').append('<span>' + day + '</span>');
+            }
+
+            for (var i = 1; i <= 12; i++) {
+                var day = i < 10 ? '0' + i : i;
+                $('.tab_month').append('<span>' + day + '</span>');
+            }
+
+
+            $('.tab_years span').unbind().click(function () {
+                $('.tab_years span').removeClass('bg-red');
+                $(this).addClass('bg-red');
+                year = $(this).text()
+                updateDate();
+
+            });
+            $('.tab_month span').unbind().click(function () {
+                $('.tab_month span').removeClass('bg-red');
+                $(this).addClass('bg-red');
+                month = $(this).text()
+                updateDate();
+
+            });
+            $('.tab_days span').unbind().click(function () {
+                $('.tab_days span').removeClass('bg-red');
+                $(this).addClass('bg-red');
+                day = $(this).text()
+                updateDate();
+
+            });
+
+            function updateDate() {
+                dateAll = `${year || 'YYYY'}-${month || 'MM'}-${day || 'DD'}`;
+            }
+
+            $("#confirm_date").unbind().click(function () {
+                wallet_product_historyObj.getHistoryWithdrawByDate(dateAll);
+                $("#show_select_date").css({ "display": "none" });
+            })
+
+
+
+        }
+
+
+        this.getHistoryWithdraw = function (type) {
+
+            //清空再进
+            $('#w_his_purchase').trigger('click');
+            $("#w_his_purchase_loop").html("");
+            //-----------
+            var loadData = 1
+            var pageCount = 1
+            $('#inputHistorywallet').val(pageCount)
+            var limit = 9
+            loaderObj.show();
+            var str = []
+            var collect_data = []
+            var getToken = window.localStorage.getItem('token')
+            var token = JSON.parse(getToken);
+
+            typeHis = type
+
+            getHistoryWithdraw()
+            function getHistoryWithdraw() {
+                // $('#w_his_purchase_loop').html("");
+                $.ajax({
+                    type: "get",
+                    url: API_SERVER + `/v1/wallet/history?page=${loadData}&limit=${limit}&walletType=${type}`,
+                    headers: {
+                        'Authorization': 'Bearer ' + token.token,
+                    },
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: true,
+                    timeout: 100000,
+                    success: function (data) {
+
+                        if (pageCount == 1) {
+                            $('#prevHistorywallet').css({ 'visibility': 'hidden' })
+                        }
+                        else if (pageCount != 1) {
+                            $('#prevHistorywallet').css({ 'visibility': 'visible' })
+                        }
+
+                        //   unshow next
+                        if (pageCount == Math.ceil(data.records / limit)) {
+                            $('#nextHistorywallet').css({ 'visibility': 'hidden' })
+                        }
+                        //   unshow next
+                        else if (pageCount != Math.ceil(data.records / limit)) {
+                            $('#nextHistorywallet').css({ 'visibility': 'visible' })
+                        }
+                        // max per page
+                        $('#maxPageHistorywallet').text(Math.ceil(data.records / limit) == 0 ? '1' : Math.ceil(data.records / limit))
+
+                        // clean in input
+                        $('#inputHistorywallet').unbind().on('input', function () {
+                            var inputValue = parseInt($(this).val(), 10);
+                            if (inputValue < 1 || inputValue > Math.ceil(data.records / limit) || isNaN(inputValue)) {
+                                $(this).val(""); // Clear the input value
+                            }
+
+                            console.log(inputValue);
+                        });
+                        if (data.code == 0) {
+
+                            loaderObj.unShow();
+                            if (data.records == 0) {
+                                str += '<div style="height: 400px" class="flexCenter"><img src="./pic/icons/nodata_icons.png" style="width:110px;"></div>';
+                                $("#w_his_purchase_loop").html(str);
+                                $("#search-page").css({ "display": "none" });
+
+
+                            }
+
+                            if (data.records != 0) {
+                                $('#w_his_purchase_loop').html("");
+                                str = ''
+                                $.each(data.result, function (index, data) {
+                                    var finalAllDate = moment(data.cdt).format("YYYY-MM-DD HH:mm:ss");
+
+
+                                    var seletGroup = data.group;
+
+                                    if (data.group == 10) {
+                                        seletGroup = '算力+工业'
+                                    } else if (data.group == 20) {
+                                        seletGroup = '算力+教育'
+                                    } else if (data.group == 30) {
+                                        seletGroup = '算力+金融'
+                                    } else if (data.group == 40) {
+                                        seletGroup = '算力+医疗'
+                                    } else if (data.group == 50) {
+                                        seletGroup = '算力+交通'
+                                    } else if (data.group == 60) {
+                                        seletGroup = '算力+能源'
+                                    } else if (data.group == 70) {
+                                        seletGroup = '民族企业助力区'
+                                    } else if (data.group == null) {
+                                        seletGroup = ''
+                                    }
+                                    console.log(seletGroup, data.group, '+++++++++++++++++===+++++++++++++++++++++')
+
+                                    var typeName;
+                                    switch (data.walletType) {
+                                        case 20:
+                                            typeName = '产品收益';
+                                            break;
+                                        case 21:
+                                            typeName = '推荐佣金';
+                                            break;
+                                        case 26:
+                                            typeName = '会员等级奖励';
+                                            break;
+                                        case 23:
+                                            typeName = '工资';
+                                            break;
+                                        case 24:
+                                            typeName = '会议奖励';
+                                            break;
+                                        case 25:
+                                            typeName = '签到钱包';
+                                            break;
+                                        case 30:
+                                            typeName = '算力金额';
+                                            break;
+                                        default:
+                                            typeName = '';
+                                            break;
+                                    }
+
+                                    var eventTypeDescription;
+                                    switch (data.eventType) {
+                                        case 10:
+                                            eventTypeDescription = '每日返利';
+                                            break;
+                                        case 20:
+                                            eventTypeDescription = '产品周期结束';
+                                            break;
+                                        case 30:
+                                            eventTypeDescription = '提前结束';
+                                            break;
+                                        case 31:
+                                            eventTypeDescription = '撤销订单';
+                                            break;
+                                        case 40:
+                                            eventTypeDescription = '用户申请';//(充值,提现)
+                                            break;
+                                        case 50:
+                                            eventTypeDescription = '充值成功';
+                                            break;
+                                        case 60:
+                                            // if (typeName = 30) {
+                                            //     typeName = '';
+                                            eventTypeDescription = '转出';
+                                            // }
+                                            break;
+                                        case 70:
+                                            eventTypeDescription = '转入';
+                                            break;
+                                        case 90:
+                                            if (typeName = 30) {
+                                                typeName = '';
+                                                eventTypeDescription = '购买产品：' + seletGroup;
+                                            }
+                                            break;
+                                        case 100:
+                                            eventTypeDescription = '购买2型';
+                                            break;
+                                        case 110:
+                                            eventTypeDescription = '直推奖';
+                                            break;
+                                        case 120:
+                                            eventTypeDescription = '管理奖';
+                                            break;
+                                        case 121:
+                                            eventTypeDescription = '平级奖';
+                                            break;
+                                        case 122:
+                                            eventTypeDescription = '合伙人分红奖';
+                                            break;
+                                        case 123:
+                                            eventTypeDescription = '兑换';
+                                            break;
+                                        case 140:
+                                            eventTypeDescription = '兑换算力券';
+                                            break;
+                                        case 150:
+                                            eventTypeDescription = 'II型申购';
+                                            break;
+                                        case 160:
+                                            eventTypeDescription = 'II型申购拒绝';
+                                            break;
+                                        case 170:
+                                            eventTypeDescription = 'II型部份申购';
+                                            break;
+                                        case 180:
+                                            eventTypeDescription = '年度贡献奖';
+                                            break;
+                                        case 190:
+                                            eventTypeDescription = '注册发放';
+                                            break;
+                                        case 200:
+                                            eventTypeDescription = '签到发放';
+                                            break;
+                                        case 210:
+                                            eventTypeDescription = '收益加速';
+                                            break;
+                                        case 220:
+                                            eventTypeDescription = '每月直推奖励';
+                                            break;
+                                        case 230:
+                                            eventTypeDescription = '日激活奖励';
+                                            break;
+                                        default:
+                                            eventTypeDescription = '';
+                                            break;
+                                    }
+
+                                    var levelDescription;
+                                    switch (data.level) {
+                                        case 1:
+                                            levelDescription = '一级';
+                                            break;
+                                        case 2:
+                                            levelDescription = '二级';
+                                            break;
+                                        case 3:
+                                            levelDescription = '三级';
+                                            break;
+
+                                        default:
+                                            levelDescription = '';
+                                            break;
+                                    }
+
+
+
+                                    // check money out
+                                    var moneyOut = data.type
+                                    if (moneyOut == 20 || moneyOut == 30 || moneyOut == 60 || moneyOut == 100 || moneyOut == 120) {
+                                        moneyOut = 1
+                                    } else {
+                                        moneyOut = 0
+                                    }
+
+
+                                    str += ' <div  style="font-weight:bold; background: #fff; width: 100%;  height: 70px;align-items: center;gap: 5px; display: flex; box-shadow: 0px 0px 8px 0px rgba(92, 122, 181, 0.25);" class="go_each_detail' + data.id + '">'
+                                    str += '<div style="height: 50px; width: 50px; padding-left: 5px; " class="flexCenter">'
+                                    str += '<img src="' + (data.walletType == 20 ? './pic/history_trade/product1.png' :
+                                        data.walletType == 21 ? './pic/history_trade/product2.png' :
+                                            data.walletType == 26 ? './pic/history_trade/product5.png' :
+                                                data.walletType == 23 ? './pic/history_trade/product4.png' :
+                                                    data.walletType == 24 ? './pic/history_trade/product5.png' :
+                                                        data.walletType == 25 ? './pic/history_trade/product6.png' :
+                                                            './pic/history_trade/product7.png') + '" style="width: 32px; height: 32px;">';
+
+                                    str += ' </div>'
+
+                                    str += '<div style="display: flex; flex-direction: column; width: 80%; gap: 10px;">'
+                                    str += '<div style=" display: flex;justify-content: space-between;">'
+                                    str += '<span style="color: #414655;  font-size: 16px;">' + (typeName) + (eventTypeDescription) + (levelDescription) + '</span>'
+                                    str += '<div class="flexCenter" style="gap: 10px;">'
+                                    str += '<span style="color: #6C7BA8;  font-size: 16px;"><span style=" ' + (data.state == 40 ? 'color:#60EB1F;">已完成' : data.state == 10 ? 'color:#FA8642;">待定' : data.state == 30 ? 'color:#FA3939;">提现失败' : 'color:#0000;">失败') + '</span>' + '</span>'
+                                    str += '</div>'
+                                    str += '</div>'
+                                    str += '<div style=" display: flex;justify-content: space-between;">'
+                                    str += '<span style="color: #6C7BA8;  font-size: 16px;">' + finalAllDate + '</span>'
+                                    str += '<span style="' + (moneyOut == 1 ? "color: #EA372A;" : "color: #414655;") + '  font-size: 16px;">' + (moneyOut == 1 ? "-" + parseFloat(data.amount).toFixed(2) : parseFloat(data.amount).toFixed(2)) + '</span>'
+                                    str += '</div>'
+                                    str += '</div>'
+
+                                    // str += ' <div style="height: auto; width: 25px; " class="flexCenter">'
+                                    // str += '<img class="nexticon" style="width: 9px;height: 11px;">'
+                                    // str += '</div>'
+
+                                    str += '</div>'
+                                    collect_data.push({
+                                        "id": data.id,
+                                        "amount": parseFloat(data.amount).toFixed(2),
+                                        "state": data.state,
+                                        "time": finalAllDate,
+                                        "title": (typeName) + (eventTypeDescription) + (levelDescription)
+                                    })
+
+                                })
+                                myScroll.refresh();
+                                $('#w_his_purchase_loop').html(str);
+                                $('.nexticon').attr("src", picRes['nexticon.png'])
+                                $("#search-page").css({ "display": "flex" });
+
+                                // $('#h_quantity_history').text(data.records);
+
+                                myScroll = new IScroll('#scroller_wallet_product_history', { probeType: 1, mouseWheel: true });
+
+                                $.each(collect_data, function (index, data) {
+                                    $(`.go_each_detail${data.id}`).unbind().click(function () {
+                                        // pageShow('wallet_product_detailPage')
+                                        // wallet_product_detailObj.getDatailHistory(data.id, data.amount, data.state, data.time)
+                                        pageShow("assets_historyPage")
+                                        assets_historyObj.call(data.id, data.time, data.title)
+                                    });
+                                })
+
+                            }
+
+                        }
+                        else {
+                            loaderObj.unShow();
+                            msgPageObj.show(getStatusCode(data.code))
+                        }
+
+                    },
+                    error: function (xmlhttprequest, error) {
+                        loaderObj.unShow();
+                        msgPageObj.show(NSLang('sys.serverError'))
+                    },
+
+                });
+            }
+            $("#goHistoryPage").unbind().click(function () {
+                // Parse the input value as a float
+                var inputPage = parseFloat($("#inputHistorywallet").val());
+                if (isNaN(inputPage)) {
+                    msgPageObj.show("请输入您想要访问的页面"); // Display "Please enter the page you want to visit"
+                } else {
+                    loadData = inputPage; // Set loadData to the input value (assuming these are global variables)
+                    pageCount = inputPage; // Set pageCount to the input value (assuming these are global variables)
+                    $('#w_his_purchase_loop').html("");
+                    getHistoryWithdraw();
+                }
+            });
+
+            $('#nextHistorywallet').unbind().click(function () {
+                loadData += 1
+                pageCount += 1
+                $('#w_his_purchase_loop').html("");
+                getHistoryWithdraw()
+                $('#inputHistorywallet').val(pageCount)
+
+            })
+            $('#prevHistorywallet').unbind().click(function () {
+                loadData -= 1
+                pageCount -= 1
+                $('#w_his_purchase_loop').html("");
+                getHistoryWithdraw()
+                $('#inputHistorywallet').val(pageCount)
+            })
+
+        }
+
+        this.getHistoryWithdrawByDate = function (date) {
+
+
+            //清空再进
+            $('#w_his_purchase').trigger('click');
+            $("#w_his_purchase_loop").html("");
+            //-----------
+            var loadData = 1
+            var pageCount = 1
+            var limit = 1000
+            loaderObj.show();
+            var str = []
+            var collect_data = []
+            var collect_data2 = []
+            var collect_data3 = []
+            var getToken = window.localStorage.getItem('token')
+            var token = JSON.parse(getToken);
+            getHistoryWithdraw()
+            function getHistoryWithdraw() {
+                // $('#w_his_purchase_loop').html("");
+                $.ajax({
+                    type: "get",
+                    url: API_SERVER + `/v1/wallet/history?limit=${limit}&walletType=${typeHis}`,
+                    headers: {
+                        'Authorization': 'Bearer ' + token.token,
+                    },
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: true,
+                    timeout: 100000,
+                    success: function (data) {
+
+                        collect_data = data.result
+                        collect_data.forEach(function (item) {
+                            item.cdt = moment(item.cdt).format("YYYY-MM-DD");
+                        });
+
+                        var collect2 = collect_data.filter(data => data.cdt === date);
+                        collect_data2.push(collect2)
+
+
+                        if (pageCount == 1) {
+                            $('#prevHistorywallet').css({ 'visibility': 'hidden' })
+                        }
+                        else if (pageCount != 1) {
+                            $('#prevHistorywallet').css({ 'visibility': 'visible' })
+                        }
+
+                        //   unshow next
+                        if (pageCount == Math.ceil(data.records / limit)) {
+                            $('#nextHistorywallet').css({ 'visibility': 'hidden' })
+                        }
+                        //   unshow next
+                        else if (pageCount != Math.ceil(data.records / limit)) {
+                            $('#nextHistorywallet').css({ 'visibility': 'visible' })
+                        }
+                        // max per page
+                        $('#maxPageHistorywallet').text(Math.ceil(data.records / limit) == 0 ? '1' : Math.ceil(data.records / limit))
+
+                        // clean in input
+                        $('#inputHistorywallet').unbind().on('input', function () {
+                            var inputValue = parseInt($(this).val(), 10);
+                            if (inputValue < 1 || inputValue > Math.ceil(data.records / limit) || isNaN(inputValue)) {
+                                $(this).val(""); // Clear the input value
+                            }
+                        });
+                        if (data.code == 0) {
+
+                            loaderObj.unShow();
+
+                            // no data
+                            if (collect_data2[0].length == 0) {
+                                str += '<div style="height: 400px" class="flexCenter"><img src="./pic/icons/nodata_icons.png" style="width:110px;"></div>';
+                                $("#w_his_purchase_loop").html(str);
+                                // $("#search-page").css({ "display": "none" });
+
+                            }
+                            // have data
+                            if (collect_data2[0].length != 0) {
+                                $('#w_his_purchase_loop').html("");
+                                str = ''
+                                $.each(collect_data2[0]), function (index, data) {
+
+                                    var seletGroup = data.group;
+                                    if (data.group == 10) {
+                                        seletGroup = '算力+工业'
+                                    } else if (data.group == 20) {
+                                        seletGroup = '算力+教育'
+                                    } else if (data.group == 30) {
+                                        seletGroup = '算力+金融'
+                                    } else if (data.group == 40) {
+                                        seletGroup = '算力+医疗'
+                                    } else if (data.group == 50) {
+                                        seletGroup = '算力+交通'
+                                    } else if (data.group == 60) {
+                                        seletGroup = '算力+能源'
+                                    } else if (data.group == 70) {
+                                        seletGroup = '民族企业助力区'
+                                    } else if (data.group == null) {
+                                        seletGroup = ''
+                                    }
+                                    console.log(seletGroup, data.group, '+++++++++++++++++===+++++++++++++++++++++')
+
+                                    var typeName;
+                                    switch (data.walletType) {
+                                        case 20:
+                                            typeName = '产品收益';
+                                            break;
+                                        case 21:
+                                            typeName = '推荐佣金';
+                                            break;
+                                        case 26:
+                                            typeName = '会员等级奖励';
+                                            break;
+                                        case 23:
+                                            typeName = '工资';
+                                            break;
+                                        case 24:
+                                            typeName = '会议奖励';
+                                            break;
+                                        case 25:
+                                            typeName = '签到钱包';
+                                            break;
+                                        case 30:
+                                            typeName = '算力金额';
+                                            break;
+                                        default:
+                                            typeName = '';
+                                            break;
+                                    }
+
+                                    var eventTypeDescription;
+                                    switch (data.eventType) {
+                                        case 10:
+                                            eventTypeDescription = '每日返利';
+                                            break;
+                                        case 20:
+                                            eventTypeDescription = '产品周期结束';
+                                            break;
+                                        case 30:
+                                            eventTypeDescription = '提前结束';
+                                            break;
+                                        case 31:
+                                            eventTypeDescription = '撤销订单';
+                                            break;
+                                        case 40:
+                                            eventTypeDescription = '用户申请';//(充值,提现)
+                                            break;
+                                        case 50:
+                                            eventTypeDescription = '充值成功';//充值: 第三方支付
+                                            break;
+                                        case 60:
+                                            // if (typeName = 30) {
+                                            //     typeName = '';
+                                            eventTypeDescription = '转出';//系统充值
+                                            // }
+                                            break;
+                                        case 70:
+                                            eventTypeDescription = '转入';//充值: 强制第三方成功
+                                            break;
+                                        case 90:
+                                            if (typeName = 30) {
+                                                typeName = '';
+                                                eventTypeDescription = '购买产品：' + seletGroup;
+                                            }
+                                            break;
+                                        case 100:
+                                            eventTypeDescription = '购买2型';
+                                            break;
+                                        case 110:
+                                            eventTypeDescription = '直推奖';
+                                            break;
+                                        case 120:
+                                            eventTypeDescription = '管理奖';
+                                            break;
+                                        case 121:
+                                            eventTypeDescription = '平级奖';
+                                            break;
+                                        case 122:
+                                            eventTypeDescription = '合伙人分红奖';
+                                            break;
+                                        case 123:
+                                            eventTypeDescription = '兑换';
+                                            break;
+                                        case 140:
+                                            eventTypeDescription = '兑换算力券';
+                                            break;
+                                        case 150:
+                                            eventTypeDescription = 'II型申购';
+                                            break;
+                                        case 160:
+                                            eventTypeDescription = 'II型申购拒绝';
+                                            break;
+                                        case 170:
+                                            eventTypeDescription = 'II型部份申购';
+                                            break;
+                                        case 180:
+                                            eventTypeDescription = '年度贡献奖';
+                                            break;
+                                        case 190:
+                                            eventTypeDescription = '注册发放';
+                                            break;
+                                        case 200:
+                                            eventTypeDescription = '签到发放';
+                                            break;
+                                        case 210:
+                                            eventTypeDescription = '收益加速';
+                                            break;
+                                        case 220:
+                                            eventTypeDescription = '每月直推奖励';
+                                            break;
+                                        case 230:
+                                            eventTypeDescription = '日激活奖励';
+                                            break;
+                                        default:
+                                            eventTypeDescription = '';
+                                            break;
+                                    }
+
+                                    var levelDescription;
+                                    switch (data.level) {
+                                        case 1:
+                                            levelDescription = '一级';
+                                            break;
+                                        case 2:
+                                            levelDescription = '二级';
+                                            break;
+                                        case 3:
+                                            levelDescription = '三级';
+                                            break;
+
+                                        default:
+                                            levelDescription = '';
+                                            break;
+                                    }
+                                    // check money out
+                                    var moneyOut = data.type
+                                    if (moneyOut == 20 || moneyOut == 30 || moneyOut == 60 || moneyOut == 100 || moneyOut == 120) {
+                                        moneyOut = 1
+                                    } else {
+                                        moneyOut = 0
+                                    }
+
+
+                                    str += ' <div style="font-weight:bold; background: #fff; width: 100%;  height: 70px;align-items: center;gap: 5px; display: flex; box-shadow: 0px 0px 8px 0px rgba(92, 122, 181, 0.25);" class="go_each_detailX' + data.id + '">'
+                                    str += '<div style="height: 50px; width: 50px; padding-left: 5px; " class="flexCenter">'
+                                    str += '<img src="' + (data.walletType == 20 ? './pic/history_trade/product1.png' :
+                                        data.walletType == 21 ? './pic/history_trade/product2.png' :
+                                            data.walletType == 26 ? './pic/history_trade/product5.png' :
+                                                data.walletType == 23 ? './pic/history_trade/product4.png' :
+                                                    data.walletType == 24 ? './pic/history_trade/product5.png' :
+                                                        data.walletType == 25 ? './pic/history_trade/product6.png' :
+                                                            './pic/history_trade/product7.png') + '" style="width: 32px; height: 32px;">';
+
+                                    str += ' </div>'
+
+                                    str += '<div style="display: flex; flex-direction: column; width: 80%; gap: 10px;">'
+                                    str += '<div style=" display: flex;justify-content: space-between;">'
+                                    str += '<span style="color: #414655;  font-size: 16px;">' + (typeName) + (eventTypeDescription) + (levelDescription) + '</span>'
+                                    str += '<div class="flexCenter" style="gap: 10px;">'
+                                    str += '<span style="color: #6C7BA8;  font-size: 16px;"><span style=" ' + (data.state == 40 ? 'color:#60EB1F;">已完成' : data.state == 10 ? 'color:#FA8642;">待定' : data.state == 30 ? 'color:#FA3939;">提现失败' : 'color:#0000;">失败') + '</span>' + '</span>'
+                                    str += '</div>'
+                                    str += '</div>'
+                                    str += '<div style=" display: flex;justify-content: space-between;">'
+                                    str += '<span style="color: #6C7BA8;  font-size: 16px;">' + data.cdt + '</span>'
+                                    str += '<span style="' + (moneyOut == 1 ? "color: #EA372A;" : "color: #414655;") + '  font-size: 16px;">' + (moneyOut == 1 ? "-" + parseFloat(data.amount).toFixed(2) : parseFloat(data.amount).toFixed(2)) + '</span>'
+                                    str += '</div>'
+                                    str += '</div>'
+
+                                    // str += ' <div style="height: auto; width: 25px; " class="flexCenter">'
+                                    // str += '<img class="nexticon go_each_detail' + data.id + '" style="width: 9px;height: 11px;">'
+                                    // str += '</div>'
+
+                                    str += '</div>'
+                                    collect_data3.push({
+                                        "id": data.id,
+                                        "amount": parseFloat(data.amount).toFixed(2),
+                                        "state": data.state,
+                                        "time": data.cdt,
+                                        "title": (typeName) + (eventTypeDescription) + (levelDescription)
+
+                                    })
+                                    myScroll.refresh();
+                                    $('#w_his_purchase_loop').html(str);
+                                    $('.nexticon').attr("src", picRes['nexticon.png'])
+                                    $("#search-page").css({ "display": "flex" });
+
+                                    // $('#h_quantity_history').text(data.records);
+
+                                    myScroll = new IScroll('#scroller_wallet_product_history', { probeType: 1, mouseWheel: true });
+
+                                    $.each(collect_data3, function (index, data) {
+                                        $(`.go_each_detailX${data.id}`).unbind().click(function () {
+                                            // pageShow('wallet_product_detailPage')
+                                            // wallet_product_detailObj.getDatailHistory(data.id, data.amount, data.state, data.time)
+                                            pageShow("assets_historyPage")
+                                            assets_historyObj.call(data.id, data.time, data.title)
+                                        });
+                                    })
+
+                                }
+                            }
+                        }
+                        else {
+                            loaderObj.unShow();
+                            msgPageObj.show(getStatusCode(data.code))
+                        }
+
+                    },
+                    error: function (xmlhttprequest, error) {
+                        loaderObj.unShow();
+                        msgPageObj.show(NSLang('sys.serverError'))
+                    },
+
+                });
+            }
+            // $("#goHistoryPage").unbind()
+            // $("#goHistoryPage").click(function () {
+            //     // Parse the input value as a float
+            //     var inputPage = parseFloat($("#inputHistorywallet").val());
+            //     if (isNaN(inputPage)) {
+            //         msgPageObj.show("请输入您想要访问的页面"); // Display "Please enter the page you want to visit"
+            //     } else {
+            //         loadData = inputPage; // Set loadData to the input value (assuming these are global variables)
+            //         pageCount = inputPage; // Set pageCount to the input value (assuming these are global variables)
+            //         $('#w_his_purchase_loop').html("");
+            //         getHistoryWithdraw();
+            //     }
+            // });
+
+            // $('#nextHistorywallet').unbind()
+            // $('#nextHistorywallet').click(function () {
+            //     loadData += 1
+            //     pageCount += 1
+            //     $('#w_his_purchase_loop').html("");
+            //     getHistoryWithdraw()
+            //     $('#inputHistorywallet').val(pageCount)
+
+            // })
+            // $('#prevHistorywallet').unbind()
+            // $('#prevHistorywallet').click(function () {
+            //     loadData -= 1
+            //     pageCount -= 1
+            //     $('#w_his_purchase_loop').html("");
+            //     getHistoryWithdraw()
+            //     $('#inputHistorywallet').val(pageCount)
+            // })
+
+        }
+
+
+
+
+
+        // function loadList() {
+        //         myScroll1 = new IScroll('#scroller_picker-years', { probeType: 1, mouseWheel: true });
+
+        //         // Add scroll event listener
+        //         myScroll1.on('scroll', function () {
+        //             var topPosition = this.y;
+        //             var containerHeight = $('#scroller_picker-years').height();
+        //             console.log(this.y);
+        //             // Check if the top position is within the top 50%
+        //             if (topPosition >= -containerHeight / 2 && topPosition <= containerHeight / 2) {
+        //                 // Find the span at the top 50%
+        //                 var spans = $('.picker-years span');
+        //                 var spanIndex = Math.round(spans.length / 2);
+
+        //                 // Get the data of the span at the top 50%
+        //                 var dataAtTop50 = spans.eq(spanIndex).text();
+        //                 console.log('Data at Top 50%:', dataAtTop50);
+        //             }
+        //         })
+        //     }
+
+
+
+
+
+
+
+    }
+
+</script>

@@ -1,0 +1,148 @@
+<div class="menuPage bg-my" id="rewardPage"
+    style="position: absolute; z-index: 10; background:#FAFAFA; background-repeat: no-repeat; background-size: cover;">
+    <div id="reward_header">
+    </div>
+    <div style="height: 25px;"></div>
+    <div id="scroller_reward">
+        <div id="reward_body" style="width: 100%; display: flex; align-items: center; flex-direction: column;">
+           
+            <div style="display: flex; width: 100%;   background:#fff; justify-content: center; gap: 1px;">
+                <div style="width: 90%;  margin: 0 auto;  height: 70px; display: flex;  align-items: center; gap: 5px;">
+
+                    <div style="height: 50px; width: 50px; " class="flexCenter">
+                        <img class="rewardIcon" style="width: 32px;height: 32px;">
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; width: 92%; gap: 10px;">
+                        <div style=" display: flex;justify-content: space-between;">
+                            <span style="color: #414655;  font-size: 16px;">连续签到3天奖励
+                            </span>
+
+                            <div class="flexCenter" style="gap: 5px;">
+                                <span style="color: #414655;  font-size: 16px;">状态</span>
+                            </div>
+                        </div>
+
+                        <div style=" display: flex;justify-content: space-between;">
+                            <span style="color: #6C7BA8;  font-size: 16px;">2022-09-19 01:05:25</span>
+                            <span style="color: #2674FF;  font-size: 16px;">未发货</span>
+                        </div>
+                    </div>
+
+                    <div style="height: 20px;display: flex;justify-content: flex-end; align-items: center;">
+                        <img class="nexticon" style="width: 9px;height: 11px;">
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div style="height: 10px;"></div>
+
+            <div style="display: flex; width: 100%;   background:#fff; justify-content: center; gap: 1px; flex-direction: column;">
+                <div style="width: 90%;  margin: 0 auto;  height: 60px; display: flex;  align-items: center; gap: 5px;">
+
+                    <div style="height: 50px; width: 50px; " class="flexCenter">
+                        <img class="rewardIcon" style="width: 32px;height: 32px;">
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; width: 92%; gap: 10px;">
+                        <div style=" display: flex;justify-content: space-between;">
+                            <span style="color: #414655;  font-size: 16px;">连续签到3天奖励
+                            </span>
+
+                            <div class="flexCenter" style="gap: 5px;">
+                                <span style="color: #414655;  font-size: 16px;">状态</span>
+                            </div>
+                        </div>
+
+                        <div style=" display: flex;justify-content: space-between;">
+                            <span style="color: #6C7BA8;  font-size: 16px;">2022-09-19 01:05:25</span>
+                            <span style="color: #F02E2E;  font-size: 16px;">已取消</span>
+                        </div>
+                    </div>
+
+                    <div style="height: 20px;display: flex;justify-content: flex-end; align-items: center;">
+                        <img class="nexticon" style="width: 9px;height: 11px;">
+                    </div>
+
+                </div>
+                <div style="width: 90%;margin: 0 auto; margin-bottom: 10px;" class="flexRight">
+                    <span style="color: #6C7BA8; padding-right: 14px; font-size: 16px;">收货地址不详，无法发货</span>
+                </div>
+
+
+            </div>
+
+            <div style="height: 10px;"></div>
+            <div style="display: flex; width: 100%;   background:#fff; justify-content: center; gap: 1px;">
+                <div style="width: 90%;  margin: 0 auto;  height: 70px; display: flex;  align-items: center; gap: 5px;">
+
+                    <div style="height: 50px; width: 50px; " class="flexCenter">
+                        <img class="rewardIcon" style="width: 32px;height: 32px;">
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; width: 92%; gap: 10px;">
+                        <div style=" display: flex;justify-content: space-between;">
+                            <span style="color: #414655;  font-size: 16px;">连续签到3天奖励
+                            </span>
+
+                            <div class="flexCenter" style="gap: 5px;">
+                                <span style="color: #414655;  font-size: 16px;">状态</span>
+                            </div>
+                        </div>
+
+                        <div style=" display: flex;justify-content: space-between;">
+                            <span style="color: #6C7BA8;  font-size: 16px;">2022-09-19 01:05:25</span>
+                            <span style="color: #20A735;  font-size: 16px;">已发货</span>
+                        </div>
+                    </div>
+
+                    <div style="height: 20px;display: flex;justify-content: flex-end; align-items: center;">
+                        <img class="nexticon" style="width: 9px;height: 11px;">
+                    </div>
+
+                </div>
+
+
+            </div>
+
+         
+
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var rewardObj = new reward();
+    rewardObj.init();
+
+    function reward() {
+        var myScroll;
+        this.init = function () {
+            pageInit("rewardPage");
+            headerInit("reward", "签到奖励领取记录")
+            $("#reward_Page").css({ "width": w, "height": h });
+            $("#scroller_reward").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+            myScroll = new IScroll('#scroller_reward', { probeType: 1, mouseWheel: true });
+            $('.rewardIcon').attr("src", picRes['rewardicon.png'])
+            $('.nexticon').attr("src", picRes['nexticon.png'])
+
+
+
+        }
+        this.call = function () {
+
+            $('#reward_Page').transition({
+                x: w
+            }, 0);
+        }
+
+
+
+    }
+
+</script>

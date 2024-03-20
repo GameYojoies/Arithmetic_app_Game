@@ -1,0 +1,68 @@
+<div class="menuPage bg-my" id="nationalPage"
+    style="position: absolute; z-index: 10; background:#fff; background-repeat: no-repeat; background-size: cover;">
+    <div id="national_header">
+    </div>
+    <div style="height: 25px;"></div>
+    <div id="scroller_national">
+        <div id="national_body" style="width: 100%; display: flex; align-items: center; flex-direction: column;">
+            <div
+                style="width: 90%; margin:  0 auto;  background:#fff; display: flex; flex-direction: column; ">
+                <div>Hainan 2025</div>
+
+            </div>
+            <div style="height: 10px;"></div>
+
+            <div
+                style=" color: #999; width: 90%; margin:  0 auto;  background:#fff; display: flex; flex-direction: column;">
+                <div>2023-06-01 12:00｜简介｜平台</div>
+
+            </div>
+            <div
+                style="display: flex; width: 100%; margin:  0 auto; justify-content: center; gap: 1px; flex-direction: column;">
+
+                <div style="height: 10px;"></div>
+
+                <div
+                    style=" color: #55575A; width: 90%; margin:  0 auto;  background:#fff; display: flex; flex-direction: column; align-items: center;">
+                    海南2025充分利用互联网优势，采用独特的“小门户＋联盟”的经营模式，面向全国乃至全世界，专业为企业客户提供网上、网下多种形式的专业贸易服务。为国内外茶业及相关企业进行产品贸易、信息交流架设互动桥梁。现有资讯、招商、会展、人才、供求、行业人脉等多个服务频道。资讯内容丰富、权威、时效性强。供求信息更新速度快，网站活跃度高。截止到2020年底，海南2025拥有会员用户8000+，拥有企业两百多家。海南2025在2021年1月推出了新的版面，新版的中国茶叶网增添了茶叶报价、茶叶政策等栏目，并且根据不同种类的茶叶增添不同的子频道，资讯内容上更加丰富，供求信息的分类
+                    商圈。为了提供业内人士一个高效快捷的网上交易平台、购平台、交流平台。海南2025坚持为中国茶行业创造价值。不断整合自身资源，突破观念，完善策略，让企业借助网络平台，真正的实现客户收效最大化，将中国茶行业打造为强大且不同凡响的服务大众最优行业，为建设成为中国领先的网络平台服务供应商为目标
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var nationalObj = new national();
+    nationalObj.init();
+
+    function national() {
+        var myScroll;
+        this.init = function () {
+            pageInit("nationalPage");
+            headerInit("national", "国家信息与海南签署协议")
+            $("#national_Page").css({ "width": w, "height": h });
+            $("#scroller_national").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+            myScroll = new IScroll('#scroller_national', { probeType: 1, mouseWheel: true });
+            $("#national_header_right_body").css({ "font-size": "13px" });
+
+
+
+        }
+        this.call = function () {
+
+            $('#national_Page').transition({
+                x: w
+            }, 0);
+        }
+
+
+
+    }
+
+</script>

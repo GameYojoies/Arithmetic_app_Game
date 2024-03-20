@@ -1,0 +1,61 @@
+
+    <div class="menuPage bg-my" id="informationPage" style="position: absolute; background:#fff; ">
+        <div id="information_header">
+        </div>
+
+    <!-- body -->
+    <div id="informationbody" style="width: 100%; height: auto; flex-direction: column; display: flex ; 
+    align-items: center; justify-content:start;">
+
+        <div style="height: 5px;"></div>
+        <div id="information_body"
+            style="width: 100%;  display: flex; justify-content: center;  overflow: hidden; padding: 10px 0px;">
+            <!-- Box -->
+            <div class="informationBox" style="padding: 15px 10px; border-radius: 5px; display: flex;  width: 90%;height: 80vh; overflow: hidden; 
+            background: #ffffff;">
+                <div id="scroll_information_body" style="overflow: hidden;">
+                    
+                        <div id="information_info">
+                            <div>
+
+                            </div>
+
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var informationObj = new information();
+    informationObj.init();
+
+    function information() {
+        var myScroll;
+
+
+        this.init = function () {
+            pageInit("informationPage");
+       
+            headerInit("information", "公告详情")
+            // Image
+            $("#scroll_information_body").css({ "width": w, "height":'auto' });
+            $('#information_ArrowLeft').attr('src', picRes['arrow_left.png'])
+            myScroll = new IScroll('#scroll_information_body', { probeType: 1, mouseWheel: true });
+            $('#information_header_left').on("click", function () {
+                // $('#information_info').empty();
+              
+                pageUnShow('informationPage')
+                // homeObj.closePopup();
+                $("#informationHeader_view").html("")
+             
+                informationListObj.getAnnouncement_view()
+                var popupContainer = document.getElementById('popup-container');
+            // popupContainer.style.display = 'flex';
+            })
+
+        }
+    }
+</script>

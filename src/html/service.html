@@ -1,0 +1,77 @@
+<div class="menuPage bg-my" id="servicePage"
+    style="position: absolute;background:#FAFAFA; background-repeat: no-repeat; background-size: cover;">
+    <div id="service_header">
+    </div>
+    <div id="scroller_service">
+        <div id="service_body"
+            style="height: 800px; width: 100%; display: flex; align-items: center; flex-direction: column;">
+            <iframe id="service_iframe" style="border: 0px;">
+
+            </iframe>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var serviceObj = new service();
+    serviceObj.init();
+
+    function service() {
+        var myScroll;
+        this.init = function () {
+            pageInit("servicePage");
+            headerInit("service", "在线客服")
+            $("#service_Page").css({ "width": w, "height": h });
+            $("#scroller_service").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+            $("#service_iframe").css({ "width": w, "height": h - headH });
+            myScroll = new IScroll('#scroller_service', { probeType: 1, mouseWheel: true });
+
+
+        }
+        this.call = function () {
+
+            $('#service_Page').transition({
+                x: w
+            }, 0);
+            getKfLink();
+            // window.frames[0].location.href=kfLink;
+        }
+
+        function getKfLink() {
+            
+            loaderObj.show();
+
+            var getToken = window.localStorage.getItem('token');
+            var token = JSON.parse(getToken);
+
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + `/v1/config/customer-link`,
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+
+                    var KfLink = data.result;
+
+
+                    window.frames[0].location.href = KfLink;
+                    loaderObj.unShow();
+
+
+                    console.log('okLink', KfLink);
+
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching data:', error);
+                }
+            });
+        }
+
+
+    }
+
+</script>

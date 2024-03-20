@@ -1,0 +1,173 @@
+<div class="menuPage bg-my" id="informationListPage" style="position: absolute; background:#fff; ">
+    <div id="informationList_header">
+    </div>
+
+    <!-- body -->
+    <div id="informationListbody" style="width: 100%; height: auto; flex-direction: column; display: flex ; 
+    align-items: center; justify-content:start;">
+
+        <div style="height: 5px;"></div>
+        <div id="informationList_body"
+            style="width: 100%; height: auto; display: flex; justify-content: center;  overflow: hidden; padding: 10px 0px;">
+            <!-- Box -->
+            <div class="informationListBox" style="border-radius: 5px; display: flex; height: auto;  width: 90%;overflow: hidden; 
+            background: #c2c2c2;">
+                <div id="scroll_informationList_body" style="overflow: hidden;  background: #ffffff;">
+
+                    <div id="informationHeader_view" style="height: auto; ">
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    var informationListObj = new informationList();
+    // informationListObj.init();
+
+
+    function informationList() {
+        var myScroll;
+        var getToken = window.localStorage.getItem('token')
+        var token = JSON.parse(getToken)
+
+        this.init = function () {
+            pageInit("informationListPage");
+
+            headerInit("informationList", "最新公告")
+
+
+            $("#informationListbody").css({ "width": w, "height": h - headH });
+            // Image
+            $("#scroll_informationList_body").css({ "width": w, "overflow": "hidden" });
+
+            myScroll = new IScroll('#scroll_informationList_body', { probeType: 1, mouseWheel: true });
+
+
+            $('#informationList_header_left').on("click", function () {
+
+                pageUnShow('informationListPage')
+
+            })
+            informationListObj.getAnnouncement_view()
+        }
+        this.getAnnouncement_viewID = function (id) {
+            var getToken = window.localStorage.getItem('token')
+            var token = JSON.parse(getToken)
+            var container = document.getElementById('informationHeader_view');
+            var myScroll;
+            var IdView = []
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + `/v1/announcement/topic${id}`,
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+
+
+
+                }
+            });
+        }
+        this.getAnnouncement_view = function () {
+            var getToken = window.localStorage.getItem('token')
+            var token = JSON.parse(getToken)
+            var container = document.getElementById('informationHeader_view');
+            var myScroll;
+            // $("#informationHeader_view").html("")
+            var IdView = []
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/announcement',
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+
+                    var str = ""
+                    var str1 = ""
+                    str_viewPage = ""
+                    var IdView = []
+
+                    $.each(data.result, function (index, data) {
+
+                        var item = data;
+                        // var lang = localStorage.getItem('Language')
+                        // if (lang == "EN") {
+                        //     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                        // }
+                        // if (lang == "TH") {
+                        //     var months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+                        // }
+                        // var date = new Date(item.date)
+                        var finalAllDate = moment(item.date).format("YYYY-MM-DD");
+                        // var dateFormat = months[date.getMonth()] + '\t' + date.getDate() + " , " + date.getFullYear()
+                        var titleElement = document.createElement('li');
+                        str += ` 
+                            <div style="display: flex;justify-content: space-between;margin-top: 20px; padding:0px 10px;margin-bottom: 15px;align-items: center; ">
+                                <div style="display: flex;align-items: center;">
+                                    <img src="./pic/home/not02.png"style="height:32px; padding:10px; " >
+                                <div style="font-weight:normal; font-size:14px; ">${item.title}</div>
+                            </div>` +
+                            `<br>` +
+                            `<span id="view_${item.id}" class="view_more" style=" color:#FFF;background:#EA372A;    padding: 5px 20px; border-radius: 4px;">查看
+                                </span>
+                                </div>` +
+                            `</div>` + ``
+                        $('#informationHeader_view').html(str);
+
+
+                        myScroll = new IScroll('#scroll_informationList_body', { probeType: 1, mouseWheel: true });
+
+
+
+
+
+
+                    })
+                    $.each(data.result, function (index, viewmore) {
+                        IdView.push({ "IdView": viewmore.id, "title": viewmore.title, "content": viewmore.content, "date": viewmore.date })
+                    })
+                    // <div style="height:10px;"></div>
+                    // <span style="color:#999999; fontsize:12px;">${ViewPageDate} ｜新闻中心</span>
+                    // <div style="height:10px;"></div>
+                    // <img style="width:90% ; margin: 0 auto;" src="./pic/home/Mask_group_1.png">
+
+                    $.each(IdView, function (index, Viewpage) {
+                        var ViewPageDate = moment(Viewpage.date).format("YYYY-MM-DD HH:mm");
+                        $(`#view_${Viewpage.IdView}`).click(function () {
+                            //时间显示
+                            // <div style=" display: flex;gap:10px;    align-items: center;">  <img src="./pic/home/colck.png"style=" display: flex; height:13px">  <div style="color:#9C9C9C;" >${ViewPageDate}</div></div>
+                            str_viewPage += `
+                                        <div style="display: flex; flex-direction: column; padding: 0px 32px 260px 24px; ">
+                                         
+                                                <h3 style=" fontsize:18px;">${Viewpage.title}</h3>
+                                               
+
+                                            <div style=" text-indent: 20px;   letter-spacing: 0.5px;  fontsize:14px;">${Viewpage.content}</div>
+                                            
+
+                                        </div>
+                                    `;
+                            $('#information_info').html(str_viewPage);
+                            myScroll = new IScroll('#scroll_information_body', { probeType: 1, mouseWheel: true });
+                            $(`#information_info`).css({ "height": "auto" });
+
+                            pageShow("informationPage");
+                            informationListObj.getAnnouncement_viewID(Viewpage.IdView)
+                        });
+                    })
+                }
+            });
+        }
+    }
+</script>

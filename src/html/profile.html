@@ -1,0 +1,554 @@
+<style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        /* Adjust the gap as needed */
+    }
+
+    .center-c {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .text-c {
+        text-align: center;
+    }
+
+    .line_app {
+        height: 1px;
+        border: none;
+        background: #D5DBFF;
+        margin: 0;
+        overflow: hidden;
+
+    }
+
+    .line_app::before,
+    .line_app::after {
+        content: "";
+        display: table;
+
+    }
+
+    .line_app::after {
+        clear: both;
+    }
+
+    .line_app::before {
+        height: 0.5px;
+        background: #D5DBFF;
+        margin: -0.5px 0 0;
+    }
+</style>
+
+
+
+<div class="menuHeader" id="profileHeader"
+    style="position: absolute;display: flex;justify-content: center;align-items: center;font-size: 24px; font-weight: 700; background-color: transparent;">
+    <div style="width: 90%; display: flex; justify-content: space-between;">
+        <span></span>
+        <span id="profileHeaderBody">我的</span>
+        <div id="" style="height:28px;">
+
+            <!-- <img style="height:28px;" id="call_center" alt="callcenter"> -->
+        </div>
+    </div>
+
+</div>
+
+
+<div class="menuPage bg-my" id="profilePage" style="position: absolute;overflow: hidden; background: #F5F5F5;">
+    <div style="display: flex; justify-content: center;  ">
+
+        <div
+            style="display: flex; flex-direction: column; width: 90%;  background: #F5F5F5; padding: 10px 0; gap: 20px;">
+            <div id="profile_detail1"
+                style="display: flex;align-items: center; width: 100%; padding: 10px 0; gap: 10px; position: relative;">
+                <div id="profile_pic"
+                    style="width: 50px;height: 50px;border-radius: 100px;border: 2px solid #eb1313;overflow: hidden;margin-right:10px;">
+                    <img src="./pic/profile/box4-item1.png" class="profile_img"
+                        style="object-fit: cover;width: inherit;" alt="profile">
+                </div>
+                <div id="profile_info">
+
+                    <div style="display: flex; gap: 10px;">
+
+                        <div style="color: #000000;" id="user_account"></div>
+                        <div style="color: #000000;" id="verified_name"></div>
+                        <!-- <img style="height: 18px;display: none;" src="./pic/profile/vip1.png" id="profile_myVip1"
+                            alt="vip_icon">
+                        <img style="height: 18px;display: none;" src="./pic/profile/vip2.png" id="profile_myVip2"
+                            alt="vip_icon"> -->
+                    </div>
+                    <div style="display: flex;align-items: center;color: #0000009c;">
+                        <span id="profile_id">ID:</span><span id="id_account"></span>
+                        <div>
+                            <img id="copy_profile" alt="copy"
+                                style="width: 14px;height: 15px;margin-left:5px;margin-top:3px">
+                        </div>
+                    </div>
+                </div>
+
+                <divc style="width: 56px; height: 56px; position: absolute; right: 0;">
+                    <img id="profileLevel_All" alt="" style="width: 100%; height: 100%;">
+                </divc>
+            </div>
+            <!-- box2 -->
+            <div style="display: flex; background-image: url('./pic/bg/bg-globol.png'); background-size: cover; background-repeat: no-repeat; border-radius: 10px; color: #ffffff; "
+                class="flexCenter">
+                <div class="flexCenter-c" style="padding: 30px 0; width: 100%; " id="my_team">
+
+                    <div class="flexCenter">
+                        <img style="width: 40px;" src="./pic/profile/people.png" alt="people">
+                        <span style="font-size: 20px; font-weight: bold;">我的团队</span>
+                    </div>
+                    <div id="team_count_All" style="text-align: center;font-size: 18px;font-weight: bold;">0</div>
+                </div>
+
+
+
+                <div style="height: 30px; border-left: 1px solid #ffffff; ">
+
+                </div>
+
+                <div id="call_wallet_all" class="flexCenter-c" style="padding: 30px 0;width: 100%; ">
+
+                    <div class="flexCenter">
+                        <img style="width: 40px;" src="./pic/profile/money.png" alt="people">
+                        <span style="font-size: 20px;font-weight: bold;">我的资产</span>
+                    </div>
+                    <div id="show_w_balance" style="text-align: center;font-size: 18px;font-weight: bold;">0</div>
+                </div>
+            </div>
+            <!-- box3 -->
+
+            <div id="invite_go" style="height: 54px; width: 100%; display: flex;" class="flexRight">
+                <img src="./pic/profile/box3.png" alt="" style="width: 100%; height: 100%;">
+
+            </div>
+
+            <!-- box4 -->
+
+            <div
+                style="color: #5E6683; border-radius: 8px;background: #FFF;box-shadow: 0px 0px 8px 0px rgba(92, 122, 181, 0.25); padding: 10px;">
+                <span style="font-size: 18px;">常用功能</span>
+
+                <div style="height: 5px;"></div>
+                <div class="line_app"></div>
+                <div>
+                    <div style="height: 15px;"></div>
+
+                    <div style="display: flex; gap: 20px; flex-direction: column;">
+                        <div>
+                            <div class="grid-container">
+                                <div class="center-c text-c" id="verified">
+                                    <div style="height:33px;">
+
+                                        <img style="height:33px;" src="./pic/profile/boxitem1.png" alt="item1">
+                                    </div>
+                                    <span style="height:33px;">实名认证</span>
+                                </div>
+
+                                <!-- <div class="center-c text-c " id="go_promoton">
+                                    <div style="height:33px;">
+
+                                        <img style="height:33px;" src="./pic/profile/box4-item2.png" alt="item2">
+                                    </div>
+                                    <span style="height:33px;">推广海报</span>
+                                </div> -->
+                                <div class="center-c text-c" id="go_service">
+                                    <div style="height:33px;">
+                                        <img style="height:33px;" src="./pic/profile/box4-item6.png" alt="item6">
+                                    </div>
+                                    <span style="height:33px;">在线客服</span>
+                                </div>
+
+                                <div class="center-c text-c" id="go_information">
+                                    <div style="height:33px;">
+                                        <img style="height:33px;" src="./pic/profile/box4-item3.png" alt="item3">
+                                    </div>
+                                    <span style="height:33px;">收款信息</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="grid-container">
+
+
+                                <div class="center-c text-c" id="setting_page">
+                                    <div style="height:33px;">
+                                        <img style="height:33px;" src="./pic/profile/box4-item9.png" alt="item9">
+                                    </div>
+                                    <span style="height:33px;">个人设置</span>
+                                </div>
+                                <!-- <div class="center-c text-c" id="go_person">
+                                <div style="height:33px;">
+                                    <img style="height:33px;" src="./pic/profile/box4-item4.png" alt="item4">
+                                </div>
+                                <span style="height:33px;">个人信息</span>
+                            </div> -->
+
+                                <!-- <div class="center-c text-c" id="go_service">
+                                    <div style="height:33px;">
+                                        <img style="height:33px;" src="./pic/profile/box4-item6.png" alt="item6">
+                                    </div>
+                                    <span style="height:33px;">在线客服</span>
+                                </div> -->
+                                <div class="center-c text-c" id="go_history">
+                                    <div style="height:33px;">
+                                        <img style="height:33px;" src="./pic/profile/boxhisstoy.png" alt="level">
+                                    </div>
+                                    <span style="height:33px;">订单记录</span>
+                                </div>
+
+                                <div class="center-c text-c" id="about_us">
+                                    <div style="height:33px;">
+                                        <img style="height:33px;" src="./pic/profile/box4-item5.png" alt="item5">
+                                    </div>
+                                    <span style="height:33px;">关于我们</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="grid-container">
+                                <!-- <div class="center-c text-c" id="go_problem">
+                                <div style="height:33px;">
+                                    <img style="height:33px;" src="./pic/profile/box4-item7.png" alt="item7">
+                                </div>
+                                <span style="height:33px;">常见问题</span>
+                            </div> -->
+                                <div class="center-c text-c" id="go_level">
+                                    <div style="height:33px;">
+                                        <img style="height:33px;" src="./pic/profile/boxlv.png" alt="level">
+                                    </div>
+                                    <span style="height:33px;">会员等级</span>
+                                </div>
+
+                                <div class="center-c text-c" id="go_problem">
+                                    <div style="height:33px;">
+                                        <img style="height:33px;" src="./pic/profile/box4-item7.png" alt="item7">
+                                    </div>
+                                    <span style="height:33px;">常见问题</span>
+                                </div>
+
+                                <div class="center-c text-c" id="go_feedback">
+                                    <div style="height:33px;">
+                                        <img style="height:33px;" src="./pic/profile/box4-item8.png" alt="item8">
+                                    </div>
+                                    <span style="height:33px;">意见反馈</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        <!-- copy -->
+        <div style=" margin:0 auto;  position: absolute; top: 45%; z-index: 5;  width: 100%; display: none; justify-content: center;"
+            id="copy_content_id">
+            <div style="display:flex; flex-direction:column; opacity: 0.85; font-size: 16px;line-height: 17px;align-items: center;justify-content: center;text-align: center; color: #FFFFFF; background: #252525; width: 120px; height: 80px; text-align: center;  align-items: center; 
+                            box-shadow: 2px 3px 9px 1px rgba(0, 0, 0, 0.4);border-radius: 16px;">
+                <img id="copyright_id" style="height: 50px; width: 50px; " loading="lazy">
+                <span id="Copied_id" style="margin-bottom: 10px;">复制成功</span>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    var profileObj = new profile();
+    profileObj.init();
+
+    function profile() {
+
+        var myScroll;
+
+        var profile_myVip;
+
+        this.init = function () {
+
+            $("#profileHeader").css({ "width": "100%", "height": headH, "left": (-1.0) * w, "top": 0 });
+            $("#profilePage").css({ "width": w, "height": h - headH - menuH + 20, "position": "absolute", "left": (-1.0) * w, "top": headH });
+            myScroll = new IScroll('#profilePage', { probeType: 1, mouseWheel: true });
+            loadList();
+
+
+
+            $("#call_center").attr("src", picRes["callcenter.png"])
+
+            $("#copy_profile").attr("src", picRes["copy.png"])
+            $("#copyright_id").attr("src", picRes['copyright.png']);
+
+            $("#call_wallet_all").unbind().click(function () {
+                mainObj.menuwallet();
+            });
+
+            //实名认证点击选择页
+            $("#verified").unbind().click(function () {
+                // 在点击事件中调用verified_name，并根据返回结果执行相应的逻辑
+                verified_name().then(function (result) {
+                    if (result) {
+                        pageShow("reset_password_donePage");//ok
+                    } else {
+                        pageShow("verifiedPage");//not
+                        verifiedObj.call();
+                    }
+                }).catch(function (error) {
+                    console.error('出现错误:', error);
+                    // 根据需要处理错误
+                });
+            });
+
+
+            $("#about_us").unbind().click(function () {
+                pageShow("aboutPage");
+            });
+
+            $("#go_level").unbind().click(function () {
+                pageShow("levelPage");
+                levelObj.call()
+            });
+
+            $("#go_history").unbind().click(function () {
+                pageShow("trade_historyPage");
+                trade_historyObj.getHistory("All")
+
+            });
+            $("#my_team").unbind().click(function () {
+                pageShow("myteamPage");
+                myteamObj.call()
+                $("#pageTab_team_group").css({ "display": "none" })
+                $('[data-tab="tab1"]').click();
+
+            });
+            $("#setting_page").unbind().click(function () {
+                pageShow("settingPage");
+                settingObj.call()
+            });
+            $("#invite_go").unbind().click(function () {
+                pageShow("invitePage");
+                inviteObj.call();
+            });
+
+            $("#go_feedback").unbind().click(function () {
+                pageShow("feedbackPage");
+                feedbackObj.call();
+
+            });
+
+            $("#go_promoton").unbind().click(function () {
+                // pageShow("promotionPage");
+                pageShow("invitePage");
+                inviteObj.call();
+            });
+
+
+            $("#go_information").unbind().click(function () {
+                // pageShow("informationPage");
+                // pageShow("bank_cardPage");
+                // bank_cardObj.getFinancialBank()
+                // pageShow("alipay_cardPage");
+                // alipay_cardObj.getFinancialAlipay()
+                pageShow("paymentsPage");
+
+            });
+
+            $("#go_person").unbind().click(function () {
+                pageShow("personPage");
+            });
+
+            $("#go_service").unbind().click(function () {
+                pageShow("servicePage");
+                serviceObj.call();
+            });
+
+            $("#go_problem").unbind().click(function () {
+                pageShow("problemPage");
+                problemObj.call();
+            });
+
+
+
+
+        }
+
+
+        var profile_copy = new ClipboardJS('#copy_profile', {
+            text: function () {
+
+                $('#copy_content_id').css({ "display": "flex" });
+                setTimeout(function () {
+                    $('#copy_content_id').css({ "display": "none " });
+
+                }, 1000);
+                return $("#id_account").html();
+            },
+        });
+
+        function Profile() {
+            var Token = localStorage.getItem('token');
+            var obj = JSON.parse(Token);
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/profile',
+                headers: {
+                    'Authorization': 'Bearer ' + obj.token
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+
+                    $('#id_account, #show_id_setting').text(data.result.accountId);
+                    $('#user_account, #show_name_setting, #show_name_setting,  #show_name3_setting').text(data.result.name);
+                    $('#show_name2_setting').text(data.result.realName);
+
+                    $('#show_id_card_setting').text(data.result.identification);
+                    $('#show_phone_setting').text(data.result.phoneNumber);
+                    console.log(data.result);
+
+                    // var profile_myVip = data.result.level;
+
+                    // if (profile_myVip == null) {
+                    //     $("#profile_myVip1").css({ "display": "none" });
+                    //     $("#profile_myVip2").css({ "display": "none" });
+                    // } else if (profile_myVip == 1) {
+                    //     $("#profile_myVip1").css({ "display": "flex" });
+                    //     $("#profile_myVip2").css({ "display": "none" });
+                    // } else if (profile_myVip == 2) {
+                    //     $("#profile_myVip1").css({ "display": "none" });
+                    //     $("#profile_myVip2").css({ "display": "flex" });
+                    // }
+
+                    // $('#show_phone_setting').html(profile_myVip);
+
+                },
+                error: function (xhr, status, error) {
+
+                }
+            });
+        }
+        function Team() {
+            var Token = localStorage.getItem('token');
+            var obj = JSON.parse(Token);
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/inviteCode/myTeam/level1',
+                headers: {
+                    'Authorization': 'Bearer ' + obj.token
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+                    myteamObj.Peer_group();
+
+
+
+                },
+                error: function (xhr, status, error) {
+
+                }
+            });
+        }
+
+        // function Verified() {
+        //     var Token = localStorage.getItem('token');
+        //     var obj = JSON.parse(Token);
+        //     $.ajax({
+        //         type: 'get',
+        //         url: API_SERVER + '/v1/identity',
+        //         headers: {
+        //             'Authorization': 'Bearer ' + obj.token
+        //         },
+        //         async: true,
+        //         timeout: 100000,
+        //         success: function (data) {
+        //             var state = data.result.state;
+        //             var status = state === 10 ? "(Unverified)" : state === 20 ? "(已实名)" : "(Rejected)";
+        //             $('#Verified').text(status);
+        //         },
+        //         error: function (xhr, status, error) {
+
+        //         }
+        //     });
+        // }
+
+
+        function verified_name() {
+            // 返回一个Promise对象
+            return new Promise(function (resolve, reject) {
+                var Token = localStorage.getItem('token');
+                var obj = JSON.parse(Token);
+
+                $.ajax({
+                    type: 'GET',
+                    url: API_SERVER + '/v1/identity/check-image', // 请用你实际的 API 端点替换这里的地址
+                    headers: {
+                        'Authorization': 'Bearer ' + obj.token
+                    },
+                    async: true,
+                    timeout: 100000,
+                    success: function (data) {
+                        console.log(data); // 假设 API 响应是 { "result": true|false }
+
+                        if (data.result === true) {
+                            console.log('已上传');
+                            $('#verified_name').text('(已实名)');
+                            isVerified = true; // 存储判断值到全局变量
+                            resolve(true); // 将结果传递给Promise对象
+                        } else {
+                            console.log('未上传');
+                            $('#verified_name').text('(未实名)');
+                            var isVerified = false;// 存储判断值到全局变量
+                            resolve(false); // 将结果传递给Promise对象
+                        }
+                    },
+                    error: function (xmlhttprequest, error) {
+                        console.error('请求失败:', error);
+                        reject(error); // 将错误传递给Promise对象
+                    },
+                });
+            });
+        }
+
+        this.call = function () {
+            Profile()
+            Team()
+            verified_name()
+            $("#profilePage").transition({
+                x: w
+            }, 0);
+            $("#profileHeader").transition({
+                x: w
+            }, 0);
+            levelObj.getlevel();
+            myScroll.refresh();
+
+
+        }
+
+        function loadList() {
+            myScroll = new IScroll('#profilePage', { probeType: 1, mouseWheel: true });
+
+            myScroll.on('scroll', function () {
+                console.log("====>" + this.y);
+            });
+
+            myScroll.on('scrollEnd', function () {
+                console.log('====' + (new Date()));
+            });
+            myScroll.refresh();
+        }
+
+    }
+</script>

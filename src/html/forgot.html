@@ -1,0 +1,119 @@
+<div id="forgotPage" class="flexTop pageInit">
+
+    <div style="height: 20px;"></div>
+
+    <div style="height: 110px;">
+
+        <div style="height: 20px;"></div>
+
+        <div class="flexCenter forgotImg">
+            <img src="./pic/logo/logoApp.png" style="width: 140px; height: 40px;" />
+        </div>
+
+        <div style="height: 10px;"></div>
+
+        <div class="flexCenterColW100">
+            <div style="font-size: 20px; color: #fff;">全球算力一体化服务平台</div>
+
+        </div>
+
+    </div>
+
+    <div style="height: 30px;"></div>
+
+    <div id="forgot_scroll" style="width: 100%; overflow: hidden;">
+
+        <div style="display: flex; flex-direction: column; width: 100%;" class="flexTop">
+
+            <!-- box forgot -->
+            <div class="flexTop"
+                style="width: 85%; height: auto; border-radius: 20px; box-shadow: 0px 10px 20px 0px #0000001A; background: #fff; flex-direction: column; padding: 20px 0;">
+                <div style="height: 10px;"></div>
+
+                <div style="width: 90%; flex-direction: row;" class="flexSpac">
+
+                    <div style="width: 30px;">
+                        <img id="forgot_back" alt="" style="width: 20px; height: 20px;">
+                    </div>
+
+                    <div style="font-weight: bold; color: #01040D; font-size: 20px;">
+                        Forgot password
+                    </div>
+
+                    <div style="width: 30px;"></div>
+
+                </div>
+
+                <div style="height: 20px;"></div>
+
+                <div style="text-align: center; width: 90%; font-size: 16px; color: #8991A4;">
+                    <span>Please provide your mobile phone number, and we will send a verification code.</span>
+
+                </div>
+
+
+                <div style="height: 30px;"></div>
+
+                <div class="coverBoxInput">
+                    <img class="inputAllImg" id="forgot_phone">
+                    <input id="mobileforgot" class="boxInput" type="number" placeholder="Phone"
+                        pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11) return false;" />
+                </div>
+
+
+                <div style="height: 50px;"></div>
+                <div id="forgotBtn_go" class="btnComm">Verify</div>
+                <div style="height: 10px;"></div>
+
+
+            </div>
+
+            <div style="height: 30px;"></div>
+        </div>
+
+    </div>
+
+
+
+
+
+</div>
+<script>
+
+    var forgotObj = new forgot();
+    forgotObj.init();
+
+    function forgot() {
+
+        this.init = function () {
+
+
+            setAllUILang("forgot")
+            pageInit("forgotPage");
+
+            $("#forgot_scroll").css({ "width": w, "height": h - 160 });
+
+            setTimeout(() => {
+                myScroll = new IScroll('#forgot_scroll', { probeType: 1, mouseWheel: true });
+            }, 300);
+
+            $('#forgot_phone').attr("src", picRes['phone.png'])
+            $('#forgot_back').attr("src", picRes['back_arrow.png'])
+
+            $("#forgotBtn_go").click(function () {
+                pageShow("verifyPage");
+            });
+
+            $("#forgot_back").click(function () {
+                pageUnShow("forgotPage")
+            });
+
+            
+
+        }
+
+
+
+    }
+
+</script>

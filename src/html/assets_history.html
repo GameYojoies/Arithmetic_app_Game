@@ -1,0 +1,218 @@
+<div class="menuPage bg-my" id="assets_historyPage" style="position: absolute; background: rgb(248, 248, 248);">
+    <div class="menuHeader" id="assets_historyHeader"
+        style=" display: flex;justify-content: center;align-items: center; font-size: 24px; color: #ffffff; font-weight: 700; background-image: url('./pic/topup/bg_topup1.png');background-size: cover; background-repeat: no-repeat; height: 60px; ">
+        <img class="back_assetshistory" style="height: 21px;position: absolute;left: 22px;">
+        <span id="assets_history_header">详情信息</span>
+        <img style="height: 21px;position: absolute;right: 22px;">
+    </div>
+
+    <div id="assets_history_body" style=" background-color:transparent; height: auto;  width: 100%; ">
+        <div id="scroller_assets_history" class="flexTop_c">
+            <!--ส่วนเนื้อหนาที่เลื่อนได้-->
+            <div id="loop_assets_history"
+                style=" width: 100%; margin-top:15px;display: flex;flex-direction: column;gap: 10px;" class="flexTop_c">
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<style>
+    .bothSides {
+        width: 95%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+</style>
+
+<script>
+    var assets_historyObj = new assets_history();
+    assets_historyObj.init();
+    function assets_history() {
+        var myScroll;
+        var daySalesNumber;
+
+
+
+        this.init = function () {
+
+            pageInit("assets_historyPage");
+            // headerInit("assets_history", "我的团队")
+            $("#assets_historyPage").css({ "width": w, "height": h });
+            $("#body_content_team").css({ "width": w });
+            $("#assets_history_header").css({ "color": "#fff", "z-index": "15" });
+            $("#assets_history_header_right_body").css({ "color": "#fff" });
+            $("#assets_history_header_left").html('<img id="back_team" style="width:13px; height:21px;">');
+            $('.back_assetshistory').attr("src", picRes['back_team.png']);
+            $('#icons_search_t').attr("src", picRes['search.png']);
+            $("#assets_history_body").css({ "width": w, "height": h - headH - 60, "overflow": "hidden" });
+            myScroll = new IScroll('#assets_history_body', { probeType: 1, mouseWheel: true });
+
+            // click
+            $('.back_assetshistory').click(function () {
+                pageUnShow("assets_historyPage")
+
+            })
+
+            this.call = function (id, time, title) {
+
+                $('#assets_historyPage').transition({
+                    x: w
+                }, 0);
+
+                historyFunction(id, time, title)
+            }
+
+            // function getAllHistory() {
+            //     var item1 = [];
+            //     var getToken = window.localStorage.getItem("token");
+            //     var token = JSON.parse(getToken);
+
+            //     // Create an array to store promises for each AJAX request
+            //     var promises = [];
+
+            //     $.ajax({
+            //         type: 'get',
+            //         url: API_SERVER + '/v1/wallet/history?limit=1000',
+            //         headers: {
+            //             'Authorization': 'Bearer ' + token.token,
+            //         },
+            //         async: true,
+            //         timeout: 100000,
+            //         success: function (data) {
+            //             if (data.code == 0) {
+            //                 $.each(data.result, function (index, data) {
+            //                     var promise = $.ajax({
+            //                         type: 'get',
+            //                         url: API_SERVER + `/v1/wallet/history/${data.id}`,
+            //                         headers: {
+            //                             'Authorization': 'Bearer ' + token.token,
+            //                         },
+            //                         async: true,
+            //                         timeout: 100000,
+            //                         success: function (data) {
+            //                             if (data.code == 0 && data.result.uid != null) {
+            //                                 item1.push({
+            //                                     "uid": data.result.uid,
+            //                                     "mobile": data.result.mobile,
+            //                                     "pName": data.result.pName,
+            //                                     "pPrice": data.result.pPrice
+            //                                 });
+            //                             }
+            //                         },
+            //                         error: function (xmlhttprequest, error) {
+            //                             loaderObj.unShow();
+            //                             msgPageObj.show(NSLang('sys.serverError'));
+            //                         },
+            //                     });
+            //                     promises.push(promise);
+            //                 });
+
+            //                 // Wait for all promises to be resolved before calling historyFunction
+            //                 $.when.apply($, promises).done(function () {
+            //                     console.log(JSON.stringify(item1));
+            //                     historyFunction(item1);
+            //                 });
+            //             } else {
+            //                 loaderObj.unShow();
+            //                 msgPageObj.show(getStatusCode(data.code));
+            //             }
+            //         },
+            //         error: function (xmlhttprequest, error) {
+            //             loaderObj.unShow();
+            //             msgPageObj.show(NSLang('sys.serverError'));
+            //         },
+            //     });
+            // }
+
+
+            function historyFunction(id, time, title) {
+                var str = '';
+                var Alldata
+
+                var getToken = window.localStorage.getItem("token");
+                var token = JSON.parse(getToken);
+
+                $.ajax({
+                    type: 'get',
+                    url: API_SERVER + `/v1/wallet/history/${id}`,
+                    headers: {
+                        'Authorization': 'Bearer ' + token.token,
+                    },
+                    async: true,
+                    timeout: 100000,
+                    success: function (data) {
+                        if (data.code == 0) {
+                            Alldata = data.result
+
+                            if (Alldata.uid == null) {
+                                str += '<div style="height: 40px;font-weight:bold; font-size:16px; width:100%; background:#fff" class="flexCenter">没有数据</div>';
+                                $("#").html(str);
+                            } else {
+                                str += '<div style="margin-top:25px; width:90%; font-size:16px; font-weight:bold; background: linear-gradient(180deg, #FFECEA 0%, #FFFEFE 20.49%, #FFFFFF 100%); padding: 20px 0; gap: 10px; display: flex;flex-direction: column;box-shadow: 0px 0px 8px 0px #5C7AB540;border-radius: 6px;">';
+
+                                str += `<div class="flexCenter" style="font-size:20px;">${title}</div>`
+                                str += '<div style="height:20px;"></div> ';
+
+                                str += '<div style="weight:100%;">';
+                                str += '<div class="bothSides"> ';
+                                str += '<span style="padding-left:20px;color:#8D959B;">时间 ：</span>';
+                                str += `<span style="padding-left:10px;">${Alldata.uid == null ? "-" : time}</span>`;
+                                str += '</div>';
+
+                                str += '<div class="bothSides"> ';
+                                str += '<span style="padding-left:20px;color:#8D959B;">UID :</span>';
+                                str += `<span style="padding-left:10px;">${Alldata.uid == null ? "-" : Alldata.uid}</span>`;
+                                str += '</div>';
+
+                                str += '<div class="bothSides"> ';
+                                str += '<span style="padding-left:20px;color:#8D959B;">用户 ：</span>';
+                                str += `<span style="padding-left:10px;">${Alldata.uid == null ? "-" : Alldata.name}</span>`;
+                                str += ' </div>';
+
+                                str += '<div class="bothSides"> ';
+                                str += '<span style="padding-left:20px;color:#8D959B;">手机 ：</span>';
+                                str += `<span style="padding-left:10px;">${Alldata.mobile == null ? "-" : Alldata.mobile}</span>`;
+                                str += '</div>';
+
+                                str += '<div class="bothSides"> ';
+                                str += '<span style="padding-left:20px;color:#8D959B;">产品名称 ：</span>';
+                                str += `<span style="padding-left:10px;">${Alldata.pName == null ? "-" : Alldata.pName}</span>`;
+                                str += ' </div>';
+
+                                str += '<div class="bothSides"> ';
+                                str += '<span style="padding-left:20px;color:#8D959B;">产品价格 ：</span>';
+                                str += `<span style="padding-left:10px;">${Alldata.pPrice == null ? "-" : Alldata.pPrice}</span>`;
+                                str += '</div>';
+
+                                str += '</div>';
+
+                                str += '</div> ';
+
+                                $('#loop_assets_history').html(str);
+                                myScroll = new IScroll('#assets_history_body', { probeType: 1, mouseWheel: true });
+
+                            }
+
+                        } else {
+                            loaderObj.unShow();
+                            msgPageObj.show(getStatusCode(data.code));
+                        }
+                    },
+                    error: function (xmlhttprequest, error) {
+                        loaderObj.unShow();
+                        msgPageObj.show(NSLang('sys.serverError'));
+                    },
+                });
+            }
+
+        }
+
+
+    }
+
+</script>

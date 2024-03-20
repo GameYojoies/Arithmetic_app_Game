@@ -1,0 +1,40 @@
+<div class="menuPage bg-my" id="setting_fundPage"
+    style="position: absolute;background:#FAFAFA; background-repeat: no-repeat; background-size: cover;">
+    <div id="setting_fund_header">
+    </div>
+    <div id="scroller_setting_fund">
+        <div id="setting_fund_body" style="height: 800px; width: 100%; display: flex; align-items: center; flex-direction: column;">
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var setting_fundObj = new setting_fund();
+    setting_fundObj.init();
+
+    function setting_fund() {
+        var myScroll;
+        this.init = function () {
+            pageInit("setting_fundPage");
+            headerInit("setting_fund", "在线客服")
+            $("#setting_fund_Page").css({ "width": w, "height": h });
+            $("#scroller_setting_fund").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+           
+            myScroll = new IScroll('#scroller_setting_fund', { probeType: 1, mouseWheel: true });
+
+
+        }
+        this.call = function () {
+
+            $('#setting_fund_Page').transition({
+                x: w
+            }, 0);
+        }
+
+
+
+    }
+
+</script>

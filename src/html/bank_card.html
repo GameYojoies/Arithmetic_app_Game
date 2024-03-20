@@ -1,0 +1,195 @@
+<div class="menuPage bg-my" id="bank_cardPage" style="position: absolute; background: #FAFAFA;">
+    <div id="bank_card_header">
+    </div>
+
+    <div id="scroller_bank_card">
+        <div id="bank_card_body"
+            style="height: auto; width: 100%; display: flex; align-items: center; flex-direction: column;">
+
+            <div id="loop_data_bank" style="width: 100%;" class="flexTop_c">
+
+            </div>
+
+            <div style="height: 15px;"></div>
+            <div style="width: 90%; height: 45px; border-radius: 6px; color: #fff; font-weight: bold; background: linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%);"
+                class="flexCenter" id="go_to_add_bank">
+                <span style="font-size: 18px;">添加银行卡</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var bank_cardObj = new bank_card();
+    bank_cardObj.init();
+
+    function bank_card() {
+        var myScroll;
+        this.init = function () {
+            pageInit("bank_cardPage");
+            headerInit("bank_card", "银行卡管理")
+            $("#bank_card_Page").css({ "width": w, "height": h });
+            $("#scroller_bank_card").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+            $('.alipay_icons').attr("src", picRes['alipay_icon.png'])
+
+            myScroll = new IScroll('#scroller_bank_card', { probeType: 1, mouseWheel: true });
+
+            $('#go_to_add_bank').unbind().click(function () {
+                pageShow("bank_addPage")
+
+            })
+            $('#bank_card_header_left').click(function () {
+                topupObj.getBankAll()
+
+            })
+        
+
+        }
+
+        this.getFinancialBank = function () {
+            loaderObj.show()
+            str = ""
+            data_id = []
+            collect_Bank = []
+            var getToken = window.localStorage.getItem("token");
+            var token = JSON.parse(getToken);
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/financialOrganization',
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+
+                    loaderObj.unShow()
+                    var Bank_card = data.result.filter(data => data.type === 10);
+                    collect_Bank.push(Bank_card)
+
+                    if (collect_Bank[0].length == 0) {
+                        str += '<div style="height: 300px" class="flexCenter"><img src="./pic/icons/nodata_icons.png" style="width:110px;"></div>';
+                        $("#loop_data_bank").html(str);
+                    }
+
+                    else if (collect_Bank[0].lenght != 0) {
+                        $.each(collect_Bank[0], function (index, data) {
+
+                            var formatNum = formatCardNumber(data.cardNumber)
+
+                            str += '<div style="height: 10px;"></div>'
+
+                            str += '<div style="border-radius: 4px; width: 90%; height: 128px; position:relative; gap: 20px;" class="flexCenter_c">'
+                            str += '<img src="./pic/bank/bg_bank.png" alt="" style="height: 100%; width: 100%; position: absolute; z-index: -1;">'
+                            str += '<div class="flexSpac" style="width: 85%;">'
+                            str += '<img class="icon_" src="./pic/bank/logos_unionpay.png" alt="" style="height: 27px; ">'
+
+                            str += '<div style="color: #fff; text-align: left; display: flex; flex-direction: row;">'
+                            str += '<span style="font-size: 18px;">' + data.bankName + '</span>'
+                            str += '</div>'
+
+                            str += '<div style="padding: 5px; font-size: 13px; color: #fff; background: #ffffff40; border-radius: 100px;" class="flexCenter">'
+                            str += '<span id="bank_del_' + data.id + '">删除银行卡</span>'
+                            str += '</div>'
+                            str += '</div>'
+
+                            str += '<div style="color: #fff; font-weight: bold; font-size: 22px;">'
+                            str += '<span>' + formatNum + '</span>'
+                            str += '</div>'
+                            str += '</div>'
+
+                            data_id.push({ "id": data.id })
+
+                        })
+
+            
+                        $("#loop_data_bank").html(str)
+                        myScroll = new IScroll('#scroller_bank_card', { probeType: 1, mouseWheel: true });
+
+                        // delete bank
+                        $.each(data_id, function (index, data) {
+                            $(`#bank_del_${data.id}`).click(function () {
+                                deleteBank(data.id)
+                            })
+                        })
+
+                    }
+
+                    if (data.code != 0) {
+                        msgPageObj.show(getStatusCode(data.code))
+                    }
+                },
+
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+                    cleanInput();
+                },
+            })
+        }
+
+        // format card num
+        function formatCardNumber(cardNumber) {
+            
+            if (cardNumber !== null && cardNumber !== undefined) {
+                
+                var formattedNumber = cardNumber.replace(/\s/g, '').replace(/(.{4})/g, '$1 ');
+                return formattedNumber.trim(); // Remove leading/trailing whitespace
+            } else {
+                return '';
+            }
+        }
+
+        // delete card
+        function deleteBank(id) {
+            msgObj.show('确定要删除吗？', function () {
+
+                msgObj.unShow();
+                loaderObj.show();
+
+                $.ajax({
+                    type: "delete",
+                    headers: {
+                        'Authorization': 'Bearer ' + token.token,
+                    },
+                    url: API_SERVER + "/v1/financialOrganization/" + id,
+                    data: {},
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: true,
+                    timeout: 100000,
+                    beforeSend: function (xmlhttprequest) {
+                    },
+                    success: function (data) {
+
+                        loaderObj.unShow();
+                        if (data.code == 0) {
+                            bank_cardObj.getFinancialBank();
+                            earnObj.getFinancialPayments()
+                        } else {
+                            msgPageObj.show(getStatusCode(data.code))
+                        }
+                    },
+                    error: function (xmlhttprequest, error) {
+                        loaderObj.unShow();
+                        msgPageObj.show(NSLang('sys.serverError'))
+                    },
+                });
+
+            });
+        }
+
+
+        this.call = function () {
+            $('#bank_cardPage').transition({
+                x: w
+            }, 0);
+            bank_cardObj.getFinancialBank()
+        }
+
+
+
+    }
+
+</script>

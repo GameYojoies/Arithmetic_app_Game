@@ -1,0 +1,201 @@
+<div class="menuPage bg-my" id="summarize_product2Page"
+    style="position: absolute; z-index: 10; background:#ffffff; background-repeat: no-repeat; background-size: cover; font-size: 16px; font-weight: bold;">
+    <div id="summarize_product2_header">
+    </div>
+    <div id="scroller_summarize_product2">
+        <div id="summarize_product2_body"
+            style="width: 100%; display: flex; align-items: center; flex-direction: column;  background: #FAFAFA;">
+            <div style="height: 30px;"></div>
+            <div class="boxSumProduct">
+                <span class=" leftText">产品类型</span>
+                <span class="rightText" id="productname_summarize_2">算力+教育系列</span>
+
+            </div>
+
+            <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class=" leftText">项目周期</span>
+                <div>
+                    <span class="rightText" id="debate_summarize_2">0</span><span>天</span>
+                </div>
+            </div>
+
+            <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class=" leftText">起投金额</span>
+                <div>
+                    <span class="rightText" id="startRMB_summarize_2">0</span><span>元</span>
+                </div>
+            </div>
+
+            <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class="leftText">总收益</span>
+                <div>
+                    <span class="rightText" id="totalRMB_summarize_2">0</span><span>元</span>
+                </div>
+
+            </div>
+
+            <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class="leftText">结算模式</span>
+                <span class="rightText" id="name_product_sum_2">每日返息</span>
+            </div>
+
+            <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class="leftText">购买方式</span>
+                <span class="rightText">收益余额购买</span>
+            </div>
+
+            <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class="leftText">龙力值奖励</span>
+                <span class="rightText" id="activityRMB_summarize_2">0.5</span>
+            </div>
+
+            <!-- <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class="leftText">复投方式</span>
+                <span class="rightText"><span id="ratio_summarize_2"></span> 倍复投</span>
+            </div> -->
+
+            <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class=" leftText">算力券抵扣比例</span>
+                <div>
+                    <span class="rightText" id="dayIncome_summarize_2">0</span><span>%</span>
+                </div>
+            </div>
+
+            <div style="height: 10px;"></div>
+            <hr style="border: 1px solid #E4E4E4; background: #E4E4E4; width: 90%; margin:  0 auto;">
+
+            <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class="leftText">产品金额</span>
+                <span class="rightText"><span id="startRMB_summarize2_2"></span>元</span>
+            </div>
+
+            <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class="leftText">算力券抵扣金额</span>
+                <span class="rightText">-<span id="percentRMB_summarize2_2"></span>算力券</span>
+            </div>
+
+            <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class="leftText">支付总额</span>
+                <span style="color: #EA4644;">-<span style="color: #EA4644;" id="startRMB_summarize3_2"></span></span>
+            </div>
+
+            <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class="leftText">支付方式</span>
+                <span class="leftText" style="color: #000;">收益余额(<span id="balanceRMB_summarize3_2"></span>)</span>
+               
+            </div>
+
+            <div style="height: 20px;"></div>
+            <div id="btn_summarizeProdut_2"
+                style="width: 90% ;margin: 0 auto; height: 50px; border-radius: 8px; display: flex; justify-content: center; align-items: center; background: linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%);">
+                <span style="color: #ffffff;"> 提交</span>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        var summarize_product2Obj = new summarize_product2();
+        summarize_product2Obj.init();
+        function summarize_product2() {
+            var myScroll;
+            this.init = function () {
+                pageInit("summarize_product2Page");
+                headerInit("summarize_product2", "购买订单详情")
+
+                $("#scroller_summarize_product2").css({
+                    "width": w,
+                    "height": h - headH,
+                    "overflow": "hidden"
+
+                });
+                myScroll = new IScroll('#scroller_summarize_product2', {
+                    probeType: 1,
+                    mouseWheel: true
+                });
+
+                $('#summarize_product2_header_left').click(function () {
+                    $('#product_tab_10').click()
+                })
+
+            }
+            this.call = function () {
+                $('#summarize_product2Page').transition({
+                    x: w
+                }, 0);
+            }
+
+            this.getDataBuy = function (id, name1, name2, invest, earn, activity, ratio, dayIncomeS, cycle) {
+                $("#productname_summarize_2").text(name1)
+                $("#name_product_sum_2").text(name2)
+                $("#startRMB_summarize_2, #startRMB_summarize2_2").text(parseFloat(invest).toFixed(2))
+                // $("#ratio_summarize_2").text(ratio)
+                $("#totalRMB_summarize_2").text(parseFloat(earn).toFixed(2))
+                $("#activityRMB_summarize_2").text(parseFloat(activity).toFixed(2))
+                $("#dayIncome_summarize_2").text(parseFloat(dayIncomeS).toFixed(2));
+                $("#percentRMB_summarize2_2").text(parseFloat(dayIncomeS * invest /100).toFixed(1));                
+                $("#startRMB_summarize3_2").text(invest -(dayIncomeS * invest /100));
+                $("#debate_summarize_2").text(cycle);
+
+                console.log("-----------日收益--下一页---------", dayIncomeS);
+                walletObj.getWallet()
+
+                $('#btn_summarizeProdut_2').unbind().click(function () {
+                    msgObj.show('您确定要购买吗' + `<br>` + `<br>` + (name), function () {
+                        msgObj.unShow();
+                        loaderObj.show();
+                        // summarize_product2Obj.go2FA(id)
+                        BuyProduct(id)
+                    });
+                })
+
+            }
+
+            function BuyProduct(id) {
+                loaderObj.show();
+                var Token = localStorage.getItem("token");
+                var obj = JSON.parse(Token);
+                mData = {
+                    productId: id,
+                };
+                $.ajax({
+                    type: "post",
+                    url: API_SERVER + "/v1/products",
+                    data: JSON.stringify(mData),
+                    contentType: "application/json",
+                    headers: {
+                        Authorization: "Bearer " + obj.token,
+                    },
+                    async: true,
+                    timeout: 100000,
+                    success: function (data) {
+                        loaderObj.unShow();
+                        if (data.code == 0) {
+                            msgPageObj.show("恭喜您！产品购买成功！", function () { })
+                            walletObj.getWallet();
+                            mainObj.menutrade();
+                        } else {
+                            msgPageObj.show(getStatusCode(data.code), function () { })
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        loaderObj.unShow();
+                        msgPageObj.show(NSLang("sys.serverError"))
+
+                    },
+                });
+            }
+        }
+    </script>

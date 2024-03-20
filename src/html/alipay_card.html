@@ -1,0 +1,191 @@
+<div class="menuPage bg-my" id="alipay_cardPage" style="position: absolute; background: #FAFAFA;">
+    <div id="alipay_card_header">
+    </div>
+
+    <div id="scroller_alipay_card">
+        <div id="alipay_card_body"
+            style="height: auto; width: 100%; display: flex; align-items: center; flex-direction: column;">
+
+            <div id="loop_data_Alipay" style="width: 100%;" class="flexTop_c">
+                <div style="height: 50px;" class="flexCenter">没有数据</div>
+            </div>
+
+            <div style="height: 15px;"></div>
+            <div style="width: 90%; height: 45px; border-radius: 6px; color: #fff; font-weight: bold; background: linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%);"
+                class="flexCenter" id="go_to_add_Alipay">
+                <span style="font-size: 18px;">添加支付宝</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var alipay_cardObj = new alipay_card();
+    alipay_cardObj.init();
+
+    function alipay_card() {
+        var myScroll;
+        this.init = function () {
+            pageInit("alipay_cardPage");
+            headerInit("alipay_card", "支付宝管理")
+            $("#alipay_card_Page").css({ "width": w, "height": h });
+            $("#scroller_alipay_card").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+
+            myScroll = new IScroll('#scroller_alipay_card', { probeType: 1, mouseWheel: true });
+
+            $('#go_to_add_Alipay').unbind().click(function () {
+                pageShow("alipay_addPage")
+
+            })
+
+        }
+
+        this.getFinancialAlipay = function () {
+            
+            loaderObj.show()
+            str = ""
+            data_id = []
+            collect_alipay = []
+            var getToken = window.localStorage.getItem("token");
+            var token = JSON.parse(getToken);
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/financialOrganization',
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+                    loaderObj.unShow()
+
+                    var alipay_card = data.result.filter(data => data.type === 20);
+                    collect_alipay.push(alipay_card)
+
+                    if (collect_alipay[0].length == 0) {
+                        str += '<div style="height: 300px" class="flexCenter"><img src="./pic/icons/nodata_icons.png" style="width:110px;"></div>';
+                        $("#loop_data_Alipay").html(str);
+                    }
+
+                    else if (collect_alipay.lenght != 0) {
+                        $.each(collect_alipay[0], function (index, data) {
+
+                            var formatNum = formatCardNumber(data.cardNumber)
+
+                            str += '<div style="height: 10px;"></div>'
+
+                            str += '<div style="border-radius: 4px; width: 90%; height: 128px; position:relative; gap: 20px;" class="flexCenter_c">'
+                            str += '<img src="./pic/bank/bg_alipay.png" alt="" style="height: 100%; width: 100%; position: absolute; z-index: -1;">'
+                            str += '<div class="flexSpac" style="width: 85%;">'
+                            str += '<img src="./pic/bank/icons_bank.png" alt="" style="height: 35px; width: 30px;">'
+
+                            str += '<div style="color: #fff; text-align: left; display: flex; flex-direction: row;">'
+                            str += '<span style="font-size: 18px;">' + data.cardName + '</span>'
+                            str += '</div>'
+
+                            str += '<div style="padding: 5px; font-size: 13px; color: #fff; background: #ffffff40; border-radius: 100px;" class="flexCenter">'
+                            str += '<span id="Alipay_del_' + data.id + '">删除支付宝</span>'
+                            str += '</div>'
+                            str += '</div>'
+
+                            str += '<div style="color: #fff; font-weight: bold; font-size: 22px;">'
+                            str += '<span>' + formatNum + '</span>'
+                            str += '</div>'
+                            str += '</div>'
+
+                            data_id.push({ "id": data.id })
+
+
+
+                        })
+
+                        $("#loop_data_Alipay").html(str)
+                        myScroll = new IScroll('#scroller_alipay_card', { probeType: 1, mouseWheel: true });
+
+                        // delete Alipay
+                        $.each(data_id, function (index, data) {
+                            $(`#Alipay_del_${data.id}`).click(function () {
+                                deleteAlipay(data.id)
+                            })
+                        })
+
+                    }
+
+                    if (data.code != 0) {
+                        msgPageObj.show(getStatusCode(data.code))
+                    }
+                },
+
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+                    cleanInput();
+                },
+            })
+        }
+
+        // format card num
+        function formatCardNumber(cardNumber) {
+            // Insert a space every 4 characters in the card number
+            if (cardNumber !== null && cardNumber !== undefined) {
+                // Insert a space every 4 characters in the card number
+                var formattedNumber = cardNumber.replace(/\s/g, '').replace(/(.{4})/g, '$1 ');
+                return formattedNumber.trim(); // Remove leading/trailing whitespace
+            } else {
+                return ''; // หรือค่าเริ่มต้นที่คุณต้องการกำหนดในกรณีที่ cardNumber เป็น null หรือ undefined
+            }
+        }
+
+        // delete card
+        function deleteAlipay(id) {
+            msgObj.show('确定要删除吗？', function () {
+
+                msgObj.unShow();
+                loaderObj.show();
+
+                $.ajax({
+                    type: "delete",
+                    headers: {
+                        'Authorization': 'Bearer ' + token.token,
+                    },
+                    url: API_SERVER + "/v1/financialOrganization/" + id,
+                    data: {},
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: true,
+                    timeout: 100000,
+                    beforeSend: function (xmlhttprequest) {
+                    },
+                    success: function (data) {
+
+                        loaderObj.unShow();
+                        if (data.code == 0) {
+                            alipay_cardObj.getFinancialAlipay();
+                            earnObj.getFinancialPayments()
+                        } else {
+                            msgPageObj.show(getStatusCode(data.code))
+                        }
+                    },
+                    error: function (xmlhttprequest, error) {
+                        loaderObj.unShow();
+                        msgPageObj.show(NSLang('sys.serverError'))
+                    },
+                });
+
+            });
+        }
+
+
+        this.call = function () {
+            $('#alipay_cardPage').transition({
+                x: w
+            }, 0);
+            alipay_cardObj.getFinancialAlipay();
+        }
+
+
+
+    }
+
+</script>

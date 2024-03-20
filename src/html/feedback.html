@@ -1,0 +1,313 @@
+<style>
+    .flex-container {
+        display: flex;
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    textarea {
+        width: 100%;
+        border: none;
+        outline: none;
+        color: #8F9CB3;
+        border-radius: 6px;
+        background: #F5F5F5;
+        font-size: 18px;
+        padding: 15px;
+        margin: 10px 0;
+        box-sizing: border-box;
+        display: block;
+    }
+</style>
+<div class="menuPage bg-my" id="feedbackPage"
+    style="position: absolute; z-index: 10; background:#fff; background-repeat: no-repeat; background-size: cover;">
+    <div id="feedback_header">
+    </div>
+    <div style="height: 5px;"></div>
+    <div id="scroller_feedback">
+        <div id="feedback_body" style="width: 100%; ">
+            <div style="width: 90%; margin:  0 auto; height: 30px;  font-size: 19px; font-weight: 600;
+            ">
+                问题分类 <span style="color: #EC3A2C;">*</span>
+            </div>
+            <div style="height: 15px;"></div>
+            <div id="tabs-feedback" style="display: flex; width: 90%; margin: 0 auto;">
+                <div class="tab-feedback" id="tab1_feedback"
+                    style="font-size: 13px;justify-content: center;margin-right: 20px;padding: 5px 10px; border-radius: 30px;border: 1px solid #EC3A2C;background: #FAE6E6; display: flex; align-items: center; justify-content: center;"
+                    onclick="feedbackObj.changeTab('tab1-feedback')">
+                    <span>产品建议</span>
+                </div>
+
+                <div class="tab-feedback" id="tab2_feedback"
+                    style="font-size: 13px; margin-right: 20px;padding: 5px 10px; border-radius: 30px; border: 1px solid var(--Gray-4, #ACB6C6); display: flex; align-items: center; justify-content: center;"
+                    onclick="feedbackObj.changeTab('tab2-feedback')">
+                    <span>功能Bug</span>
+                </div>
+            </div>
+            <div style="height: 30px;"></div>
+
+            <div style="display: flex; width: 90%; margin:  0 auto;">
+                <div
+                    style=" font-weight: 600;
+                     font-size: 19px; margin-right: 20px;padding: 5px 10px;  display: flex; align-items: center; justify-content: center;">
+                    <span> 详细描述 </span><span style="color: #EC3A2C;">*</span>
+
+                </div>
+
+
+            </div>
+            <div style="height: 10px;"></div>
+            <div id="tab1-feedback" class="tab-content-feedback">
+                <div class="flex-container">
+                    <textarea id="product_suggestions" placeholder="您在哪个页面，遇到了什么问题，详细描述有助于帮您快速解决"></textarea>
+                </div>
+            </div>
+
+            <div id="tab2-feedback" class="tab-content-feedback" style="display: none;">
+                <!-- Content for tab 2 -->
+                <div class="flex-container">
+                    <textarea id="function_bug" placeholder="功能Bug"></textarea>
+                </div>
+            </div>
+
+            <div style="height: 30px;"></div>
+
+            <div style="display: flex; width: 90%; margin:  0 auto;     flex-direction: column;            ">
+                <div style=" font-weight: 600;
+                     font-size: 19px; margin-right: 20px;padding: 5px 10px;  display: flex; align-items: center; ">
+                    <span> 联系方式 </span><span style="color: #EC3A2C;">*</span>
+
+                </div>
+                <div style="height: 10px;"></div>
+
+                <div style="display: flex; width: 95%; margin:  0 auto;">
+                    <input type="text" id="mobile_feedback"
+                        style="  border: none; font-weight: 600; width: 100%;color: #101D34; border-radius: 6px; background: #F5F5F5; font-size: 17px;   padding: 15px 15px;  display: flex; align-items: center; ">
+
+                    </input>
+
+
+                </div>
+                <div style="height: 20px;"></div>
+
+                <div id="sent_feedback"
+                    style=" justify-content: center;align-items: center;   height: 40px;display: flex; width: 95%; margin:  0 auto; border-radius: 10px;background: var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%));">
+
+                    <span style="color: #F5F5F5;"> 提交 </span>
+
+
+
+                </div>
+                <div style="height: 30px;"></div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var feedbackObj = new feedback();
+    feedbackObj.init();
+
+    function feedback() {
+        var myScroll;
+        var type;
+        var content;
+        var mobileFeedback;
+
+        this.changeTab = function (tabId) {
+            // Remove 'active' class from all tabs
+
+            var tabs = document.getElementsByClassName('tab-feedback');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active_feedback');
+            }
+
+            // Add 'active' class to the clicked tab
+            var clickedTab = document.getElementById(tabId);
+            clickedTab.classList.add('active_feedback');
+
+            // Hide all tab contents
+            var tabContents = document.getElementsByClassName('tab-content-feedback');
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].style.display = 'none';
+            }
+
+            // Show the content for the clicked tab
+            var contentId = tabId;
+            var content = document.getElementById(contentId);
+            content.style.display = 'block';
+
+            // Implement your tab content switching logic here
+        }
+        this.init = function () {
+            pageInit("feedbackPage");
+            headerInit("feedback", "意见反馈")
+            $("#mobile_feedback").on("input", function () {
+                var inputVal = $(this).val();
+                if (!/^\d+$/.test(inputVal)) {
+                    $(this).val(inputVal.replace(/[^\d]/g, ''));
+                }
+                if (inputVal.length > 16) {
+                    $(this).val(inputVal.slice(0, 16));
+                }
+            });
+            var type = 10
+            var content = ''
+            $("#feedback_Page").css({ "width": w, "height": h });
+            $("#sent_feedback").css({ "background": "rgb(178 171 171)" })
+
+            $("#scroller_feedback").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+            myScroll = new IScroll('#scroller_feedback', { probeType: 1, mouseWheel: true });
+            $('#up_img').attr("src", picRes['uploadimg.png'])
+            $('#deleteBtn').attr("src", picRes['deleteimg.png'])
+            $("#tab1_feedback").click(function () {
+                $("#function_bug").val("");
+                type = 10
+            });
+            $("#tab2_feedback").click(function () {
+                $("#product_suggestions").val("");
+                type = 20
+
+
+            });
+            $("#product_suggestions, #function_bug, #mobile_feedback").on("input", function () {
+                var productSuggestionsContent = $("#product_suggestions").val();
+                var functionBugContent = $("#function_bug").val();
+                var mobileFeedbackContent = $("#mobile_feedback").val();
+                console.log(productSuggestionsContent, mobileFeedbackContent);
+                if (productSuggestionsContent === '' || functionBugContent === '' || mobileFeedbackContent === '') {
+                    $("#sent_feedback").css({ "background": "rgb(178, 171, 171)" });
+                    $("#sent_feedback").off("click")
+                }
+
+                if (productSuggestionsContent != '' && mobileFeedbackContent != '') {
+                    content = productSuggestionsContent
+                    $("#sent_feedback").css({ "background": "var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%))" });
+                    $("#sent_feedback").on("click", function () {
+                        feedbackObj.feedback(type, content)
+                    });
+
+
+                }
+                if (functionBugContent != '' && mobileFeedbackContent != '') {
+                    content = functionBugContent
+                    $("#sent_feedback").css({ "background": "var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%))" });
+                    $("#sent_feedback").on("click", function () {
+                        feedbackObj.feedback(type, content)
+                    });
+
+
+                }
+            });
+
+
+            $(".tab-feedback").click(function () {
+                $(".tab-feedback").css({
+                    'border-radius': '30px',
+                    'border': '1px solid var(--Gray-4, #ACB6C6)',
+                    'background': '#fff'
+                })
+                $(this).css({
+                    'border-radius': '30px',
+                    'border': '1px solid #EC3A2C',
+                    'background': '#FAE6E6'
+                });
+            })
+            $('#up_img').on('click', function () {
+                $('#image').click();
+            });
+            $('#image').on('change', function () {
+                var selectedFile = this.files[0];
+                if (selectedFile) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#up_img').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(selectedFile);
+                    if (selectedFile) {
+                        $("#deleteBtn").css({ "display": "block" });
+                    }
+                }
+            });
+            $('#feedback_header_left').on('click', function () {
+                $('#up_img').attr('src', picRes["uploadimg.png"]);
+                $('#image').val('');
+                $("#deleteBtn").css({ "display": "none" });
+                feedbackObj.clearfeedback()
+
+            })
+            $('#deleteBtn').on('click', function () {
+                var delete_img = $('#image').val();
+                if (!delete_img) {
+                    $("#deleteBtn").css({ "display": "none" });
+                }
+            });
+
+        }
+        this.feedback = function (Type, Content) {
+            var mobileFeedback = $("#mobile_feedback").val();
+            var Token = localStorage.getItem("token");
+            var obj = JSON.parse(Token);
+            var mData = {
+                "type": Type,
+                "mobile": mobileFeedback,
+                "content": Content,
+
+            }
+        
+            $.ajax({
+                type: "post",
+                url: API_SERVER + "/v1/config/feedback",
+                data: JSON.stringify(mData),
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                    "Content-Type": "application/json",
+                },
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+                    if (data.code === 0) {
+                       
+                        msgPageObj.show("意见反馈提交成功")
+                        feedbackObj.clearfeedback()
+                    }
+                    else {
+                        msgPageObj.show(getStatusCode(data.code))
+                        feedbackObj.clearfeedback()
+                    }
+                },
+                error: function (xmlhttprequest, error) {
+
+
+                }
+
+            });
+
+        }
+        this.call = function () {
+
+            $('#feedback_Page').transition({
+                x: w
+            }, 0);
+
+            $("#tab1_feedback").trigger("click");
+
+
+        }
+        this.clearfeedback = function () {
+            $("#mobile_feedback").val("");
+            $("#product_suggestions").val("");
+            $("#function_bug").val("");
+            $("#sent_feedback").css({ "background": "rgb(178, 171, 171)" });
+            $("#sent_feedback").off("click");
+        }
+
+
+
+    }
+
+</script>

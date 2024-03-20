@@ -1,0 +1,51 @@
+<div class="menuPage bg-my" id="about_detailPage"
+    style="position: absolute; z-index: 10; background:#ffffff; background-repeat: no-repeat; background-size: cover;">
+    <div id="about_detail_header">
+    </div>
+    <div id="scroller_about_detail">
+        <div id="about_detail_body" style="width: 100%; display: flex; align-items: center; flex-direction: column; ">
+
+            <div
+                style="padding: 20px 0;  justify-content: center; align-items: center; gap: 20px; background-color: #f8f8f8;flex-direction: column; display: flex;  ">
+
+
+                <div id="about_detail_Obj_img" style="height: auto;  width:100%;  ">
+                    
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var about_detailObj = new about_detail();
+    about_detailObj.init();
+
+    function about_detail() {
+        var myScroll;
+        this.init = function () {
+            pageInit("about_detailPage");
+            headerInit("about_detail", "项目背景")
+            $("#about_detail_Page").css({ "width": w, "height": h });
+            $("#scroller_about_detail").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+
+            myScroll = new IScroll('#scroller_about_detail', { probeType: 1, mouseWheel: true });
+
+        }
+        this.call = function () {
+            $("#about_detail_Obj_img").html('<img src="./pic/about/about_pic_01.png" style="width:100%; height: auto; background-size: cover;border-radius: 8px;">')
+            $('#about_detail_Page').transition({
+                x: w
+            }, 0);
+            refreshSrollObj(myScroll);
+        }
+
+
+
+    }
+
+</script>

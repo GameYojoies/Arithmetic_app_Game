@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script language="javascript" type="text/javascript" src="conf.js?version=1.01"></script>
+    <script language="javascript" type="text/javascript" src="js/jquery.js?version=1.0.0.1"></script>
+</head>
+
+
+<body>
+
+
+    <b>
+        <div style="display: none; height: 90px;font-size:52Px;color: red;" id="respCode">支付失败，请重试！</div>
+    </b>
+
+
+</body>
+
+</html>
+
+
+<script>
+
+    // alert("Hello World!");
+
+    getOrder();
+
+    function getQueryString(name) {
+
+        console.log("getQueryString", "==================1============+");
+
+        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+        console.log("reg", "==================1==2==========+");
+        var r = window.location.search.substr(1).match(reg);
+        console.log("r", "==================1==3==========+");
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
+        console.log("null", "==================1====4========+");
+    }
+
+
+
+
+    function getOrder() {
+        console.log("getOrder", "==================2============+");
+
+        var onlineValue = getQueryString('onlineWay');
+        //var accessToken = localStorage.getItem("token");
+        var onlineToken = getQueryString('token');
+        var obj = JSON.parse(onlineToken);
+        var onlineAmount = getQueryString('onlineSum');
+
+        var API_SERVER = "";
+
+        if (APIServer) {
+            API_SERVER = APIServer;
+        }
+
+        if (isPro) {
+            var host = location.hostname;
+            var port = location.port;
+            API_SERVER = location.protocol + "//" + host + ":" + port;
+        }
+
+
+        //  var msgPageObj = new messagePage();
+
+        $.ajax({
+
+            type: "get",
+            url: API_SERVER + "/v1/wallet/payment?channelId=" + onlineValue + "&amount=" + onlineAmount,
+            headers: {
+                Authorization: "Bearer " + obj.token,
+            },
+            async: true,
+            timeout: 100000,
+
+            // beforeSend: function (xmlhttprequest) {
+            //     xmlhttprequest.setRequestHeader('Authorization', obj.token);
+            // },
+
+            success: function (data) {
+                console.log("success", "==================3=1===========+");
+
+
+                if (data.code == 0) {
+
+                    var url = data.result.payUrl;
+                    location.href = url;
+                    //makeOnlineForm(data.data.fields, data.data.action);
+
+                    // console.log("makeOnlineForm", "==================3=1=1==========+");
+
+
+                } else {
+                    $("#respCode").css("display", "flex");
+
+                }
+                // loadingObj.unShow();
+            },
+            error: function (xmlhttprequest, error) {
+                //   loadingObj.unShow();
+
+                $("#respCode").css("display", "flex");
+                console.log(error);
+            },
+            complete: function () {
+            }
+        });
+        console.log("ajax", "==================3=1===========+");
+
+        // function makeOnlineForm(fileds, action) {
+
+
+        //     var form = document.createElement("form");
+
+        //     console.log("form", "==================4=1===========+");
+
+
+        //     form.action = action;
+        //     console.log("action", "==================4=3===========+");
+        //     form.method = 'POST';
+        //     console.log("'POST'", "==================4=4===========+");
+
+        //     var str = '<input name="CID" value="' + fileds.CID + '">';
+        //     str = str + '<input name="callbackurl" value="' + fileds.callbackurl + '">';
+        //     str = str + '<input name="returnurl" value="' + fileds.returnurl + '">';
+        //     str = str + '<input name="signature" value="' + fileds.signature + '">';
+        //     str = str + '<input name="v_amount" value="' + fileds.v_amount + '">';
+        //     str = str + '<input name="v_cartid" value="' + fileds.v_cartid + '">';
+        //     str = str + '<input name="v_currency" value="' + fileds.v_currency + '">';
+        //     str = str + '<input name="version" value="' + fileds.version + '">';
+
+        //     form.innerHTML = str;
+
+
+        //     var container = document.getElementById("my_form_container");
+        //     container.appendChild(form);
+        //     console.log("container", "==================4=5===========+");
+
+        //     form.submit();
+        //     console.log("submit", "==================4=6===========+");
+
+
+
+
+        //     console.log(form);
+
+        // }
+
+
+
+
+    }
+
+
+
+
+</script>

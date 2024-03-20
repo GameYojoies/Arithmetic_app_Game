@@ -1,0 +1,381 @@
+
+
+<div class="menuPage bg-my" id="verifiedPage" style="position: absolute; background:#fff; ">
+    <div id="verified_header">
+    </div>
+    <!-- <div style="height: 25px;"></div> -->
+    <div id="scroller_verified">
+
+
+        <div
+            style="display: flex; width: 90%; margin:  0 auto; justify-content: center; gap: 1px;     flex-direction: column;   height: auto;          ">
+
+
+            <div style="height: 10px;"></div>
+            <div style="width: 90%; height: 30px; background:#fff; display: flex;  align-items: center;">
+                <span style="color: red;"> *</span><span style="margin-right: 10px;">姓名</span>
+                <div id="name_verified" style="border: none;font-size: 18px;"> </div>
+            </div>
+
+            <div style="height: 10px;"></div>
+            <div style="width: 90%; height: 30px; background:#fff; display: flex;  align-items: center;">
+                <span style="color: red;"> *</span><span style="margin-right: 10px;">身份证号</span>
+                <div id="number_verified" style="border: none;font-size: 18px;"> </div>
+            </div>
+
+            <div style="height: 10px;"></div>
+            <div style="width: 90%; height: 30px; background:#fff; display: flex;  align-items: center;">
+                <span style="color: red;"> *</span><span style="margin-right: 10px;">身份证照</span>
+
+            </div>
+            <div style="height: 10px;"></div>
+            <div style="position: relative; display:  flex; justify-content: center;">
+                <input type="file" id="image1" name="image" accept="image/*" style="display: none;">
+                <!-- Image tag serving as a button -->
+                <img id="verified_upload1" style="height: 214px; ">
+                <img id="deleteBtn_verified1"
+                    style="display: none; position: absolute; width: 20px; height: 20px; top: 101%; left: 50%; transform: translate(-50%, -50%);">
+
+            </div>
+            <div style="height: 10px;"></div>
+            <div style="position: relative; display:  flex; justify-content: center;">
+                <input type="file" id="image2" name="image" accept="image/*" style="display: none;">
+                <!-- Image tag serving as a button -->
+                <img id="verified_upload2" style=" height: 214px;">
+                <img id="deleteBtn_verified2"
+                    style="display: none; position: absolute; width: 20px; height: 20px; top: 101%; left: 50%; transform: translate(-50%, -50%);">
+
+            </div>
+            <div style="height: 10px;"></div>
+            <div style="position: relative; display:  flex; justify-content: center;">
+                <input type="file" id="image3" name="image" accept="image/*" style="display: none;">
+                <!-- Image tag serving as a button -->
+                <img id="verified_upload3" style=" height: 214px; ">
+                <img id="deleteBtn_verified3"
+                    style="display: none; position: absolute; width: 20px; height: 20px; top: 101%; left: 50%; transform: translate(-50%, -50%);">
+
+            </div>
+            <div style="height: 10px;"></div>
+            <!-- <div>
+                    <img id="verified_upload3" style="  height: 214px;  ">
+                </div> -->
+
+        </div>
+
+
+
+    </div>
+
+    <div style="height: 100px; " class="flexTop_c">
+        <div id="btn_verified"
+            style=" margin-top: 20px;  display: flex; align-items: center; justify-content: center; width: 90%; height: 45px; border-radius: 8px;background: var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%));">
+            <span style="color: #fff;">提交 </span>
+
+
+
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+    var verifiedObj = new verified();
+    verifiedObj.init();
+
+    function verified() {
+        var myScroll;
+
+        var Image1
+        var Image2
+        var Image3
+
+        this.init = function () {
+            pageInit("verifiedPage");
+            headerInit("verified", "实名认证")
+
+
+            $("#scroller_verified").css({ "width": w, "height": h - headH - 100, "overflow": "hidden" });
+
+            myScroll = new IScroll('#scroller_verified', { probeType: 1, mouseWheel: true });
+            $('#verified_upload1').attr("src", picRes['verified_upload1.png']);
+            $('#verified_upload2').attr("src", picRes['verified_upload2.png']);
+            $('#verified_upload3').attr("src", picRes['verified_upload3.png']);
+            $('#deleteBtn_verified1').attr("src", picRes['deleteimg.png'])
+            $('#deleteBtn_verified2').attr("src", picRes['deleteimg.png'])
+            $('#deleteBtn_verified3').attr("src", picRes['deleteimg.png'])
+
+            // $("#number_verified").keypress(function (event) {
+            //     var ew = event.which;
+            //     if (48 <= ew && ew <= 57)
+            //         return true;
+            //     return false;
+            // });
+
+            // $("#text_verified").on("input", function () {
+            //     // ดึงค่าที่ผู้ใช้ป้อนเข้ามา
+            //     var inputValue = $(this).val();
+
+            //     // กรองและกำจัดตัวเลข
+            //     var filteredValue = inputValue.replace(/[0-9]/g, '');
+
+            //     // นำค่าที่กรองแล้วกลับไปที่ input field
+            //     $(this).val(filteredValue);
+            // });
+
+            // $("#btn_verified").click(function () {
+            //     // pageUnShow("verifiedPage");
+            //     // pageShow("reset_password_donePage");
+            //     if (Image1 == null || Image2 == null, Image3 == null) {
+            //         msgPageObj.show("请上传全部图片");//please upload Image all
+            //     } else {
+            //         VerifiedImgAcc();
+            //         console.log(Image1, Image2, Image3);
+            //     }
+            // })
+
+            //点击上传
+            $("#btn_verified").click(function () {
+                if (Image1 == null || Image2 == null || Image3 == null) {
+                    msgPageObj.show("请上传完成三张图片"); // 提示上传三张图片
+                } else if (Image1 === Image2 || Image1 === Image3 || Image2 === Image3) {
+                    msgPageObj.show("请勿上传相同的图片"); // 提示上传相同图片
+                } else {
+                    // 执行上传成功逻辑
+                    VerifiedImgAcc();
+                    console.log(Image1, Image2, Image3);
+
+                    // 自动跳转到身份认证成功的界面，不弹出提示
+                    
+                    // 如果需要隐藏 "verifiedPage" 页面，取消注释下一行
+                    // 
+                }
+            });
+
+
+            $('#verified_upload1').on('click', function () {
+                $('#image1').click();
+            });
+            $('#verified_upload2').on('click', function () {
+                $('#image2').click();
+            });
+            $('#verified_upload3').on('click', function () {
+                $('#image3').click();
+            });
+            $('#verified_header_left').on('click', function () {
+                $('#verified_upload1').attr('src', picRes["verified_upload1.png"]);
+                $('#image1').val('');
+                $("#deleteBtn_verified1").css({ "display": "none" });
+                $('#verified_upload2').attr('src', picRes["verified_upload2.png"]);
+                $('#image2').val('');
+                $("#deleteBtn_verified2").css({ "display": "none" });
+                $('#verified_upload3').attr('src', picRes["verified_upload3.png"]);
+                $('#image3').val('');
+                $("#deleteBtn_verified3").css({ "display": "none" });
+            })
+            $('#image1').on('change', function () {
+                var selectedFile = this.files[0];
+                if (selectedFile) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#verified_upload1').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(selectedFile);
+                    if (selectedFile) {
+                        $("#deleteBtn_verified1").css({ "display": "block" });
+                    }
+                    AddFilesFunc(selectedFile, "img1")
+                }
+            });
+            $('#image2').on('change', function () {
+                // รับไฟล์ที่ถูกเลือก
+                var selectedFile = this.files[0];
+
+                // แสดงรูปที่เลือกในแท็ก img
+                if (selectedFile) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#verified_upload2').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(selectedFile);
+                    if (selectedFile) {
+                        $("#deleteBtn_verified2").css({ "display": "block" });
+                    }
+
+                }
+                AddFilesFunc(selectedFile, "img2")
+            });
+            $('#image3').on('change', function () {
+                // รับไฟล์ที่ถูกเลือก
+                var selectedFile = this.files[0];
+
+                // แสดงรูปที่เลือกในแท็ก img
+                if (selectedFile) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#verified_upload3').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(selectedFile);
+                    if (selectedFile) {
+                        $("#deleteBtn_verified3").css({ "display": "block" });
+                    }
+                }
+                AddFilesFunc(selectedFile, "img3")
+            });
+            $('#deleteBtn_verified1').on('click', function () {
+                // ล้างรูปที่เลือกและรีเซ็ตไฟล์อินพุต
+                $('#verified_upload1').attr('src', picRes["verified_upload1.png"]);
+                $('#image1').val('');
+                var delete_img = $('#image1').val();
+                if (!delete_img) {
+                    $("#deleteBtn_verified1").css({ "display": "none" });
+                }
+                Image1 = null
+            });
+            $('#deleteBtn_verified2').on('click', function () {
+                // ล้างรูปที่เลือกและรีเซ็ตไฟล์อินพุต
+                $('#verified_upload2').attr('src', picRes["verified_upload2.png"]);
+                $('#image2').val('');
+                var delete_img = $('#image2').val();
+                if (!delete_img) {
+                    $("#deleteBtn_verified2").css({ "display": "none" });
+                }
+                Image2 = null
+            });
+            $('#deleteBtn_verified3').on('click', function () {
+                // ล้างรูปที่เลือกและรีเซ็ตไฟล์อินพุต
+                $('#verified_upload3').attr('src', picRes["verified_upload3.png"]);
+                $('#image3').val('');
+                var delete_img = $('#image3').val();
+                if (!delete_img) {
+                    $("#deleteBtn_verified3").css({ "display": "none" });
+                }
+                Image3 = null
+            });
+
+        }
+        this.call = function () {
+
+            $('#verified_Page').transition({
+                x: w
+            }, 0);
+            Verified_info();
+        }
+
+        function AddFilesFunc(file, img) {
+
+            var Token = localStorage.getItem('token');
+            var obj = JSON.parse(Token);
+
+            var formData = new FormData();
+            formData.append('file', file);
+            loaderObj.show()
+
+            $.ajax({
+                type: 'put',
+                url: API_SERVER + '/v1/files',
+                headers: {
+                    'Authorization': 'Bearer ' + obj.token,
+                },
+                contentType: false,
+                data: formData,
+                async: true,
+                timeout: 100000,
+                processData: false,
+
+                success: function (data) {
+                    loaderObj.unShow()
+                    if (data.code == 0) {
+                        console.log(data.result);
+                        switch (img) {
+                            case 'img1':
+                                Image1 = data.result.link
+                                break;
+                            case 'img2':
+                                Image2 = data.result.link
+                                break;
+                            case 'img3':
+                                Image3 = data.result.link
+                            default:
+                                break;
+                        }
+
+                    } else {
+                        msgPageObj.show(getStatusCode(data.code))
+                    }
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow()
+                    msgPageObj.show(NSLang("sys.serverError"))
+                },
+            });
+        }
+
+        function VerifiedImgAcc() {
+
+            console.log(Image1, Image2, Image3);
+            var mData = [
+                Image1,
+                Image2,
+                Image3
+            ]
+            loaderObj.show();
+            $.ajax({
+                type: "post",
+                url: API_SERVER + "/v1/identity/image",
+                headers: {
+                    'Authorization': 'Bearer ' + token.token
+                },
+                data: JSON.stringify(mData),
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+
+                    loaderObj.unShow();
+                    if (data.code == 0) {
+                        console.log(data.result);
+                        pageUnShow("verifiedPage");
+                        pageShow("reset_password_donePage");
+                        mainObj.menuprofile();
+                        // msgPageObj.show("身份验证图片已上传成功！");//上传成功提示
+                    }
+                    else {
+                        msgPageObj.show(getStatusCode(data.code))
+                    }
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+                },
+            });
+        }
+
+        function Verified_info() {
+            var Token = localStorage.getItem('token');
+            var obj = JSON.parse(Token);
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/identity',
+                headers: {
+                    'Authorization': 'Bearer ' + obj.token
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+                    $('#name_verified').text(data.result.name)
+                    $('#number_verified').text(data.result.passportCode)
+                },
+                error: function (xhr, status, error) {
+                    msgPageObj.show(NSLang('sys.serverError'))
+
+                }
+            });
+        }
+
+
+
+    }
+
+</script>

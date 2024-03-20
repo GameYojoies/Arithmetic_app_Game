@@ -1,0 +1,1535 @@
+<style>
+    .tab-content_team {
+        display: none;
+
+    }
+
+    .active-tab-team {
+        display: block;
+    }
+
+    .btn-tap {
+        padding: 5px 0px;
+        background: #fff;
+        border: none;
+        color: #8D959B;
+        font-weight: bold;
+        font-size: 16px;
+        /* Adjust the width and color as needed */
+    }
+
+    .font-myteam {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .font-myteam-number {
+        font-weight: bold;
+        font-size: 20px;
+
+    }
+
+    .font-myteam-bottom {
+        color: #ED3C2E;
+    }
+</style>
+
+<div class="menuPage bg-my" id="myteamPage" style="position: absolute; z-index: 10; ">
+    <!--รูปพื้นหลัง ส่วนหัว -->
+    <!-- <img src="./pic/bg/bg-team.png" style=" height: 200px; width: 100% ; top: 0; position: absolute; z-index: -1;"> -->
+
+    <div id="myteam_header" style="background: transparent; color: #000000;">
+    </div>
+    <!--เลื่อนทั้งหน้า -->
+    <div id="myteam_body"
+        style=" background-color:transparent; height: auto; display: flex; width: 100%;  align-items: center; flex-direction: column;">
+        <div id="scroller_myteam">
+            <!--ส่วนเนื้อหนาที่เลื่อนได้-->
+            <div>
+                <div style="position: relative; z-index: 10; width: 100%; height: 100%; " id="body_content_team">
+                    <div style="width: 100%; background: transparent;" class="flexCenter">
+                        <!-- box ส่วนข้างบน-->
+                        <div style="  flex-direction: column;   padding: 10px;font-size: 15px;   display: flex; align-items: center; color: #8D959B; border-radius: 11px; width: 90%;  background: linear-gradient(180deg, #FFECEA 0%, #FFFEFE 20.49%, #FFFFFF 100%);; height: auto; box-shadow: 0px 0px 8px 0px #5C7AB540;
+                            ">
+                            <div style="display: flex; width: 100%; justify-content: space-between; ">
+                                <div style="flex: 1; text-align: center;">
+                                    <span class="font-myteam">总注册用户</span>
+                                    <div style="height: 5px;"></div>
+                                    <div>
+                                        <span style="color: #F33;" id="level_team_all"
+                                            class="font-myteam-number">0</span>
+                                    </div>
+                                </div>
+                                <div style="flex: 1; text-align: center;">
+                                    <span class="font-myteam">总激活用户</span>
+                                    <div style="height: 5px;"></div>
+
+                                    <div>
+                                        <span style="color: #F33;" id="dayPerformance_all"
+                                            class="font-myteam-number">0</span>
+                                    </div>
+                                </div>
+                                <div style="flex: 1; text-align: center;">
+                                    <span class="font-myteam">总业绩</span>
+                                    <div style="height: 5px;"></div>
+
+                                    <div>
+                                        <span style="color: #F33;" id="performance_all"
+                                            class="font-myteam-number">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height: 25px;"></div>
+                            <div style="display: flex; justify-content: space-between;  width: 100%;">
+                                <div style="flex: 1; text-align: center;">
+                                    <span class="font-myteam">一级注册人数</span>
+                                    <div style="height: 5px;"></div>
+
+                                    <div>
+                                        <span style="color: #F33;" id="Level_team_number_1"
+                                            class="font-myteam-number">0</span>
+                                    </div>
+                                </div>
+                                <div style="flex: 1; text-align: center;">
+                                    <span class="font-myteam">一级激活用户</span>
+                                    <div style="height: 5px;"></div>
+
+                                    <div>
+                                        <span style="color: #F33;" id="Active_team_active_1"
+                                            class="font-myteam-number">0</span>
+                                    </div>
+                                </div>
+                                <div style="flex: 1; text-align: center;">
+                                    <span class="font-myteam">一级总业绩</span>
+                                    <div style="height: 5px;"></div>
+
+                                    <div>
+                                        <span style="color: #F33;" id="Amount_team_amount_1"
+                                            class="font-myteam-number">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height: 25px;"></div>
+                            <div style="display: flex; justify-content: space-between;  width: 100%;">
+                                <div style="flex: 1; text-align: center;">
+                                    <span class="font-myteam">二级注册人数</span>
+                                    <div style="height: 5px;"></div>
+
+                                    <div>
+                                        <span style="color: #F33;" id="Level_team_number_2"
+                                            class="font-myteam-number">0</span>
+                                    </div>
+                                </div>
+                                <div style="flex: 1; text-align: center;">
+                                    <span class="font-myteam">二级激活用户</span>
+                                    <div style="height: 5px;"></div>
+
+                                    <div>
+                                        <span style="color: #F33;" id="Active_team_active_2"
+                                            class="font-myteam-number">0</span>
+                                    </div>
+                                </div>
+                                <div style="flex: 1; text-align: center;">
+                                    <span class="font-myteam">二级总业绩</span>
+                                    <div style="height: 5px;"></div>
+
+                                    <div>
+                                        <span style="color: #F33;" id="Amount_team_amount_2"
+                                            class="font-myteam-number">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height: 25px;"></div>
+                            <div style="display: flex; justify-content: space-between;  width: 100%;">
+                                <div style="flex: 1; text-align: center;">
+                                    <span class="font-myteam">三级注册人数</span>
+                                    <div style="height: 5px;"></div>
+
+                                    <div>
+                                        <span style="color: #F33;" id="Level_team_number_3"
+                                            class="font-myteam-number">0</span>
+                                    </div>
+                                </div>
+                                <div style="flex: 1; text-align: center;">
+                                    <span class="font-myteam">三级激活用户</span>
+                                    <div style="height: 5px;"></div>
+
+                                    <div>
+                                        <span style="color: #F33;" id="Active_team_active_3"
+                                            class="font-myteam-number">0</span>
+                                    </div>
+                                </div>
+                                <div style="flex: 1; text-align: center;">
+                                    <span class="font-myteam">三级总业绩</span>
+                                    <div style="height: 5px;"></div>
+
+                                    <div>
+                                        <span style="color: #F33;" id="Amount_team_amount_3"
+                                            class="font-myteam-number">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- box สิ้นสุดส่วนข้างบน-->
+
+                    </div>
+                    <div style="height: 15px;"></div>
+                    <!--box bottom -->
+                    <div
+                        style="height: 80px; border-radius: 11px; width: 95%; margin:  0 auto ; background: linear-gradient(180deg, #FFECEA 0%, #FFFEFE 78.32%, #FFFFFF 100%);box-shadow: 0px 0px 8px 0px #5C7AB540; ">
+                        <div style="height: 15px;"></div>
+                        <div
+                            style="font-weight: bold;width: 96%;display: flex;align-items: center;justify-content: space-between;margin:  0 auto;font-size: 16px;">
+                            <div
+                                style=" gap: 10px; display: flex; align-items: center; flex-direction: column; justify-content: center;">
+                                <span>
+                                    总佣金
+                                </span>
+                                <span class="font-myteam-bottom" id="makeAmount_all">
+                                    0
+                                </span>
+                            </div>
+                            <div
+                                style=" gap: 10px; display: flex; align-items: center; flex-direction: column; justify-content: center;">
+                                <span>
+                                    一级总佣金
+                                </span>
+                                <span class="font-myteam-bottom" id="makeAmount_1">
+                                    0
+                                </span>
+                            </div>
+                            <div
+                                style=" gap: 10px; display: flex; align-items: center; flex-direction: column; justify-content: center;">
+                                <span>
+                                    二级总佣金
+                                </span>
+                                <span class="font-myteam-bottom" id="makeAmount_2">
+                                    0
+                                </span>
+                            </div>
+                            <div
+                                style=" gap: 10px; display: flex; align-items: center; flex-direction: column; justify-content: center;">
+                                <span>
+                                    三级总佣金
+                                </span>
+                                <span class="font-myteam-bottom" id="makeAmount_3">
+                                    0
+                                </span>
+                            </div>
+                        </div>
+                        <div style="height: 15px;"></div>
+
+
+                    </div>
+                    <!--box bottom end -->
+
+                </div>
+            </div>
+
+            <div style="height: 20px;"></div>
+            <div style="background: #fff; width: 95%; margin:  0 auto; border-radius: 10px;">
+                <div
+                    style="border-radius: 10px;justify-content: space-around;background-color: #FFF;width: 95%;margin:  0 auto;height: 50px;display: flex;align-items: center;box-shadow: rgba(171, 194, 216, 0.24) 2px 2px 8px 4px;">
+
+                    <div style="position: relative; width: 60%;">
+                        <input id="input_search" placeholder="电话号码/姓名" type="text" style="font-size: 16px;
+            padding: 0px 0px 0px 25px; border-radius: 4px;
+            height: 30px; width: 90%; background-color: #FFEBE9; border: none;"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+
+                        <img id="icons_search_t" alt="" style="position: absolute; height: 14px; top: 8px; left: 7px;">
+                    </div>
+                    <div id="search_myteam" style=" display: flex;align-items: center;justify-content: center;border-radius: 6px;width: 20%; height: 30px; background: linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%);
+                        color: #FFF;">
+                        搜索</div>
+                </div>
+                <div style="height: 10px;"></div>
+                <div id="tabs" style="width: 90%;margin: 0 auto;" class="flexSpac">
+                    <button data-tab="tab1" class="btn-tap">一级会员(<span id="level_team">0</span>)</button>
+                    <button data-tab="tab2" class="btn-tap">二级会员(<span id="team_peer">0</span>)</button>
+                    <button data-tab="tab3" class="btn-tap">三级会员(<span id="level_team_3">0</span>)</button>
+
+                </div>
+                <div style="height: 10px;"></div>
+                <div id="headmyteam"
+                    style="font-weight: bold; font-size: 13px; width: 100%; margin:  0 auto; height: 40px; background: #FFE6D9; justify-content: space-around; display: flex;">
+                    <div
+                        style="display: flex; flex-direction: column; gap: 10px; width: 25%; align-items: center; justify-content: center;">
+                        <span>电话号码</span>
+
+                    </div>
+
+                    <div
+                        style="display: flex; flex-direction: column; gap: 10px; width: 20%; align-items: center; justify-content: center;">
+                        <span>姓名</span>
+                    </div>
+                    <div
+                        style="display: flex; flex-direction: column; gap: 10px; width: 20%; align-items: center; justify-content: center;">
+                        <span>购买总额</span>
+                    </div>
+                    <div
+                        style="display: flex; flex-direction: column; gap: 10px; width: 35%; align-items: center; justify-content: center;">
+                        <span>注册时间</span>
+                    </div>
+
+                </div>
+                <!-- <div id="scroller_peer"> -->
+                <!-- <div> -->
+                <div id="tab1_my_team" class="tab-content_team active-tab-team" style="width: 100%; margin:  0 auto;">
+                    <div id="tabcontent_1"></div>
+                    <div id="no_data_team" style="display: none;color: #686664;justify-content: center;height: 30px;align-items: center;
+                            "> <img src="./pic/icons/nodata_icons.png" style="width:75px; margin-top: 50px;"></div>
+                    <div style="height:55px;"></div>
+
+
+                </div>
+                <div id="tab2_my_team" class="tab-content_team" style="width: 100%; margin:  0 auto;">
+                    <div id="tabcontent_2"></div>
+                    <div id="no_data_team_2" style="display: none;color: #686664;justify-content: center;height: 30px;align-items: center;
+                    "> <img src="./pic/icons/nodata_icons.png" style="width:75px; margin-top: 50px;"></div>
+                    <div style="height:55px;"></div>
+
+                </div>
+                <div id="tab3_my_team" class="tab-content_team" style="width: 100%; margin:  0 auto;">
+                    <div id="tabcontent_3"></div>
+                    <div id="no_data_team_3" style="display: none;color: #686664;justify-content: center;height: 30px;align-items: center;
+                    "> <img src="./pic/icons/nodata_icons.png" style="width:75px; margin-top: 50px;"></div>
+                    <div style="height:55px;"></div>
+
+                    <!-- </div> -->
+                    <!-- </div> -->
+
+                </div>
+
+
+
+            </div>
+            <!--tab ค้นหา getteam  -->
+
+            <div class="pagTab" id="pageTab_team" style="         bottom: 0px;
+        background: #FAFAFA; position: absolute;
+        z-index: 11; display: flex;align-items: center; font-size: 16px; font-weight:bold;
+        justify-content: space-between;" id="search-page">
+                <div id="prevmy_team" class="btnPageTeam" style="margin-left: 5%;">
+                    &#60;</div>
+                <div id="dropdwnoTabmy_team" class="flexCenter">
+
+                    <input id="inputmy_team" type="number" min="0"
+                        oninput="this.value = Math.abs(parseInt(this.value)) || 0"
+                        style="font-weight: bold; width:30px;text-align: center;margin-right: 10px; margin-left: 10px; height: 30px; border: none;border-radius: 5px; font-size: 16px;">/
+                    &nbsp;<span id="maxPagemy_team"></span>&nbsp;&nbsp;<button id="gomy_teamPage" style="border: none; background: var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%));
+                 color: white;padding: 5px 7px;border-radius: 5px;font-weight: bold;">访问</button>
+
+
+                </div>
+                <div id="nextmy_team" class="btnPageTeam" style="margin-right: 5%;">&#62;</div>
+
+            </div>
+            <!--tab ค้นหา peer group  -->
+
+            <div class="pagTab" id="pageTab_team_group" style="         bottom: 0px;
+        background: #FAFAFA; position: absolute;
+        z-index: 11; display: flex;align-items: center; font-size: 16px; font-weight:bold;
+        justify-content: space-between;" id="search-page">
+                <div id="prevmy_team_group" class="btnPageTeam" style="margin-left: 5%;">
+                    &#60;</div>
+                <div id="dropdwnoTabmy_team_group" class="flexCenter">
+
+                    <input id="inputmy_team_group" type="number" min="0"
+                        oninput="this.value = Math.abs(parseInt(this.value)) || 0"
+                        style="font-weight: bold; width:30px;text-align: center;margin-right: 10px; margin-left: 10px; height: 30px; border: none;border-radius: 5px; font-size: 16px;">/
+                    &nbsp;<span id="maxPagemy_team_group"></span>&nbsp;&nbsp;<button id="gomy_teamPage_group" style="border: none; background: var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%));
+                 color: white;padding: 5px 7px;border-radius: 5px;font-weight: bold;">访问</button>
+
+
+                </div>
+                <div id="nextmy_team_group" class="btnPageTeam" style="margin-right: 5%;">&#62;</div>
+
+            </div>
+            <!--tab ค้นหา  team 3 -->
+            <div class="pagTab" id="pageTab_team_3" style="         bottom: 0px;
+                        background: #FAFAFA; position: absolute;
+                        z-index: 11; display: flex;align-items: center; font-size: 16px; font-weight:bold;
+                        justify-content: space-between;" id="search-page">
+                <div id="prevmy_team_3" class="btnPageTeam" style="margin-left: 5%;">
+                    &#60;</div>
+                <div id="dropdwnoTabmy_team_3" class="flexCenter">
+
+                    <input id="inputmy_team_3" type="number" min="0"
+                        oninput="this.value = Math.abs(parseInt(this.value)) || 0"
+                        style="font-weight: bold; width:30px;text-align: center;margin-right: 10px; margin-left: 10px; height: 30px; border: none;border-radius: 5px; font-size: 16px;">/
+                    &nbsp;<span id="maxPagemy_team_3"></span>&nbsp;&nbsp;<button id="gomy_teamPage_3" style="border: none; background: var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%));
+         color: white;padding: 5px 7px;border-radius: 5px;font-weight: bold;">访问</button>
+
+
+                </div>
+                <div id="nextmy_team_3" class="btnPageTeam" style="margin-right: 5%;">&#62;</div>
+
+            </div>
+        </div>
+        <div style="width: 100%;height: 100px;"></div>
+
+
+        <div id="openPopup_team"
+            style=" display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6);   z-index: 999;">
+            <div
+                style=" position: relative; border-radius: 10px; background: #fff; width: 90%; height: 80%; position: absolute; top: 50%;left: 50%;transform: translate(-50%, -50%);">
+                <div id="scroll_underMember" style="overflow: hidden; height: 90%;" class="flexTop_c">
+
+                    <div style="height: auto; width: 100%;" class="flexTop_c">
+                        <div style="height: 20px;"></div>
+                        <div id="underMember" style="height: auto; width: 90%; gap: 5px;" class="flexTop_c"></div>
+                    </div>
+
+                </div>
+                <img src="./pic/icons/close.png" id="img_openPopup_team"
+                    style="     position: absolute; top: -35px;right: 0;width: 32px; position: absolute;">
+                <img src="./pic/icons/icon_back.png" id="img_openPopup_team_back"
+                    style="     position: absolute; top: 10px; left:10px;width: 32px; position: absolute;">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<script>
+    var myteamObj = new myteam();
+    myteamObj.init();
+    function myteam() {
+        var myScroll;
+        var daySalesNumber;
+        var arrayIdTeam = []
+
+
+        this.init = function () {
+            pageInit("myteamPage");
+            headerInit("myteam", "团队")
+            $("#pageTab_team_group").css({ "display": "none" })
+            $("#myteamPage").css({ "width": w, "height": h });
+            $("#openPopup_team").css({ "width": w, "height": h });
+            $("#body_content_team").css({ "width": w });
+            $("#myteam_header").css({ "color": "#fff", "z-index": "15" });
+            // $("#myteam_header_right_body").css({ "color": "" });
+            $("#myteam_header_left").html('<svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M15.7071 4.29289C16.0976 4.68342 16.0976 5.31658 15.7071 5.70711L9.41421 12L15.7071 18.2929C16.0976 18.6834 16.0976 19.3166 15.7071 19.7071C15.3166 20.0976 14.6834 20.0976 14.2929 19.7071L7.29289 12.7071C7.10536 12.5196 7 12.2652 7 12C7 11.7348 7.10536 11.4804 7.29289 11.2929L14.2929 4.29289C14.6834 3.90237 15.3166 3.90237 15.7071 4.29289Z" fill="#000"></path></svg>');
+            $('#back_team').attr("src", picRes['back_team.png']);
+            $('#icons_search_t').attr("src", picRes['search.png']);
+            $("#myteam_body").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+            // $("#scroller_peer").css({ "width": w, "height": h - headH - 290, "overflow": "hidden" });
+            $('#search_myteam').css({ 'background': '#999696' })
+            $("#search_myteam").off("click");
+            // $("#scroller_myteam").css({ "width": w, "height": h - headH - 50,  });
+
+
+            myScroll = new IScroll('#myteam_body', { probeType: 1, mouseWheel: true });
+
+            $('.bg_assets').attr("src", picRes['bg_assets.png'])
+            $('#tabs button').unbind();
+            $('#tabs button').click(function () {
+                $('#tabs button').css({ "border-bottom": "none", "color": "#686664" });
+                $('.tab-content_team').removeClass('active-tab-team');
+                var tabId = $(this).data('tab');
+                if (tabId == 'tab1') {
+                    myteamObj.getMyTeam();
+                    // $("#pageTab_team").css({ "display": "flex" })
+                    $("#pageTab_team_group").css({ "display": "none" })
+                    $("#input_search").val("")
+                    arrayIdTeam = []
+                } if (tabId == 'tab2') {
+                    myteamObj.summary();
+                    $("#pageTab_team").css({ "display": "none" })
+                    $("#pageTab_team_group").css({ "display": "none" })
+                    $("#input_search").val("")
+                    arrayIdTeam = []
+
+                }
+                if (tabId == 'tab3') {
+                    $("#pageTab_team").css({ "display": "none" })
+                    $("#pageTab_team_group").css({ "display": "none" })
+                    $("#headmyteam").css({ "display": "none" })
+                    myteamObj.getMyTeam_3();
+                    $("#input_search").val("")
+                    arrayIdTeam = []
+
+
+                }
+                $('#' + tabId + "_my_team").addClass('active-tab-team');
+                // $(this).css({ "border-bottom": "2px solid #E73600", "color": "#E73600", "font-weight": "bold" });
+                $(this).css({ "border-bottom": "2px solid #E73600", "font-weight": "bold", "color": "#000" });
+
+                myScroll = new IScroll('#myteam_body', { probeType: 1, mouseWheel: true });
+
+            });
+            $('[data-tab="tab1"]').click();
+            $('#search_myteam').unbind();
+
+
+            $('#myteam_header_left').click(function () {
+                // $('#inputmy_team').val(1)
+
+            })
+            $("#input_search").on("input", function () {
+                if ($('#input_search').val() === '') {
+                    $('#search_myteam').css({ 'background': '#999696' })
+                    $("#search_myteam").off("click");
+                    $("#no_data_team").css({ "display": "none" });
+                    $('[data-tab="tab1"]').click();
+                    arrayIdTeam = []
+                    // myteamObj.getMyTeam();
+                }
+                else {
+                    $("#search_myteam").unbind().on("click", function () {
+                        arrayIdTeam = []
+                        searchFunction();
+                    });
+
+
+                    $('#search_myteam').css({ 'background': 'linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%)' })
+
+                }
+            });
+
+            function searchFunction() {
+                var input_team = $('#input_search').val();
+                $("#pageTab_team").css({ "display": "none" })
+                // var str = ''
+                // $.ajax({
+                //     type: 'get',
+                //     url: API_SERVER + `/v1/inviteCode/team/${input_team}`,
+                //     headers: {
+                //         'Authorization': 'Bearer ' + token.token,
+                //     },
+                //     async: true,
+                //     timeout: 100000,
+                //     success: function (data) {
+                //         if (data.code == 0) {
+                //             if (data.records == 0) {
+                //                 str += '  <div style=" color: #8D959B;width: 100%; ">'
+                //                 str += '<div style=" display: flex;align-items: center; width: 85%;margin: 0 auto; justify-content: center;">'
+                //                 str += ' <span style="margin-right: 10px;">您搜索的手机号码不存在 </span>'
+                //                 str += '</div>'
+                //                 str += '</div>'
+                //                 $('#tabcontent_1').html(str);
+                //                 $("#headmyteam").css({ "display": "none" })
+
+
+
+                //             } else {
+                //                 $("#headmyteam").css({ "display": "flex" })
+
+                //             }
+
+                //             $.each(data.result, function (index, data) {
+                //                 str += '<div  class="item-myteam"  id="' + (data.uid) + '_show_inside_team" style="height: 35px; background: #FFF4EA; width: 100%; margin:  0 auto; justify-content: space-around; display: flex; font-size: 13px;">'
+                //                 str += '<div style="display: flex; flex-direction: column; gap: 10px; width: 25%; align-items: center; justify-content: center;">'
+                //                 str += '<span>' + (data.mobile) + '</span>'
+                //                 str += '</div>'
+                //                 str += '<div style="display: flex; flex-direction: column; gap: 10px; width: 20%; align-items: center; justify-content: center;">'
+                //                 str += '<span>' + (data.name) + '</span>'
+                //                 str += '</div>'
+                //                 str += '<div style="display: flex; flex-direction: column; gap: 10px; width: 20%; align-items: center; justify-content: center;">'
+                //                 str += '<span>200</span>'
+                //                 str += '</div>'
+                //                 str += '<div style="display: flex; flex-direction: column; gap: 10px; width: 35%; align-items: center; justify-content: center;">'
+                //                 str += '<span>2024-2-16 8：00</span>'
+                //                 str += '</div>'
+                //                 str += ' </div>'
+                //                 if (!arrayIdTeam.some(item => item.uid === data.uid)) {
+                //                     arrayIdTeam.push({ "uid": data.uid });
+                //                 }
+                //             })
+                //             setTimeout(() => {
+                //                 myScroll = new IScroll('#myteam_body', { probeType: 1, mouseWheel: true });
+
+                //             }, 300);
+                //             $('#tabcontent_1').html(str);
+                //             $.each(arrayIdTeam, function (index, data) {
+                //                 if (index % 2 === 0) {
+                //                     $(`#${data.uid}_show_inside_team`).css({ "background": "#FFF4EA" });
+                //                 }
+                //                 else {
+                //                     $(`#${data.uid}_show_inside_team`).css({ "background": "#FFE6D9" });
+
+                //                 }
+                //                 $(`#${data.uid}_show_inside_team, #${data.uid}_show_inside_team_search`).off().on('click', function () {
+                //                     $('#openPopup_team').css({ "display": "flex" });
+                //                     back_level_1.push({ "id": data.uid });
+                //                     myteamObj.underMember(data.uid, 0);
+                //                     setTimeout(() => {
+                //                         var myScroll = new IScroll('#scroll_underMember', { probeType: 1, mouseWheel: true });
+                //                     }, 300);
+                //                 });
+
+
+                //             });
+
+                //         }
+
+
+                //     }
+                // })
+                var Array_team = []
+                $('.item-myteam').each(function () {
+                    var itemText = $(this).text().toLowerCase();
+                    Array_team.push(itemText.includes(input_team))
+                    if (itemText.includes(input_team)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                    if (itemText.includes(input_team) === false) {
+
+                    }
+                });
+                // สมมติว่า Array_team เป็น array ของค่า boolean
+                var allFalse = true;
+                for (var i = 0; i < Array_team.length; i++) {
+                    if (Array_team[i] !== false) {
+                        allFalse = false;
+                        $("#no_data_team").css({ "display": "none" });
+                        $("#no_data_team_2").css({ "display": "none" });
+                        $("#no_data_team_3").css({ "display": "none" });
+                        $("#headmyteam").css({ "display": "flex" });
+                        $("#pageTab_team_group").css({ "display": "none" });
+                        $("#pageTab_team_3").css({ "display": "none" });
+
+
+
+
+                        break;
+
+                    }
+                }
+
+                if (allFalse) {
+                    $("#no_data_team").css({ "display": "flex" });
+                    $("#no_data_team_2").css({ "display": "flex" });
+                    $("#no_data_team_3").css({ "display": "flex" });
+                    $("#pageTab_team_group").css({ "display": "none" });
+                    $("#pageTab_team_3").css({ "display": "none" });
+                    $("#headmyteam").css({ "display": "none" });
+
+
+
+                }
+
+                console.log(Array_team);
+
+                myScroll = new IScroll('#scroller_peer', { probeType: 1, mouseWheel: true });
+
+            }
+
+        }
+        this.call = function () {
+            arrayIdTeam = []
+            myteamObj.getMyTeam();
+            // myteamObj.Peer_group();
+            myteamObj.summary();
+            myteamObj.getMyTeam_3();
+            // setTimeout(() => {
+            //     myteamObj.summary();
+            // }, 1000);
+            $('#myteamPage').transition({
+                x: w
+            }, 0);
+
+            myteamObj.getMyTeam();
+        }
+        var back_level_1 = []
+        var arrayForBack = []
+        this.getMyTeam = function () {
+            var getToken = window.localStorage.getItem('token')
+            var token = JSON.parse(getToken)
+            var loadData_team = 1
+            var pageCount_team = 1
+            var limit_team = 8
+            var level = 1
+            arrayIdTeam = []
+            $('#tabcontent_1').html("");
+            $('#inputmy_team').val(pageCount_team)
+            function getMyTeam() {
+                var str = ""
+                $.ajax({
+                    type: 'get',
+                    // url: API_SERVER + `/v1/inviteCode/myTeam/level1?page=${loadData_team}&limit=${limit_team}`,
+                    url: API_SERVER + `/v1/inviteCode/underLevel/1?page=${loadData_team}&limit=${limit_team}`,
+                    // url: API_SERVER + `/v1/inviteCode/underLevel/level1?page=${loadData_team}&limit=${limit_team}`,
+                    headers: {
+                        'Authorization': 'Bearer ' + token.token,
+                    },
+                    async: true,
+                    timeout: 100000,
+                    success: function (data) {
+                        $('#level_team').text(data.records)
+                        $("#pageTab_team_group").css({ "display": "none" })
+                        $("#pageTab_team_3").css({ "display": "none" })
+
+                        $('#maxPagemy_team').text(Math.ceil(data.records / limit_team) == 0 ? '1' : Math.ceil(data.records / limit_team))
+                        $('#inputmy_team').unbind();
+                        $('#inputmy_team').on('input', function () {
+                            var inputValue_team = parseInt($(this).val(), 10);
+                            if (inputValue_team < 1 || inputValue_team > Math.ceil(data.records / limit_team)) {
+                                $(this).val(""); // Clear the input value
+                            }
+                        });
+                        $('#nextmy_team').unbind()
+                        $('#nextmy_team').click(function () {
+                            loadData_team += 1
+                            pageCount_team += 1
+                            $('#inputmy_team').val(pageCount_team)
+                            getMyTeam();
+                            arrayIdTeam = []
+                            loaderObj.show();
+
+                        })
+                        $('#prevmy_team').unbind()
+                        $('#prevmy_team').click(function () {
+                            loadData_team -= 1
+                            pageCount_team -= 1
+                            $('#inputmy_team').val(pageCount_team)
+                            getMyTeam();
+                            arrayIdTeam = []
+                            loaderObj.show();
+
+                        })
+                        $("#gomy_teamPage").unbind()
+                        $("#gomy_teamPage").click(function () {
+                            var inputmy_team = parseFloat($("#inputmy_team").val());
+                            if (isNaN(inputmy_team)) {
+                                msgPageObj.show("请输入您想要访问的页面"); // Display "Please enter the page you want to visit"
+                            } else {
+                                loadData_team = inputmy_team; // Set loadData to the input value (assuming these are global variables)
+                                pageCount_team = inputmy_team; // Set pageCount to the input value (assuming these are global variables)
+                                getMyTeam();
+                            }
+                        });
+                        if (pageCount_team <= 1) {
+                            pageCount_team = 1
+                        }
+                        if (pageCount_team > Math.ceil(data.records / limit_team)) {
+                            pageCount_team = Math.ceil(data.records / limit_team)
+                        }
+                        if (pageCount_team <= 1) {
+                            $('#prevmy_team').css({ 'visibility': 'hidden' })
+                        }
+                        if (pageCount_team != 1) {
+                            $('#prevmy_team').css({ 'visibility': 'visible' })
+                        }
+
+                        //   unshow next
+                        if (pageCount_team == Math.ceil(data.records / limit_team)) {
+                            $('#nextmy_team').css({ 'visibility': 'hidden' })
+                        }
+                        //   unshow next
+                        if (pageCount_team != Math.ceil(data.records / limit_team)) {
+                            $('#nextmy_team').css({ 'visibility': 'visible' })
+                        }
+                        if (data.code == 0) {
+                            if (data.records == 0) {
+                                str = ""
+                                str += '  <div style=" color: #8D959B;width: 100%; ">'
+                                str += '<div style=" display: flex;align-items: center; width: 100%;margin: 0 auto; justify-content: center;">'
+                                str += ' <img src="./pic/icons/nodata_icons.png" style="width:110px;">'
+                                str += '</div>'
+                                str += '</div>'
+                                $('#tabcontent_1').html(str);
+                                $("#pageTab_team").css({ "display": "none" })
+                                $("#headmyteam").css({ "display": "none" })
+
+
+                            } else {
+                                $("#pageTab_team").css({ "display": "flex" })
+                                $("#headmyteam").css({ "display": "flex" })
+
+
+                            }
+                            if (data.records < 8) {
+                                $("#pageTab_team").css({ "display": "none" })
+
+                            } else {
+                                $("#pageTab_team").css({ "display": "flex" })
+
+                            }
+                            $.each(data.result, function (index, data) {
+
+                                if (data.daySales == null) {
+                                    daySalesNumber = '0';
+                                } else {
+                                    daySalesNumber = data.daySales;
+                                }
+                                var isoDateTime = data.signupTime;
+                                var date = new Date(isoDateTime);
+                                var year = date.getFullYear();
+                                var month = String(date.getMonth() + 1).padStart(2, '0');
+                                var day = String(date.getDate()).padStart(2, '0');
+                                var hours = String(date.getHours()).padStart(2, '0');
+                                var minutes = String(date.getMinutes()).padStart(2, '0');
+                                var formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}`;
+                                str += '<div  class="item-myteam"  id="' + (data.mobile) + '_show_inside_team" style="height: 35px; background: #FFE6D9; width: 100%; margin:  0 auto; justify-content: space-around; display: flex; font-size: 13px;">'
+                                str += '<div style="display: flex; flex-direction: column; gap: 10px; width: 25%; align-items: center; justify-content: center;">'
+                                str += '<span>' + (data.mobile) + '</span>'
+                                str += '</div>'
+                                str += '<div style="display: flex; flex-direction: column; gap: 10px; width: 20%; align-items: center; justify-content: center;">'
+                                str += '<span>' + (data.name) + '</span>'
+                                str += '</div>'
+                                str += '<div style="display: flex; flex-direction: column; gap: 10px; width: 20%; align-items: center; justify-content: center;">'
+                                str += '<span>' + (data.amount.toFixed(1)) + '</span>'
+                                str += '</div>'
+                                str += '<div style="display: flex; flex-direction: column; gap: 10px; width: 35%; align-items: center; justify-content: center;">'
+                                str += '<span>' + (formattedDateTime) + '</span>'
+                                str += '</div>'
+                                str += ' </div>'
+                                // str += '<div style="height: 15px;"></div>'
+                                // str += '  <div id="' + (data.uid) + '_show_inside_team" class="item-myteam"  style=" margin-bottom:10px; color: #8D959B;width: 100%;   border-radius: var(--1, 8px); background: var(--222, linear-gradient(180deg, #FFECEA 0%, #FFFEFE 20.49%, #FFF 100%));">'
+                                // str += '<div style="height: 5px;"></div> '
+                                // // str += '<div style=" display: flex;align-items: center; width: 85%;margin: 0 auto;">'
+                                // // str += ' <span style="width:90px;">郭富城: </span>'
+                                // // str += '<img style="height: 14px;" src="./pic/profile/vip.png" alt="vip_icon"> '
+                                // // str += '</div>'
+                                // str += '<div style="height: 15px;"></div>'
+                                // str += '<div style=" display: flex;align-items: center; width: 85%;margin: 0 auto;">'
+                                // str += '<span style="width:90px;">姓名: </span>'
+                                // str += '<span style="font-size: 19px;font-weight: 500; color: #000;">' + (data.name) + '</span> '
+                                // str += '</div>'
+                                // str += '<div style="height: 15px;"></div>'
+                                // str += '<div style=" display: flex;align-items: center; width: 85%;margin: 0 auto;">'
+                                // str += '<span style="width:90px;">电话: </span>'
+                                // str += '<span style="font-size: 19px;font-weight: 500; color: #000;">' + (data.mobile) + '</span> '
+                                // str += '</div>'
+                                // str += '<div style="height: 15px;"></div>'
+                                // str += '<div style=" display: flex;align-items: center; width: 85%;margin: 0 auto;">'
+                                // str += '<span style="width:90px;">今日业绩 ： </span>'
+
+                                // str += '<span style="font-size: 19px;font-weight: 500; color: #000;  margin-right: 100px;">' + daySalesNumber + '</span>';
+                                // str += '<span style="font-size: 12px;font-weight: 500; color: #8D959B;   font-size:18px; position: absolute;right: 100px;  ">' + (data.number) + '人</span> '
+                                // str += '</div>'
+                                // str += '<div style="height: 15px;"></div>'
+                                // str += '<div style=" display: flex;align-items: center; width: 85%;margin: 0 auto;"> '
+                                // str += '<span style="width:90px;">您的佣金 ：</span> '
+                                // str += '<span style="font-size: 19px;font-weight: 500; color: #000;  margin-right: 15%;">' + (data.dayMakeCommission) + '</span> '
+                                // // str += '<span style="font-size: 12px;font-weight: 500; color: #8D959B;  position: absolute;right: 60px;   ">注册时间 : 03-02 23:31</span> '
+                                // str += '</div> '
+                                // str += ' </div>'
+                                // str += '<div style="height: 15px;"></div>'
+                                if (!arrayIdTeam.some(item => item.mobile === data.mobile)) {
+                                    arrayIdTeam.push({ "uid": data.mobile });
+                                }
+
+                            })
+                            setTimeout(() => {
+                                myScroll = new IScroll('#myteam_body', { probeType: 1, mouseWheel: true });
+
+                            }, 300);
+                            loaderObj.unShow();
+                            $('#tabcontent_1').html(str);
+                            $.each(arrayIdTeam, function (index, data) {
+                                console.log(arrayIdTeam);
+                                if (index % 2 === 0) {
+                                    $(`#${data.uid}_show_inside_team`).css({ "background": "#FFF4EA" });
+                                }
+                                else {
+                                    $(`#${data.uid}_show_inside_team`).css({ "background": "#FFE6D9" });
+
+                                }
+
+
+                                // $(`#${data.uid}_show_inside_team, #${data.uid}_show_inside_team_search`).off().on('click', function () {
+                                //     $('#openPopup_team').css({ "display": "flex" });
+                                //     back_level_1.push({ "id": data.uid });
+                                //     myteamObj.underMember(data.uid, 0);
+                                //     setTimeout(() => {
+                                //         var myScroll = new IScroll('#scroll_underMember', { probeType: 1, mouseWheel: true });
+                                //     }, 300);
+                                // });
+
+
+                            });
+                        }
+
+
+                    }
+                })
+            }
+
+            getMyTeam()
+
+        }
+        var arrayForBack_last = []
+        this.underMember = function (id, count) {
+            $('#underMember').html("")
+            var getToken = window.localStorage.getItem('token')
+            var token = JSON.parse(getToken)
+            var arrayIdTeam_2 = []
+            UID = id
+            if (count == 1) {
+                $("#img_openPopup_team_back").css({ "display": "block" })
+
+            }
+            if (count == 0) {
+                $("#img_openPopup_team_back").css({ "display": "none" })
+
+            }
+            $('#img_openPopup_team_back').unbind();
+
+            $('#img_openPopup_team').click(function () {
+                back_level_1 = []
+                arrayIdTeam_2 = []
+                arrayForBack = []
+                $('#openPopup_team').css({ "display": "none" });
+
+            })
+            getMyTeam(UID)
+            function getMyTeam(ID) {
+                var str_mem = ""
+                $.ajax({
+                    type: 'get',
+                    url: API_SERVER + `/v1/inviteCode/underMember/${ID}`,
+                    headers: {
+                        'Authorization': 'Bearer ' + token.token,
+                    },
+                    async: true,
+                    timeout: 100000,
+                    success: function (data) {
+                        if (arrayIdTeam_2) {
+                            $.each(arrayIdTeam_2, function (index, data) {
+                                console.log(data, "1");
+
+                            })
+                        }
+
+                        if (data.code == 0) {
+                            if (data.records == 0) {
+                                str_mem = ""
+                                str_mem += ' <div style=" color: #8D959B;width: 100%; ">'
+                                str_mem += '<div style=" display: flex;align-items: center; width: 85%;margin: 0 auto; justify-content: center;">'
+                                str_mem += '<div style="height: 15px;"></div>'
+                                str_mem += ' <span style="margin-right: 10px;">没有数据</span>'
+                                str_mem += '</div>'
+                                str_mem += '</div>'
+                                $('#underMember').html(str_mem);
+
+                            }
+                            if (data.records > 0) {
+                                $.each(data.result, function (index, data) {
+                                    str_mem += '<div style="height: 15px;"></div>'
+                                    str_mem += '  <div id="' + (data.uid) + '_inside" class="item-myteam"  style=" margin-bottom:10px; color: #8D959B;width: 85%;   border-radius: var(--1, 8px); background: var(--222, linear-gradient(180deg, #FFECEA 0%, #FFFEFE 20.49%, #FFF 100%));">'
+                                    str_mem += '<div style="height: 5px;"></div> '
+                                    str_mem += '<div style="height: 15px;"></div>'
+                                    str_mem += '<div style=" display: flex;align-items: center; width: 85%;margin: 0 auto;">'
+                                    str_mem += '<span style="width:90px;">姓名: </span>'
+                                    str_mem += '<span style="font-size: 19px;font-weight: 500; color: #000;">' + (data.name) + '</span> '
+                                    str_mem += '</div>'
+                                    str_mem += '<div style="height: 15px;"></div>'
+                                    str_mem += '<div style=" display: flex;align-items: center; width: 85%;margin: 0 auto;">'
+                                    str_mem += '<span style="width:90px;">电话: </span>'
+                                    str_mem += '<span style="font-size: 19px;font-weight: 500; color: #000;">' + (data.mobile) + '</span> '
+                                    str_mem += '</div>'
+                                    str_mem += '<div style="height: 15px;"></div>'
+                                    str_mem += '<div style=" display: flex;align-items: center; width: 85%;margin: 0 auto;">'
+                                    str_mem += '<span style="width:90px;">銷售量 ： </span>'
+                                    str_mem += '<span style="font-size: 19px;font-weight: 500; color: #000;  margin-right: 100px;">' + (data.sales) + '</span>';
+                                    str_mem += '</div>'
+                                    str_mem += '<div style="height: 15px;"></div>'
+                                    str_mem += ' </div>'
+                                    str_mem += '<div style="height: 15px;"></div>'
+                                    $('#underMember').html(str_mem);
+                                    setTimeout(() => {
+                                        myScroll = new IScroll('#myteam_body', { probeType: 1, mouseWheel: true });
+                                    }, 300);
+                                    if (!arrayIdTeam_2.some(item => item.uid === data.uid)) {
+                                        arrayIdTeam_2.push({ "uid": data.uid });
+                                    }
+                                    $.each(arrayIdTeam_2, function (index, data) {
+                                        $(`#${data.uid}_inside`).off().on('click', function () {
+
+                                            if (!arrayForBack.some(item => item.uid === data.uid)) {
+                                                arrayForBack.push({ "uid": data.uid });
+                                            }
+                                            myteamObj.underMember(data.uid);
+                                            $('#openPopup_team').css({ "display": "flex" })
+                                            myScroll = new IScroll('#myteam_body', { probeType: 1, mouseWheel: true });
+                                            $("#img_openPopup_team_back").css({ "display": "block" });
+                                            console.log(arrayForBack, "back");
+                                            setTimeout(() => {
+                                                myScroll = new IScroll('#scroll_underMember', { probeType: 1, mouseWheel: true });
+                                            }, 300);
+
+
+
+                                            console.log("level1", back_level_1[0].id);
+
+
+                                        });
+
+                                    });
+                                })
+                            }
+
+                        }
+
+
+                    }
+                })
+            }
+            $('#img_openPopup_team_back').unbind().on('click', function () {
+                console.log(arrayForBack);
+                if (arrayForBack.length === 1) {
+                    myteamObj.underMember(back_level_1[0].id, 0);
+                    setTimeout(() => {
+                        myScroll = new IScroll('#scroll_underMember', { probeType: 1, mouseWheel: true });
+                    }, 300);
+                    arrayForBack = [];
+                } else {
+                    var number_back = arrayForBack.length - 2;
+                    myteamObj.underMember(arrayForBack[number_back].uid, 1);
+                    console.log(arrayForBack, number_back);
+                    if (number_back > 0) {
+                        arrayForBack.pop();
+                        console.log("testst");
+                    }
+                    if (number_back == 0) {
+                        arrayForBack.pop();
+
+                    }
+
+                    setTimeout(() => {
+                        myScroll = new IScroll('#scroll_underMember', { probeType: 1, mouseWheel: true });
+                    }, 300);
+
+
+
+                }
+
+            });
+        }
+        //this.summary = get APi peer-group
+        this.summary = function () {
+            arrayIdTeam = []
+            $("#pageTab_team_group").css({ "display": "none" })
+            $("#pageTab_team_3").css({ "display": "none" });
+            var getToken = window.localStorage.getItem('token')
+            var token = JSON.parse(getToken);
+            $('#tabcontent_2').html("");
+            var loadData_team_group = 1
+            var limit_team_group = 8
+            var pageCount_team_group = 1
+            Peer_group()
+            function Peer_group() {
+                var str = ""
+
+                $.ajax({
+                    type: "get",
+                    // url: API_SERVER + `/v1/inviteCode/team/peer-group?page=${loadData_team_group}&limit=${limit_team_group}`,
+                    url: API_SERVER + `/v1/inviteCode/underLevel/2?page=${loadData_team_group}&limit=${limit_team_group}`,
+                    headers: {
+                        'Authorization': 'Bearer ' + token.token,
+                    },
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: true,
+                    timeout: 100000,
+                    beforeSend: function (xmlhttprequest) { },
+                    success: function (data) {
+                        $('#inputmy_team_group').val(pageCount_team_group)
+                        $('#nextmy_team_group').unbind()
+                        $('#nextmy_team_group').click(function () {
+                            loadData_team_group += 1
+                            pageCount_team_group += 1
+                            Peer_group();
+                            $('#inputmy_team_group').val(pageCount_team_group)
+                            arrayIdTeam = []
+                            loaderObj.show();
+
+                        })
+                        $('#prevmy_team_group').unbind()
+                        $('#prevmy_team_group').click(function () {
+                            loadData_team_group -= 1
+                            pageCount_team_group -= 1
+                            Peer_group();
+                            $('#inputmy_team_group').val(pageCount_team_group)
+                            arrayIdTeam = []
+                            loaderObj.show();
+
+                        })
+                        $("#gomy_teamPage_group").unbind()
+                        $("#gomy_teamPage_group").click(function () {
+                            // Parse the input value as a float
+                            var inputmy_team_group = parseFloat($("#inputmy_team_group").val());
+                            if (isNaN(inputmy_team_group)) {
+                                msgPageObj.show("请输入您想要访问的页面"); // Display "Please enter the page you want to visit"
+                            } else {
+                                loadData_team_group = inputmy_team_group; // Set loadData to the input value (assuming these are global variables)
+                                pageCount_team_group = inputmy_team_group; // Set pageCount to the input value (assuming these are global variables)
+                                Peer_group();
+                            }
+                        });
+                        if (pageCount_team_group <= 1) {
+                            pageCount_team_group = 1
+                        }
+                        if (pageCount_team_group > Math.ceil(data.records / limit_team_group)) {
+                            pageCount_team_group = Math.ceil(data.records / limit_team_group)
+                        }
+                        if (pageCount_team_group == 1) {
+                            $('#prevmy_team_group').css({ 'visibility': 'hidden' })
+                        }
+                        else if (pageCount_team_group != 1) {
+                            $('#prevmy_team_group').css({ 'visibility': 'visible' })
+                        }
+                        //   unshow next
+                        if (pageCount_team_group == Math.ceil(data.records / limit_team_group)) {
+                            $('#nextmy_team_group').css({ 'visibility': 'hidden' })
+                        }
+                        //   unshow next
+                        else if (pageCount_team_group != Math.ceil(data.records / limit_team_group)) {
+                            $('#nextmy_team_group').css({ 'visibility': 'visible' })
+                        }
+                        // max per page
+                        $('#maxPagemy_team_group').text(Math.ceil(data.records / limit_team_group) == 0 ? '1' : Math.ceil(data.records / limit_team_group))
+                        // clean in input
+                        $('#inputmy_team_group').unbind();
+                        $('#inputmy_team_group').on('input', function () {
+                            var inputValue_team_group = parseInt($(this).val(), 10);
+                            if (inputValue_team_group < 1 || inputValue_team_group > Math.ceil(data.records / limit_team_group)) {
+                                $(this).val(""); // Clear the input value
+                            }
+                        });
+                        $('#team_peer').html(data.records);
+
+                        if (data.code == 0) {
+                            if (data.records == 0) {
+                                str += '  <div style=" color: #8D959B;width: 100%; ">'
+                                str += '<div style=" display: flex;align-items: center; width: 85%;margin: 0 auto; justify-content: center;">'
+                                str += ' <img src="./pic/icons/nodata_icons.png" style="width:110px;">'
+                                str += '</div>'
+
+                                str += '</div>'
+                                $('#tabcontent_2').html(str);
+                                $("#pageTab_team_group").css({ "display": "none" })
+                                $("#headmyteam").css({ "display": "none" })
+
+                            }
+                            else {
+                                $("#pageTab_team_group").css({ "display": "flex" })
+                                $("#headmyteam").css({ "display": "flex" })
+
+
+                            }
+                            if (data.records < 8) {
+                                $("#pageTab_team_group").css({ "display": "none" })
+
+                            } else {
+                                $("#pageTab_team_group").css({ "display": "flex" })
+
+                            }
+
+                            $.each(data.result, function (index, data) {
+                                var isoDateTime = data.signupTime;
+                                var date = new Date(isoDateTime);
+                                var year = date.getFullYear();
+                                var month = String(date.getMonth() + 1).padStart(2, '0');
+                                var day = String(date.getDate()).padStart(2, '0');
+                                var hours = String(date.getHours()).padStart(2, '0');
+                                var minutes = String(date.getMinutes()).padStart(2, '0');
+                                var formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}`;
+                                str += '<div class="item-myteam" id="' + (data.mobile) + '_show_inside_team" style="height: 35px; background: #FFE6D9; width: 100%; margin:  0 auto; justify-content: space-around; display: flex; font-size: 13px;">'
+                                str += '<div style="display: flex; flex-direction: column; gap: 10px; width: 25%; align-items: center; justify-content: center;">'
+                                str += '<span>' + (data.mobile) + '</span>'
+                                str += '</div>'
+                                str += '<div style="display: flex; flex-direction: column; gap: 10px; width: 20%; align-items: center; justify-content: center;">'
+                                str += '<span>' + (data.name) + '</span>'
+                                str += '</div>'
+                                str += '<div style="display: flex; flex-direction: column; gap: 10px; width: 20%; align-items: center; justify-content: center;">'
+                                str += '<span>' + (data.amount.toFixed(1)) + '</span>'
+                                str += '</div>'
+                                str += '<div style="display: flex; flex-direction: column; gap: 10px; width: 35%; align-items: center; justify-content: center;">'
+                                str += '<span>' + (formattedDateTime) + '</span>'
+                                str += '</div>'
+                                str += ' </div>'
+                                if (!arrayIdTeam.some(item => item.mobile === data.mobile)) {
+                                    arrayIdTeam.push({ "uid": data.mobile });
+                                }
+
+                            })
+
+                            loaderObj.unShow();
+
+                            setTimeout(() => {
+                                myScroll = new IScroll('#myteam_body', { probeType: 1, mouseWheel: true });
+
+                            }, 300);
+
+                            $('#tabcontent_2').html(str);
+                            console.log(arrayIdTeam);
+                            $.each(arrayIdTeam, function (index, data) {
+                                if (index % 2 === 0) {
+                                    $(`#${data.uid}_show_inside_team`).css({ "background": "#FFF4EA" });
+                                }
+                                else {
+                                    $(`#${data.uid}_show_inside_team`).css({ "background": "#FFE6D9" });
+
+                                }
+                                // $(`#${data.uid}_show_inside_team`).off().on('click', function () {
+                                //     $('#openPopup_team').css({ "display": "flex" })
+                                //     back_level_1.push({ "id": data.uid })
+                                //     console.log("level1", back_level_1);
+                                //     myteamObj.underMember(data.uid, 0);
+                                //     setTimeout(() => {
+                                //         myScroll = new IScroll('#scroll_underMember', { probeType: 1, mouseWheel: true });
+                                //     }, 300);
+                                // });
+
+                            });
+
+                        }
+
+
+                    },
+                    error: function (xmlhttprequest, error) {
+                        loaderObj.unShow();
+                    },
+
+                });
+            }
+
+
+
+        }
+
+        //this.Peer_group = get APi summary
+        this.Peer_group = function () {
+            var getToken = window.localStorage.getItem('token')
+            var token = JSON.parse(getToken);
+            $.ajax({
+                type: "get",
+                url: API_SERVER + "/v1/inviteCode/team/summary2",
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                beforeSend: function (xmlhttprequest) { },
+                success: function (data) {
+                    // console.log(data.result.level);
+                    // // 1-2-3
+                    var allMyTeam = data.result;
+                    console.log(allMyTeam, '==========================================');
+                    $('#level_team_all').html(allMyTeam.number);//总注册用户
+                    $('#team_count_All').html(allMyTeam.number);//总注册用户_我的页显示
+
+
+                    $('#performance_all').html(allMyTeam.amount.toFixed(1));//总业绩
+                    // // 4 
+                    var team_data_0 = allMyTeam.level[0];
+                    var team_data_1 = allMyTeam.level[1];
+                    var team_data_2 = allMyTeam.level[2];
+                    // console.log(team_data_0,team_data_1,team_data_2, '==========================================');
+
+                    //总佣金计算
+                    if (team_data_0.makeAmount >= 0) {
+                        var makeAmountAll_0 = team_data_0.makeAmount + team_data_1.makeAmount + team_data_2.makeAmount;
+                        $('#makeAmount_all').text(makeAmountAll_0.toFixed(1));//总佣金=1
+
+                    } else if (team_data_0.makeAmount >= 0 && team_data_1.makeAmount >= 0) {
+                        var makeAmountAll_1 = team_data_0.makeAmount + team_data_1.makeAmount + team_data_2.makeAmount;
+                        $('#makeAmount_all').text(makeAmountAll_1.toFixed(1));//总佣金=1+2
+
+                    } else {
+                        var makeAmountAll = team_data_0.makeAmount + team_data_1.makeAmount + team_data_2.makeAmount;
+                        $('#makeAmount_all').text(makeAmountAll.toFixed(1));//总佣金=1+2+3
+                    }
+
+                    //team_1
+                    $('#Level_team_number_1').text(team_data_0.number);//一级注册人数
+                    $('#Active_team_active_1').html(team_data_0.active);//一级激活用户
+                    $('#Amount_team_amount_1').text(team_data_0.amount.toFixed(1));//一级总业绩
+                    $('#makeAmount_1').text(team_data_0.makeAmount.toFixed(1));//一级总佣金
+
+                    //team_2
+                    $('#Level_team_number_2').text(team_data_1.number);//二级注册人数
+                    $('#Active_team_active_2').html(team_data_1.active);//二级激活用户
+                    $('#Amount_team_amount_2').text(team_data_1.amount.toFixed(1));//二级总业绩
+                    $('#makeAmount_2').text(team_data_1.makeAmount.toFixed(1));//二级总佣金
+
+                    //team_3
+                    $('#Level_team_number_3').text(team_data_2.number);//三级注册人数
+                    $('#Active_team_active_3').html(team_data_2.active);//三级激活用户
+                    $('#Amount_team_amount_3').text(team_data_2.amount.toFixed(1));//三级总业绩
+                    $('#makeAmount_3').text(team_data_2.makeAmount.toFixed(1));//三级总佣金
+
+
+
+                    // 总佣金
+
+
+                    var allMyTeamActive = team_data_0.active + team_data_1.active + team_data_2.active;
+
+
+
+                    $('#dayPerformance_all').html(allMyTeamActive);//总激活用户
+
+
+
+
+
+                    console.log(team_data_1.amount, '==========================================');
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    console.log(data.result.level[0].number, "testtstst");
+                    // $('#team_count').text(data.result.number);
+                    // $('#dayCommission_team').text(data.result.daySelfCommission);//团队今日贡献佣金
+                    // $('#commission_team').text(data.result.selfCommission);//团队贡献佣金
+                    // $('#dayGroupCommission_team').text(data.result.daySelfGroupCommission);//平级今日贡献佣金
+                    // $('#groupCommission_team').text(data.result.selfGroupCommission);//平级贡献佣金
+                    // // $('#accumulated_commissions').text(data.result.selfGroupCommission);//平级贡献佣金
+
+
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'));
+                    myteamObj.ClearStatusMyTeam();
+                },
+
+            });
+
+        }
+        this.ClearStatusMyTeam = function () {
+            $('#team_count_All').text("");
+            // 4 
+            $('#Level_team_number_1').text("");//一级注册人数
+            $('#Level_team_number_2').text("");//二级注册人数
+            $('#Level_team_number_3').text("");//三级注册人数
+            //5
+            $('#Active_team_active_1').text("");//一级激活用户
+            $('#Active_team_active_2').text("");//二级激活用户
+            $('#Active_team_active_3').text("");//三级激活用户
+            //6
+            //总业绩
+            $('#Amount_team_amount_1').text("");//一级总业绩
+            $('#Amount_team_amount_2').text("");//二级总业绩
+            $('#Amount_team_amount_3').text("");//三级总业绩
+
+            //7
+            $('#makeAmount_all').text("");//总佣金
+            $('#makeAmount_1').text("");//一级总佣金
+            $('#makeAmount_2').text("");//二级总佣金
+            $('#makeAmount_3').text("");//三级总佣金
+
+
+
+        }
+        this.getMyTeam_3 = function () {
+            var getToken = window.localStorage.getItem('token')
+            var token = JSON.parse(getToken);
+            $('#tabcontent_3').html("");
+            var loadData_team_3 = 1
+            var limit_team_3 = 8
+            var pageCount_team_3 = 1
+            Peer_3()
+            function Peer_3() {
+                var str = ""
+
+                $.ajax({
+                    type: "get",
+                    // url: API_SERVER + `/v1/inviteCode/team/peer-group?page=${loadData_team_3}&limit=${limit_team_3}`,
+                    url: API_SERVER + `/v1/inviteCode/underLevel/3?page=${loadData_team_3}&limit=${limit_team_3}`,
+
+
+
+                    headers: {
+                        'Authorization': 'Bearer ' + token.token,
+                    },
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: true,
+                    timeout: 100000,
+                    beforeSend: function (xmlhttprequest) { },
+                    success: function (data) {
+                        $('#inputmy_team_3').val(pageCount_team_3)
+                        $('#nextmy_team_3').unbind()
+                        $('#nextmy_team_3').click(function () {
+                            loadData_team_3 += 1
+                            pageCount_team_3 += 1
+                            Peer_3();
+                            $('#inputmy_team_3').val(pageCount_team_3)
+                            arrayIdTeam = []
+                            loaderObj.show();
+
+                        })
+                        $('#prevmy_team_3').unbind()
+                        $('#prevmy_team_3').click(function () {
+                            loadData_team_3 -= 1
+                            pageCount_team_3 -= 1
+                            Peer_3();
+                            $('#inputmy_team_3').val(pageCount_team_3)
+                            arrayIdTeam = []
+                            loaderObj.show();
+
+                        })
+                        $("#gomy_teamPage_3").unbind()
+                        $("#gomy_teamPage_3").click(function () {
+                            // Parse the input value as a float
+                            var inputmy_team_3 = parseFloat($("#inputmy_team_3").val());
+                            if (isNaN(inputmy_team_3)) {
+                                msgPageObj.show("请输入您想要访问的页面"); // Display "Please enter the page you want to visit"
+                            } else {
+                                loadData_team_3 = inputmy_team_3; // Set loadData to the input value (assuming these are global variables)
+                                pageCount_team_3 = inputmy_team_3; // Set pageCount to the input value (assuming these are global variables)
+                                Peer_3();
+                            }
+                        });
+                        if (pageCount_team_3 <= 1) {
+                            pageCount_team_3 = 1
+                        }
+                        if (pageCount_team_3 > Math.ceil(data.records / limit_team_3)) {
+                            pageCount_team_3 = Math.ceil(data.records / limit_team_3)
+                        }
+                        if (pageCount_team_3 == 1) {
+                            $('#prevmy_team_3').css({ 'visibility': 'hidden' })
+                        }
+                        else if (pageCount_team_3 != 1) {
+                            $('#prevmy_team_3').css({ 'visibility': 'visible' })
+                        }
+                        //   unshow next
+                        if (pageCount_team_3 == Math.ceil(data.records / limit_team_3)) {
+                            $('#nextmy_team_3').css({ 'visibility': 'hidden' })
+                        }
+                        //   unshow next
+                        else if (pageCount_team_3 != Math.ceil(data.records / limit_team_3)) {
+                            $('#nextmy_team_3').css({ 'visibility': 'visible' })
+                        }
+                        // max per page
+                        $('#maxPagemy_team_3').text(Math.ceil(data.records / limit_team_3) == 0 ? '1' : Math.ceil(data.records / limit_team_3))
+                        // clean in input
+                        $('#inputmy_team_3').unbind();
+                        $('#inputmy_team_3').on('input', function () {
+                            var inputValue_team_3 = parseInt($(this).val(), 10);
+                            if (inputValue_team_3 < 1 || inputValue_team_3 > Math.ceil(data.records / limit_team_3)) {
+                                $(this).val(""); // Clear the input value
+                            }
+                        });
+                        $('#level_team_3').html(data.records);
+
+                        if (data.code == 0) {
+                            if (data.records == 0) {
+                                str += '  <div style=" color: #8D959B;width: 100%; ">'
+                                str += '<div style=" display: flex;align-items: center; width: 85%;margin: 0 auto; justify-content: center;">'
+                                str += ' <img src="./pic/icons/nodata_icons.png" style="width:110px;">'
+                                str += '</div>'
+
+                                str += '</div>'
+                                $('#tabcontent_2').html(str);
+                                $("#pageTab_team_3").css({ "display": "none" })
+                                $("#headmyteam").css({ "display": "none" })
+
+                            }
+                            else {
+                                $("#pageTab_team_3").css({ "display": "flex" })
+                                $("#headmyteam").css({ "display": "flex" })
+
+
+                            }
+                            if (data.records < 8) {
+                                $("#pageTab_team_3").css({ "display": "none" })
+
+                            } else {
+                                $("#pageTab_team_3").css({ "display": "flex" })
+
+                            }
+
+                            $.each(data.result, function (index, data) {
+                                var isoDateTime = data.signupTime;
+                                var date = new Date(isoDateTime);
+                                var year = date.getFullYear();
+                                var month = String(date.getMonth() + 1).padStart(2, '0');
+                                var day = String(date.getDate()).padStart(2, '0');
+                                var hours = String(date.getHours()).padStart(2, '0');
+                                var minutes = String(date.getMinutes()).padStart(2, '0');
+                                var formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}`;
+                                str += '<div class="item-myteam" id="' + (data.mobile) + '_show_inside_team" style="height: 35px; background: #FFE6D9; width: 100%; margin:  0 auto; justify-content: space-around; display: flex; font-size: 13px;">'
+                                str += '<div style="display: flex; flex-direction: column; gap: 10px; width: 25%; align-items: center; justify-content: center;">'
+                                str += '<span>' + (data.mobile) + '</span>'
+                                str += '</div>'
+                                str += '<div style="display: flex; flex-direction: column; gap: 10px; width: 20%; align-items: center; justify-content: center;">'
+                                str += '<span>' + (data.name) + '</span>'
+                                str += '</div>'
+                                str += '<div style="display: flex; flex-direction: column; gap: 10px; width: 20%; align-items: center; justify-content: center;">'
+                                str += '<span>' + (data.amount.toFixed(1)) + '</span>'
+                                str += '</div>'
+                                str += '<div style="display: flex; flex-direction: column; gap: 10px; width: 35%; align-items: center; justify-content: center;">'
+                                str += '<span>' + (formattedDateTime) + '</span>'
+                                str += '</div>'
+                                str += ' </div>'
+                                if (!arrayIdTeam.some(item => item.mobile === data.mobile)) {
+                                    arrayIdTeam.push({ "uid": data.mobile });
+                                }
+
+                            })
+
+                            loaderObj.unShow();
+
+                            setTimeout(() => {
+                                myScroll = new IScroll('#myteam_body', { probeType: 1, mouseWheel: true });
+
+                            }, 300);
+
+                            $('#tabcontent_3').html(str);
+                            console.log(arrayIdTeam);
+                            $.each(arrayIdTeam, function (index, data) {
+                                if (index % 2 === 0) {
+                                    $(`#${data.uid}_show_inside_team`).css({ "background": "#FFF4EA" });
+                                }
+                                else {
+                                    $(`#${data.uid}_show_inside_team`).css({ "background": "#FFE6D9" });
+
+                                }
+                                // $(`#${data.uid}_show_inside_team`).off().on('click', function () {
+                                //     $('#openPopup_team').css({ "display": "flex" })
+                                //     back_level_1.push({ "id": data.uid })
+                                //     console.log("level1", back_level_1);
+                                //     myteamObj.underMember(data.uid, 0);
+                                //     setTimeout(() => {
+                                //         myScroll = new IScroll('#scroll_underMember', { probeType: 1, mouseWheel: true });
+                                //     }, 300);
+                                // });
+
+                            });
+
+                        }
+
+
+                    },
+                    error: function (xmlhttprequest, error) {
+                        loaderObj.unShow();
+                    },
+
+                });
+            }
+
+
+
+
+
+        }
+
+
+
+    }
+
+</script>

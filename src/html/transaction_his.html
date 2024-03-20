@@ -1,0 +1,679 @@
+<style>
+    .rotate {
+        transform: rotate(180deg);
+        /*transform: rotate(180deg);*/
+        transition: .2s;
+    }
+
+    .rotate-reset-2 {
+        transform: rotate(0deg);
+        transition: .2s;
+    }
+
+    .rotate-1 {
+        transform: rotate(180deg);
+        /*transform: rotate(180deg);*/
+        transition: .2s;
+    }
+
+    .rotate-reset-3 {
+        transform: rotate(0deg);
+        transition: .2s;
+    }
+
+    .tabs {
+        display: flex;
+    }
+
+    .tab-btn.active {
+        background-color: #ddd;
+    }
+
+    .tab-content {
+        width: 90%;
+        margin: 0 auto;
+        height: 70px;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .tab-content.active {
+        display: flex;
+    }
+
+
+    #option_history_his {
+        border-radius: 8px;
+        width: 90%;
+        margin: 0 auto;
+        margin: 10px;
+        gap: 5px;
+        font-weight: bold;
+    }
+
+    .history-option {
+        box-sizing: border-box;
+        height: 30px;
+        width: 30%;
+        background: #ffffff;
+        border: 1px solid rgba(59, 120, 254, 0.20);
+        color: #383838;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btnPageTeam {
+        background: var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%));
+        border-radius: 10px;
+        font-size: 20px;
+        color: #fff;
+        width: 30px;
+        height: 30px;
+    }
+</style>
+<div class="menuPage bg-my" id="transaction_hisPage" style="position: absolute; background:#F8F8F8;">
+
+    <div id="transaction_his_header">
+    </div>
+    <div
+        style="font-weight: bold; width: 100%; height: 50px; display: flex; align-items: center; justify-content: start; background: #fff; font-size: 16px;">
+        <div class="tab-btn active" data-tab="tab_content_1" id="select_history_his"
+            style=" gap: 10px;border-radius: 67px;background: #F8F8F8;padding: 0 10px; height: 80%; margin-left: 10px; display: flex; align-items: center; justify-content: center;">
+            <span id="select_option_his">全部</span>
+            <img style="height: 13px; " class="rotate-reset-2 rotateBtn" id="today_history_his">
+
+        </div>
+        <!-- <div class="tab-btn" data-tab="tab_content_2"
+            style="gap: 10px; border-radius: 67px;background: #F8F8F8; padding: 0 10px; height: 80%; margin-left: 10px; display: flex; align-items: center; justify-content: center;">
+            <span>今日</span>
+            <img style="height: 13px; " class="rotate-reset-3 rotateBtn" id="withdraw_history_his">
+
+        </div> -->
+    </div>
+
+    <div id="option_history_his"
+        style="display: none; flex-direction: column; align-items: flex-start; padding: 0; gap: 5px;">
+
+        <div style="width: 100%; gap: 5px; margin-top: 5px;" class="flexCenter">
+
+            <div class="history-option" id="all_up_option_his">全部</div>
+            <div class="history-option" id="deposit_option_his">充值</div>
+            <div class="history-option" id="withdraw_option_his">提现</div>
+        </div>
+
+        <div style="width: 100%; gap: 5px; margin-top: 5px;" class="flexCenter">
+            <div class="history-option" id="product_option_his">买入</div>
+            <div class="history-option" id="40_option_his">返利</div>
+            <div class="history-option" id="50_option_his">返佣</div>
+
+        </div>
+
+        <div style="width: 100%; gap: 5px; margin-top: 5px;" class="flexCenter">
+            <div class="history-option" id="60_option_his">转出</div>
+            <div class="history-option" id="70_option_his">转入</div>
+            <!-- <div class="history-option" id="80_option_his">退款</div> -->
+
+        </div>
+
+        <!-- <div style="width: 100%; gap: 5px; margin-top: 5px;" class="flexCenter">
+
+            <div class="history-option" id="90_option_his">换汇</div>
+            <div class="history-option" id="100_option_his">买入挂单</div>
+            <div class="history-option" id="120_option_his">卖出挂单</div>
+        </div>
+
+        <div style="width: 100%; gap: 5px; margin-top: 5px;" class="flexCenter">
+            <div class="history-option" id="130_option_his">挂单订单取消</div>
+            <div class="history-option" id="140_option_his">挂单取消</div>
+            <div class="history-option" id="150_option_his">挂单数量修改</div>
+        </div> -->
+
+    </div>
+
+    <div style=" height: 10px;">
+    </div>
+
+    <div id="scroller_transaction_his">
+        <div style="height: auto; width: 100%; display: flex; align-items: center; flex-direction: column;">
+            <div id="loop_tansaction_history" style="width: 100%; height: auto; background:#fff; gap: 10px;"
+                class="flexTop_c">
+
+            </div>
+
+        </div>
+    </div>
+
+    <div style="width: 100%;height: 70px; font-size: 16px; font-weight:bold;" id="search_page_tran" class="flexCenter">
+
+        <div style="width: 90%; height: auto; padding-bottom: 20px;" class="flexSpac">
+            <div id="prevHistoryTrans" class="btnPageTeam flexCenter">
+                &#60;</div>
+            <div id="dropdwnoTabHistoryTran" class="flexCenter">
+                <input id="inputHisTrans" type="number"
+                    style="font-weight: bold; width: 30px;height: 30px; background: #fff; font-size: 16px; text-align: center;margin-right: 10px;border: none;border-radius: 5px;">/
+                &nbsp;<span id="maxPageHisTran"></span>&nbsp;&nbsp;<button id="goHisTransPage" style="border: none; background: var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%));
+                color: white;padding: 5px 7px;border-radius: 5px; font-weight: bold;">访问</button>
+            </div>
+            <div id="nextHistoryTrans" class="btnPageTeam flexCenter">&#62;</div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    var transaction_hisObj = new transaction_his();
+    transaction_hisObj.init();
+
+    function transaction_his() {
+        var myScroll;
+        var pageCount = 1;
+        var page = 1;
+        var seletGroup;
+
+
+        this.init = function () {
+            pageInit("transaction_hisPage");
+            headerInit("transaction_his", "交易记录")
+            $('.transaction_historyIcon').attr("src", picRes['transaction_historyIcon.png'])
+            $('.nexticon').attr("src", picRes['nexticon.png'])
+            $('.rotateBtn').attr("src", picRes['rotateBtn.png'])
+            $('.nexticon').attr("src", picRes['nexticon.png'])
+
+            $("#transaction_his_Page").css({ "width": w, "height": h });
+            $("#scroller_transaction_his").css({ "height": h - headH - 110, "width": w, "overflow": "hidden" });
+
+            myScroll = new IScroll('#scroller_transaction_his', { probeType: 1, mouseWheel: true });
+
+            // });transferdeposite
+            $("#today_history_his").unbind().click(function () {
+                $('#today_history_his').toggleClass('rotate rotate-reset-2');
+                $('#option_history_his').slideToggle();
+
+                // transaction_hisObj.getHistoryTransaction(10)
+
+            });
+            $("#deposit_option_his").unbind().click(function () {
+                $('#deposit_option_his').toggleClass('rotate rotate-reset-2');
+                $('#option_history_his').slideToggle();
+                $("#select_option_his").text("充值")
+                transaction_hisObj.getHistoryTransaction(10)
+                page = 1
+
+
+            });
+            $("#all_up_option_his").unbind().click(function () {
+                $('#all_up_option_his').toggleClass('rotate rotate-reset-2');
+                $('#option_history_his').slideToggle();
+                $("#select_option_his").text("全部")
+                transaction_hisObj.getHistoryTransaction("All")
+                page = 1
+
+
+            });
+            $("#withdraw_option_his").unbind().click(function () {
+                $("#select_option_his").text("提现")
+                $('#withdraw_option_his').toggleClass('rotate rotate-reset-2');
+                $('#option_history_his').slideToggle();
+                transaction_hisObj.getHistoryTransaction(20)
+                page = 1
+            });
+
+            $("#product_option_his").unbind().click(function () {
+                $('#product_option_his').toggleClass('rotate rotate-reset-2');
+                $('#option_history_his').slideToggle();
+                $("#select_option_his").text("买入")
+                transaction_hisObj.getHistoryTransaction(30)
+                page = 1
+
+            });
+
+            $("#40_option_his").unbind().click(function () {
+                $('#40_option_his').toggleClass('rotate rotate-reset-2');
+                $('#option_history_his').slideToggle();
+                $("#select_option_his").text("返利")
+                transaction_hisObj.getHistoryTransaction(40)
+                page = 1
+            });
+
+            $("#50_option_his").unbind().click(function () {
+                $('#50_option_his').toggleClass('rotate rotate-reset-2');
+                $('#option_history_his').slideToggle();
+                $("#select_option_his").text("返佣")
+                transaction_hisObj.getHistoryTransaction(50)
+                page = 1
+            });
+
+            $("#60_option_his").unbind().click(function () {
+                $('#60_option_his').toggleClass('rotate rotate-reset-2');
+                $('#option_history_his').slideToggle();
+                $("#select_option_his").text("转出")
+                transaction_hisObj.getHistoryTransaction(60)
+                page = 1
+            });
+
+            $("#70_option_his").unbind().click(function () {
+                $('#70_option_his').toggleClass('rotate rotate-reset-2');
+                $('#option_history_his').slideToggle();
+                $("#select_option_his").text("转入")
+                transaction_hisObj.getHistoryTransaction(70)
+                page = 1
+            });
+            $("#80_option_his").unbind().click(function () {
+                $('#80_option_his').toggleClass('rotate rotate-reset-2');
+                $('#option_history_his').slideToggle();
+                $("#select_option_his").text("退款")
+                transaction_hisObj.getHistoryTransaction(80)
+                page = 1
+            });
+            $("#90_option_his").unbind().click(function () {
+                $('#90_option_his').toggleClass('rotate rotate-reset-2');
+                $('#option_history_his').slideToggle();
+                $("#select_option_his").text("换汇")
+                transaction_hisObj.getHistoryTransaction(90)
+                page = 1
+            });
+            $("#100_option_his").unbind().click(function () {
+                $('#100_option_his').toggleClass('rotate rotate-reset-2');
+                $('#option_history_his').slideToggle();
+                $("#select_option_his").text("买入挂单")
+                transaction_hisObj.getHistoryTransaction(100)
+                page = 1
+            });
+            $("#120_option_his").unbind().click(function () {
+                $('#120_option_his').toggleClass('rotate rotate-reset-2');
+                $('#option_history_his').slideToggle();
+                $("#select_option_his").text("卖出挂单")
+                transaction_hisObj.getHistoryTransaction(120)
+                page = 1
+            });
+            $("#130_option_his").unbind().click(function () {
+                $('#130_option_his').toggleClass('rotate rotate-reset-2');
+                $('#option_history_his').slideToggle();
+                $("#select_option_his").text("挂单订单取消")
+                transaction_hisObj.getHistoryTransaction(130)
+                page = 1
+            });
+            $("#140_option_his").unbind().click(function () {
+                $('#140_option_his').toggleClass('rotate rotate-reset-2');
+                $('#option_history_his').slideToggle();
+                $("#select_option_his").text("挂单取消")
+                transaction_hisObj.getHistoryTransaction(140)
+                page = 1
+            });
+            $("#150_option_his").unbind().click(function () {
+                $('#150_option_his').toggleClass('rotate rotate-reset-2');
+                $('#option_history_his').slideToggle();
+                $("#select_option_his").text("挂单数量修改")
+                transaction_hisObj.getHistoryTransaction(150)
+                page = 1
+            });
+
+
+
+        }
+
+        this.call = function () {
+
+            $('#transaction_his_Page').transition({
+                x: w
+            }, 0);
+        }
+
+        this.getHistoryTransaction = function (type) {
+            loaderObj.show();
+            var str = []
+            var Alltype
+
+            var limit = 15
+
+            var collect_data = []
+            var collect_data_all = []
+
+            var getToken = window.localStorage.getItem('token')
+            var token = JSON.parse(getToken);
+
+            Alltype = (type == 'All') ? '' : '&type=' + type;
+
+            $.ajax({
+                type: "get",
+                url: API_SERVER + `/v1/wallet/history?page=${page}&limit=${limit}${Alltype}`,
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+
+                    if (data.code == 0) {
+
+                        // var collect_data_all = data.result.filter(data => [10, 20, 30].includes(data.type));
+
+                        loaderObj.unShow();
+                        if (data.result.length == 0) {
+                            str += '<div style="height: 400px" class="flexCenter"><img src="./pic/icons/nodata_icons.png" style="width:110px;"></div>';
+                            $("#loop_tansaction_history").html(str);
+                            $("#search_page_tran").css({ "display": "none" });
+
+                        }
+
+                        if (data.result.length != 0) {
+
+                            $("#search_page_tran").css({ "display": "flex" });
+
+                            $.each(data.result, function (index, data) {
+
+                                var finalAllDate = moment(data.cdt).format("YYYY-MM-DD HH:mm:ss");
+
+                                var seletGroup = data.group;
+
+                                if (data.group == 10) {
+                                    seletGroup = '算力+工业'
+                                } else if (data.group == 20) {
+                                    seletGroup = '算力+教育'
+                                } else if (data.group == 30) {
+                                    seletGroup = '算力+金融'
+                                } else if (data.group == 40) {
+                                    seletGroup = '算力+医疗'
+                                } else if (data.group == 50) {
+                                    seletGroup = '算力+交通'
+                                } else if (data.group == 60) {
+                                    seletGroup = '算力+能源'
+                                } else if (data.group == 70) {
+                                    seletGroup = '民族企业助力区'
+                                } else if (data.group == null) {
+                                    seletGroup = ''
+                                }
+                                console.log(seletGroup, data.group, '+++++++++++++++++=all==+++++++++++++++++++++')
+
+                                var typeName;
+                                switch (data.walletType) {
+                                    case 20:
+                                        typeName = '产品收益';
+                                        break;
+                                    case 21:
+                                        typeName = '推荐佣金';
+                                        break;
+                                    case 26:
+                                        typeName = '会员等级奖励';
+                                        break;
+                                    case 23:
+                                        typeName = '工资';
+                                        break;
+                                    case 24:
+                                        typeName = '会议奖励';
+                                        break;
+                                    case 25:
+                                        typeName = '签到钱包';
+                                        break;
+                                    case 30:
+                                        typeName = '算力金额';
+                                        break;
+                                    default:
+                                        typeName = '';
+                                        break;
+                                }
+
+                                var eventTypeDescription;
+                                switch (data.eventType) {
+                                    case 10:
+                                        eventTypeDescription = '每日返利';
+                                        break;
+                                    case 20:
+                                        eventTypeDescription = '产品周期结束';
+                                        break;
+                                    case 30:
+                                        eventTypeDescription = '提前结束';
+                                        break;
+                                    case 31:
+                                        eventTypeDescription = '撤销订单';
+                                        break;
+                                    case 40:
+                                        eventTypeDescription = '用户申请';//(充值,提现)
+                                        break;
+                                    case 50:
+                                        eventTypeDescription = '充值成功';
+                                        break;
+                                    case 60:
+                                        // if (typeName = 30) {
+                                        //     typeName = '';
+                                            eventTypeDescription = '转出';
+                                        // }
+                                        break;
+                                    case 70:
+                                        eventTypeDescription = '转入';
+                                        break;
+                                    case 90:
+                                        if (typeName = 30) {
+                                            typeName = '';
+                                            eventTypeDescription = '购买产品：' + seletGroup;
+                                        }
+                                        break;
+                                    case 100:
+                                        eventTypeDescription = '购买2型';
+                                        break;
+                                    case 110:
+                                        eventTypeDescription = '直推奖';
+                                        break;
+                                    case 120:
+                                        eventTypeDescription = '管理奖';
+                                        break;
+                                    case 121:
+                                        eventTypeDescription = '平级奖';
+                                        break;
+                                    case 122:
+                                        eventTypeDescription = '合伙人分红奖';
+                                        break;
+                                    case 123:
+                                        eventTypeDescription = '兑换';
+                                        break;
+                                    case 140:
+                                        eventTypeDescription = '兑换算力券';
+                                        break;
+                                    case 150:
+                                        eventTypeDescription = 'II型申购';
+                                        break;
+                                    case 160:
+                                        eventTypeDescription = 'II型申购拒绝';
+                                        break;
+                                    case 170:
+                                        eventTypeDescription = 'II型部份申购';
+                                        break;
+                                    case 180:
+                                        eventTypeDescription = '年度贡献奖';
+                                        break;
+                                    case 190:
+                                        eventTypeDescription = '注册发放';
+                                        break;
+                                    case 200:
+                                        eventTypeDescription = '签到发放';
+                                        break;
+                                    case 210:
+                                        eventTypeDescription = '收益加速';
+                                        break;
+                                    case 220:
+                                        eventTypeDescription = '每月直推奖励';
+                                        break;
+                                    case 230:
+                                        eventTypeDescription = '日激活奖励';
+                                        break;
+                                    default:
+                                        eventTypeDescription = '';
+                                        break;
+                                }
+
+                                var levelDescription;
+                                switch (data.level) {
+                                    case 1:
+                                        levelDescription = '一级';
+                                        break;
+                                    case 2:
+                                        levelDescription = '二级';
+                                        break;
+                                    case 3:
+                                        levelDescription = '三级';
+                                        break;
+
+                                    default:
+                                        levelDescription = '';
+                                        break;
+                                }
+
+
+                                // check money out
+                                var moneyOut = data.type
+                                if (moneyOut == 20 || moneyOut == 30 || moneyOut == 60 || moneyOut == 100 || moneyOut == 120) {
+                                    moneyOut = 1
+                                } else {
+                                    moneyOut = 0
+                                }
+
+
+
+                                str += ' <div style="font-weight:bold; background: #fff; width: 100%;  height: 70px;align-items: center;gap: 5px; display: flex; box-shadow: 0px 0px 8px 0px rgba(92, 122, 181, 0.25);" class="go_each_tran_detail' + data.id + '">'
+
+                                str += '<div style="height: 50px; width: 50px; padding-left: 5px; " class="flexCenter">'
+                                str += '<img src="' + (data.walletType == 20 ? './pic/history_trade/product1.png' :
+                                    data.walletType == 21 ? './pic/history_trade/product2.png' :
+                                        data.walletType == 26 ? './pic/history_trade/product5.png' :
+                                            data.walletType == 23 ? './pic/history_trade/product4.png' :
+                                                data.walletType == 24 ? './pic/history_trade/product5.png' :
+                                                    data.walletType == 25 ? './pic/history_trade/product6.png' :
+                                                        './pic/history_trade/product7.png') + '" style="width: 32px;height: 32px;">'
+                                str += ' </div>'
+
+                                str += '<div style="display: flex; flex-direction: column; width: 80%; gap: 10px;">'
+                                str += '<div style=" display: flex;justify-content: space-between;">'
+                                str += '<span style="color: #414655;  font-size: 16px;">' + (typeName) + (eventTypeDescription) + (levelDescription) + '</span>'
+                                str += '<div class="flexCenter" style="gap: 10px;">'
+                                str += '<span style="color: #6C7BA8;  font-size: 16px;"><span style=" ' + (data.state == 40 ? 'color:#60EB1F;">已完成' : data.state == 10 ? 'color:#FA8642;">待定' : data.state == 30 ? 'color:#FA3939;">提现失败' : 'color:#0000;">失败') + '</span>' + '</span>'
+                                str += '</div>'
+                                str += '</div>'
+                                str += '<div style=" display: flex;justify-content: space-between;">'
+                                str += '<span style="color: #6C7BA8;  font-size: 16px;">' + finalAllDate + '</span>'
+                                str += '<span style="' + (moneyOut == 1 ? "color: #EA372A;" : "color: #414655;") + '  font-size: 16px;">' + (moneyOut == 1 ? "-" + parseFloat(data.amount).toFixed(2) : parseFloat(data.amount).toFixed(2)) + '</span>'
+                                str += '</div>'
+                                str += '</div>'
+
+                                // str += ' <div style="height: auto; width: 25px; " class="flexCenter">'
+                                // str += '<img class="nexticon go_each_tran_detail' + data.id + '" style="width: 9px;height: 11px;">'
+                                // str += '</div>'
+
+                                str += '</div>'
+
+                                collect_data.push({
+                                    "id": data.id,
+                                    "amount": parseFloat(data.amount).toFixed(2),
+                                    "state": data.state,
+                                    "time": finalAllDate,
+                                    "title": (typeName) + ' - ' + (eventTypeDescription)
+                                })
+
+
+                            })
+
+                            $('#loop_tansaction_history').html(str);
+                            $('.nexticon').attr("src", picRes['nexticon.png'])
+                            $('#h_quantity_history').text(data.records);
+
+                            myScroll = new IScroll('#scroller_transaction_his', { probeType: 1, mouseWheel: true });
+
+                            $.each(collect_data, function (index, data) {
+                                $(`.go_each_tran_detail${data.id}`).unbind().click(function () {
+                                    // pageShow('wallet_product_detailPage')
+                                    // wallet_product_detailObj.getDatailHistory(data.id, data.amount, data.state, data.time)
+                                    pageShow("assets_historyPage")
+                                    assets_historyObj.call(data.id, data.time, data.title)
+                                });
+
+                            })
+
+                            // clean in input
+                            $('#inputHisTrans').unbind().on('input', function () {
+                                var inputValue = parseInt($(this).val(), 10);
+                                if (inputValue < 1 || inputValue > Math.ceil(data.records / limit) || isNaN(inputValue)) {
+                                    $(this).val(""); // Clear the input value
+                                }
+                            });
+
+                            maxPage = Math.ceil(data.records / limit) == 0 ? 1 : Math.ceil(data.records / limit);
+                            $('#maxPageHisTran').text(maxPage);
+                            $('#inputHisTrans').val(page);
+
+                            if (page == 1) {
+                                $('#prevHistoryTrans').css({ "visibility": "hidden" });
+                                $('#nextHistoryTrans').css({ "visibility": "visible" });
+                            } else if (page == maxPage) {
+                                $('#prevHistoryTrans').css({ "visibility": "visible" });
+                                $('#nextHistoryTrans').css({ "visibility": "hidden" });
+                            } else {
+                                $('#prevHistoryTrans').css({ "visibility": "visible" });
+                                $('#nextHistoryTrans').css({ "visibility": "visible" });
+                            }
+
+                            if (maxPage == 1) {
+                                $('#prevHistoryTrans, #nextHistoryTrans').css({ "visibility": "hidden" });
+                                $('#goHisTransPage').off();
+                            }
+
+
+                            $('#goHisTransPage').unbind().click(function () {
+                                page = parseFloat($('#inputHisTrans').val())
+
+
+                                if (page == "") {
+                                    msgPageObj.show("请输入您想要访问的页面");
+                                } else {
+                                    transaction_hisObj.getHistoryTransaction(type)
+                                }
+
+                            })
+
+
+
+                            $('#nextHistoryTrans').unbind().click(function () {
+                                page += 1
+                                transaction_hisObj.getHistoryTransaction(type)
+                            })
+
+                            $('#prevHistoryTrans').unbind().click(function () {
+                                page -= 1
+                                transaction_hisObj.getHistoryTransaction(type)
+                            })
+
+                        }
+
+                    }
+                    else {
+                        loaderObj.unShow();
+                        msgPageObj.show(getStatusCode(data.code))
+
+                    }
+
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+
+                },
+
+            });
+        }
+        function loadList() {
+            myScroll = new IScroll('#scroller_transaction_his_2', { probeType: 1, mouseWheel: true });
+
+            myScroll.on('beforeScrollStart', function () {
+                console.log("====>" + this.y);
+            });
+
+
+        }
+
+
+
+    }
+
+</script>

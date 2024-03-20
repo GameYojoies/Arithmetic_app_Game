@@ -1,0 +1,558 @@
+<style>
+    .selected-tab {
+        border-bottom: 2px solid red;
+        color: #EA372A;
+        /* สีแดงขีดเส้นใต้ */
+    }
+
+
+    /* swiper-slide img {
+        height: 150px;
+        border-radius: 20px;
+        object-fit: cover;
+    } */
+    .swiper-slide-content {
+        margin-left: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .image-item {
+        height: 60px;
+        width: 90px;
+        padding: 5px;
+        border-radius: 10px;
+    }
+
+    .center-swiper {
+        display: flex;
+        align-items: center;
+        /* justify-content: center; */
+    }
+
+    #code {
+        text-align: center;
+        width: 100%;
+        height: 30px;
+        border: 1px solid #000;
+        border-radius: 5px;
+        opacity: 0.3;
+        background: #D9D9D9;
+    }
+</style>
+
+<div class="menuPage bg-my" id="homePage" style="position: absolute;overflow: hidden; background: #F5F5F5;">
+
+    <div id="scrollerMy" style="height: auto;">
+
+        <div style="position: relative; height: auto; ">
+            <div
+                style="width: 100%; display: flex; flex-direction: column;  align-items: center; height: 230px; background-size: cover; background-repeat: no-repeat; background-position: center; background-image: url('./pic/bg/BG-home.png');">
+                <div
+                    style="text-align: center; gap: 10px; display: flex; flex-direction: column; padding-top: 20px;color: #FFF0E5;">
+                    <div style="font-size: 24px;"><img id="from_the_world" style="height: 24px;"></div>
+                    <div style="font-family: YouSheBiaoTiHei;
+                    font-size: 42px;
+                    font-weight: 400;
+                   "> <img id="from_the_world2" style="height: 41px;"></div>
+                    <div style="font-family: Inter;
+                    font-size: 18px;
+                    font-weight: 400;
+                    "><img id="from_the_world3" style="height: 20px;"></div>
+                </div>
+            </div>
+
+
+            <div
+                style="width: 100%; margin-left: auto; margin-right: auto; margin-top: -80px; position: relative; justify-content: center; align-items: center;  ">
+                <!-- <div style="position: absolute; top: 20px; color: #FFF0E5;">Computing power future new technology</div> -->
+                <div class="slideshow-container">
+                    <!-- Full-width images with number and caption text -->
+                    <swiper-container class="mySwiper" pagination="true" pagination-clickable="true"
+                        autoplay-delay="3000" autoplay-disable-on-interaction="false" loop="false"
+                        style="border-radius: 8px; overflow: hidden;">
+                        <swiper-slide style="height: auto;  width:100%; border-radius: 8px; overflow: hidden;">
+                            <img src="./pic/home/banner01.jpg" style="width:100%; height: auto; border-radius: 8px;">
+                        </swiper-slide>
+
+                        <swiper-slide style="height: auto;  width:100%; border-radius: 8px; overflow: hidden;">
+                            <img src="./pic/home/banner02.jpg" style=" width:100%; height: auto; border-radius: 8px;">
+                        </swiper-slide>
+                        <swiper-slide style="height: auto;  width:100%; border-radius: 8px; overflow: hidden;">
+                            <img src="./pic/home/banner03.jpg" style=" width:100%; height: auto; border-radius: 8px;">
+                        </swiper-slide>
+                        <swiper-slide style="height: auto;  width:100%; border-radius: 8px; overflow: hidden;">
+                            <img src="./pic/home/banner04.jpg" style=" width:100%; height: auto; border-radius: 8px;">
+                        </swiper-slide>
+                    </swiper-container>
+                </div>
+
+
+
+            </div>
+        </div>
+        <div
+            style="width: 100%; display: flex; justify-content: center; flex-direction: column;align-items: center; gap: 10px; ">
+
+
+            <!-- <div id="openPopup"
+                style=" border-radius: 10px; width: 95%;
+                background: #FFF;
+                box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.08); padding: 10px 0px; border-radius: 8px; height: 20px; display: flex;">
+                <div style="display: flex;align-items: center; width: 85px; justify-content: end; margin-left: 10px;">
+                    <img style="width: 20px;height: 18px; margin-right: 10px;" src="./pic/home/not.png" alt="">
+                    <span style="width: 55px;">公告：</span>
+                </div> -->
+
+            <!-- <swiper-container id="informationHeader" class="mySwiper" centered-slides="true" autoplay-delay="2500"
+                    noSwiping="true" autoplay-disable-on-interaction="false" loop="false" 
+                    direction="vertical" style=" width: 70%;">
+
+
+                    <swiper-slide >
+                      
+                    </swiper-slide>
+                    <swiper-slide >
+                      
+                    </swiper-slide>
+                    <swiper-slide >
+                      
+                    </swiper-slide>
+                    <swiper-slide >
+                      
+                    </swiper-slide>
+                   
+                 
+                    
+
+                </swiper-container>
+                
+            </div> -->
+            <div id="openPopup"
+                style=" border-radius: 10px; width: 95%;
+                background: #FFF;
+                box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.08); padding: 10px 0px; border-radius: 8px; height: 25px; display: flex;">
+                <div class="flexCenter" style="margin-left: 10px;">
+
+                    <img style="width: 20px;height: 20px; " src="./pic/home/not.png" alt="">
+                </div>
+                <swiper-container id="informationHeader" class="mySwiper" centered-slides="true" autoplay-delay="2500"
+                    noSwiping="true" autoplay-disable-on-interaction="false" loop="false" direction="vertical" style="overflow: hidden; text-align: left;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                ">
+                    <swiper-slide>
+
+                    </swiper-slide>
+                </swiper-container>
+            </div>
+            <!-- mod -->
+
+            <div
+                style="background: linear-gradient(180deg, #FFEBE9 0%, #FFFEFE 20.49%, #FFF 100%);box-shadow: 2px -3px 7px 3px rgba(92, 122, 181, 0.25);padding:15px 12px;border-radius: 5px;width: 88%;display:flex;justify-content: center;flex-direction: column;margin-top: 10px;">
+
+                <div style="display: flex; gap: 60px; ">
+                    <div style="letter-spacing: 2px;" id="latest-events-tab">最新活动</div>
+                    <div style="letter-spacing: 2px;" id="news-center-tab">新闻中心</div>
+                </div>
+
+                <!-- new1 -->
+                <div style="display: flex; flex-direction: column; font-weight: 700; gap: 10px; margin-top: 30px;"
+                    id="event">
+                    <!-- content1 -->
+                    <div style="display: flex; align-items: center;">
+                        <img style="height: 48px; margin-right: 10px;" src="./pic/home/en01.png" alt="item">
+                        <div style="display: flex; flex-direction: column;">
+                            <span>每日签到（45）</span>
+                            <span>总奖励：1算力1活动值</span>
+                        </div>
+                        <div style="padding: 10px; display: flex; justify-content: center; align-items: center;">
+                            <button
+                                style="position: absolute; right: 20px; display: flex; border-radius: 15px; justify-content: center; width: 70px; background: linear-gradient(281deg, #EA372A 48.76%, #F83D3D 86.99%); border: none; color: #FFF; padding: 6px;margin-right: 15px;"
+                                class="checkin_btn">签到</button>
+                        </div>
+                    </div>
+
+                    <div class="line_app" style="width:100%; margin: 5px 0;"></div>
+
+                    <!-- content2 -->
+                    <div style="display: flex; align-items: center;">
+                        <img style="height: 48px; margin-right: 10px;" src="./pic/home/en02.png" alt="item">
+                        <div style="display: flex; flex-direction: column;">
+                            <span>前5000名注册</span>
+                            <span>总奖励：40万算力券</span>
+                            <span>超级会员身份</span>
+                        </div>
+                        <div style="padding: 10px; display: flex; justify-content: center; align-items: center;">
+                            <button
+                                style="position: absolute; right: 20px; display: flex; border-radius: 15px; justify-content: center; width: 70px; background: linear-gradient(281deg, #EA372A 48.76%, #F83D3D 86.99%); border: none; color: #FFF; padding: 6px;margin-right: 15px;"
+                                id="first">领取</button>
+                        </div>
+                    </div>
+                    <div class="line_app" style="width:100%; margin: 5px 0;"></div>
+
+                    <!-- Content3 -->
+                    <div style="display: flex; align-items: center;">
+                        <img style="height: 48px; margin-right: 10px;" src="./pic/home/en03.png" alt="item">
+                        <div style="display: flex; flex-direction: column;">
+                            <span>参加线上会议，领取奖励</span>
+                            <span>输入兑换码</span>
+                        </div>
+                        <div style="padding: 10px; display: flex; justify-content: center; align-items: center;">
+                            <button
+                                style="position: absolute; right: 20px; display: flex; border-radius: 15px; justify-content: center; width: 70px; background: linear-gradient(281deg, #EA372A 48.76%, #F83D3D 86.99%); border: none; color: #FFF; padding: 6px;margin-right: 15px;"
+                                id="receive">领取</button>
+                        </div>
+                    </div>
+                    <div class="line_app" style="width:100%; margin: 5px 0;"></div>
+
+                </div>
+
+                <!-- new2 -->
+                <div style="display: flex; flex-direction: column; padding-top: 10px;" id="news">
+
+                    <!-- Add more news content here -->
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+        <div style=" height: 20px;"></div>
+
+
+
+    </div>
+
+    <!-- popup -->
+    <div id="newsPopup"
+        style="display: flex; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6);   z-index: 999;">
+        <div id="popupNews"
+            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%;   z-index: 4;">
+
+            <div>
+                <!-- Full-width images with number and caption text -->
+                <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" autoplay-delay="500"
+                    autoplay-disable-on-interaction="false" loop="false" style=" overflow: hidden; height: 70vh; ">
+                    <swiper-slide style="overflow: hidden; " class="flexCenter">
+                        <img src="./pic/home/slider1.png" style="height: 100%; ">
+                    </swiper-slide>
+
+                    <swiper-slide style=" overflow: hidden; " class="flexCenter">
+                        <img src="./pic/home/slider1.png" style="height: 100%;  ">
+                    </swiper-slide>
+                    <swiper-slide style=" overflow: hidden; " class="flexCenter">
+                        <img src="./pic/home/slider1.png" style="height: 100%;  ">
+                    </swiper-slide>
+                    <swiper-slide style=" overflow: hidden; " class="flexCenter">
+                        <img src="./pic/home/slider1.png" style="height: 100%;  ">
+                    </swiper-slide>
+                </swiper-container>
+            </div>
+            <div id="closeNewsPopup"
+                style="justify-content: center; text-align: center; color: #457BFF; display: flex; align-items: center;gap: 10px; padding: 10px 10px;  border: none; border-radius: 5px; cursor: pointer;">
+                <!-- <img id="close_an" alt="close" style="height: 35px;" loading="lazy"> -->
+                <img src="./pic/icons/close.png" style="width: 40px;">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var homeObj = new home();
+    homeObj.init();
+
+    function home() {
+
+        var myScroll;
+
+        this.init = function () {
+            // getAnnouncement()
+
+            $("#homePage").css({ "width": w, "height": h - menuH + 20, "position": "absolute", "left": (-1.0) * w, "top": 0 });
+
+            $('#from_the_world').attr("src", picRes['from_the_world.png'])
+            $('#from_the_world2').attr("src", picRes['from_the_world2.png'])
+            $('#from_the_world3').attr("src", picRes['from_the_world3.png'])
+
+            setTimeout(() => {
+                myScroll = new IScroll('#homePage', { probeType: 1, mouseWheel: true });
+            }, 500);
+            loadList();
+
+            $(".checkin_btn").unbind().click(function () {
+
+                pageShow("checkinPage");
+            });
+            $("#first").unbind().click(function () {
+                homeObj.first();
+
+            });
+
+            $("#receive").unbind().click(function () {
+                msgObj.show(
+                    '<div><div style="flex-direction: column; width:100%;height:auto;display:flex;align-content: flex-start;justify-content: center;">' +
+                    '<span>输入兑换码 </span>' + '</div>' + `<div style="height:20px;"></div>` +
+                    '<input onkeydown="homeObj.filterInput(event)" id="code"   type="text"/></div>' +
+                    `<div style="height:5px;"></div>` +
+                    `</div>`, function () {
+                        homeObj.redempiontcode();
+                        msgObj.unShow()
+                    });
+            });
+
+
+            $("#event").show();
+            $("#news").hide(); // แสดงเนื้อหาของ "latest events" เมื่อหน้าเว็บโหลดเสร็จ
+            $("#latest-events-tab").addClass("selected-tab");
+            $("#news-center-tab").removeClass("selected-tab");
+            // เมื่อคลิกที่ "latest events" tab
+            $("#latest-events-tab").click(function () {
+
+                $("#event").show();  // แสดงเนื้อหาของ "latest events"
+                $("#news").hide();   // ซ่อนเนื้อหาของ "News Center"
+
+                // เพิ่มเอฟเฟกต์สีแดงขีดเส้นใต้
+                $("#latest-events-tab").addClass("selected-tab");
+                $("#news-center-tab").removeClass("selected-tab");
+
+                myScroll = new IScroll('#homePage', { probeType: 1, mouseWheel: true });
+            });
+
+            $("#closeNewsPopup").unbind().click(function () {
+                $("#popupNews").css({ "display": "none", })
+                $("#newsPopup").css({ "display": "none", })
+            })
+
+            // เมื่อคลิกที่ "News Center" tab
+            $("#news-center-tab").unbind().click(function () {
+                homeObj.news()
+                $("#event").hide();  // ซ่อนเนื้อหาของ "latest events"
+                $("#news").show();   // แสดงเนื้อหาของ "News Center"
+
+                myScroll = new IScroll('#homePage', { probeType: 1, mouseWheel: true });
+                // เพิ่มเอฟเฟกต์สีแดงขีดเส้นใต้
+                $("#latest-events-tab").removeClass("selected-tab");
+                $("#news-center-tab").addClass("selected-tab");
+            });
+
+            $('#openPopup').unbind().click(function () {
+                // loaderObj.show()
+
+                pageShow("informationListPage");
+                informationListObj.init();
+                informationListObj.call();
+
+            })
+
+
+        }
+        function getAnnouncement() {
+            var getToken = window.localStorage.getItem('token');
+            var token = JSON.parse(getToken);
+
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/announcement',
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+                    var announcementHTML = "";
+
+                    $.each(data.result, function (index, announcement) {
+                        announcementHTML += `
+                        
+                
+                
+                <swiper-slide style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; justify-content: flex-start; align-items: center;">
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;margin: 0 8px; " > 
+                             <span style="width: 55px;">公告：</span>${announcement.title}\n</div>
+            </swiper-slide>`
+                    })
+                    $(`#informationHeader`).html(announcementHTML)
+                    // 
+
+                },
+
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError') + ': ' + error);
+                },
+            });
+        }
+
+
+        this.news = function () {
+            var str = ''
+            var collect_id = []
+            var getToken = window.localStorage.getItem('token')
+            var token = JSON.parse(getToken)
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/news',
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+
+                    if (data.code == 0) {
+
+
+                        if (data.result.length == 0) {
+                            str += '<div style="height: 50px;" class="flexCenter">没有数据</div>';
+                            $("#news").html(str);
+                            myScroll = new IScroll('#homePage', { probeType: 1, mouseWheel: true });
+                        }
+
+                        if (data.result.length != 0) {
+                            $.each(data.result, function (index, data) {
+                                var newDate = moment(data.time).format("YYYY-MM-DD hh:mm:ss");
+
+                                str += '<div style=" height: 5px;"></div>'
+                                str += '<div style="display: flex; align-items: center; justify-content: space-between;">'
+                                str += '<img class="image-item" src="' + (API_SERVER + data.image + '?Authorization=' + token.token) + '" alt="item">'
+                                str += '<div style="display: flex; flex-direction: column; flex: 1; text-align: end;">'
+                                str += '<div style="height: 10px;"></div>'
+                                str += '<span style="font-size: 14px;" id="news_' + data.id + '">' + data.title + '</span>'
+                                str += '<div style="height: 15px;"></div>'
+                                str += '<span style="color: #A4A4A4; font-size: 14px;">' + newDate + '</span>'
+                                str += '</div>'
+                                str += '</div>'
+
+                                str += '<div style=" height: 5px;"></div>'
+                                str += '<div class="line_app" style="width:100%; margin: 5px 0;"></div>'
+
+                                collect_id.push({ "id": data.id, "img": data.image, "title": data.title })
+
+                            })
+                            $('#news').html(str);
+                            myScroll = new IScroll('#homePage', { probeType: 1, mouseWheel: true });
+
+                            $.each(collect_id, function (index, data) {
+                                $(`#news_${data.id}`).unbind().click(function () {
+
+                                    pageShow("newsPage")
+                                    newsObj.showNews(data.id, data.img, data.title)
+
+                                })
+
+                            })
+
+                        }
+
+
+                    } else {
+                        msgPageObj.show(getStatusCode(data.code))
+                        msgObj.unShow()
+                    }
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+                },
+
+            })
+
+        }
+
+        this.first = function () {
+            var getToken = localStorage.getItem('token')
+            var token = JSON.parse(getToken)
+            $.ajax({
+                type: "post",
+                url: API_SERVER + `/v1/profile/math-coupon`,
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+                    loaderObj.unShow();
+                    if (data.code == 0) {
+                        msgPageObj.show(getStatusCode(data.code))
+
+                    }
+                    else {
+                        msgPageObj.show(getStatusCode(data.code))
+                        msgObj.unShow()
+                    }
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+                },
+            });
+        }
+        this.redempiontcode = function () {
+            var getToken = localStorage.getItem('token')
+            var token = JSON.parse(getToken)
+            var code = $("#code").val()
+            $.ajax({
+                type: "post",
+                url: API_SERVER + `/v1/profile/active-code/${code}`,
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                beforeSend: function (xmlhttprequest) { },
+                success: function (data) {
+                    loaderObj.unShow();
+                    if (data.code == 0) {
+                        msgPageObj.show(getStatusCode(data.code))
+                        msgObj.unShow()
+
+                    }
+                    else {
+                        msgPageObj.show(getStatusCode(data.code))
+                        msgObj.unShow()
+                    }
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+
+                },
+
+            });
+        }
+
+        this.call = function () {
+
+            $("#homePage").transition({
+                x: w
+            }, 0);
+            checkinObj.call();
+            getAnnouncement()
+            myScroll.refresh()
+        }
+
+        function loadList() {
+            myScroll = new IScroll('#homePage', { probeType: 1, mouseWheel: true });
+
+            myScroll.on('scroll', function () {
+                console.log("====>" + this.y);
+            });
+
+            myScroll.on('scrollEnd', function () {
+                console.log('====' + (new Date()));
+            });
+            myScroll.refresh();
+            // homeObj.news();
+        }
+
+    }
+</script>

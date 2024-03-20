@@ -1,0 +1,89 @@
+<div id="personal_information_real_namePage" style="background-color: white; position: absolute;">
+
+
+    <div id="personal_information_real_name_header"></div>
+    <div id="personal_information_real_name_scroll" style="width: 100%; overflow: hidden;">
+        <div id="personal_information_real_name_body"
+            style="display: flex; height: auto; align-items: center; justify-content: center; flex-direction: column; gap: 20px;">
+            <!-- start box -->
+            <div
+                style="display: flex; justify-content: flex-start; width: 90%;  align-items: flex-start; flex-direction: column;">
+                <div>
+                    真实姓名：
+                </div>
+                <div>
+                    请输入真实姓名
+                </div>
+            </div>
+            <div
+                style="display: flex; justify-content: center; width: 90%;  text-align: center; flex-direction: column;">
+                <div
+                    style="display: flex; background-color: red; width: 100%; justify-content: center; align-items: center;border-radius: 4px; padding: 10px 0; color: white;">
+
+                    提交
+                </div>
+                <div style="margin-top: 10px;">
+
+                    <div>为了您的隐私安全，信息再确认后将无法修改</div>
+                    <div style="color: #6C7BA8 ;">如需帮助，请联系 <span style="color: #E31D1A;">人工客服</span></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+
+    var personal_information_real_nameObj = new personal_information_real_name();
+    personal_information_real_nameObj.init();
+
+    function personal_information_real_name() {
+
+        this.init = function () {
+
+
+            setAllUILang("personal_information_real_name")
+            pageInit("personal_information_real_namePage");
+            headerInit("personal_information_real_name", "真实姓名")
+            $("#personal_information_real_name_scroll").css({ "width": w, "height": h - headH });
+
+
+
+            $('#personal_information_real_name_back').attr("src", picRes['back_arrow.png'])
+            $('#personal_information_real_name_header_right_right').html('<img  id="personal_information_real_name_phone" style="width:28px;">')
+            $('#personal_information_real_name_header_right_right').addClass("flexCenter")
+            $('#personal_information_real_name_phone').attr("src", picRes['personal_information_real_name.png'])
+
+            $('.rigth_arrow').attr("src", picRes['icon_arrow_rigth.png']).css("width", "10px");
+
+            $('#logout').click(function () {
+                loaderObj.show()
+                $("#body_content_team").css({ "display": "none" });
+
+
+                window.localStorage.removeItem('token');
+
+
+                setTimeout(() => {
+                    pageUnShow("personal_information_real_namePage")
+                    pageShow("loginPage");
+                    loaderObj.unShow();
+                    window.location.reload();
+                }, 200);
+                // window.location.reload();
+            })
+            setTimeout(() => {
+                myScroll = new IScroll('#personal_information_real_name_scroll', { probeType: 1, mouseWheel: true });
+            }, 300);
+
+        }
+
+
+
+        this.call = function () {
+            getpersonal_information_real_name()
+        }
+
+    }
+
+</script>

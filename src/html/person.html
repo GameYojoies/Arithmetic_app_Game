@@ -1,0 +1,40 @@
+<div class="menuPage bg-my" id="personPage"
+    style="position: absolute;background:#FAFAFA; background-repeat: no-repeat; background-size: cover;">
+    <div id="person_header">
+    </div>
+    <div id="scroller_person">
+        <div id="person_body" style="height: 800px; width: 100%; display: flex; align-items: center; flex-direction: column;">
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var personObj = new person();
+    personObj.init();
+
+    function person() {
+        var myScroll;
+        this.init = function () {
+            pageInit("personPage");
+            headerInit("person", "个人信息")
+            $("#person_Page").css({ "width": w, "height": h });
+            $("#scroller_person").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+           
+            myScroll = new IScroll('#scroller_person', { probeType: 1, mouseWheel: true });
+
+
+        }
+        this.call = function () {
+
+            $('#person_Page').transition({
+                x: w
+            }, 0);
+        }
+
+
+
+    }
+
+</script>

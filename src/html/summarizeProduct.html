@@ -1,0 +1,403 @@
+<style>
+    .leftText {
+        color: #8A8A8A;
+    }
+
+    .rightText {
+        color: #000000;
+    }
+
+    .boxSumProduct {
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 30px;
+    }
+</style>
+<div class="menuPage bg-my" id="summarize_productPage"
+    style="position: absolute; z-index: 10; background:#ffffff; background-repeat: no-repeat; background-size: cover; font-size: 16px; font-weight: bold;">
+    <div id="summarize_product_header">
+    </div>
+    <div id="scroller_summarize_product">
+        <div id="summarize_product_body"
+            style="width: 100%; display: flex; align-items: center; flex-direction: column;  background: #FAFAFA;">
+            <div style="height: 30px;"></div>
+            <div class="boxSumProduct">
+                <span class=" leftText">产品类型</span>
+                <span class="rightText" id="productname_summarize">算力+教育系列</span>
+
+            </div>
+
+            <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class=" leftText">项目周期</span>
+                <div>
+                    <span class="rightText" id="debate_summarize">0</span><span>天</span>
+                </div>
+            </div>
+
+            <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class=" leftText">起投金额</span>
+                <div>
+                    <span class="rightText" id="startRMB_summarize">0</span><span>元</span>
+                </div>
+            </div>
+
+            <!-- <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class=" leftText">日收益</span>
+                <div>
+                    <span class="rightText" id="dayIncome_summarize">0</span><span>%</span>
+                </div>
+            </div> -->
+
+            <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class="leftText">总收益</span>
+                <div>
+                    <span class="rightText" id="totalRMB_summarize">0</span><span>元</span>
+                </div>
+
+            </div>
+
+            <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class="leftText">结算模式</span>
+                <span class="rightText" id="name_product_sum">每日返息</span>
+            </div>
+
+            <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class="leftText">龙力值</span>
+                <span class="rightText" id="activityRMB_summarize">0.5</span>
+            </div>
+
+            <!-- <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class="leftText">复投方式</span>
+                <span class="rightText"><span id="ratio_summarize"></span> 倍复投</span>
+            </div> -->
+
+            <div style="height: 10px;"></div>
+            <hr style="border: 1px solid #E4E4E4; background: #E4E4E4; width: 90%; margin:  0 auto;">
+
+
+
+            <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class="leftText">产品金额</span>
+                <span class="rightText"><span id="startRMB_summarize2"></span>元</span>
+            </div>
+
+
+            <div style="height: 10px;"></div>
+            <div id="deductingShowOff" class="boxSumProduct">
+                <span class="leftText">签到钱包抵扣</span>
+                <span style="color: #EA4644;">-<span style="color: #EA4644;" id="deductingForCut"></span></span>
+            </div>
+
+
+
+            <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class="leftText">支付总额</span>
+                <span style="color: #EA4644;">-<span style="color: #EA4644;" id="startRMB_summarize3"></span></span>
+
+            </div>
+
+
+
+            <div style="height: 10px;"></div>
+            <div class="boxSumProduct">
+                <span class="leftText">支付方式</span>
+                <span class="leftText" style="color: #000;">算力余额(<span id="balanceRMB_summarize3"></span>)</span>
+
+            </div>
+
+
+            <div style="height: 20px;"></div>
+            <div id="btn_summarizeProdut"
+                style="width: 90% ;margin: 0 auto; height: 50px; border-radius: 8px; display: flex; justify-content: center; align-items: center; background: linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%);">
+                <span style="color: #ffffff;"> 提交</span>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+        var summarize_productObj = new summarize_product();
+        summarize_productObj.init();
+        function summarize_product() {
+            var myScroll;
+            var investData = null;
+            var deducted;
+            this.init = function () {
+                pageInit("summarize_productPage");
+                headerInit("summarize_product", "订单详情")
+
+                $("#scroller_summarize_product").css({
+                    "width": w,
+                    "height": h - headH,
+                    "overflow": "hidden"
+
+                });
+                myScroll = new IScroll('#scroller_summarize_product', {
+                    probeType: 1,
+                    mouseWheel: true
+                });
+
+            }
+            this.call = function (deductingContent) {
+                $('#summarize_product_Page').transition({
+                    x: w
+                }, 0);
+
+
+
+                if (deducted == false) {
+                    $("#deductingShowOff").css({ "display": "none" });
+                    $("#startRMB_summarize3").text(parseFloat(investData).toFixed(2));
+                    console.log("-----------deducting = false---------");
+                } else if (deducted == true) {
+
+
+
+                    if (investData < deductingContent) {
+                        var getMath = investData - investData;
+                        console.log("-----------签到钱包抵扣----1-----", getMath);
+                        var deductingForCut = investData;
+                        console.log("-----------签到钱包抵扣-----2----", deductingForCut);
+
+                    } else {
+                        var getMath = Math.floor(investData - deductingContent);
+                        console.log("-----------签到钱包抵扣-----3----", getMath);
+                        var deductingForCut = investData - getMath;
+                        console.log("-----------签到钱包抵扣-----4----", deductingForCut);
+
+                    }
+
+                    $("#deductingShowOff").css({ "display": "flex" });
+                    $("#startRMB_summarize3").text(parseFloat(getMath).toFixed(2));
+                    $("#deductingForCut").text(parseFloat(deductingForCut).toFixed(2));
+                    console.log("-----------deducting = true---------");
+                }
+
+
+                console.log("-----------签到钱包---------", investData, deductingContent, deducted);
+
+            }
+
+
+            this.getDataBuy = function (id, name1, name2, invest, earn, activity, ratio, dayIncomeS, cycle, deducting) {
+
+                investData = invest;
+                deducted = deducting;
+
+
+
+
+                // var deductingMath = deductingContent1
+
+
+                // console.log("-----------goumai,,,判断---------",deductingContent1);
+                // if (deducting == false) {
+                //     $("#deductingShowOff").css({ "display": "none" });
+                //     console.log("-----------deducting = false---------");
+                // } else if (deducting == true) {
+                //     $("#deductingShowOff").css({ "display": "block" });
+                //     console.log("-----------deducting = true---------");
+                // }
+
+
+
+                $("#productname_summarize").text(name1)
+                if (name2 == '收益到期返') {
+                    $("#name_product_sum").text('收益到期返');
+                } else {
+                    var dayGetName2 = earn / cycle;
+                    console.log("-----------dayGetName2---------", dayGetName2);
+                    $("#name_product_sum").text('每日收益' + dayGetName2 + '元');
+                }
+
+                // $("#name_product_sum").text(name2)
+                // $("#startRMB_summarize, #startRMB_summarize2, #startRMB_summarize3").text(parseFloat(invest).toFixed(2))
+                $("#startRMB_summarize, #startRMB_summarize2").text(parseFloat(invest).toFixed(2))
+                $("#ratio_summarize").text(ratio)
+                $("#totalRMB_summarize").text(earn)
+                $("#activityRMB_summarize").text(activity)
+                $("#debate_summarize").text(cycle)
+
+
+                // $("#dayIncome_summarize").text(dayIncomeS);
+                // console.log("-----------日收益--下一页---------", dayIncomeS);
+                walletObj.getWallet()
+
+                $('#btn_summarizeProdut').unbind().click(function () {
+                    msgObj.show('您确定要购买吗' + `<br>` + `<br>` + (name), function () {
+                        msgObj.unShow();
+                        loaderObj.show();
+                        // summarize_productObj.go2FA(id)
+                        BuyProduct(id)
+                    });
+                })
+
+            }
+            // this.go2FA = function (id) {
+            //     get2FATrade(id)
+            //     function get2FATrade(id) {
+            //         var ID = id
+            //         var Token = localStorage.getItem('token')
+            //         var obj = JSON.parse(Token);
+            //         $.ajax({
+            //             type: "get",
+            //             url: API_SERVER + "/v1/twoFA",
+            //             headers: {
+            //                 'Authorization': 'Bearer ' + obj.token
+            //             },
+            //             contentType: "application/json",
+            //             dataType: "json",
+            //             async: true,
+            //             timeout: 100000,
+            //             success: function (data) {
+            //                 loaderObj.show();
+            //                 if (data.result.status == false) {
+            //                     loaderObj.unShow();
+            //                     msgObj.show('您尚未开启交易密码', function () {
+            //                         msgObj.unShow()
+            //                         settingObj.call()
+            //                         pageUnShow("summarize_productPage")
+            //                         pageShow('settingPage')
+
+            //                     })
+
+            //                 }
+
+            //                 if (data.result.status == true) {
+            //                     loaderObj.unShow();
+            //                     msgObj.show(
+            //                         '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width: 100%;"><div id="Trade2FA" style="margin-bottom:20px">请输入交易密码</div><input style="width:100%;height:30px;font-size: 19px;" id="Trade2FA_Input" type="password" placeholder="请输入六位密码数字" /></div>', function () {
+            //                             msgObj.unShow();
+            //                             loaderObj.show();
+            //                             verify2faTrade(ID)
+
+            //                         }, function () {
+            //                             msgObj.unShow();
+            //                             pageShow("summarize_productPage")
+
+            //                         });
+
+            //                     $("#Trade2FA_Input").keypress(function (event) {
+            //                         var ew = event.which;
+            //                         if (48 <= ew && ew <= 57)
+            //                             return true;
+            //                         return false;
+            //                     });
+            //                 }
+
+            //             },
+            //             error: function (xmlhttprequest, error) {
+            //                 loaderObj.unShow();
+            //                 msgPageObj.show(NSLang("sys.serverError"))
+
+            //             }
+            //         });
+
+            //     }
+            //     function moveToNext(currentInput) {
+            //         var maxLength = parseInt(currentInput.attr("maxlength"), 10);
+            //         var currentLength = currentInput.val().length;
+            //         if (currentLength === maxLength) {
+            //             currentInput.next(".code-input3").focus();
+            //         }
+            //     }
+            //     function verify2faTrade(get_id) {
+            //         var getToken = localStorage.getItem('token')
+            //         var token = JSON.parse(getToken)
+            //         var InputPassword = $("#Trade2FA_Input").val()
+            //         var mData = {
+            //             "password": InputPassword,
+            //         }
+            //         $.ajax({
+            //             type: "post",
+            //             url: API_SERVER + "/v1/twoFA/verify",
+            //             headers: {
+            //                 'Authorization': 'Bearer ' + token.token,
+            //             },
+            //             data: JSON.stringify(mData),
+            //             contentType: "application/json",
+            //             dataType: "json",
+            //             async: true,
+            //             timeout: 100000,
+            //             beforeSend: function (xmlhttprequest) { },
+            //             success: function (data) {
+
+            //                 if (data.code == 0) {
+            //                     tradeObj.cleanInputTrade();
+            //                     msgObj.unShow()
+            //                     setTimeout(() => {
+            //                         BuyProduct(get_id)
+            //                     }, 500)
+
+            //                 }
+            //                 else {
+            //                     loaderObj.unShow();
+            //                     tradeObj.cleanInputTrade();
+            //                     msgPageObj.show(getStatusCode(data.code))
+            //                 }
+            //             },
+            //             error: function (xmlhttprequest, error) {
+            //                 tradeObj.cleanInputTrade();
+            //                 loaderObj.unShow();
+            //                 msgPageObj.show(NSLang("sys.serverError"))
+
+            //             },
+
+            //         });
+            //     }
+
+            // }
+
+            function BuyProduct(id) {
+                loaderObj.show();
+                var Token = localStorage.getItem("token");
+                var obj = JSON.parse(Token);
+                mData = {
+                    productId: id,
+                };
+                $.ajax({
+                    type: "post",
+                    url: API_SERVER + "/v1/products",
+                    data: JSON.stringify(mData),
+                    contentType: "application/json",
+                    headers: {
+                        Authorization: "Bearer " + obj.token,
+                    },
+                    async: true,
+                    timeout: 100000,
+                    success: function (data) {
+                        loaderObj.unShow();
+                        if (data.code == 0) {
+                            msgPageObj.show("恭喜您！产品购买成功！", function () { })
+                            walletObj.getWallet();
+                            mainObj.menutrade();
+                        } else {
+                            msgPageObj.show(getStatusCode(data.code), function () { })
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        loaderObj.unShow();
+                        msgPageObj.show(NSLang("sys.serverError"))
+
+                    },
+                });
+            }
+        }
+    </script>

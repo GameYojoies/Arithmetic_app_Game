@@ -1,0 +1,982 @@
+<style>
+    .block-main-red {
+        height: 100px;
+        width: 100%;
+        border-radius: 10px;
+        background: #FFF;
+        box-shadow: 0px 0px 8px 0px rgba(92, 122, 181, 0.25);
+        display: flex;
+        align-items: center;
+        position: relative;
+        justify-content: space-between;
+
+    }
+
+    .block-main-in {
+        margin-left: 15px;
+        border-radius: 5px;
+        background: var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%));
+        width: 130px;
+        height: 70px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+
+    .btn-red {
+        background: var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%));
+        border-radius: 10px;
+        color: white;
+        width: 68px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .btn-white {
+        border-radius: 10px;
+        border: 1px solid #E31D1A;
+        color: #E31D1A;
+        margin-right: 20px;
+        width: 68px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        font-weight: bold;
+
+    }
+
+    .block-main-white {
+        height: 100px;
+        width: 100%;
+        border-radius: 10px;
+        background: #FFF;
+        box-shadow: 0px 0px 8px 0px rgba(92, 122, 181, 0.25);
+        display: flex;
+        align-items: center;
+        position: relative;
+        justify-content: space-between;
+
+    }
+
+    .block-main-white-in {
+        margin-left: 15px;
+        border-radius: 5px;
+        border: 1px solid #f5514e;
+        width: 130px;
+        height: 70px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-right: 15px;
+        font-size: 16px;
+        font-weight: bold;
+        background: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(245, 81, 78, 0.3));
+
+    }
+
+    .img-assets {
+        width: 20px;
+        height: 20px;
+    }
+
+    .block-btn-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 200px;
+        gap: 20px;
+
+    }
+</style>
+
+<div class="menuHeader" id="walletHeader"
+    style="position: absolute;display: flex;justify-content: center;align-items: center;font-size: 24px; font-weight: 700; background: transparent;">
+    <span id="walletHeaderBody">资产</span>
+    <img id="go_assets" style="height: 23px;position: absolute;right: 22px;">
+</div>
+<div class="menuPage bg-my" id="walletPage" style="position: absolute;overflow: hidden; background:#F8F8F8;">
+
+    <div>
+
+        <div style="width: 100%; display: flex; align-items: center; flex-direction: column;">
+            <div
+                style="display: flex; width: 95%; margin:  0 auto; justify-content: center; gap: 1px; flex-direction: column;">
+                <!-- 算力金额 -->
+                <div class="block-main-red" style="height: 120px;">
+                    <!-- <img class="info_assets" style="height: 16px;position: absolute;right: 7px;top: 5px;"> -->
+                    <div class="block-main-in" style="font-weight: bold;">
+                        <img class="bg_assets" style="position: absolute;height: 80px;top: -8px;left: -1px;">
+                        <div class="flexCenter">
+                            <img src="./pic/wallet/coins.png" style="height: 30px;">
+                            <span style="color: white; font-size: 16px;"> 算力金额</span>
+                        </div>
+                        <div style="height: 5px;"></div>
+                        <div class="flexCenter">
+                            <span style="color: white; font-size: 16px;"> ￥ <span id="w_show_balance"></span></span>
+
+                        </div>
+
+                    </div>
+
+                    <div
+                        style="width: 200px;height: auto;display: flex; flex-direction: column; justify-content: left; align-items: start;">
+                        <div class="block-btn-text" style="width: 100%;">
+                            <div class="btn-red" id="go_topup_page">
+                                <span> 充值</span>
+                            </div>
+                            <div class="btn-white" id="go_transfer_page">
+                                <span style="color: #E31D1A;"> 转账</span>
+
+                            </div>
+                        </div>
+                        <div class="block-btn-text" style="width: 100%; margin-top: 15px;">
+                            <div class="btn-red withdraw-button" id="go_withdraw6">
+                                <span> 提现</span>
+                            </div>
+                            <div class="btn-white" id="go_product_history6">
+                                <span style="color: #E31D1A;"> 记录</span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- 算力金额 ————————-->
+                <div style="height: 10px;"></div>
+
+                <div class="block-main-red">
+                    <!-- <img class="info_assets" style=" height: 16px;position: absolute;right: 7px;top: 5px;"> -->
+                    <div class="block-main-in" style="font-weight: bold;">
+                        <img class="bg_assets" style="position: absolute;height: 80px;top: -8px;left: -1px;">
+                        <div class="flexCenter" style="gap: 5px; ">
+                            <img src="./pic/wallet/comput.png" style="height: 20px;">
+                            <span style="color: white; font-size: 16px;"> 算力券</span>
+                        </div>
+
+                        <div style="height: 5px;"></div>
+                        <div class="flexCenter">
+                            <span style="color: white; font-size: 16px;"> ￥ <span id="w_show_balance2"></span></span>
+
+                        </div>
+
+                    </div>
+                    <div class="block-btn-text"
+                        style="justify-content: start; display: flex; flex-direction: column; align-items: start;">
+                        <div class="btn-red" style="margin-left: 9px;" id="go_topup_page2">
+                            <span> 兑换</span>
+                        </div>
+
+                        <div style="width: 100%;position: relative;" class="flexSpac">
+                            <div
+                                style="position: relative; margin-left: 9px; width: 105px; overflow: hidden; height: 16px; border-radius: 10px;border: 1px solid #F83D3D;background: #FCA5AF;">
+                                <div id="myBar_activity" style="background-color: #E31D1A;border-radius: 10px; ">
+                                </div>
+                                <span id="loader_text_activity"
+                                    style="font-size: 14px;font-weight: 600;color: #FFF; position: absolute; right: 0; top: 0;">
+                                    0</span>
+                            </div>
+                            <span style="color: #8D959B; padding:0 20px;">龙力值</span>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div style="height: 10px;"></div>
+                <div class="block-main-white">
+                    <div class="block-main-white-in">
+                        <div class="flexCenter" style="gap: 5px;">
+                            <img src="./pic/wallet/product.png" class="img-assets">
+                            <span> 产品收益</span>
+                        </div>
+                        <div style="height: 5px;"></div>
+                        <div class="flexCenter">￥<span id="show_w_balance1"> </span></div>
+                    </div>
+                    <div class="block-btn-text">
+                        <div class="btn-red withdraw-button" id="go_withdraw1">
+                            <span> 提现</span>
+                        </div>
+                        <div class="btn-white" id="go_product_history1">
+                            <span style="color: #E31D1A;"> 记录</span>
+
+                        </div>
+                    </div>
+                </div>
+                <div style="height: 10px;"></div>
+                <div class="block-main-white">
+                    <div class="block-main-white-in">
+                        <div class="flexCenter" style="gap: 5px;">
+                            <img src="./pic/wallet/referral.png" class="img-assets">
+                            <span> 推荐佣金</span>
+                        </div>
+                        <div style="height: 5px;"></div>
+                        <div class="flexCenter">￥<span id="show_w_balance2"></span></div>
+                    </div>
+                    <div class="block-btn-text">
+                        <div class="btn-red withdraw-button" id="go_withdraw2">
+                            <span> 提现</span>
+                        </div>
+                        <div class="btn-white" id="go_product_history2">
+                            <span style="color: #E31D1A;"> 记录</span>
+
+                        </div>
+                    </div>
+                </div>
+                <div style="height: 10px;"></div>
+                <div class="block-main-white">
+                    <div class="block-main-white-in">
+                        <div class="flexCenter" style="gap: 5px;">
+                            <img src="./pic/wallet/network.png" class="img-assets">
+                            <span> 会员等级奖励</span>
+                        </div>
+                        <div style="height: 5px;"></div>
+                        <div lass="flexCenter">￥<span id="show_w_balance3"></span></div>
+                    </div>
+                    <div class="block-btn-text">
+                        <div class="btn-red withdraw-button" id="go_withdraw3">
+                            <span> 提现</span>
+                        </div>
+                        <div class="btn-white" id="go_product_history3">
+                            <span style="color: #E31D1A;"> 记录</span>
+
+                        </div>
+                    </div>
+                </div>
+                <div style="height: 10px;"></div>
+                <div class="block-main-white">
+                    <div class="block-main-white-in">
+                        <div class="flexCenter" style="gap: 5px;">
+                            <img src="./pic/wallet/energy.png" class="img-assets">
+                            <span> 工资</span>
+                        </div>
+                        <div style="height: 5px;"></div>
+                        <div lass="flexCenter">￥<span id="show_w_balance4"> </span></div>
+                    </div>
+                    <div class="block-btn-text">
+                        <div class="btn-red withdraw-button" id="go_withdraw4">
+                            <span> 提现</span>
+                        </div>
+                        <div class="btn-white" id="go_product_history4">
+                            <span style="color: #E31D1A;"> 记录</span>
+
+                        </div>
+                    </div>
+                </div>
+                <div style="height: 10px;"></div>
+                <div class="block-main-white">
+                    <div class="block-main-white-in">
+                        <div class="flexCenter" style="gap: 5px;">
+                            <img src="./pic/wallet/icons5.png" class="img-assets">
+                            <span> 会议奖励</span>
+                        </div>
+                        <div style="height: 5px;"></div>
+                        <div lass="flexCenter">￥<span id="show_w_balance5"> </span></div>
+                    </div>
+                    <div class="block-btn-text">
+                        <div class="btn-red withdraw-button" id="go_withdraw5">
+                            <span> 提现</span>
+                        </div>
+                        <div class="btn-white" id="go_product_history5">
+                            <span style="color: #E31D1A;"> 记录</span>
+
+                        </div>
+                    </div>
+                </div>
+                <div style="height: 10px;"></div>
+                <div class="block-main-white">
+                    <div class="block-main-white-in">
+                        <div class="flexCenter" style="gap: 5px;">
+                            <img src="./pic/wallet/meeting.png" class="img-assets">
+                            <span> 签到钱包</span>
+                        </div>
+                        <div style="height: 5px;"></div>
+                        <div lass="flexCenter">￥<span id="show_w_balance61"></span></div>
+                    </div>
+                    <div class="block-btn-text">
+                        <!-- <div class="btn-red withdraw-button" id="go_withdraw61">
+                            <span> 提现</span>
+                        </div> -->
+                        <div class="btn-white" id="go_product_history61">
+                            <span style="color: #E31D1A;"> 记录</span>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div style="height: 30px;"></div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    var walletObj = new wallet();
+    walletObj.init();
+
+    function wallet() {
+
+        var myScroll;
+
+
+        this.init = function () {
+
+            $("#walletHeader").css({ "width": "100%", "height": headH, "left": (-1.0) * w, "top": 0 });
+            $("#walletPage").css({ "width": w, "height": h - headH - menuH + 20, "position": "absolute", "left": (-1.0) * w, "top": headH });
+
+            myScroll = new IScroll('#walletPage', { probeType: 1, mouseWheel: true });
+            loadList();
+
+            $('#go_assets').attr("src", picRes['go_assets.png'])
+            $('.bg_assets').attr("src", picRes['bg_assets.png'])
+            $('.info_assets').attr("src", picRes['info_assets.png'])
+
+            $("#go_topup_page, #go_topup_page2").unbind().click(function () {
+                pageShow("topupPage")
+                topupObj.getBankAll();
+                topupObj.call();
+            })
+
+
+
+            //    go to earn wallet
+            $(".withdraw-button").unbind().click(function () {
+                // if (isVerified) {
+                // console.log(isVerified,'+------------------实名参数1-------------+');
+                var index = $(this).attr("id").replace("go_withdraw", "");
+                earnObj.wallgetType(parseInt(index) + 19);
+                earnObj.getFinancialPayments()
+                walletObj.getWallet(parseInt(index) + 19);
+                pageShow("earnPage");
+                // } else {
+                //     msgPageObj.show('您还未实名认证，请先进行实名认证。')
+                // }
+            });
+
+            //加入实名认证判断---------------------------------------------------------------------------
+            $("#go_withdraw1").unbind().click(function () {
+                // 在点击事件中使用全局变量的值
+                verified_wallet().then(function (result) {
+                    if (result) {
+                        console.log(result, '+------------------实名参数2-------------+');
+                        pageShow("earnPage");
+                        earnObj.wallgetType(20);
+                        earnObj.call();
+                        walletObj.getWallet(20);
+                    } else {
+                        msgPageObj.show('您还未实名认证，请先进行实名认证。');
+                    }
+                }).catch(function (error) {
+                    console.error('出现错误:', error);
+                    // 根据需要处理错误
+                });
+            });
+            $("#go_withdraw2").unbind().click(function () {
+                verified_wallet().then(function (result) {
+                    if (result) {
+                        console.log(result, '+------------------实名参数2-------------+');
+                        pageShow("earnPage");
+                        earnObj.wallgetType(21);
+                        earnObj.call();
+                        walletObj.getWallet(21);
+                    } else {
+                        msgPageObj.show('您还未实名认证，请先进行实名认证。');
+                    }
+                }).catch(function (error) {
+                    console.error('出现错误:', error);
+                    // 根据需要处理错误
+                });
+            });
+
+            $("#go_withdraw3").unbind().click(function () {
+                verified_wallet().then(function (result) {
+                    if (result) {
+                        pageShow("earnPage");
+                        earnObj.wallgetType(26);
+                        earnObj.call();
+                        walletObj.getWallet(26);
+                    } else {
+                        msgPageObj.show('您还未实名认证，请先进行实名认证。');
+                    }
+                }).catch(function (error) {
+                    console.error('出现错误:', error);
+                    // 根据需要处理错误
+                });
+            });
+
+            $("#go_withdraw4").unbind().click(function () {
+                verified_wallet().then(function (result) {
+                    if (result) {
+                        pageShow("earnPage");
+                        earnObj.wallgetType(23);
+                        earnObj.call();
+                        walletObj.getWallet(23);
+                    } else {
+                        msgPageObj.show('您还未实名认证，请先进行实名认证。');
+                    }
+                }).catch(function (error) {
+                    console.error('出现错误:', error);
+                    // 根据需要处理错误
+                });
+            });
+
+            $("#go_withdraw5").unbind().click(function () {
+                verified_wallet().then(function (result) {
+                    if (result) {
+                        pageShow("earnPage");
+                        earnObj.wallgetType(24);
+                        earnObj.call();
+                        walletObj.getWallet(24);
+                    } else {
+                        msgPageObj.show('您还未实名认证，请先进行实名认证。');
+                    }
+                }).catch(function (error) {
+                    console.error('出现错误:', error);
+                    // 根据需要处理错误
+                });
+            });
+
+            $("#go_withdraw61").unbind().click(function () {
+                verified_wallet().then(function (result) {
+                    if (result) {
+                        pageShow("earnPage");
+                        // $("#earn_convert").removeClass("selected-tab");
+                        earnObj.wallgetType(25);
+                        earnObj.call();
+                        walletObj.getWallet(25);
+                    } else {
+                        msgPageObj.show('您还未实名认证，请先进行实名认证。');
+                    }
+                }).catch(function (error) {
+                    console.error('出现错误:', error);
+                    // 根据需要处理错误
+                });
+            });
+
+            $("#go_withdraw6").unbind().click(function () {
+                verified_wallet().then(function (result) {
+                    if (result) {
+                        pageShow("earnPage");
+                        earnObj.wallgetType(30);
+                        earnObj.call();
+                        walletObj.getWallet(30);
+                    } else {
+                        msgPageObj.show('您还未实名认证，请先进行实名认证。');
+                    }
+                }).catch(function (error) {
+                    console.error('出现错误:', error);
+                    // 根据需要处理错误
+                });
+            });
+            //加入实名认证判断---------------------------------------------------------------------------
+
+            // $("#go_withdraw2").unbind().click(function () {
+            //     pageShow("earnPage")
+            //     earnObj.wallgetType(21)
+            //     earnObj.call()
+            //     walletObj.getWallet(21)
+            // })
+            // $("#go_withdraw3").unbind().click(function () {
+            //     pageShow("earnPage")
+            //     earnObj.wallgetType(22)
+            //     earnObj.call()
+            //     walletObj.getWallet(22)
+            // })
+            // $("#go_withdraw4").unbind().click(function () {
+            //     pageShow("earnPage")
+            //     earnObj.wallgetType(23)
+            //     earnObj.call()
+            //     walletObj.getWallet(23)
+            // })
+            // $("#go_withdraw5").unbind().click(function () {
+            //     pageShow("earnPage")
+            //     earnObj.wallgetType(24)
+            //     earnObj.call()
+            //     walletObj.getWallet(24)
+            // })
+            // $("#go_withdraw61").unbind().click(function () {
+            //     pageShow("earnPage")
+
+            //     // $("#earn_convert").removeClass("selected-tab");
+            //     earnObj.wallgetType(25)
+            //     earnObj.call()
+            //     walletObj.getWallet(25)
+            // })
+            // $("#go_withdraw6").unbind().click(function () {
+            //     pageShow("earnPage")
+            //     earnObj.wallgetType(30)
+            //     earnObj.call()
+            //     walletObj.getWallet(30)
+            // })
+
+            $("#go_product_history1").unbind().click(function () {
+                pageShow("wallet_product_historyPage")
+
+                wallet_product_historyObj.getHistoryWithdraw(20)
+                walletObj.getWallet(20)
+            })
+            $("#go_product_history2").unbind().click(function () {
+                pageShow("wallet_product_historyPage")
+
+                wallet_product_historyObj.getHistoryWithdraw(21)
+                walletObj.getWallet(21)
+            })
+            $("#go_product_history3").unbind().click(function () {
+                pageShow("wallet_product_historyPage")
+
+                wallet_product_historyObj.getHistoryWithdraw(26)
+                walletObj.getWallet(26)
+            })
+            $("#go_product_history4").unbind().click(function () {
+                pageShow("wallet_product_historyPage")
+                wallet_product_historyObj.getHistoryWithdraw(23)
+                walletObj.getWallet(23)
+            })
+            $("#go_product_history5").unbind().click(function () {
+                pageShow("wallet_product_historyPage")
+                wallet_product_historyObj.getHistoryWithdraw(24)
+                walletObj.getWallet(24)
+            })
+
+            $("#go_product_history61").unbind().click(function () {
+                pageShow("wallet_product_historyPage")
+                wallet_product_historyObj.getHistoryWithdraw(25)
+                walletObj.getWallet(25)
+            })
+            $("#go_product_history6").unbind().click(function () {
+                pageShow("wallet_product_historyPage")
+                wallet_product_historyObj.getHistoryWithdraw(30)
+                walletObj.getWallet(30)
+            })
+
+            $("#go_transfer_page").unbind().click(function () {
+                msgPageObj.show('功能尚未开放', function () {
+                    msgPageObj.unShow()
+                });
+                //pageShow("transferPage")
+                // msgPageObj.show('功能尚未开放', function () {
+                //     msgPageObj.unShow()
+                // });
+            })
+
+            $("#go_assets").unbind().click(function () {
+                pageShow("transaction_hisPage")
+                $("#content_today_history").css({ "display": "none" });
+                transaction_hisObj.getHistoryTransaction('All')
+            })
+
+            $("#go_topup_page2").unbind().click(function () {
+                Recieve_DSFCIPS()
+            })
+        }
+
+
+        function Recieve_DSFCIPS() {
+            var getToken = window.localStorage.getItem("token");
+            var token = JSON.parse(getToken);
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/profile/points',
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+
+                    amountDSF = data.result.debt;
+                    console.log(amountDSF, '+++++++++++++++++=amountDSF==+++++++++++++++++++++')
+
+                    // $("#amountDSF").text(amountDSF);
+                    // $("#w_show_balance2").text(amountDSF);
+
+
+                    if (amountDSF >= 0) {
+
+                        msgObj.show("确定领取剩余算力券吗？",
+                            function () {
+                                loaderObj.show();
+                                msgObj.unShow();
+                                // Send a POST request to the server
+                                var getToken = window.localStorage.getItem("token");
+                                var token = JSON.parse(getToken);
+                                $.ajax({
+                                    type: 'POST',
+                                    url: API_SERVER + '/v1/debtSettlementFund/apply',
+                                    headers: {
+                                        'Authorization': 'Bearer ' + token.token,
+                                    },
+                                    data: JSON.stringify({
+                                        type: 30,
+                                        amount: amountDSF// ใช้ตัวแปร amount ที่อัพเดตแล้ว
+                                    }),
+                                    contentType: 'application/json',
+                                    async: true,
+                                    timeout: 100000,
+                                    success: function (data) {
+                                        loaderObj.unShow();
+                                        if (data.code == 0) {
+                                            msgPageObj.show('领取成功')
+                                        }
+                                        else {
+                                            msgPageObj.show(getStatusCode(data.code))
+                                        }
+                                        setTimeout(function () {
+                                            getAllPoints()
+                                        }, 1000);
+
+                                    },
+                                    error: function (xmlhttprequest, error) {
+                                        loaderObj.unShow();
+                                        msgPageObj.show(NSLang('sys.serverError'))
+                                    },
+                                });
+                                msgPageObj.unShow();
+                            })
+                    }
+                }
+            });
+        }
+
+        //备用获取算力卷参数
+        // function get_DSFCIPS() {
+        //     var getToken = window.localStorage.getItem("token");
+        //     var token = JSON.parse(getToken);
+        //     $.ajax({
+        //         type: 'get',
+        //         url: API_SERVER + '/v1/profile/points',
+        //         headers: {
+        //             'Authorization': 'Bearer ' + token.token,
+        //         },
+        //         async: true,
+        //         timeout: 100000,
+        //         success: function (data) {
+
+        //             if (data.code == 0) {
+
+        //                 amountDSF = data.result.debt;
+        //                 console.log(amountDSF, '+++++++++++++++++=amountDSF==+++++++++++++++++++++')
+        //                 $("#w_show_balance2").html(amountDSF);
+
+        //                 loadingBar((Number(data.result.activity) / Number(data.result.debtActivity) * 10000));
+
+        //             }
+
+        //         }
+        //     });
+        // }
+
+        this.call = function () {
+            $("#walletPage").transition({
+                x: w
+            }, 0);
+            $("#walletHeader").transition({
+                x: w
+            }, 0);
+
+            walletObj.getWallet()
+            getAllPoints();
+            // get_DSFCIPS();
+            getLimitWithdraw();
+            myScroll.refresh()
+        }
+
+        this.getWallet = function (type) {
+            var getToken = window.localStorage.getItem("token");
+            var token = JSON.parse(getToken);
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/wallet',
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+
+                    // $("#w_show_balance, #w_show_balance2, #topup_money").text(parseFloat(data.result[6].balance).toFixed(2))
+                    $("#w_show_balance, #topup_money, #balanceRMB_summarize3").text(parseFloat(data.result[7].balance).toFixed(2))
+                    $("#show_w_balance1,#balanceRMB_summarize3_2").text(parseFloat(data.result[0].balance).toFixed(2))
+                    $("#show_w_balance2").text(parseFloat(data.result[1].balance).toFixed(2))
+                    $("#show_w_balance3").text(parseFloat(data.result[6].balance).toFixed(2))
+                    $("#show_w_balance4").text(parseFloat(data.result[3].balance).toFixed(2))
+                    $("#show_w_balance5").text(parseFloat(data.result[4].balance).toFixed(2))
+                    $("#show_w_balance61").text(parseFloat(data.result[5].balance).toFixed(2));
+                    $("#show_w_balance6").text(parseFloat(data.result[7].balance).toFixed(2))
+
+
+                    var deductingContent = parseFloat(data.result[5].balance).toFixed(2);
+                    console.log("deductingContent:", deductingContent); // 输出值到控制台
+                    summarize_productObj.call(deductingContent);
+
+
+
+                    var totalBalance = 0;
+                    for (var i = 0; i < 8; i++) {
+                        var currentBalance = parseFloat(data.result[i].balance);
+                        totalBalance += currentBalance;
+
+                    }
+                    $("#show_w_balance").text(totalBalance.toFixed(2));
+                    $("#show_earn_balance").text(totalBalance.toFixed(2));//显示到资产总额
+
+
+
+                    if (type == 20) {
+                        $("#earn_header_right_body").text("产品收益提现")
+                        $("#wallet_product_history_header_right_body, #wallet_product_detail_header_right_body").text("产品收益记录")
+                        $("#earn_show_balance").text(parseFloat(data.result[0].balance).toFixed(2))
+                    }
+                    if (type == 21) {
+                        $("#earn_header_right_body").text("推荐佣金提现")
+                        $("#wallet_product_history_header_right_body, #wallet_product_detail_header_right_body").text("推荐佣金记录")
+                        $("#earn_show_balance").text(parseFloat(data.result[1].balance).toFixed(2))
+                    }
+                    if (type == 26) {
+                        $("#earn_header_right_body").text("会员等级奖励")
+                        $("#wallet_product_history_header_right_body, #wallet_product_detail_header_right_body").text("会员等级奖励")
+                        $("#earn_show_balance").text(parseFloat(data.result[6].balance).toFixed(2))
+                    }
+                    if (type == 23) {
+                        $("#earn_header_right_body").text("工资提现")
+                        $("#wallet_product_history_header_right_body, #wallet_product_detail_header_right_body").text("工资记录")
+                        $("#earn_show_balance").text(parseFloat(data.result[3].balance).toFixed(2))
+                    }
+                    if (type == 24) {
+                        $("#earn_header_right_body").text("会议奖励提现")
+                        $("#wallet_product_history_header_right_body, #wallet_product_detail_header_right_body").text("会议奖励记录")
+                        $("#earn_show_balance").text(parseFloat(data.result[4].balance).toFixed(2))
+                    }
+                    if (type == 25) {
+                        $("#earn_header_right_body").text("签到钱包提现")
+                        $("#wallet_product_history_header_right_body, #wallet_product_detail_header_right_body").text("签到钱包记录")
+                        $("#earn_show_balance").text(parseFloat(data.result[5].balance).toFixed(2))
+                    }
+                    if (type == 30) {
+                        $("#earn_header_right_body").text("算力金额提现")
+                        $("#wallet_product_history_header_right_body, #wallet_product_detail_header_right_body").text("算力金额记录")
+                        $("#earn_show_balance").text(parseFloat(data.result[7].balance).toFixed(2))
+                    }
+
+                },
+
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+
+                },
+            })
+        }
+
+        function getAllPoints() {
+            var getToken = window.localStorage.getItem("token");
+            var token = JSON.parse(getToken);
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/profile/points',
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+
+                    if (data.code == 0) {
+
+                        $("#activity_points").text(data.result.activity)
+                        amountDSF = data.result.debt;
+                        console.log(amountDSF, '+++++++++++++++++=amountDSF==+++++++++++++++++++++')
+                        $("#w_show_balance2").html(amountDSF);
+                        // $("#go_topup_page2").unbind().click(function () {
+                        //     pageShow("convert_DSFPage")
+                        //     convert_DSFObj.getdata(data.result);
+
+                        // })
+                        // loadingBar((Number(data.result.activity) / Number(data.result.debtActivity) * 10000));
+
+                        loadingBar((Number(data.result.activity) / Number(data.result.debtActivity) * 888));
+                    }
+
+                    else {
+                        loaderObj.unShow();
+                        msgPageObj.show(getStatusCode(data.code))
+
+                    }
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+
+                },
+            })
+
+        }
+
+        function loadingBar(data) {
+
+            $("#loader_text_activity").text(data)
+
+            if (data == 0) {
+                $("#myBar_activity").css({
+                    "background-color": "#dbe2f3",
+                    "border-radius": "10px",
+                    "color": "#fff",
+                    "display": "flex",
+                    "align-items": "center",
+                    "font-size": "10px",
+                    "height": "100%"
+                });
+            }
+            if (data > 0) {
+                var i = 0;
+                if (i === 0) {
+                    i = 1;
+                    var elem = document.querySelector(`#myBar_activity`); // Changed getElementById to querySelector
+                    var loader_text = document.getElementById(`loader_text_activity`);
+                    $("#myBar_activity").css({
+                        "background": "linear-gradient(278.86deg, #EA372A 0%, #FD5E43 100%)",
+                        "border-radius": "10px",
+                        "color": "#fff",
+                        "display": "flex",
+                        "align-items": "center",
+                        "font-size": "10px",
+                        "height": "100%"
+                    });
+
+                    var width = 0;
+                    var id = setInterval(frame, 10);
+                    var percent = 0
+                    var percent2 = 0
+
+                    // if (data / 10 > 1000) {
+                    //     percent = 100
+
+
+                    // }
+                    // if (data / 10 < 1000) {
+                    //     percent = (data / 10) / 10
+
+                    // }
+
+                    // 计算百分比
+                    if (data > 880) {
+                        percent = 100;
+                    } else {
+                        percent = (data / 880) * 100;
+                    }
+
+
+                    function frame() {
+                        if (width >= percent) {
+                            clearInterval(id);
+                            i = 0;
+                        } else {
+                            width++;
+                            elem.style.width = percent + "%";
+                            loader_text.innerHTML = "&nbsp;" + (data / 10).toFixed(1) + "/88" + " &nbsp;";
+                        }
+                        if (width == percent) {
+                            loader_text.innerHTML = "&nbsp;" + (data / 10).toFixed(1) + "/88" + " &nbsp;";
+                        }
+                    }
+                }
+            }
+        }
+
+        function verified_wallet() {
+            // 返回一个Promise对象
+            return new Promise(function (resolve, reject) {
+                var Token = localStorage.getItem('token');
+                var obj = JSON.parse(Token);
+
+                $.ajax({
+                    type: 'GET',
+                    url: API_SERVER + '/v1/identity/check-image', // 请用你实际的 API 端点替换这里的地址
+                    headers: {
+                        'Authorization': 'Bearer ' + obj.token
+                    },
+                    async: true,
+                    timeout: 100000,
+                    success: function (data) {
+                        console.log(data); // 假设 API 响应是 { "result": true|false }
+
+                        if (data.result === true) {
+                            console.log('已上传+verified_wallet');
+                            resolve(true); // 将结果传递给Promise对象
+                        } else {
+                            console.log('未上传+verified_wallet');
+                            resolve(false); // 将结果传递给Promise对象
+                        }
+                    },
+                    error: function (xmlhttprequest, error) {
+                        console.error('请求失败:', error);
+                        reject(error); // 将错误传递给Promise对象
+                    },
+                });
+            });
+        }
+
+        function getLimitWithdraw() {
+
+            var getToken = window.localStorage.getItem("token");
+            var token = JSON.parse(getToken);
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/config/trans-limit',
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+
+                    if (data.code == 0) {
+                        var limitData = data.result.split(',')
+                        earnObj.getLimitInput(limitData);
+                        transferObj.setLimitInput(limitData)
+                    }
+
+                    else {
+                        loaderObj.unShow();
+                        msgPageObj.show(getStatusCode(data.code))
+
+                    }
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+                },
+            })
+
+        }
+
+        function loadList() {
+            myScroll = new IScroll('#walletPage', { probeType: 1, mouseWheel: true });
+
+            myScroll.on('scroll', function () {
+                console.log("====>" + this.y);
+            });
+
+            myScroll.on('scrollEnd', function () {
+                console.log('====' + (new Date()));
+            });
+            myScroll.refresh();
+        }
+
+    }
+</script>

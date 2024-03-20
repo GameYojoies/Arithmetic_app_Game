@@ -1,0 +1,309 @@
+<style>
+    .btc_tab {
+        width: 90px;
+        padding: 8px 0px;
+        background-color: #fff;
+        border: 0.3px solid;
+        border-radius: 10px;
+        font-size: 17px;
+        font-weight: bold;
+    }
+
+    .btc_tab.activeBtnTab {
+        width: 90px;
+        color: white;
+        background-color: #EA372A;
+        font-size: 17px;
+        font-weight: bold;
+
+    }
+</style>
+<div class="menuPage bg-my" id="newChatPage"
+    style="position: absolute; z-index: 10; background:#fff; background-repeat: no-repeat; background-size: cover;">
+    <div id="newChat_header">
+    </div>
+    <div id="newChat_body" style="  position: relative;
+         width: 100%; display: flex; align-items: center; flex-direction: column;">
+
+        <!-- ้header -->
+
+        <div style="width: 100%; height: 202px;  position: relative; font-weight: bold; color: #fff;"
+            class="flexCenter_c">
+            <img src="./pic/Vip/bg-vip.png" alt="" style="height: 100%; width: 100%;  z-index: -1;">
+            <div class="flexSpac" style="width: 90%; position: absolute; ">
+                <div style="display: flex; font-size: 38px; align-items: center;gap: 5px;width: 100%;">
+                    <span>排行榜</span>
+                </div>
+            </div>
+        </div>
+        <div style="background-color: #fff; margin-top: -50px; z-index: 50; width: 100%; border-radius: 20px 20px 0px 0px;"
+            class="flexTop_c">
+            <div style="display: flex; margin-top: 25px; width: 85%;" class="flexSpac">
+                <button class="btc_tab">直推</button>
+                <button class="btc_tab">团队业绩</button>
+                <button class="btc_tab">算力券</button>
+            </div>
+            <div id="scroller_newChat"
+                style="  background-repeat: no-repeat; background-size: cover;  margin-top: 35px; " class="flexTop_c">
+                <div style="width: 90%; " id="data_table">
+                    <!-- <table style="width: 100%; border-collapse: collapse; gap: 10px; ">
+                        <tr style="font-size: 16px; ">
+                            <th>排行</th>
+                            <th>姓名</th>
+                            <th>号码</th>
+                            <th>算力券</th>
+                        </tr>
+                       
+                        <tr>
+                            <td><img src="./pic/Vip/level-icon1.png" style="height: 40px;" alt=""></td>
+                            <td>刘*华</td>
+                            <td>131****3321</td>
+                            <td>434332</td>
+                        </tr>
+                        <tr>
+                            <td><img src="./pic/Vip/level-icon2.png" style="height: 40px;" alt=""></td>
+                            <td>刘*华</td>
+                            <td>131****3321</td>
+                            <td>434332</td>
+                        </tr>
+                        <tr>
+                            <td><img src="./pic/Vip/level-icon3.png" style="height: 40px;" alt=""></td>
+                            <td>刘*华</td>
+                            <td>131****3321</td>
+                            <td>434332</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>刘*华</td>
+                            <td>131****3321</td>
+                            <td>434332</td>
+                        </tr> -->
+                    <!-- <tr>
+                            <td>5</td>
+                            <td>刘*华</td>
+                            <td>131****3321</td>
+                            <td>434332</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>刘*华</td>
+                            <td>131****3321</td>
+                            <td>434332</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>刘*华</td>
+                            <td>131****3321</td>
+                            <td>434332</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>刘*华</td>
+                            <td>131****3321</td>
+                            <td>434332</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>刘*华</td>
+                            <td>131****3321</td>
+                            <td>434332</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>刘*华</td>
+                            <td>131****3321</td>
+                            <td>434332</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>刘*华</td>
+                            <td>131****3321</td>
+                            <td>434332</td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>刘*华</td>
+                            <td>131****3321</td>
+                            <td>434332</td>
+                        </tr> -->
+
+
+                    <!-- </table> -->
+                </div>
+
+
+            </div>
+        </div>
+        <!-- newChat -->
+        <div style="background-color:#fff; width: 100%;position: absolute; bottom: 0px; height: 60px; border: none;"
+            class="flexCenter">
+
+            <!-- <button style=" background-color: #EA372A; width: 90%; padding: 10px 0px; border: none; border-radius: 5px; color: white; font-size: 16px;">领取奖励（5000算力券）</button> -->
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+    var newChatObj = new newChat();
+    newChatObj.init();
+
+    function newChat() {
+        var myScroll;
+
+        var nameV;
+        var type;
+        this.init = function () {
+            pageInit("newChatPage");
+            headerInit("newChat", "排行榜")
+            $("#newChat_Page").css({ "width": w, "height": h });
+            $("#newChat_body").css({ "width": w, "height": h - headH });
+            $("#scroller_newChat").css({ "width": w, "height": h - 350, "overflow": "hidden", });
+
+            $(".btc_tab").click(function () {
+                $(".btc_tab").removeClass("activeBtnTab");
+                $(this).addClass("activeBtnTab");
+
+                // Determine the type based on the clicked tab
+
+                switch ($(this).text()) {
+                    case "直推":
+                        type = 10;
+                        nameV = '<th>直推</th>';
+
+                        break;
+                    case "团队业绩":
+                        type = 20;
+                        nameV = '<th>团队业绩</th>';
+
+                        break;
+                    case "算力券":
+                        type = 30;
+                        nameV = '<th>算力券</th>';
+
+                        break;
+                    default:
+                        console.error('Invalid tab clicked');
+                        return;
+                }
+                getlevel(type);
+            });
+            $(".btc_tab:contains('直推')").click();
+            setTimeout(() => {
+
+                myScroll = new IScroll('#scroller_newChat', { probeType: 1, mouseWheel: true });
+            }, 300);
+        }
+
+        this.call = function () {
+            getlevel(10)
+            $('#newChat_Page').transition({
+                x: w
+            }, 0);
+        }
+
+        function getlevel(type) {
+            var getToken = window.localStorage.getItem('token');
+            var token = JSON.parse(getToken);
+
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + `/v1/config/rank/${type}`,
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+
+                    updateLeaderboard(data);
+
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching data:', error);
+                }
+            });
+
+
+            function updateLeaderboard(data) {
+
+
+
+                // Create a new table with the data from the API response
+                var tableHtml = '<table style="width: 100%; border-collapse: collapse; gap: 10px; table-layout: fixed;">';
+                tableHtml += '<tr style="font-size: 14px; color:#5E6683;">';
+                tableHtml += ' <th style="width: 10%;">排行</th>';
+                tableHtml += '<th style="width: 20%;">姓名</th>';
+                tableHtml += '<th style="width: 30%;">号码</th>';
+                // tableHtml += '<th style="width: 20%;">算力券</th>';
+                tableHtml += nameV;
+                tableHtml += '</tr>';
+
+                // Loop through the data items and add them to the table
+                for (var i = 0; i < data.result.length; i++) {
+                    var item = data.result[i];
+                    tableHtml += '<tr>';
+                    tableHtml += `<td>${i + 1}</td>`;
+
+                    function isChinese(text) {
+                        // ใช้ regex ตรวจสอบ
+                        var chineseRegex = /^[\u4e00-\u9fa5]+$/;
+                        return chineseRegex.test(text);
+                    }
+
+                    var maskedName;
+
+                    // ตรวจสอบว่า item.name เป็นภาษาจีนหรือไม่
+                    if (isChinese(item.name)) {
+                        // ถ้าเป็นภาษาจีน
+                       
+                            maskedName = item.name.slice(0, 1) + '*';
+                      
+                    } else {
+                        // ถ้าไม่ใช่ภาษาจีน
+                        // ทำตามเงื่อนไขเดิม
+                        maskedName = item.name.slice(0, -2) + '**';
+                    }
+
+                    tableHtml += `<td>${maskedName}</td>`;
+
+                    var maskedMobile = item.mobile.substring(0, 3) + '****' + item.mobile.slice(-4);
+
+
+                    // Add the masked mobile number to the table
+                    tableHtml += `<td>${maskedMobile}</td>`;
+                    // tableHtml += `<td>${item.value}</td>`;
+                    // tableHtml += `<td>${item.value.toFixed(2)}</td>`;
+                    if (type == 10) {
+                        tableHtml += `<td>${item.value}</td>`;
+                    } else {
+                        tableHtml += `<td>${item.value.toFixed(2)}</td>`;
+                    }
+
+                    tableHtml += '</tr>';
+                }
+                // Close the table
+                tableHtml += '</table>';
+                $("#data_table").html(tableHtml);
+                myScroll = new IScroll('#scroller_newChat', { probeType: 1, mouseWheel: true });
+            }
+
+            // Function to get the level icon based on the value
+            // function getLevelIcon(value) {
+            //     // Implement logic to determine the level icon based on the value
+            //     // Example logic (you may need to adjust this based on your actual requirements)
+            //     if (value >= 160) {
+            //         return "./pic/Vip/level-icon1.png";
+            //     } else if (value >= 110) {
+            //         return "./pic/Vip/level-icon2.png";
+            //     } else {
+            //         return "./pic/Vip/level-icon3.png";
+            //     }
+            // }
+        }
+    }
+
+</script>

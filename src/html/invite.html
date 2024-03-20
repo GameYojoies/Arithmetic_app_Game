@@ -1,0 +1,271 @@
+<style>
+    .background_invite {
+        /* 设置背景图 */
+        background-image: url('./pic/invite/bg_invite_1.png');
+        /* 设置背景图的尺寸 */
+        background-size: cover;
+        /* 设置背景图的位置 */
+        background-position: center;
+        /* 设置背景重复方式 */
+        background-repeat: no-repeat;
+        /* 设置div的宽度和高度 */
+        width: 100%;
+        height: 300px;
+        /* 为了演示目的设置了一个固定高度 */
+    }
+
+    .background_invite2 {
+        /* 设置背景图 */
+        background-image: url('./pic/invite/bg_invite2.png');
+        /* 设置背景图的尺寸 */
+        background-size: cover;
+        /* 设置背景图的位置 */
+        background-position: top;
+        /* 设置背景重复方式 */
+        background-repeat: no-repeat;
+        /* 设置div的宽度和高度 */
+
+    }
+</style>
+
+<div id="invitePage" class="background_invite" style="width: 100%;">
+
+
+
+    <div id="invite_scroll">
+        <!-- <div id="invite_header"></div> -->
+
+        <div id="invite_body" style=" height: auto;" class="flexTop_c">
+            <!-- <img src='./pic/invite/bg_invite_1.png' style="width: 100%; position: absolute; z-index: -1; ">
+            </img> -->
+            <div id="invitetHeader"
+                style="display: flex;justify-content: center;align-items: center;font-size: 24px; font-weight: 700; background: transparent; height: 50px; width: 100%;">
+                <span id="invitetHeaderBody" style="color: white;">邀请好友</span>
+                <img id="back_invite" style="height: 23px;position: absolute;left: 22px;">
+            </div>
+            <div style="height: 40px;"></div>
+            <div style="height: 80px;">
+                <img src="./pic/invite/logo_1.png" alt="" style="width: 250px;height: 80px;">
+                <div style="height: 20px;"></div>
+                <!-- <img src="./pic/invite/logo_2.png" alt="" style="width: 250px;height: 80px;"> -->
+            </div>
+            <div style="color: #FFFFFF; font-size: 20px; text-shadow: 1px 1px 2px  #000;">-算力有我，未来可期-</div>
+
+            <div style="height: 70px;"></div>
+
+            <div id="invitePage" class="background_invite2"
+                style="width: 95%;height: 100%;border-radius: 8px;display: flex;flex-direction: column;align-items: center;">
+
+                <div id="qr_invite" style="width: 90px;height: 90px;margin-top: 20%;"></div>
+                <!-- <span style="color: #ffffff; margin: 10px 0px; ">长按图片识别二维码</span> -->
+
+
+                <div class="flexCenter">
+                    <div style="color: #040404;margin: 20px;width: 100%;display: flex;align-items: center;">我的邀请码：
+                        <div id="copy_link"
+                            style="height: 25px;background: linear-gradient(223.94deg, #671b19 7%, #df382b 90%),linear-gradient(0deg, #FFFFFF, #FFFFFF);border: 1px solid #fff;border-radius: 20px; color: #fff;font-weight: bold;gap: 5px;width: 100px; "
+                            class="flexCenter">
+                            <span id="ref_code_invite" style="margin: 10px 0px;">XXXXX</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="flexCenter" style="width: 100%; gap: 20px;">
+
+                    <div id="copy_link" style=" height: 40px; background: linear-gradient(223.94deg,  #671b19 7%, #df382b 90%),
+                    linear-gradient(0deg, #FFFFFF, #FFFFFF); border: 1px solid #fff;
+                    border-radius: 20px; color: #fff; font-weight: bold; gap: 5px; width: 280px;" class="flexCenter">
+                        <span>复制邀请码 </span>
+
+                    </div>
+                </div>
+                <div style=" height: 20px;"></div>
+                <div class="flexCenter" style="width: 100%; gap: 20px;">
+                    <div id="save_img_qr" style=" height: 40px; background: linear-gradient(223.94deg,  #671b19 7%, #df382b 90%),
+                linear-gradient(0deg, #FFFFFF, #FFFFFF); border: 1px solid #fff;
+                border-radius: 20px; color: #fff; font-weight: bold; gap: 5px; width: 280px;" class="flexCenter">
+
+                        <span>复制邀请链接</span>
+                    </div>
+
+                </div>
+                <div style=" height: 30px;"></div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <!-- copy -->
+    <div style=" margin:0 auto;  position: absolute;  top: 45%;  z-index: 5;  width: 100%; display: none; justify-content: center;"
+        id="copy_content_invite">
+        <div style="display:flex; flex-direction:column; opacity: 0.85; font-size: 16px;line-height: 17px;align-items: center;justify-content: center;text-align: center; color: #FFFFFF; background: #252525; width: 120px; height: 80px; text-align: center;  align-items: center; 
+box-shadow: 2px 3px 9px 1px rgba(0, 0, 0, 0.4);border-radius: 16px;">
+            <img id="copyright_id_qr" style="height: 50px; width: 50px; " loading="lazy">
+            <span id="Copied_id" style="margin-bottom: 10px;">复制成功</span>
+        </div>
+
+    </div>
+
+
+</div>
+<!-- <img src="./pic/invite/bottm.png" style="height: 300px;" alt=""> -->
+<script>
+
+    var inviteObj = new invite();
+    inviteObj.init();
+
+    function invite() {
+
+        this.init = function () {
+
+
+            setAllUILang("invite")
+            pageInit("invitePage");
+            headerInit("invite", "邀请好友")
+            $("#invite_scroll").css({ "width": w, "height": h, "overflow": "hidden" });
+
+            myScroll = new IScroll('#invite_scroll', { probeType: 1, mouseWheel: true });
+            $("#invite_header_left").html('<img id="back_invite" style="width:13px; height:21px;">');
+            $('#back_invite').attr("src", picRes['back_team.png']);
+            $("#invite_header_right_body").css({ "color": "#fff" });
+            $('#back_invite').attr("src", picRes['back_arrow.png'])
+            $("#copy_qrcode").attr("src", picRes["copy.png"])
+            $("#copyright_id_qr").attr("src", picRes['copyright.png']);
+            // $("#save_img_qr").click(function () {
+            //     html2canvas($('#qr_invite')[0]).then(function (canvas) {
+            //         var imgData = canvas.toDataURL('image/png');
+            //         var link = document.createElement('a');
+            //         link.href = imgData;
+            //         link.download = 'download.png';
+            //         link.click();
+            //     });
+            // })
+
+
+        }
+        $("#back_invite").unbind().click(function () {
+            pageUnShow("invitePage")
+
+        })
+
+        $("#save_img_qr").on("click", function () {
+
+            // var ShareServer = "https://m.slzgtest.top";
+            // var ShareServer = "/build";
+            var vCode = $("#ref_code_invite").html();
+
+            var qrcode_copy_link = new ClipboardJS('#save_img_qr', {
+                text: function () {
+                    var linkUrl = ShareServer + "/reOutside.html?code=" + vCode
+                    copy_show();
+                    return linkUrl;
+                }
+            });
+
+            // var u = navigator.userAgent;
+            // var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+            // loaderObj.show();
+            // setTimeout(function () {
+            //     if (isiOS) {
+            //         window.location.href = ShareServer + "/reOutside.html?code=" + vCode;
+            //         loaderObj.unShow();
+            //     } else {
+            //         window.open(ShareServer + "/reOutside.html?code=" + vCode);
+            //         loaderObj.unShow();
+            //     }
+
+
+            //     $("#qrcode_gen").html('');
+            //     // 生成二维码并显示在页面上
+            //     var qrCanvas = document.getElementById("qrcode_gen");
+            //     var qrData = "reOutside.html?code=" + vCode; // 二维码内容
+            //     $("#qrcode_gen").html('');
+            //     // 使用jsQR库生成二维码
+            //     var qrCode = new QRCode(qrCanvas, {
+            //         text: qrData,
+            //         width: w * 0.4, // 二维码宽度
+            //         height: w * 0.4 // 二维码高度
+            //     });
+            // }, 1000);
+
+
+
+
+
+        })
+
+
+        function getQRcode() {
+            var Token = localStorage.getItem('token')
+            var obj = JSON.parse(Token);
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/inviteCode',
+                headers: {
+                    'Authorization': 'Bearer ' + obj.token
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+
+                    $('#ref_code_invite').text(data.result.inviteCode)
+                    // inviteObj.getQrInvite(data.result.inviteCode);
+                    $('#link_qr_show').text(data.result.link)
+
+                    inviteObj.getQrInvite()
+                    // copy qr
+                    var qrcode_copy = new ClipboardJS('#copy_qrcode', {
+                        text: function () {
+                            copy_show();
+                            return $("#ref_code_invite").html();
+                        }
+                    });
+                    var qrcode_copy_link = new ClipboardJS('#copy_link', {
+                        text: function () {
+                            copy_show();
+                            return $("#ref_code_invite").html();
+                        }
+                    });
+
+                },
+                error: function (xhr, status, error) {
+                }
+            });
+        }
+
+        function copy_show() {
+            $('#copy_content_invite').css({ "display": "flex" });
+            setTimeout(function () {
+                $('#copy_content_invite').css({ "display": "none " });
+            }, 1000);
+        }
+
+        this.getQrInvite = function () {
+
+            $('#qr_invite').html("")
+            var vCode = $("#ref_code_invite").html();
+
+            var qrcode = new QRCode(document.getElementById("qr_invite"), {
+                width: 90,
+                height: 90,
+            })
+            qrcode.makeCode(ShareServer + "/reOutside.html?code=" + vCode)
+        }
+
+
+        this.call = function () {
+            getQRcode()
+        }
+
+
+
+
+    }
+
+</script>

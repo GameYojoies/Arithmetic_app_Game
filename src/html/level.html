@@ -1,0 +1,415 @@
+<style>
+    td {
+        padding: 10px 0px;
+    }
+
+    tr {
+        font-size: 16px;
+    }
+</style>
+<div class="menuPage bg-my" id="levelPage"
+    style="position: absolute;background:#FAFAFA; background-repeat: no-repeat; background-size: cover;">
+    <div id="level_header">
+    </div>
+    <div id="scroller_level">
+        <div id="level_body"
+            style="height: auto; width: 100%; display: flex; align-items: center; flex-direction: column;">
+
+            <!-- <div style="width: 100%;">
+                <img style="width: 100%;" src="./pic/level/level-bg.png" alt="">
+            </div> -->
+
+            <div style="width: 90%; height: 150px; border-radius: 8px; position: relative; margin-top: 15px; gap: 10px; font-size: 16px; font-weight: bold; color: #fff;"
+                class="flexCenter_c">
+                <img src="./pic/level/header-bg.png" alt=""
+                    style="position: absolute; width: 100%; height: 100%; z-index: -1;">
+                <div class="flexSpac" style="width: 90%; margin-top: -25px;">
+
+                    <div class="flexCenter_c" style="width: 65%;gap: 15px; ">
+
+                        <div style="display: flex; font-size: 30px; align-items: center;gap: 5px;width: 100%;">
+                            <span id="level_number_header_name11">超级会员</span>
+                            <span id="level_number_header11" style="color: #FEBF06;">VIP0</span>
+                        </div>
+                        <div class="flexSpac" style="width: 100%;">
+                            <div class="" style="gap: 5px;font-weight: lighter; display: flex; justify-self: start; flex-direction: column;
+                        font-size: 16px;">
+                                <span>团队业绩</span>
+                                <span id="teamPerformance" style="text-align: center;">0</span>
+                            </div>
+                            <div class="flexCenter_c" style="gap: 5px;font-weight: lighter;
+                        font-size: 16px; ">
+                                <span>直推激活人数</span>
+                                <span id="now_number">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flexTop_c" style="height: 100%;">
+                        <img class="img_level11" alt="iconLevel" style="height: 90px;">
+                    </div>
+                </div>
+            </div>
+            <div style="width: 90%;background-color:#FFDCC0;">
+                <div style="padding: 10px;" class="flexSpac">
+                    <div>当前为<span id="level_number11" style="color: #E31D1A;">V0</span>级别，可以领取<span id="amount_number"
+                            style="color: #E31D1A;">0</span>元周奖励</div>
+                    <button id="sendPostData"
+                        style="background-color: #FE8B04; color: white; border-radius: 8px;border: none; padding: 7px 13px;">立即领取</button>
+                </div>
+            </div>
+            <!-- vip -->
+            <div style="width: 90%;">
+                <div class="flexSpac" style="width: 100%;padding: 20px 0px; font-weight: bold;">
+                    <hr style="height: 0.3px;
+                    border: none;
+                    background: #8D8EA9;
+                  width: 15%;">
+                    <span style="width: 60%;">VIP等级规划及每周奖励制度表</span>
+                    <hr style="height: 0.3px;
+                    border: none;
+                    background: #8D8EA9;
+                    width: 15%; ">
+                </div>
+            </div>
+            <!-- table -->
+            <div style="width: 90%;">
+                <div id="tableContainer"></div>
+                <!-- <table style="width: 100%; border-collapse: collapse; gap: 10px;font-weight: bold;">
+                    <tr style="background-color: #FFF1E5; font-size: 16px; font-weight:bold ;">
+                        <th>等级</th>
+                        <th>团队业绩</th>
+                        <th>周奖励</th>
+                        <th>龙力值</th>
+                    </tr>
+                    <tr>
+                        <td>VIP1（直推5人）</td>
+                        <td>1W</td>
+                        <td>38元</td>
+                        <td>0.1/天</td>
+                    </tr>
+                    <tr>
+                        <td>VIP1（直推5人）</td>
+                        <td>2W</td>
+                        <td>58元</td>
+                        <td>0.2/天</td>
+                    </tr>
+
+                </table> -->
+            </div>
+            <div style=" width: 90%; background-color: #F2F2F2; margin: 20px 0px; padding: 10px 0px; ">
+                <div style="padding-left: 10px;display: flex; flex-direction: column; font-weight: 400;">
+
+                    <span>备注：</span>
+                    <span>1、团队业绩为三级业绩之和。</span>
+                    <span>2、用户购买任意产品即为激活用户。</span>
+                    <span>3、周奖励每周发放，奖励不累计不叠加。</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var levelObj = new level();
+    levelObj.init();
+
+    function level() {
+        var myScroll;
+
+        this.init = function () {
+            pageInit("levelPage");
+            headerInit("level", "VIP会员等级")
+            $("#level_Page").css({ "width": w, "height": h });
+            $("#scroller_level").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+            myScroll = new IScroll('#scroller_level', { probeType: 1, mouseWheel: true });
+
+            $('.img_level11').attr('src', './pic/level/level0.png');
+
+        }
+
+        this.call = function () {
+
+            $('#level_Page').transition({
+                x: w
+            }, 0);
+
+            levelObj.getlevel();
+
+            myScroll.refresh();
+        }
+
+        this.getlevel = function () {
+            var getToken = window.localStorage.getItem('token');
+            var token = JSON.parse(getToken);
+
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/profile/cycle-voucher?type=40',
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+
+
+                    $("#now_number").text(data.result.activeNumber);
+                    $("#teamPerformance").text(data.result.performance);
+
+
+                    // กรองข้อมูลที่มี state=20
+                    // var filteredItems = data.result.items.filter(item => item.state === 20);
+                    var filteredItems = data.result.items.filter(item => item.state === 20);
+
+                    var indexLevel = data.result.level;
+
+                    // $("#level_number_header11").text('VIP' + indexLevel);
+                    // $("#level_number11").text('VIP' + indexLevel);
+
+                    console.log(indexLevel, '--------------------------------')
+                    if (indexLevel === 0) {
+                        $('.img_level11').attr('src', './pic/level/level0.png');
+                        $('#profileLevel_All').attr('src', './pic/level/level0.png');
+
+                        $("#level_number_header_name11").text('普通会员');
+                        $("#level_number_header11").text('');
+                        $("#level_number11").text('普通会员');
+                        $("#sendPostData").css({ "visibility": "hidden" });
+
+                    } else if (indexLevel === 1) {
+                        $('.img_level11').attr('src', './pic/level/level1.png');
+                        $('#profileLevel_All').attr('src', './pic/level/level1.png');
+
+                        $("#level_number_header11").text('VIP1');
+                        $("#level_number11").text('V1');
+                    } else if (indexLevel === 2) {
+                        $('.img_level11').attr('src', './pic/level/level2.png');
+                        $('#profileLevel_All').attr('src', './pic/level/level2.png');
+
+                        $("#level_number_header11").text('VIP2');
+                        $("#level_number11").text('V2');
+                    } else if (indexLevel === 3) {
+                        $('.img_level11').attr('src', './pic/level/level3.png');
+                        $('#profileLevel_All').attr('src', './pic/level/level3.png');
+
+                        $("#level_number_header11").text('VIP3');
+                        $("#level_number11").text('V3');
+                    } else if (indexLevel === 4) {
+                        $('.img_level11').attr('src', './pic/level/level4.png');
+                        $('#profileLevel_All').attr('src', './pic/level/level4.png');
+
+                        $("#level_number_header11").text('VIP4');
+                        $("#level_number11").text('V4');
+                    } else if (indexLevel === 5) {
+                        $('.img_level11').attr('src', './pic/level/level5.png');
+                        $('#profileLevel_All').attr('src', './pic/level/level5.png');
+
+                        $("#level_number_header11").text('VIP5');
+                        $("#level_number11").text('V5');
+                    } else if (indexLevel === 6) {
+                        $('.img_level11').attr('src', './pic/level/level6.png');
+                        $('#profileLevel_All').attr('src', './pic/level/level6.png');
+
+                        $("#level_number_header11").text('VIP6');
+                        $("#level_number11").text('V6');
+                    } else if (indexLevel === 7) {
+                        $('.img_level11').attr('src', './pic/level/level7.png');
+                        $('#profileLevel_All').attr('src', './pic/level/level7.png');
+
+                        $("#level_number_header11").text('VIP7');
+                        $("#level_number11").text('V7');
+                    } else if (indexLevel === 8) {
+                        $('.img_level11').attr('src', './pic/level/level8.png');
+                        $('#profileLevel_All').attr('src', './pic/level/level8.png');
+
+                        $("#level_number_header11").text('VIP8');
+                        $("#level_number11").text('V8');
+                    } else if (indexLevel === 9) {
+                        $('.img_level11').attr('src', './pic/level/level9.png');
+                        $('#profileLevel_All').attr('src', './pic/level/level9.png');
+
+                        $("#level_number_header11").text('VIP9');
+                        $("#level_number11").text('V9');
+                    } else if (indexLevel === 10) {
+                        $('.img_level11').attr('src', './pic/level/level10.png');
+                        $('#profileLevel_All').attr('src', './pic/level/level10.png');
+                        $("#level_number_header11").text('VIP10');
+                        $("#level_number11").text('V10');
+                    } else {
+                        // 默认情况
+                        $('.img_level11').attr('src', './pic/level/level0.png');
+                        $('#profileLevel_All').attr('src', './pic/level/level0.png');
+
+                        $("#level_number_header_name11").text('普通会员');
+                        $("#level_number_header11").text('');
+                        $("#level_number11").text('普通会员');
+                        $("#sendPostData").css({ "visibility": "hidden" });
+                    }
+
+
+
+                    // เช็ครูป
+                    // switch (indexLevel) {
+                    //     case 0:
+                    //         $('.img_level').attr('src', './pic/level/level0.png');
+                    //         $("#level_number_header").text('VIP0');                            
+                    //         break;
+                    //     case 1:
+                    //         $('.img_level').attr('src', './pic/level/level1.png');
+                    //         $("#level_number_header").text('VIP1'); 
+                    //         break;
+                    //     case 2:
+                    //         $('.img_level').attr('src', './pic/level/level2.png');
+                    //         break;
+                    //     case 3:
+                    //         $('.img_level').attr('src', './pic/level/level3.png');
+                    //         $("#level_number_header").text('VIP4'); 
+                    //         break;
+                    //     case 4:
+                    //         $('.img_level').attr('src', './pic/level/level4.png');
+                    //         break;
+                    //     case 5:
+                    //         $('.img_level').attr('src', './pic/level/level5.png');
+                    //         break;
+                    //     case 6:
+                    //         $('.img_level').attr('src', './pic/level/level6.png');
+                    //         break;
+                    //     case 7:
+                    //         $('.img_level').attr('src', './pic/level/level7.png');
+                    //         break;
+                    //     case 8:
+                    //         $('.img_level').attr('src', './pic/level/level8.png');
+                    //         break;
+                    //     case 9:
+                    //         $('.img_level').attr('src', './pic/level/level9.png');
+                    //         break;
+                    //     case 10:
+                    //         $('.img_level').attr('src', './pic/level/level10.png');
+                    //         break;
+
+
+                    //     default:
+                    //         $('.img_level').attr('src', './pic/level/level0.png');
+                    //         break;
+                    // }
+
+                    // เช็คว่ามีข้อมูลที่ตรงเงื่อนไขหรือไม่
+                    if (filteredItems.length > 0) {
+                        // นำไอดีที่มีลำดับที่ 1 (index 0) มาแสดงใน level_number
+                        // $("#level_number").text("V" + filteredItems[0].number);
+                        // $("#level_number_header").text("VIP" + filteredItems[0].number);
+
+                        // นำค่า amount มาแสดงใน amount_number
+                        $("#amount_number").text(filteredItems[0].amount);
+                    } else {
+                        // กรณีไม่มีข้อมูลที่ตรงเงื่อนไข
+                        // ให้โชว์ VIP 0
+                        // $('.img_level').attr('src', './pic/level/level0.png');
+                        // $("#level_number").text("V0");
+                        // $("#level_number_header").text("VIP0");
+                        $("#amount_number").text("0");
+                    }
+
+                    // สร้างตาราง HTML
+                    var tableHtml = '<table style="width: 100%; border-collapse: collapse; gap: 10px; font-weight: bold;">';
+                    tableHtml += '<tr style="background-color: #FFF1E5; font-size: 16px; font-weight:bold ;">';
+                    tableHtml += '<th>等级</th>';
+                    tableHtml += '<th>团队业绩</th>';
+                    tableHtml += '<th>周奖励</th>';
+                    tableHtml += '<th>龙力值</th>';
+                    tableHtml += '</tr>';
+
+                    // ลูปข้อมูล items และเพิ่มลงในตาราง
+                    for (var i = 0; i < data.result.items.length; i++) {
+                        var item = data.result.items[i];
+
+                        var performanceGet = ((item.performance) / 10000).toFixed(2);
+                        tableHtml += '<tr style="text-align: center">';
+                        tableHtml += '<td style="text-align: start">' + 'VIP' + item.level + '<br>' + '  直推激活' + item.activeNumber + '人' + '</td>';
+                        // tableHtml += '<td>' + item.performance + 'W</td>';
+                        tableHtml += '<td>' + performanceGet + 'W</td>';
+                        tableHtml += '<td>' + item.amount + '元</td>';
+                        tableHtml += '<td>' + item.active + '</td>';
+                        tableHtml += '</tr>';
+                    }
+
+                    // ปิด tbody และ table
+                    tableHtml += '</table>';
+
+                    myScroll.refresh();
+
+                    // แสดงตารางในตำแหน่งที่ต้องการ
+                    $("#tableContainer").html(tableHtml);
+
+                    myScroll.refresh();
+
+
+                    $("#sendPostData").unbind().click(function () {
+                        sendPostData(filteredItems, indexLevel)
+                    });
+
+                },
+
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError') + ': ' + error);
+                },
+            });
+
+
+            function sendPostData(filteredItems, indexLevel) {
+                // if (filteredItems.length > 0) {
+                var getToken = window.localStorage.getItem('token');
+                var token = JSON.parse(getToken);
+
+                // ข้อมูลที่จะส่ง
+                var postData = {
+
+                    // type: filteredItems[0].state,
+                    // step: filteredItems[0].level
+                    type: 40,
+                    step: indexLevel
+                };
+
+                // ทำการส่ง POST request
+                $.ajax({
+                    type: 'post',
+                    url: API_SERVER + '/v1/profile/cycle-voucher',
+                    headers: {
+                        'Authorization': 'Bearer ' + token.token,
+                    },
+                    data: JSON.stringify(postData),
+                    contentType: 'application/json',
+                    success: function (response) {
+                        if (response.code === 4089) {
+                            msgPageObj.show("周奖励不能重复领取！");
+                            $("#sendPostData").css({ "background": "#918e8e", });
+                            $("#sendPostData").off("click");
+
+                        } else if (response.code === 4090) {
+                            msgPageObj.show("周奖励将于每周一自动激活，请您按时领取");
+
+                        } else if (response.code === 0) {
+                            msgPageObj.show("恭喜你，领取成功！");
+                        }
+
+                    },
+                    error: function (xmlhttprequest, error) {
+                        console.error('POST request error:', error);
+                    },
+                });
+                // } else {
+                //     // กรณีไม่มีข้อมูลที่ตรงเงื่อนไข
+                //     console.log('No data to send in POST request.');
+                //     msgPageObj.show("周奖励将于每周一自动激活，请您按时领取");
+                // }
+            }
+        }
+
+
+
+    }
+
+</script>

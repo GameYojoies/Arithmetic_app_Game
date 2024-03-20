@@ -1,0 +1,197 @@
+<div class="menuPage bg-my" id="invitation_registrationPage"
+    style="position: absolute; z-index: 10; background:#F8F8F8; background-repeat: no-repeat; background-size: cover;">
+    <div id="invitation_registration_header">
+    </div>
+    <div id="scroller_invitation_registration">
+        <div id="invitation_registration_body"
+            style="width: 100%; display: flex; align-items: center; flex-direction: column; ">
+            <div style="height: 10px;"></div>
+            <div style="position: relative; height: 100px; width: 90%; margin:  0 auto;">
+                <img style="width: 100%; height: 90px;" src="./pic/home/bg_salary.png" alt="">
+                <div
+                    style="    position: absolute;top: 20px;display: flex;flex-direction: column;color: #fff;left: 20px;">
+                    <span style="font-size: 22px;">中国算力邀约注册奖励规则</span>
+                    <span style="font-size: 14px;">按照邀约注册人数计算</span>
+
+                </div>
+
+            </div>
+            <div style="height: 5px;"></div>
+            <div style="width: 90%; margin:  0 auto;">
+                <span style="font-size: 14px ;color:#5E6683;">当前直推注册用户 : </span>
+                <span style="font-size: 22px; color: #EA372A;" id="voucher_invite">
+            </div>
+
+            <div id="loop_voucher_data_invite" style="width: 100%; height: auto;" class="flexTop_c">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        var invitation_registrationObj = new invitation_registration();
+        invitation_registrationObj.init();
+
+        function invitation_registration() {
+            var myScroll;
+            this.init = function () {
+                pageInit("invitation_registrationPage");
+                headerInit("invitation_registration", "邀约注册奖励")
+
+                $("#scroller_invitation_registration").css({
+                    "width": w,
+                    "height": h - headH,
+                    "overflow": "hidden"
+
+                });
+                myScroll = new IScroll('#scroller_invitation_registration', {
+                    probeType: 1,
+                    mouseWheel: true
+                });
+
+            }
+            this.call = function () {
+                getVoucherInvite()
+                $('#invitation_registration_Page').transition({
+                    x: w
+                }, 0);
+            }
+
+            // loop vouncher
+            function getVoucherInvite() {
+
+                var str = ""
+                var collect_step = []
+
+                var getToken = window.localStorage.getItem("token");
+                var token = JSON.parse(getToken);
+                $.ajax({
+                    type: 'get',
+                    url: API_SERVER + '/v1/profile/cycle-voucher?type=30',
+                    headers: {
+                        'Authorization': 'Bearer ' + token.token,
+                    },
+                    async: true,
+                    timeout: 100000,
+                    success: function (data) {
+
+                        if (data.code == 0) {
+
+                            $('#voucher_invite').text(data.result.now)
+
+                            $.each(data.result.items, function (index, data) {
+
+                                str += '<div style="height: 10px;"></div>'
+
+                                str += '<div style="justify-content: flex-end;width: 90%;margin: 0 auto;background-color: #fff;height: 80px;border-radius: 10px;display: flex;align-items: center;">'
+
+                                str += '<div style="gap: 10px;display: flex;align-items: center;justify-content: flex-start;width: 75%;">'
+                                str += '<img style="height:  32px;" src="./pic/home/side_home.png" alt="">'
+                                str += '<div style="display: flex;flex-direction: column;gap: 5px;">'
+                                str += ' <span style="font-size: 16px ;color:#414655;">累计邀约注册人数 ' + data.number + ' 人 </span>'
+                                str += '<span style="font-size: 14px; color: #6C7BA8;">奖励 ' + data.amount + ' 算力券 </span>'
+                                str += '</div>'
+                                str += '</div>'
+
+                                str += '<div id="step_invite' + data.number + '" style="margin-right: 10px; color: #fff; ' + (data.state == 10 ? "background: linear-gradient(270deg, #67748E 0%, #6C7BA8 96.28%);" : "background: linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%);") + ' width: 70px; height: 30px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">';
+
+                                str += '<span>' + (data.state == 10 ? "已领取" : data.state == 20 ? "未领取" : "未满足") + ' </span>'
+                                str += '</div>'
+
+                                str += '</div>'
+
+                                collect_step.push({ "step": data.number })
+
+                            })
+
+                            $("#loop_voucher_data_invite").html(str);
+                            myScroll = new IScroll('#scroller_invitation_registration', { probeType: 1, mouseWheel: true });
+
+                            $.each(collect_step, function (index, data) {
+                                $(`#step_invite${data.step}`).unbind().click(function () {
+                                    postReceiveVouncher(data.step)
+                                })
+
+                            })
+
+                        }
+                        else if (data.code == 4089) {
+                            msgPageObj.show('已领取')
+                        }
+                        else if (data.code == 4090) {
+                            msgPageObj.show('未满足条件')
+                        }
+                        else {
+                            loaderObj.unShow();
+                            msgPageObj.show(getStatusCode(data.code))
+
+                        }
+
+                    },
+                    error: function (xmlhttprequest, error) {
+                        loaderObj.unShow();
+                        msgPageObj.show(NSLang('sys.serverError'))
+
+                    },
+                })
+
+            }
+
+            // receive voucher
+            function postReceiveVouncher(step) {
+
+                var getToken = window.localStorage.getItem("token");
+                var token = JSON.parse(getToken);
+
+                var mData = {
+                    "type": 30,
+                    "step": step
+                }
+                $.ajax({
+                    type: "post",
+
+                    url: API_SERVER + "/v1/profile/cycle-voucher",
+                    headers: {
+                        'Authorization': 'Bearer ' + token.token
+                    },
+                    data: JSON.stringify(mData),
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: true,
+                    timeout: 100000,
+                    beforeSend: function (xmlhttprequest) { },
+                    success: function (data) {
+
+                        if (data.code == 0) {
+                            msgPageObj.show("领取成功")
+                            $(`#step_invite${step}`).css("background", "linear-gradient(270deg, #67748E 0%, #6C7BA8 96.28%)")
+                            $(`#step_invite${step} span`).text("已领取")
+
+
+                        }
+                        else if (data.code == 4089) {
+                            msgPageObj.show('已领取')
+                        }
+                        else if (data.code == 4090) {
+                            msgPageObj.show('未满足条件')
+                        }
+                        else {
+                            loaderObj.unShow();
+                            msgPageObj.show(getStatusCode(data.code))
+
+                        }
+                    },
+
+                    error: function (xmlhttprequest, error) {
+                        loaderObj.unShow();
+                        msgPageObj.show(NSLang('sys.serverError'))
+                    },
+                });
+            }
+
+
+
+        }
+    </script>

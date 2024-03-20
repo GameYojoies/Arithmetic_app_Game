@@ -1,0 +1,45 @@
+<div class="menuPage bg-my" id="problemPage"
+    style="position: absolute;background:#FAFAFA; background-repeat: no-repeat; background-size: cover;">
+    <div id="problem_header">
+    </div>
+    <div id="scroller_problem">
+        <div id="problem_body"
+            style="height: auto; width: 100%; display: flex; align-items: center; flex-direction: column;">
+
+            <div id="qa_img_div" style="width: 90%;">
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var problemObj = new problem();
+    problemObj.init();
+
+    function problem() {
+        var myScroll;
+        this.init = function () {
+            pageInit("problemPage");
+            headerInit("problem", "常见问题")
+            $("#problem_Page").css({ "width": w, "height": h });
+            $("#scroller_problem").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+            myScroll = new IScroll('#scroller_problem', { probeType: 1, mouseWheel: true });
+        }
+        this.call = function () {
+
+            $("#qa_img_div").html('<img style="width: 100%;" src="./pic/QA/Pic-11.png" alt="">');
+            $('#problem_Page').transition({
+                x: w
+            }, 0);
+            refreshSrollObj(myScroll);
+        }
+
+
+
+
+    }
+
+</script>

@@ -1,0 +1,95 @@
+<div class="menuPage bg-my" id="newsPage" style="position: absolute; background-color: #F8F8F8;">
+    <div id="news_header">
+    </div>
+
+    <div id="scroller_news" class="flexTop_c">
+        <div id="news_body" style="width: 90%; display: flex; align-items: center; flex-direction: column;">
+
+            <div style="height: 15px;"></div>
+            <div style="width: 100%; display: flex; justify-content: start; flex-direction: column;">
+                <span id="header_news" style="font-size: 18px; font-weight: 800;"></span>
+                <div style="height: 15px;"></div>
+                <span style="color:#999999; fontsize:12px;" id="time_view"></span>
+            </div>
+
+            <div style="height: 15px;"></div>
+            <img id="news_img_show" alt="" style="width: 100%; border-radius: 5px;">
+
+            <div style="height: 20px;"></div>
+
+            <div class="flexCenter" style="width: 100%; font-weight: bold;">
+            </div>
+
+            <div id="news_page_details" style="color:#414655; font-size: 14px;    width: 90%;background: #fff;border-radius: 20px;padding: 20px;"></div>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var newsObj = new news();
+    newsObj.init();
+
+    function news() {
+        var myScroll;
+        this.init = function () {
+            pageInit("newsPage");
+            headerInit("news", "新闻中心")
+            $("#news_Page").css({ "width": w, "height": h });
+            $("#scroller_news").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+            myScroll = new IScroll('#scroller_news', { probeType: 1, mouseWheel: true });
+        }
+
+        this.showNews = function (id, img, header, time) {
+            var ViewPageDate_news = moment(time).format("YYYY-MM-DD HH:mm");
+            var getToken = localStorage.getItem('token')
+            var token = JSON.parse(getToken)
+
+            $("#news_img_show").attr("src", `${API_SERVER}${img}?Authorization=${token.token}`)
+            $("#header_news").html(header)
+
+            $.ajax({
+                type: "get",
+                url: API_SERVER + `/v1/news/${id}`,
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+                    loaderObj.unShow();
+                    if (data.code == 0) {
+                        $('#news_page_details').html(data.result)
+                        $('#time_view').text(ViewPageDate_news + "｜新闻中心")
+
+                        myScroll = new IScroll('#scroller_news', { probeType: 1, mouseWheel: true });
+
+
+                    }
+                    else {
+                        msgPageObj.show(getStatusCode(data.code))
+                        msgObj.unShow()
+                    }
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+                },
+            });
+
+        }
+        this.call = function () {
+
+            $('#news_Page').transition({
+                x: w
+            }, 0);
+        }
+
+
+
+    }
+
+</script>

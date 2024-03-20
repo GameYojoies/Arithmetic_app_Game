@@ -1,0 +1,551 @@
+<style>
+    #calendar-body {
+        height: 300px;
+    }
+
+    tr {
+        text-align: center;
+    }
+
+    .Days_group {
+        width: auto;
+        height: 60px;
+    }
+
+    .active {
+        width: auto;
+        height: 60px;
+    }
+</style>
+<div id="checkinPage" style="background-color: white; position: absolute;">
+
+
+    <div id="checkin_header"></div>
+    <div id="checkin_scroll" style="width: 100%; overflow: hidden;">
+        <div id="checkin_body" style="display: flex;align-items: center;justify-content: center;">
+
+            <div
+                style="width: 90%; background-color: #EEE; display: flex; flex-direction: column; gap: 20px; padding: 20px 10px; ">
+
+
+                <div style="display: flex; padding: 10px;  background-color: #FFF; border-radius: 5px; gap: 15px;    justify-content: space-between;
+                ">
+
+                    <div style="    display: flex;                    ">
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <span style="color: #333; font-weight: 600; margin-right: 10px;">已连续签到
+                                <span style="color: red;     font-weight: bold;  font-size: 24px;"
+                                    id="show_total_checkIn"> 1
+                                </span>
+                                <span style="font-weight: bold;     font-size: 14px; ">天</span>
+                            </span>
+                            <span style="color: #999; display: none; font-size: 12px; " id="Signed">今日已签到</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <span style="color: #999; display: none; font-size: 12px; " id="Signed">今日已签到</span>
+                        </div>
+                        <div style="font-size: 18px;">
+                        </div>
+                    </div>
+                    <div
+                        style="display: flex; justify-content: center; align-items: center;     width: 80px;                    ">
+                        <button id="checkInBtn"
+                            style="    border-radius: 20px;    background: linear-gradient(281deg, #EA372A 48.76%, #F83D3D 86.99%);color: white;border: none;padding: 8px;width: 100%;display: flex;align-items: center;justify-content: center;">签到
+                        </button>
+                    </div>
+
+
+                </div>
+                <!--calendar  -->
+                <div id="calendar"
+                    style="background-color: white; width: 100%; flex-direction: column; position: relative;"
+                    class="flexTop">
+                    <div style="display: flex; position: absolute; height: 49px;top: -17px;width: 100%;">
+                        <img style="width: 100%;" src="./pic/home/bar.png" alt="">
+                    </div>
+                    <div class="calendar-header"
+                        style="width: 70%; display: flex;justify-content: space-around;align-items: center;height: 30px; margin-top:40px;">
+                        <p style="display: flex; align-items: center;font-size: 42px;     color: #998f8f;
+                        " id="prev-month">&laquo;</p>
+                        <p id="current-month-year" style="font-size: 18px;">Month Year</p>
+                        <p id="next-month" style="display: flex; align-items: center;font-size: 42px;     color: #998f8f;
+                        ">&raquo;</p>
+                    </div>
+                    <div style="display: flex;justify-content: center;gap: 5px;">
+                        <p id="latest_"> </p>
+                        <p id="last"></p>
+                    </div>
+                    <table class="calendar-table" style="font-size:14px; width: 90%;">
+                        <thead>
+
+                            <tr>
+                                <th>日</th>
+                                <th>一</th>
+                                <th>二</th>
+                                <th>三</th>
+                                <th>四</th>
+                                <th>五</th>
+                                <th>六</th>
+                            </tr>
+                        </thead>
+                        <tbody id="calendar-body"></tbody>
+                    </table>
+                </div>
+                <!--  -->
+                <div
+                    style="display: flex; background-color: #FFF; flex-direction: column; gap: 20px; padding: 10px 0; border-radius: 5px;">
+                    <div style=" padding-left: 20px; color: #000;font-size: 18px;font-weight: 600;">连续签到奖励</div>
+                    <div
+                        style="display: flex; gap: 10px;  color: #333;  justify-content: space-around; font-size: 12px;">
+                        <div id="check_in_7days" class="flexCenter " style="flex-direction: column; ">
+                            <img class="item-check" alt="item1">
+                            <div style=" text-align: center;">连续签到7天领取</div>
+                        </div>
+                        <div id="check_in_15days" class="flexCenter " style="flex-direction: column;">
+                            <img class="item-check" alt="item1">
+                            <div style=" text-align: center;">连续签到15天领取</div>
+                        </div>
+                        <div id="check_in_30days" class="flexCenter " style="flex-direction: column;">
+                            <img class="item-check" alt="item1">
+                            <div style=" text-align: center;">连续签到30天领取</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div style="height: 20px;"></div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+</div>
+<script>
+
+    var checkinObj = new checkin();
+    checkinObj.init();
+
+    function checkin() {
+
+        this.init = function () {
+
+
+            setAllUILang("checkin")
+            pageInit("checkinPage");
+            headerInit("checkin", "签到明细")
+            $("#checkin_scroll").css({ "width": w, "height": h - headH });
+
+            setTimeout(() => {
+                myScroll = new IScroll('#checkin_scroll', { probeType: 1, mouseWheel: true });
+            }, 300);
+
+            $('#checkin_back').attr("src", picRes['back_arrow.png'])
+            // $('#checkin_header_right_right').html('<img  id="checkin_phone" style="width:28px;">')
+            $('#checkin_header_right_right').addClass("flexCenter")
+            $('#checkin_phone').attr("src", picRes['checkin.png'])
+            $('.item-check').attr("src", picRes['checkin.png']).css("width", "50px");
+
+
+            $("#checkin_phone").click(function () {
+                pageShow("rewardPage");
+
+            });
+            $("#checkinBtn_go").click(function () {
+                pageShow("verifyPage");
+            });
+
+            $("#checkin_back").click(function () {
+                pageUnShow("checkinPage")
+            });
+
+            $("#check_in_7days").click(function () {
+                checkInBonus(7)
+            });
+            $("#check_in_15days").click(function () {
+                checkInBonus(15)
+            });
+            $("#check_in_30days").click(function () {
+                checkInBonus(30)
+            });
+
+        }
+
+        $('#checkInBtn').click(function () {
+            var getToken = window.localStorage.getItem("token");
+            var token = JSON.parse(getToken);
+            var newDate = moment().format("YYYY-MM-DD");
+            var mData = {
+                "date": newDate
+            }
+            $.ajax({
+                type: "post",
+
+                url: API_SERVER + "/v1/eventCheckIn",
+                headers: {
+                    'Authorization': 'Bearer ' + token.token
+                },
+                data: JSON.stringify(mData),
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                beforeSend: function (xmlhttprequest) { },
+                success: function (data) {
+
+                    if (data.code == 0) {
+
+                        $("#calendar-body").html("")
+
+                        getCheckIn();
+                        $("#show_calender").css({
+                            "display": "block"
+                        });
+                        // msgPageObj.show(
+                        //     `恭喜您，签到成功，获得1元奖励`);
+                        msgPageObj.show(`<span style="font-size: 20px;width: 80%;text-align: center;">恭喜您，签到成功!</span>`);
+
+                        setTimeout(() => {
+                            $("#show_calender").css({
+                                "display": "block"
+                            });
+
+                        }, 50);
+                    } else if (data.code == 4043) {
+                        msgPageObj.show(`今天已经签到过了哦！`);
+                    } else if (data.code = 4098) {
+                        msgPageObj.show(`请于会议期间签到，领取更多奖励！`);
+                    } else {
+                        msgPageObj.show(`签到失败！`);
+                    }
+                },
+
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+                },
+            });
+        })
+        // function
+        function getCheckIn() {
+            var getToken = window.localStorage.getItem("token");
+            var token = JSON.parse(getToken);
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/eventCheckIn',
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+
+                    if (data.code == 0) {
+
+                        var totalDays = data.records
+                        $('#show_total_checkIn').text(totalDays);
+                        console.log(totalDays, '=========================>>>');
+                        var today = moment().format("YYYY-MM-DD");
+                        var tomorrow = moment(today).add(1, 'days').format("YYYY-MM-DD");
+
+                        var isCheckIn = data.result.find(date => date == today);
+
+
+
+                        // var dateCounts = {}; // 用于存储每个日期出现的次数
+                        // var totalDays = 0;   // 总天数
+                        // // 遍历数组，统计每个日期出现的次数
+                        // data.result.forEach(function (item) {
+                        //     dateCounts[item] = (dateCounts[item] || 0) + 1;
+                        // });
+                        // // 计算总天数，即不同日期的数量
+                        // for (var date in dateCounts) {
+                        //     totalDays++;
+                        // }
+                        // // 将总天数显示在页面中
+                        // $('#show_total_checkIn').text(totalDays);
+                        // console.log(totalDays,'=========================>>>');
+
+                        if (isCheckIn) {
+                            $("#checkInBtn").css({ "background": "#918e8e" });
+                            $("#checkInBtn").text('已签到');
+                            $(".checkin_btn").css({ "background": "#918e8e" });
+                            $(".checkin_btn").text('已签到');
+                        } else {
+                            $("#checkInBtn").css({ "background": "linear-gradient(281deg, #EA372A 48.76%, #F83D3D 86.99%)" });
+                            $("#checkInBtn").text('签到');
+                            $(".checkin_btn").css({ "background": "linear-gradient(281deg, #EA372A 48.76%, #F83D3D 86.99%)" });
+                            $(".checkin_btn").text('签到');
+                        }
+
+                        function generateCalendar(year, month) {
+
+                            var firstDay = new Date(year, month - 1, 1);
+                            var lastDay = new Date(year, month, 0);
+                            var daysInMonth = lastDay.getDate();
+                            var startingDay = firstDay.getDay();
+                            var calendarBody = document.getElementById('calendar-body');
+                            calendarBody.innerHTML = '';
+                            // calendarBody ? calendarBody.innerHTML = '' : '';
+
+                            var currentMonthYear = document.getElementById('current-month-year');
+                            currentMonthYear && (currentMonthYear.textContent = new Date(year, month - 1).toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: '2-digit'
+                            }));
+
+
+
+                            var day = 1;
+                            for (var i = 0; i < 8; i++) {
+                                var row = document.createElement('tr');
+                                row.classList.add('tr_table');
+
+                                for (var j = 0; j < 7; j++) {
+                                    var cell = document.createElement('td');
+                                    if (i === 0 && j < startingDay) {
+                                        // Add empty cells for days before the first day of the month
+                                        cell.textContent = '';
+                                        cell.classList.add('empty');
+                                    } else if (day <= daysInMonth) {
+                                        cell.textContent = day;
+                                        cell.classList.add('Days_group'); // Add a class for styling (e.g., days with numbers)
+                                        cell.id = 'day_' + day; // Set the id attribute if needed
+                                        cell.setAttribute('value', day); // Set a value attribute if needed
+                                        day++;
+                                    }
+                                    if (cell.classList.value != "empty" && cell.classList.value != "Days_group") {
+                                        cell.classList.add('NULL');
+                                    }
+
+                                    // check data check in
+                                    var dataArray = [];
+                                    dataArray.push(today)
+
+                                    if (data.result.length == 0) {
+                                        $.each(dataArray, function (index, DataAllDays) {
+                                            var text = DataAllDays
+                                            var month = text[5] + text[6]
+                                            var secondText = text[8] + text[9]
+                                            var secondYear = text[0] + text[1] + text[2] + text[3]
+                                            var currentDay = document.getElementsByClassName("Days_group")
+                                            loobchack(secondText, month, currentMonthYear, secondYear);
+                                        })
+                                    } else {
+                                        $.each(data.result, function (index, DataAllDays) {
+                                            var text = DataAllDays
+                                            var month = text[5] + text[6]
+                                            var secondText = text[8] + text[9]
+                                            var secondYear = text[0] + text[1] + text[2] + text[3]
+                                            var currentDay = document.getElementsByClassName("Days_group")
+                                            loobchack(secondText, month, currentMonthYear, secondYear);
+                                        })
+
+
+                                    }
+
+
+
+
+                                    function loobchack(secondText, month, currentMonthYear, secondYear) {
+
+                                        var currentDate = new Date();
+                                        var currentMonth = currentDate.getMonth() + 1;
+                                        var d = new Date();
+                                        if (currentMonthYear) {
+                                            var currentmon = currentMonthYear.textContent
+                                            currentmon_2 = currentmon[0] + currentmon[1]
+                                            currenyear = currentmon[3] + currentmon[4] + currentmon[5] + currentmon[6]
+
+                                            $('.Days_group').unbind();
+                                            $('.Days_group').each(function (index, element) {
+                                                var value = $(element).attr('value');
+                                                value = value >= 1 && value <= 9 ? (value < 10 ? "0" : "") + value : value;
+                                                if (data.result.length > 0) {
+                                                    var tomorrow2 = tomorrow[8] + tomorrow[9]
+                                                    var tomorrow3 = tomorrow[5] + tomorrow[6]
+                                                    var tomorrow4 = tomorrow[0] + tomorrow[1] + tomorrow[2] + tomorrow[3]
+
+                                                    // console.log(tomorrow2, value,month,tomorrow3,tomorrow4,secondYear);
+                                                    // if (tomorrow2 == value && tomorrow3 == month && tomorrow4 == secondYear) {
+                                                    //     var tomorrow_check = document.createElement('span');
+                                                    //     tomorrow_check.textContent = '今';
+                                                    //     tomorrow_check.style.position = 'absolute';
+                                                    //     tomorrow_check.style.fontSize = '8px';
+                                                    //     tomorrow_check.style.transform = 'translate(32%, -163%)';
+                                                    //     tomorrow_check.style.padding = '5px';
+                                                    //     tomorrow_check.style.background = '#F02E2E';  // Set the background color using #F02E2E
+                                                    //     tomorrow_check.style.color = 'wheat';
+                                                    //     tomorrow_check.style.borderRadius = '100%';
+                                                    //     tomorrow_check.style.width = '34px';  // Set the width property
+                                                    //     tomorrow_check.style.height = '18px';  // Set the height property
+                                                    //     tomorrow_check.style.borderRadius = '11px';  // Set the border radius property
+                                                    //     tomorrow_check.style.display = 'flex';
+                                                    //     tomorrow_check.style.alignItems = 'center';
+                                                    //     tomorrow_check.style.justifyContent = 'center';
+
+                                                    //     $(element).append(tomorrow_check);
+                                                    //     $(element).css({
+                                                    //         'color': '#333',
+                                                    //         'border-radius': '3px',
+                                                    //         'position': 'relative'
+                                                    //     });
+                                                    // }
+                                                    if (value == secondText && currentmon_2 == month && currenyear == secondYear) {
+                                                        $(element).removeClass('Days_group').addClass('active checked');
+                                                        $(element).addClass('active');
+                                                        var today2 = today[8] + today[9]
+                                                        var today3 = today[5] + today[6]
+                                                        var today4 = today[0] + today[1] + today[2] + today[3]
+                                                        var checktoday = data.result[0]
+                                                        var checktoday2 = checktoday[5] + checktoday[6]
+                                                        var checktoday3 = checktoday[0] + checktoday[1] + checktoday[2] + checktoday[3]
+                                                        if (value == today2 && today3 == checktoday2 && today4 == checktoday3) {
+                                                            var newToday = document.createElement('span');
+                                                            newToday.textContent = '今';
+                                                            newToday.style.position = 'absolute';
+                                                            newToday.style.fontSize = '8px';
+                                                            newToday.style.transform = 'translate(32%, -163%)';
+                                                            newToday.style.padding = '5px';
+                                                            newToday.style.background = 'red';
+                                                            newToday.style.color = 'wheat';
+                                                            newToday.style.borderRadius = '100%';
+                                                            $(element).append(newToday);
+                                                            $(element).css({
+                                                                'background': 'rgba(240, 46, 46, 0.10)',
+                                                                'color': '#333',
+                                                                'border-radius': '3px',
+                                                                'border': '1px solid #F02E2E',
+                                                                'position': 'relative'
+                                                            });
+                                                            $("#checkInBtn").css({ "background": "#918e8e", });
+                                                            $("#checkInBtn").text('已签到');
+                                                            $(".checkin_btn").css({ "background": "#918e8e", });
+                                                            $(".checkin_btn").text('已签到');
+                                                            $("#Signed").css({ "display": "block", });
+
+
+                                                            $("#checkInBtn").off("click");
+
+
+                                                        }
+
+
+
+                                                        if (data.result.length > 0) {
+                                                            var currentElement = data.result[i];
+                                                            var newImage = document.createElement('img');
+                                                            newImage.alt = 'check-in';
+                                                            newImage.width = 15;
+                                                            newImage.height = 15;
+                                                            newImage.classList.add('img-check');
+                                                            newImage.style.position = 'absolute';
+                                                            newImage.style.bottom = '2px';
+                                                            newImage.style.left = '50%'; // Center the image horizontally
+                                                            newImage.style.transform = 'translateX(-50%)'; // Adjust to center the image
+
+                                                            $(element).append(newImage);
+
+                                                            $(element).css({
+                                                                'color': "#333",
+                                                                'border-radius': "3px",
+                                                                'position': "relative"
+                                                            });
+                                                        }
+
+
+                                                    }
+                                                }
+
+                                            });
+
+                                            $('.img-check').attr("src", picRes['checkinlogo.png'])
+
+                                            row.appendChild(cell);
+                                            calendarBody.appendChild(row);
+                                            setTimeout(() => {
+                                                myScroll = new IScroll('#checkin_scroll', { probeType: 1, mouseWheel: true });
+                                            }, 300);
+                                        }
+
+                                    }
+
+
+                                }
+
+
+                            }
+                        }
+
+                        var currentYear = new Date().getFullYear();
+                        var currentMonth = new Date().getMonth() + 1;
+                        generateCalendar(currentYear, currentMonth);
+                        $('#prev-month').unbind().on('click', function () {
+                            currentYear = (currentMonth === 1) ? currentYear - 1 : currentYear;
+                            currentMonth = (currentMonth === 1) ? 12 : currentMonth - 1;
+                            generateCalendar(currentYear, currentMonth);
+                        });
+                        $('#next-month').unbind().on('click', function () {
+                            currentYear = (currentMonth === 12) ? currentYear + 1 : currentYear;
+                            currentMonth = (currentMonth === 12) ? 1 : currentMonth + 1;
+                            generateCalendar(currentYear, currentMonth);
+                        });
+
+                    }
+
+                    // }
+
+                }
+            })
+        }
+
+        function checkInBonus(days) {
+
+            loaderObj.show();
+
+            var getToken = window.localStorage.getItem("token");
+            var token = JSON.parse(getToken);
+
+            $.ajax({
+
+                type: "post",
+
+                url: API_SERVER + `/v1/eventCheckIn/bonus/${days}`,
+                headers: {
+                    'Authorization': 'Bearer ' + token.token
+                },
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                beforeSend: function (xmlhttprequest) { },
+                success: function (data) {
+                    if (data.code == 0) {
+                        loaderObj.unShow();
+                        console.log(data.result);
+                    } else {
+                        loaderObj.unShow();
+                        msgPageObj.show(getStatusCode(data.code))
+                        msgObj.unShow()
+                    }
+                },
+
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+                },
+            });
+
+        }
+        this.call = function () {
+            getCheckIn()
+        }
+
+    }
+
+</script>

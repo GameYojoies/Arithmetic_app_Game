@@ -1,0 +1,697 @@
+<style>
+    .slider_container {
+        position: relative;
+        width: 512px;
+        height: 215px;
+        overflow: hidden;
+        touch-action: none;
+        /* 禁止默认的触摸滚动行为 */
+    }
+
+    .background_image_slider {
+        /* width: 384px;
+        height: 161.25px; */
+        /* background-image: url('./pic/bg/BG-home-2.png'); */
+        /* 替换 'your_background_image.jpg' 为你的背景图路径 */
+        position: absolute;
+    }
+
+    .fixed-image {
+        position: absolute;
+        top: 50%;
+        left: 10%;
+        /* 初始位置，可以根据需要调整 */
+        transform: translate(-50%, -50%);
+        width: 50px;
+        /* 调整小图的宽度 */
+        height: auto;
+        z-index: 2;
+        user-drag: none;
+        /* 禁止用户拖拽元素 */
+        user-select: none;
+        /* 禁止用户选择元素内容 */
+        cursor: grab;
+    }
+</style>
+
+<div id="loginPage" class="flexTop pageInit">
+
+    <div style="height: 20px;"></div>
+
+    <div style="height: 110px;">
+
+        <div style="height: 20px;"></div>
+
+        <div class="flexCenter loginImg">
+            <img src="./pic/logo/logoApp.png" style="width: 140px; height: 40px;" />
+        </div>
+
+        <div style="height: 10px;"></div>
+
+        <div class="flexCenterColW100">
+            <div style="font-size: 20px; color: #fff;">全球算力一体化服务平台</div>
+
+        </div>
+
+    </div>
+
+    <div style="height: 30px;"></div>
+
+    <div id="login_scroll" style="width: 100%; overflow: hidden;">
+
+        <div style="display: flex; flex-direction: column; width: 100%;" class="flexTop">
+
+            <!-- box login and register -->
+            <div class="flexTop"
+                style="width: 85%; height: auto; border-radius: 20px; box-shadow: 0px 10px 20px 0px #0000001A; background: #fff; flex-direction: column; padding: 20px 0;">
+                <div style="height: 10px;"></div>
+
+                <div class="flexCenter" style="width: 90%; gap: 35%; color: #8991A4;">
+
+                    <span id="login_login" style="font-weight: bold; font-size: 22px; ">登录</span>
+                    <span id="login_register" style="font-weight: bold; font-size: 22px;">注册</span>
+                </div>
+
+                <div style="height: 30px;"></div>
+
+                <div class="coverBoxInput">
+                    <img class="inputAllImg" id="login_phone">
+                    <input id="mobileLogin" class="boxInput" type="number" placeholder="Phone" pattern="/^-?\d+\.?\d*$/"
+                        onKeyPress="if(this.value.length==11) return false;" />
+                </div>
+
+                <div style="height: 15px;"></div>
+
+                <div class="coverBoxInput">
+                    <img class="inputAllImg" id="login_pass">
+                    <input id="password" class="boxInput" type="password" placeholder="输入密码" />
+                </div>
+
+                <div id="display_none" style="width: 100%; display: none; flex-direction: column;" class="flexTop">
+
+                    <div style="height: 15px;"></div>
+
+                    <div class="coverBoxInput">
+                        <img class="inputAllImg" id="regist_password">
+                        <input id="r_password_again" class="boxInput" type="password" placeholder="密码二次确认" />
+                    </div>
+
+                    <div style="height: 15px;"></div>
+
+                    <div class="coverBoxInput">
+                        <img class="inputAllImg" id="login_re_pass">
+                        <input id="register_ref" class="boxInput" type="text" placeholder="邀请码" />
+                    </div>
+
+                    <div style="height: 15px;"></div>
+
+                    <div class="coverBoxInput">
+                        <img class="inputAllImg" id="login_regist_verify">
+                        <input id="regist_name" class="boxInput" type="text" placeholder="昵称" />
+                    </div>
+
+
+                    <div style="height: 15px;"></div>
+                    <div class="coverBoxInput">
+                        <img class="inputAllImg" id="login_regist_passname">
+                        <input id="regist_passport" class="boxInput" type="text" placeholder="真实姓名" />
+                    </div>
+
+                    <div style="height: 15px;"></div>
+                    <div class="coverBoxInput">
+                        <img class="inputAllImg" id="login_regist_passnum" style="width: 17px;">
+                        <input id="regist_passportnum_regis" class="boxInput" type="text" placeholder="身份证号" />
+                    </div>
+
+
+                    <div style="height: 20px;"></div>
+                    <div style="display: flex; gap: 10px; width: 90%; ">
+                        <input id="check_accept_regis" type="checkbox" style="accent-color: #ED3D2E; width: 20px;">
+                        <span style="font-size: 16px; color: #8991A4;">我接受条款和隐私政策</span>
+                    </div>
+                </div>
+
+                <div style="height: 10px;"></div>
+
+                <!-- forgot -->
+                <!-- <div style="width: 90%;" class="flexRight">
+                    <span id="login_forgot" style="font-size: 12px; color: #01221D; font-weight: bold;">忘记密码 ？</span>
+
+                </div> -->
+
+
+                <div style="height: 30px;"></div>
+
+                <div id="loginBtn" class="btnComm">登录</div>
+                <div id="login_registerBtn_fun" class="btnComm" style="display: none;">注册</div>
+
+                <div style="height: 10px;"></div>
+
+                <div style="font-size: 12px; width: 90%; margin-top: 5px;" class="flexCenter" id="agreement_box">
+                    <input type="checkbox" id="checkBtnAgreementBtnLogin"
+                        style="width:16px;height:16px;border-radius: 8px;border: 1px #999999 solid ; "
+                        class="flexCenter bg-accent-color">
+                    </input>
+                    <div style="width:5px"></div>
+                    <span style="color: #000;">我已阅读并同意 《</span>
+                    <span style="color:#457BFF;" id="clickshow1">用户协议</span>
+                    <span style="color: #000;">》 及 《</span>&nbsp;
+                    <span style="color:#457BFF ;" id="clickshow2">隐私条款</span>
+                    <span style="color: #000;">》</span>
+                </div>
+
+
+            </div>
+
+            <div style="height: 30px;"></div>
+        </div>
+
+    </div>
+
+</div>
+
+<div id="sliderContainer"
+    style="position: absolute; top: 0; display: none; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6);   z-index: 10;"
+    class="flexCenter">
+
+    <div class="slider_container" style="position: relative;">
+        <!-- <img class="background_image_slider" src="path/to/your/background/image.jpg" style="width: 100%; height: 100%; position: absolute;" alt="Background Image">
+        <img src="./pic/logo/logoApp.png" style="position: absolute;" alt="Fixed Image" class="fixed-image" id="fixedImage"> -->
+        <img class="background_image_slider" style="width: 100%; height: 100%; position: absolute;"
+            alt="Background Image">
+        <img style="position: absolute;border: 1px solid #ff000080;" alt="Fixed Image" class="fixed-image"
+            id="fixedImage">
+    </div>
+</div>
+<script>
+
+    var loginObj = new login();
+    loginObj.init();
+
+    function login() {
+
+        var isAgree = false;
+        var blockImage
+        var bgImage
+        var y
+        var ImgId
+        var xPosition
+        var checkLoginR
+        this.init = function () {
+
+            callApp('ask_deviceId');
+            askDeviceIdFun();
+            setAllUILang("login")
+            pageInit("loginPage");
+            $("#login_scroll").css({ "width": w, "height": h - 160 });
+
+            setTimeout(() => {
+                myScroll = new IScroll('#login_scroll', { probeType: 1, mouseWheel: true });
+            }, 300);
+
+            $('#login_phone').attr("src", picRes['phone.png'])
+            $('#login_pass').attr("src", picRes['password.png'])
+            $('#regist_password').attr("src", picRes['password.png'])
+            $('#login_re_pass').attr("src", picRes['repass.png'])
+            $('#login_regist_verify').attr("src", picRes['verify.png'])
+            $('#login_regist_passname').attr("src", picRes['passname.png'])
+            $('#login_regist_passnum').attr("src", picRes['passnumber.png'])
+
+
+            $("#login_login").addClass("under_line")
+            $("#login_login").click(function () {
+                $("#display_none, #login_registerBtn_fun").css({ "display": "none" });
+                $("#loginBtn,#login_forgot,#agreement_box").css({ "display": "flex" });
+                $("#login_login").addClass("under_line")
+                $("#login_register").removeClass("under_line")
+
+            });
+
+            $("#login_register").click(function () {
+                $("#display_none, #login_registerBtn_fun").css({ "display": "flex" });
+                $("#loginBtn, #login_forgot,#agreement_box").css({ "display": "none" });
+                $("#login_login").removeClass("under_line")
+                $("#login_register").addClass("under_line")
+                myScroll = new IScroll('#login_scroll', { probeType: 1, mouseWheel: true });
+            });
+
+
+            $("#login_forgot").click(function () {
+                pageShow("forgotPage");
+            });
+
+            $("#clickshow1").click(function () {
+                pageShow("agreementPage");
+            });
+            $("#clickshow2").click(function () {
+                pageShow("policyPage");
+            });
+            $("#sliderContainer").click(function () {
+                $("#sliderContainer").css({ "display": "none", })
+            });
+
+
+            $("#loginBtn").unbind().click(function () {
+
+                callApp('ask_deviceId');
+                var mobile = $("#mobileLogin").val();
+                var pass = $("#password").val();
+                var checkbox = $("#checkBtnAgreementBtnLogin");
+                if (mobile == "" && pass == "" && !checkbox.prop('checked')) {
+                    msgPageObj.show(NSLang('register.fill'))
+                }
+                if (mobile != "" && pass == "") {
+                    msgPageObj.show(NSLang('login.password'))
+                }
+                if (mobile == "" && pass != "") {
+                    msgPageObj.show(NSLang('login.phone'))
+                }
+                if (mobile != "" && pass != "" && !checkbox.prop('checked')) {
+                    msgPageObj.show("请确认隐私政策")
+                }
+                if (mobile != "" && pass != "" && checkbox.prop('checked')) {
+                    loaderObj.show();
+                    setTimeout(function () {
+                        checkLoginR = "login"
+                        fetchSliderConfigAndData()
+                        // loginFun();
+                    }, 200);
+                }
+
+            });
+
+            $("#login_registerBtn_fun").unbind().click(function () {
+
+                var name = $("#regist_name").val();
+                var mobile = $("#mobileLogin").val();
+                var p = $("#password").val();
+                var p_again = $("#r_password_again").val();
+                var inviteCode = $("#register_ref").val();
+                var r_name = $("#regist_passport").val();
+                var r_passport = $("#regist_passportnum_regis").val();
+                var checkbox = $("#check_accept_regis");
+
+                console.log('click', name, mobile, p.length, inviteCode, r_name, r_passport.length, checkbox.prop('checked'));
+
+
+                if ((mobile == '') || (p == '') || (p_again == '') || (name == '') || (inviteCode == '') || (r_name == '') || (r_passport == '') || !checkbox.prop('checked')) {
+                    msgPageObj.show(NSLang('register.fill'))
+                }
+
+                else if ((mobile.length != 11) && (p != '') && (p_again != '') && (name != '') && (inviteCode != '') && (r_name != '') && (r_passport != '') && checkbox.prop('checked')) {
+                    msgPageObj.show(NSLang('register.digit'))
+                }
+
+                else if ((mobile != "") && (p != '') && (p_again != '') && (p.length > 30) && (name != '') && (inviteCode != '') && (r_name != '') && (r_passport != '') && checkbox.prop('checked')) {
+                    msgPageObj.show(NSLang('register.pass'))
+                }
+                else if ((mobile != "") && (p != '') && (p_again != '') && (p.length < 6) && (name != '') && (inviteCode != '') && (r_name != '') && (r_passport != '') && checkbox.prop('checked')) {
+                    msgPageObj.show(NSLang('register.pass'))
+                }
+
+                else if ((mobile != "") && (p != '') && (p_again != '') && (p.length > 30) && (name != '') && (inviteCode != '') && (r_name != '') && (r_passport != '') && checkbox.prop('checked')) {
+                    msgPageObj.show(NSLang('register.pass'))
+                }
+                else if ((mobile != "") && (p != '') && (p_again != '') && (p.length < 6) && (name != '') && (inviteCode != '') && (r_name != '') && (r_passport != '') && checkbox.prop('checked')) {
+                    msgPageObj.show(NSLang('register.pass'))
+                }
+                else if ((mobile != "") && (p != '') && (p_again != '') && (p_again != p) && (p.length <= 30) && (p.length >= 6) && (p_again.length <= 30) && (p_again.length >= 6) && (name != '') && (inviteCode != '') && (r_name != '') && (r_passport != '')) {
+                    msgPageObj.show("两次密码输入不一致")
+                }
+
+                else if ((mobile != "") && (p != '') && (p_again != '') && (name != '') && (inviteCode != '') && (r_name != '') && (r_passport != '') && (r_passport.length < 11) && checkbox.prop('checked')) {
+                    msgPageObj.show(NSLang('register.idNum'))
+                }
+                else if ((mobile != "") && (p != '') && (p_again != '') && (name != '') && (inviteCode != '') && (r_name != '') && (r_passport != '') && (r_passport.length > 19) && checkbox.prop('checked')) {
+                    msgPageObj.show(NSLang('register.idNum'))
+                }
+                else if (mobile != '' && p != '' && p_again != '' && name != '' && inviteCode != '' && r_name != '' && r_passport != '' && !checkbox.prop('checked')) {
+                    msgPageObj.show("注册前请接受条款和隐私政策");
+                }
+                else {
+                    setTimeout(function () {
+                        loaderObj.show();
+                        checkLoginR = "register"
+                        fetchSliderConfigAndData()
+                        // registerFun();
+                    }, 200);
+                }
+            });
+            var rotated = true;
+
+        }
+
+
+        function fetchSliderConfigAndData() {
+            $.ajax({
+                type: "GET",
+                url: API_SERVER + "/v1/auth/validate/side-image-config",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (configData) {
+                    loaderObj.unShow();
+
+                    configData = configData.result
+                    handleSliderConfig(configData);
+                    console.log(configData, '================获取滑块配置和数据函数===================>>>>');
+
+                    function handleSliderConfig(configData) {
+                        if (configData[0] == 1 && configData[1] == 1) {
+                            fetchSliderData();
+                        }
+                        if (configData[0] == 0 && configData[1] == 1) {
+                            if (checkLoginR === "register") {
+                                loginObj.registerFun();
+                            }
+                            if (checkLoginR === "login") {
+                                fetchSliderData();
+                            }
+                        }
+                        if (configData[0] == 1 && configData[1] == 0) {
+                            if (checkLoginR === "register") {
+                                fetchSliderData();
+                            }
+                            if (checkLoginR === "login") {
+                                loginObj.loginFun();
+                            }
+                        }
+                        if (configData[0] == 0 && configData[1] == 0) {
+                            if (checkLoginR === "register") {
+                                loginObj.registerFun();
+                                checkLoginR = null;
+                            }
+                            if (checkLoginR === "login") {
+                                loginObj.loginFun();
+                                checkLoginR = null;
+                            }
+                        }
+
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Failed to fetch slider config:", error);
+                }
+            });
+        }
+
+        // 获取滑块数据函数
+        function fetchSliderData() {
+            $('#sliderContainer').css({ "display": "flex", })
+            fixedImage.style.left = `${0}px`;
+            $.ajax({
+                type: "GET",
+                url: API_SERVER + "/v1/auth/validate/side-image",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (sliderData) {
+                    // updateSlider(sliderData);
+                    console.log(sliderData, '================获取滑块数据函数===================>>>>');
+                    blockImage = sliderData.result.block;
+                    bgImage = sliderData.result.bg;
+                    y = ((sliderData.result.y) + 33) * (0.8 * w / 512);
+                    ImgId = sliderData.result.id;
+                    $(".slider_container").css({ "width": 0.8 * w, "height": 0.8 * w * 215 / 512 });
+
+                    $("#fixedImage").css({ "width": 0.8 * w / 512 * 66 })
+
+                    captchachack(blockImage, bgImage, y)
+
+                },
+                error: function (xhr, status, error) {
+                    console.error("Failed to fetch slider data:", error);
+                }
+            });
+        }
+
+        function captchachack(block, bg, y) {
+            $('.background_image_slider').attr("src", bg)
+            $('#fixedImage').attr("src", block)
+            $('#fixedImage').css("top", y);
+            slider_cap();
+
+        }
+
+        function slider_cap() {
+
+            var sliderContainer = document.getElementById('sliderContainer');
+            var fixedImage = document.getElementById('fixedImage');
+            var isDragging = false;
+
+            fixedImage.addEventListener('mousedown', startDrag);
+            fixedImage.addEventListener('touchstart', startDrag);
+
+            function startDrag(e) {
+                isDragging = true;
+                window.addEventListener('mousemove', drag);
+                window.addEventListener('touchmove', drag);
+                window.addEventListener('mouseup', stopDrag);
+                window.addEventListener('touchend', stopDrag);
+                fixedImage.style.transition = 'none'; // 移除过渡效果以确保实时性
+            }
+
+            function drag(e) {
+                if (isDragging) {
+                    var xPosition = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+                    var containerRect = sliderContainer.getBoundingClientRect();
+                    var minX = containerRect.left;
+                    var maxX = 0.8 * w;
+                    var newPosition = xPosition - fixedImage.clientWidth / 2;
+
+                    // 确保在范围内
+                    newPosition = Math.max(minX, Math.min(newPosition, maxX));
+
+                    fixedImage.style.left = `${newPosition}px`;
+                }
+            }
+
+            //禁止拖拽
+            function stopDrag() {
+                isDragging = false;
+                window.removeEventListener('mousemove', drag);
+                window.removeEventListener('touchmove', drag);
+                window.removeEventListener('mouseup', stopDrag);
+                window.removeEventListener('touchend', stopDrag);
+                fixedImage.style.transition = ''; // 恢复过渡效果
+
+                xPosition = (parseInt(fixedImage.style.left) / (0.8 * w / 512)) - (33)
+
+                if (checkLoginR === "register") {
+                    loginObj.registerFun();
+                    checkLoginR = null
+                }
+                else if (checkLoginR === "login") {
+                    loginObj.loginFun();
+                    checkLoginR = null
+                }
+
+            }
+        }
+
+
+
+        this.loginFun = function () {
+            loaderObj.show();
+            var mData = {
+                "mobile": $("#mobileLogin").val(),
+                "password": $("#password").val(),
+                "vid": ImgId,
+                "x": parseInt(xPosition)
+            }
+
+            if (deviceId) {
+                mData = {
+                    "mobile": $("#mobileLogin").val(),
+                    "password": $("#password").val(),
+                    "vid": ImgId,
+                    "x": parseInt(xPosition)
+                }
+            }
+
+            $.ajax({
+                type: "post",
+                url: API_SERVER + "/v1/auth/login",
+                data: JSON.stringify(mData),
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                beforeSend: function (xmlhttprequest) {
+                },
+                success: function (data) {
+                    loaderObj.unShow();
+                    if (data.code == 0) {
+                        // location.reload();
+                        cleanInput();
+                        $("#sliderContainer").css({ "display": "none", })
+                        var tokenObj = data.result;
+
+                        localStorage.setItem('token', JSON.stringify(tokenObj));
+                        mainObj.checkIsLogin();
+                        $("#newsPopup").css({ "display": "block", })
+                        $("#popupNews").css({ "display": "block", })
+
+
+                    }
+                    else {
+                        $('#sliderContainer').css({ "display": "none", })
+                        msgPageObj.show(getStatusCode(data.code))
+                        fixedImage.style.left = `${0}px`;
+                    }
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+                },
+                complete: function () {
+                }
+            });
+
+            function cleanInput() {
+                $("#username").val('');
+                $("#password").val('');
+            }
+        }
+
+
+        this.registerFun = function () {
+
+            loaderObj.show();
+            var mData = {
+                "mobile": $("#mobileLogin").val(),
+                "name": $("#regist_name").val(),
+                "password": $("#password").val(),
+                "inviteCode": $("#register_ref").val(),
+                "passportName": $("#regist_passport").val(),
+                "passportNumber": $("#regist_passportnum_regis").val(),
+                "vid": ImgId,
+                "x": parseInt(xPosition)
+            }
+            $.ajax({
+                type: "post",
+                url: API_SERVER + "/v1/auth/signUp",
+                data: JSON.stringify(mData),
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                beforeSend: function (xmlhttprequest) {
+                },
+                success: function (data) {
+                    loaderObj.unShow();
+                    if (data.code == 0) {
+                        // cleanInput();
+                        msgPageObj.show(NSLang('register.success'))
+                        $("#sliderContainer").css({ "display": "none", })
+
+                        setTimeout(function () {
+                            msgPageObj.unShow();
+                            $("#login_login").click()
+                            myScroll.refresh()
+                            // this.loginFun();
+                            //    this.loginFun()
+                        }, 1000)
+                    }
+                    else {
+
+                        $("#sliderContainer").css({ "display": "none", })
+                        msgPageObj.show(getStatusCode(data.code))
+                    }
+                },
+                error: function (xmlhttprequest, error) {
+
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+                    cleanInput();
+                },
+                complete: function () {
+                }
+            });
+
+            function cleanInput() {
+                $("#mobileLogin").val("")
+                $("#regist_name").val("")
+                $("#password").val("")
+                $("#regist_password").val("")
+                $("#register_ref").val("")
+                $("#regist_passport").val("")
+                $("#regist_passportnum_regis").val("")
+            }
+
+        }
+
+
+        this.checkLoginStatusWithRefreshToken = function () {
+
+            if (token == null) {
+                return;
+            }
+            var mData = { "token": token.refresh };
+
+            $.ajax({
+                type: "post",
+                url: API_SERVER + "/v1/auth/refresh",
+                data: JSON.stringify(mData),
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                beforeSend: function (xmlhttprequest) {
+                },
+                success: function (data) {
+
+                    if (data.code == 0) {
+                        console.log('===>refresh success');
+                        var tokenObj = data.result;
+                        localStorage.setItem('token', JSON.stringify(tokenObj));
+                        var tokenLocal = localStorage.getItem('token');
+                        if (tokenLocal != null) {
+                            token = JSON.parse(tokenLocal);
+                        }
+
+                        pageUnShow('loginPage');
+                    } else {
+                        console.log('===>refresh fail');
+                    }
+                },
+                error: function (xmlhttprequest, error) {
+                    console.log(error);
+                },
+                complete: function () {
+                }
+            });
+
+        }
+
+
+        //极光推送可能拿不到设备id，多次请求确保可以拿到  อาจไม่สามารถรับรหัสอุปกรณ์ได้ โปรดส่งคำขอหลายรายการเพื่อให้แน่ใจว่าสามารถรับได้
+        function askDeviceIdFun() {
+            if (checkIsAndroid()) {
+                setTimeout(function () {
+                    callApp('ask_deviceId');
+                }, 1000);
+                setTimeout(function () {
+                    callApp('ask_deviceId');
+                }, 3000);
+                setTimeout(function () {
+                    callApp('ask_deviceId');
+                }, 5000);
+                setTimeout(function () {
+                    callApp('ask_deviceId');
+                }, 7000);
+                setTimeout(function () {
+                    callApp('ask_deviceId');
+                }, 9000);
+                setTimeout(function () {
+                    callApp('ask_deviceId');
+                }, 11000);
+                setTimeout(function () {
+                    callApp('ask_deviceId');
+                }, 13000);
+                setTimeout(function () {
+                    callApp('ask_deviceId');
+                }, 15000);
+            }
+        }
+    }
+
+</script>

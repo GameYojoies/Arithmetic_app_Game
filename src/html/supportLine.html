@@ -1,0 +1,77 @@
+<div class="menuPage bg-my" id="supportlinePage"
+    style="position: absolute; z-index: 10; background: #F5F5F5;  background-repeat: no-repeat; background-size: cover;">
+    <div id="supportline_header">
+    </div>
+    <div id="scroller_supportline">
+
+        <div id="supportline_body"
+            style=" background: #fff;width: 100%; display: flex; align-items: center; flex-direction: column; ">
+            <div style="height: 10px;"></div>
+
+            <div style="width: 90%; margin:  0 auto;    ">
+                <span>Line：</span>
+
+                <div style="height: 15px;"></div>
+                <input type="line" style="border: none;  color: #B3B3B3; " placeholder="请输入Line" id="input_line">
+                <div style="height: 10px;"></div>
+
+
+            </div>
+
+
+        </div>
+        <div style="height: 20px;"></div>
+        <div id="btn_line"
+            style="color: #fff;  opacity:0.5;  border-radius: 3px;   display: flex; align-items: center;justify-content: center; background: linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%); width: 90%; margin:  0 auto; height: 50px;">
+            <span>提交</span>
+        </div>
+        <div style="height: 20px;"></div>
+        <div
+            style="width: 70%; margin:  0 auto; color: #414655;     display: flex;align-items: center;justify-content: center;">
+            为了您的隐私安全，信息在确认后将无法修改</div>
+        <div style="height: 10px;"></div>
+        <div
+            style="width: 70%; margin:  0 auto; color: #414655;     display: flex;align-items: center;justify-content: center;">
+            如需帮助，请联系 <span style="color: #2674FF ;"> 人工客服</span> </div>
+    </div>
+
+</div>
+
+<script>
+    var supportlineObj = new supportline();
+    supportlineObj.init();
+
+    function supportline() {
+        var myScroll;
+        this.init = function () {
+            pageInit("supportlinePage");
+            headerInit("supportline", "Line")
+            $("#supportline_Page").css({ "width": w, "height": h });
+            $("#scroller_supportline").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+            myScroll = new IScroll('#scroller_supportline', { probeType: 1, mouseWheel: true });
+            $('#input_line').on('keyup', function () {
+                var input_line = $('#input_line').val().trim(); // ให้ตัดช่องว่างด้านหน้าและด้านหลัง
+
+                if (input_line === '') {
+                    $('#btn_line').css({ "opacity": "0.5" });
+                } else {
+                    $('#btn_line').css({ "opacity": "1" });
+                }
+            });
+
+
+
+
+        }
+        this.call = function () {
+
+            $('#supportline_Page').transition({
+                x: w
+            }, 0);
+        }
+
+
+
+    }
+
+</script>

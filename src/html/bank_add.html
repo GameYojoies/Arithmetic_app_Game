@@ -1,0 +1,300 @@
+<div class="menuPage bg-my" id="bank_addPage" style="position: absolute; background: #FAFAFA;">
+    <div id="bank_add_header">
+    </div>
+
+    <!-- bank detail add -->
+    <div id="scroller_bank_add">
+        <div id="bank_add_body"
+            style="height: 900px; width: 100%; display: flex; align-items: center; flex-direction: column;">
+
+            <div style="padding: 7px; font-size: 16px; width: 100%; background: #FF37371A; color: #FF5454; height: 40px; gap: 4px;"
+                class="flexLeft">
+                <img id="warn_icons" alt="" style="height: 16px; height: 16px;">
+                <span style=" padding: 5px; margin: 5px;">请确保持卡人姓名与此银行卡开户人员姓名一致，否则无法提款</span>
+            </div>
+
+            <div style="width: 90%;">
+                <div style="height: 20px;"></div>
+                <span style="color: #2F3244; font-size: 18px; font-weight: bold;">真实姓名</span>
+                <div style="height: 10px;"></div>
+                <input id="bank_username" type="text" placeholder="请填写真实姓名"
+                    style="font-size: 18px; padding:0 5%; border: 1px solid #82848F ;width: 90%; height: 44px; border-radius: 4px; background: transparent;">
+            </div>
+
+            <div style="width: 90%;">
+                <div style="height: 20px;"></div>
+                <span style="color: #2F3244; font-size: 18px; font-weight: bold;">所属银行</span>
+                <div style="height: 10px;"></div>
+                <!-- <div style="padding:0 5%; border: 1px solid #82848F ;width: 90%; height: 44px; 
+                border-radius: 4px; background: transparent;" class="flexSpac">
+                    <span id="bank_name">请选择银行</span>
+                    <img id="click_to_show_bank_name" style="height: 16px; width: 16px;">
+                </div> -->
+
+                <input id="bank_card_bankname" type="text" placeholder="请输入银行名称" pattern="/^-?\d+\.?\d*$/"
+                    onKeyPress="if(this.value.length==100) return false;"
+                    style="font-size: 18px; padding:0 5%; border: 1px solid #82848F ;width: 90%; height: 44px; border-radius: 4px; background: transparent;">
+            </div>
+
+            <div style="width: 90%;">
+                <div style="height: 20px;"></div>
+                <span style="color: #2F3244; font-size: 18px; font-weight: bold;">银行卡号</span>
+                <div style="height: 10px;"></div>
+                <input id="bank_card_number" type="text" placeholder="请输入银行卡号" pattern="/^-?\d+\.?\d*$/"
+                    onKeyPress="if(this.value.length==19) return false;"
+                    style="font-size: 18px; padding:0 5%; border: 1px solid #82848F ;width: 90%; height: 44px; border-radius: 4px; background: transparent;">
+            </div>
+
+            <!-- <div style="width: 90%;">
+                <div style="height: 20px;"></div>
+                <span style="color: #2F3244; font-size: 18px; font-weight: bold;">支行名称</span>
+                <div style="height: 10px;"></div>
+                <input id="bank_card_name" type="text" placeholder="请输入支行名称"
+                    style="font-size: 18px; padding:0 5%; border: 1px solid #82848F ;width: 90%; height: 44px; border-radius: 4px; background: transparent;">
+            </div> -->
+
+            <div style="height: 45px;"></div>
+            <div style="width: 90%; height: 45px; border-radius: 6px; color: #fff; font-weight: bold; background: linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%);"
+                class="flexCenter" id="submit_to_add_bank">
+                <span style="font-size: 18px;">绑定</span>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <!-- slide loop bank info -->
+    <div id="to_show_bank_name"
+        style="display: flex; visibility: hidden; z-index: 2; width: 100%; height: 70%; position: absolute; bottom: 0; border-radius: 10px 10px 0 0 ; background-color: #fff;"
+        class="flexTop_c">
+
+        <div style="height: 20px;"></div>
+        <span style="height: 15px; font-size: 18px; color: #2F3244; font-weight: bold;">操作提示</span>
+
+        <div style="height: 20px;"></div>
+        <div style="height: 15px; width: 90%;" class="flexSpac">
+            <span style="font-weight: bold;">请选择银行</span>
+            <img id="close_black" alt="" style="width: 24px; height: 24px;">
+        </div>
+
+        <div style="height: 25px;"></div>
+        <div id="scroller_bank_name">
+
+            <div id="loop_bank_info" style="height: 500px; width: 100%; background: #fff;" class="flexTop_c">
+                <div style="height: 50px; width: 80%;" class="flexSpac">
+                    <label style="font-weight: bold;" for="bank_01">农业银行A</label>
+                    <input name="selectBank" type="radio" id="bank_01" value="农业银行A"
+                        style="accent-color: #FF5454; height: 18px; width: 18px;">
+                </div>
+                <hr style="width: 100%;">
+                <div style="height: 50px; width: 80%;" class="flexSpac">
+                    <label style="font-weight: bold;" for="bank_02">农业银行B</label>
+                    <input name="selectBank" type="radio" id="bank_02" value="农业银行B"
+                        style="accent-color: #FF5454; height: 18px; width: 18px;">
+                </div>
+                <hr style="width: 100%;">
+                <div style="height: 50px; width: 80%;" class="flexSpac">
+                    <label style="font-weight: bold;" for="bank_03">农业银行C</label>
+                    <input name="selectBank" type="radio" id="bank_03" value="农业银行C"
+                        style="accent-color: #FF5454; height: 18px; width: 18px;">
+                </div>
+                <hr style="width: 100%;">
+                <div style="height: 50px; width: 80%;" class="flexSpac">
+                    <label style="font-weight: bold;" for="bank_04">农业银行D</label>
+                    <input name="selectBank" type="radio" id="bank_04" value="农业银行D"
+                        style="accent-color: #FF5454; height: 18px; width: 18px;">
+                </div>
+                <hr style="width: 100%;">
+                <div style="height: 50px; width: 80%;" class="flexSpac">
+                    <label style="font-weight: bold;" for="bank_05">农业银行E</label>
+                    <input name="selectBank" type="radio" id="bank_05" value="农业银行E"
+                        style="accent-color: #FF5454; height: 18px; width: 18px;">
+                </div>
+                <hr style="width: 100%;">
+
+                <div style="height: 15px;"></div>
+                <div id="select_bank_info" style="width: 90%; height: 45px; border-radius: 6px; color: #fff; font-weight: bold; 
+                    background: linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%);" class="flexCenter">
+                    <span>提交</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- bg opacity -->
+    <div id="bg_toshow_bank_info"
+        style="display: flex; visibility: hidden; position: absolute; top: 0; background-color: #000000; opacity: 0.7; width: 100%; height: 100%; ">
+    </div>
+
+</div>
+
+
+
+
+<script>
+    var bank_addObj = new bank_add();
+    bank_addObj.init();
+
+    function bank_add() {
+        var myScroll;
+        this.init = function () {
+            pageInit("bank_addPage");
+            headerInit("bank_add", "添加银行卡")
+            $("#bank_add_Page").css({ "width": w, "height": h });
+            $("#scroller_bank_add").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+            $("#scroller_bank_name").css({ "width": w, "height": (h * 0.7) - 95, "overflow": "hidden" });
+
+            myScroll = new IScroll('#scroller_bank_add', { probeType: 1, mouseWheel: true });
+            myScroll = new IScroll('#scroller_bank_name', { probeType: 1, mouseWheel: true });
+
+            $("#bank_card_number").keypress(function (event) {
+                var ew = event.which;
+                if (48 <= ew && ew <= 57)
+                    return true;
+                return false;
+            });
+            $("#bank_username, #bank_card_name").on("input", function () {
+                // ดึงค่าที่ผู้ใช้ป้อนเข้ามา
+                var inputValue = $(this).val();
+
+                // กรองและกำจัดตัวเลข
+                var filteredValue = inputValue.replace(/[0-9]/g, '');
+
+                // นำค่าที่กรองแล้วกลับไปที่ input field
+                $(this).val(filteredValue);
+            });
+
+            $('#warn_icons').attr("src", picRes['warn.png'])
+            $('#close_black').attr("src", picRes['close_black.png'])
+            $('#click_to_show_bank_name').attr("src", picRes['show_more.png'])
+
+
+            $('#click_to_show_bank_name').unbind().click(function () {
+                $("#bg_toshow_bank_info, #to_show_bank_name").css({ "visibility": "visible" });
+            })
+
+            $('#close_black').unbind().click(function () {
+                $("#bg_toshow_bank_info, #to_show_bank_name").css({ "visibility": "hidden" });
+            })
+
+            $('#submit_to_add_bank').unbind().click(function () {
+                submitAddBank();
+            })
+
+            $('#select_bank_info').unbind().click(function () {
+                var selectedBank = $('input[name="selectBank"]:checked');
+                $('#bank_name').text(selectedBank.val())
+                $("#bg_toshow_bank_info, #to_show_bank_name").css({ "visibility": "hidden" });
+            })
+
+            // bank_addObj.getFinancial();
+
+
+
+        }
+
+        // submit add bank
+        function submitAddBank() {
+            // loaderObj.show();
+            // var name = $("#bank_username").val()
+            // var bank = $("#bank_name").text()
+            var bank = $("#bank_card_bankname").val()
+            var bank_num =$("#bank_card_number").val()
+            var bank_card_name = $("#bank_username").val()
+            // var bank_card_name = $("#bank_card_name").val()
+
+            var getToken = window.localStorage.getItem("token");
+            var token = JSON.parse(getToken);
+
+            mData = {
+                "type": "10",
+                "bankName": bank,
+                "cardNumber": bank_num,
+                "cardName": bank_card_name
+            }
+
+            if ( bank == "" || bank_num == "" || bank_card_name == "") {
+                msgPageObj.show("输入完整信息");
+            }
+
+            if (bank != "" && bank_num.length != 19 && bank_card_name != "") {
+                msgPageObj.show("请输入19位卡号");
+            }
+
+            if (bank != "" && bank_num.length == 19 && bank_card_name != "") {
+                postAddBank();
+            }
+
+
+            function postAddBank() {
+                loaderObj.show();
+                $.ajax({
+                    type: "post",
+                    url: API_SERVER + "/v1/financialOrganization",
+                    headers: {
+                        'Authorization': 'Bearer ' + token.token
+                    },
+                    data: JSON.stringify(mData),
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: true,
+                    timeout: 100000,
+                    beforeSend: function (xmlhttprequest) {
+                    },
+                    success: function (data) {
+                        loaderObj.unShow();
+                        if (data.code == 0) {
+                            msgPageObj.show('银行卡绑定成功')
+                            setTimeout(() => {
+                                msgPageObj.unShow();
+                                loaderObj.show();
+                                setTimeout(() => {
+                                    $('#bank_addPage').transition({
+                                        x: 0
+                                    }, 0);
+                                    bank_cardObj.getFinancialBank()
+                                    earnObj.getFinancialPayments()
+                                    cleanInput()
+                                    loaderObj.unShow();
+                                }, 700);
+                              
+                            }, 1000);
+                        }
+                        else {
+                            msgPageObj.show(getStatusCode(data.code))
+                        }
+                    },
+                    error: function (xmlhttprequest, error) {
+                        loaderObj.unShow();
+                        msgPageObj.show(NSLang('sys.serverError'))
+                        cleanInput();
+                    },
+                });
+            }
+
+            function cleanInput() {
+                $("#bank_username").val("")
+                $("#bank_card_bankname").val("")
+                $("#bank_card_number").val("")
+                $("#bank_card_name").val("")
+
+            }
+
+
+        }
+
+        this.call = function () {
+
+            $('#bank_addPage').transition({
+                x: w
+            }, 0);
+        }
+
+
+
+    }
+
+</script>

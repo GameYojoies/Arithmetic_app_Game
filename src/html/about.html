@@ -1,0 +1,163 @@
+<div class="menuPage bg-my" id="aboutPage"
+    style="position: absolute; z-index: 10; background:#ffffff; background-repeat: no-repeat; background-size: cover;">
+    <div id="about_header">
+    </div>
+    <div id="scroller_about">
+        <div id="about_body" style="width: 100%; display: flex; align-items: center; flex-direction: column;  font-size: 16px;">
+
+            <div
+                style="padding: 20px 10px;  justify-content: center; align-items: center; gap: 20px; background-color: #f8f8f8;flex-direction: column; display: flex;  ">
+
+
+                <div style="height: auto;  width:100%;  ">
+                    <img src="./pic/about/bg.png"
+                        style="width:100%; height: auto; background-size: cover;border-radius: 8px;">
+                </div>
+
+
+                <div style="background-color: rgb(255, 255, 255); padding: 10px; width: 90%;border-radius: 8px;">
+                    <!-- box -->
+                    <div id="go_about_1"
+                    style="display: flex;justify-content: space-between; align-items: center; width: 100%; padding: 10px 0;">
+                        <div style="color: #001227;">
+                            1.项目背景
+                        </div>
+                
+                    <img class="rigth_arrow">
+                </div>
+                <hr style="background-color: var(--2, #E7E7ED);">
+                <!-- end -->
+                    <!-- box -->
+                    <div id="go_about_2"
+                    style="display: flex;justify-content: space-between; align-items: center; width: 100%; padding: 10px 0;">
+                  
+                        
+                        <div style="color: #001227;">
+                            2.我们的使命
+                        </div>
+                
+                    <img class="rigth_arrow">
+                </div>
+                <hr style="background-color: var(--2, #E7E7ED);">
+                <!-- end -->
+                    <!-- box -->
+                    <div id="go_about_3"
+                    style="display: flex;justify-content: space-between; align-items: center; width: 100%; padding: 10px 0;">
+                  
+                        
+                        <div style="color: #001227;">
+                            3.我们的愿景
+                        </div>
+                
+                    <img class="rigth_arrow">
+                </div>
+                <hr style="background-color: var(--2, #E7E7ED);">
+                <!-- end -->
+                    <!-- box -->
+                    <div id="go_about_4"
+                    style="display: flex;justify-content: space-between; align-items: center; width: 100%; padding: 10px 0;">
+                  
+                        
+                        <div style="color: #001227;">
+                            4.我们的价值观
+                        </div>
+                
+                    <img class="rigth_arrow">
+                </div>
+                <hr style="background-color: var(--2, #E7E7ED);">
+                <!-- end -->
+                    <!-- box -->
+                    <div id="go_about_5"
+                    style="display: flex;justify-content: space-between; align-items: center; width: 100%; padding: 10px 0;">
+                  
+                        
+                        <div style="color: #001227;">
+                            5.发展历程
+                        </div>
+                
+                    <img class="rigth_arrow">
+                </div>
+                <hr style="background-color: var(--2, #E7E7ED);">
+                <!-- end -->
+                    <!-- box -->
+                    <div id="go_about_6"
+                    style="display: flex;justify-content: space-between; align-items: center; width: 100%; padding: 10px 0;">
+                  
+                        
+                        <div style="color: #001227;">
+                            6.政策解读
+                        </div>
+                
+                    <img class="rigth_arrow">
+                </div>
+                <hr style="background-color: var(--2, #E7E7ED);">
+                <!-- end -->
+                   
+                <div class="flexCenter" style="color: #999;">
+                    <span>暂无更多</span>
+                </div>
+                </div>
+
+
+         
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var aboutObj = new about();
+    aboutObj.init();
+
+    function about() {
+        var myScroll;
+        this.init = function () {
+            pageInit("aboutPage");
+            headerInit("about", "关于我们")
+            $("#about_Page").css({ "width": w, "height": h });
+            $("#scroller_about").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+
+            myScroll = new IScroll('#scroller_about', { probeType: 1, mouseWheel: true });
+
+
+            $('#go_about_1').click(function() {
+                pageShow('about_detailPage');
+                about_detailObj.call();
+            })
+            $('#go_about_2').click(function() {
+                pageShow('about_detail_2Page');
+                about_detail_2Obj.call();
+            })
+            $('#go_about_3').click(function() {
+                pageShow('about_detail_3Page');
+                about_detail_3Obj.call();
+            })
+            $('#go_about_4').click(function() {
+                pageShow('about_detail_4Page');
+                about_detail_4Obj.call();
+            })
+            $('#go_about_5').click(function() {
+                pageShow('about_detail_5Page');
+                about_detail_5Obj.call();
+            })
+            $('#go_about_6').click(function() {
+                pageShow('about_detail_6Page');
+                about_detail_6Obj.call();
+            })
+        }
+        
+        this.call = function () {
+
+            $('#about_Page').transition({
+                x: w
+            }, 0);
+        }
+
+
+
+    }
+
+</script>

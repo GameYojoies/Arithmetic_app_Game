@@ -1,0 +1,126 @@
+<div id="personal_information_mobilePage" style="background-color: white; position: absolute;">
+
+
+    <div id="personal_information_mobile_header"></div>
+    <div id="personal_information_mobile_scroll" style="width: 100%; overflow: hidden;">
+        <div id="personal_information_mobile_body"
+            style="display: flex; height: auto; align-items: center; justify-content: center; flex-direction: column; gap: 20px;    padding: 10px 0px 0px 0px px;">
+            <!-- start box -->
+            <div style="display: flex;  flex-direction: column;width: 90%;">
+                <div
+                    style="display: flex; justify-content: flex-start; width: 100%;  align-items: flex-start; flex-direction: column;">
+                    <div style="color: #E74663;">
+                        手机号码输入错误，请重新输入
+                    </div>
+                    <div>
+                        真实姓名：
+                    </div>
+                    <input type="text" style="border: none;  color: #B3B3B3;" placeholder="请输入手机号码" id="phone_num">
+
+
+                </div>
+                <hr>
+                <div
+                    style="display: flex; justify-content: flex-start; width: 100%;  align-items: flex-start; flex-direction: column;">
+
+                    <div>
+                        手机验证码：
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <input type="text" style="border: none;  color: #B3B3B3;" placeholder="请输入真实姓名" id="phone_code">
+
+                        <div style="border-radius: 4px; padding: 5px 15px; color: #ffffff; background-color: #E31D1A;">
+                            获取验证码
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                style="display: flex; justify-content: center; width: 90%;  text-align: center; flex-direction: column; gap: 30px;">
+                <div id="btn_phone"
+                    style="color: #fff;  opacity:0.5;  border-radius: 3px;   display: flex; align-items: center;justify-content: center; background: linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%); width: 90%; margin:  0 auto; height: 50px;">
+
+                    提交
+                </div>
+                <div style="margin-top: 10px;">
+
+                    <div>为了您的隐私安全，信息再确认后将无法修改</div>
+                    <div style="color: #6C7BA8 ;">如需帮助，请联系 <span style="color: #E31D1A;">人工客服</span></div>
+                </div>
+                <div style="display: flex;justify-content: flex-end;">
+                    <div id="btn_5g" style="color: #fff;  opacity:0.5;  background: linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%); padding: 5px 10px;">5G</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+
+    var personal_information_mobileObj = new personal_information_mobile();
+    personal_information_mobileObj.init();
+
+    function personal_information_mobile() {
+
+        this.init = function () {
+
+
+            setAllUILang("personal_information_mobile")
+            pageInit("personal_information_mobilePage");
+            headerInit("personal_information_mobile", "真实姓名")
+            $("#personal_information_mobile_scroll").css({ "width": w, "height": h - headH });
+
+
+
+            $('#personal_information_mobile_back').attr("src", picRes['back_arrow.png'])
+            $('#personal_information_mobile_header_right_right').html('<img  id="personal_information_mobile_phone" style="width:28px;">')
+            $('#personal_information_mobile_header_right_right').addClass("flexCenter")
+            $('#personal_information_mobile_phone').attr("src", picRes['personal_information_mobile.png'])
+
+            $('.rigth_arrow').attr("src", picRes['icon_arrow_rigth.png']).css("width", "10px");
+
+            $('#phone_num, #phone_code').on('keyup', function () {
+                var input_phone = $('#phone_num').val().trim();
+                var input_code = $('#phone_code').val().trim();
+
+                if (input_phone === '' || input_code === '') {
+                    $('#btn_phone').css({ "opacity": "0.5" });
+                    $('#btn_5g').css({ "opacity": "0.5" });
+                } else {
+                    $('#btn_phone').css({ "opacity": "1" });
+                    $('#btn_5g').css({ "opacity": "1" });
+                }
+            });
+
+            $('#logout').click(function () {
+                loaderObj.show()
+                $("#body_content_team").css({ "display": "none" });
+
+
+                window.localStorage.removeItem('token');
+
+
+                setTimeout(() => {
+                    pageUnShow("personal_information_mobilePage")
+                    pageShow("loginPage");
+                    loaderObj.unShow();
+                    window.location.reload();
+                }, 200);
+                // window.location.reload();
+            })
+            setTimeout(() => {
+                myScroll = new IScroll('#personal_information_mobile_scroll', { probeType: 1, mouseWheel: true });
+            }, 300);
+
+        }
+
+
+
+        this.call = function () {
+            getpersonal_information_mobile()
+        }
+
+    }
+
+</script>

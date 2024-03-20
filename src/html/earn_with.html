@@ -1,0 +1,805 @@
+<style>
+    .selected-tab {
+        border-bottom: 3px solid red;
+        color: #000;
+        font-weight: bold;
+        /* สีแดงขีดเส้นใต้ */
+    }
+
+    .head-on {
+        background: #FFF8F8;
+        align-items: center;
+        display: flex;
+        width: 50px;
+        height: 30px;
+        justify-content: center;
+        border-bottom: 0.5px solid #D9D9D9;
+        border-right: 0.5px solid #D9D9D9;
+        border-left: 0.5px solid #D9D9D9;
+
+    }
+
+    .head-bottom {
+        background: #FFFFFF;
+        align-items: center;
+        display: flex;
+        width: 50px;
+        height: 30px;
+        justify-content: center;
+        border-right: 0.5px solid #D9D9D9;
+        border-left: 0.5px solid #D9D9D9;
+    }
+
+    .message {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        font-size: 18px;
+        color: #333333;
+    }
+</style>
+<div class="menuPage bg-my" id="earnPage" style="position: absolute; background:#FAFAFA; font-weight: bold;">
+    <div id="earn_header">
+    </div>
+
+    <div id="scroller_earn">
+
+        <div id="earn_body"
+            style="background-color: #F8F8F8; padding: 10px 0;  display: flex; flex-direction: column; align-items: center; gap: 10px; height: auto;">
+
+            <div
+                style="display: flex; flex-direction: column; width: 100%; justify-content: center; align-items: center;">
+
+                <div style="font-weight: bold; font-size: 18px;height: 140px;   display: flex;background-image: url('./pic/bg/bg-globol.png'); background-size: contain; background-repeat: no-repeat; color: #fff; border-radius: 5px;  width: 90%;  gap: 10px; justify-content: space-around;
+                    ">
+                    <div class="flexCenter_c" style="gap: 10px;">
+                        <span>资产总额</span>
+                        <span id="show_earn_balance">0</span>
+                    </div>
+                    <div class="flexCenter_c" style="gap: 10px;">
+                        <span>今日可提现</span>
+                        <span id="earn_show_balance">0</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div style="height: 10px;"></div>
+            <div
+                style="display: flex;gap: 20px;font-size: 16px;font-style: normal;font-weight: 500;width: 90%;margin: 0 auto;justify-content: center;">
+                <div id="bank-card" style="font-size: 18px;">提现到银行卡</div>
+                <div id="alipay" style="font-size: 18px;">提现到支付宝</div>
+                <div id="earn_convert" style="font-size: 18px;">转入余额</div>
+            </div>
+
+            <div class="message" id="noWithdrawalMethodMessage" style="display: none;">当前没有提款方式</div>
+
+            <!-- box bank -->
+            <div id="showBank"
+                style="font-size: 18px; display: flex; flex-direction: column; width: 85%; justify-content: center; align-items: center; gap: 10px; margin-top: 20px;">
+                <div style="display: flex; width: 100%; flex-direction: column;">
+                    <span style="font-weight: bold ;">银行名称</span>
+                    <div style="height: 5px;"></div>
+                    <select name="bank" id="bankSelect"
+                        style="font-weight: bold; font-size: 18px; width: 100%; height: 39px; border-radius: 10px;border: 0.5px solid #8D959B;background: #FFF;">
+                        <option value=""></option>
+
+                    </select>
+                </div>
+                <div style="display: flex; width: 100%; flex-direction: column;">
+                    <span style="font-weight: bold ;">账户名</span>
+                    <div style="height: 5px;"></div>
+                    <div id="card_name" style="padding-left: 10px; display: flex; align-items: center;
+                       height: 39px; border-radius: 10px;border: 0.5px solid #8D959B;background: #FFF;" type="text">
+                        <!-- 没有数据 -->
+                    </div>
+                </div>
+                <div style="display: flex; width: 100%; flex-direction: column;">
+                    <span style="font-weight: bold;">卡号</span>
+                    <div style="height: 5px;"></div>
+                    <div id="card_number" pattern="/^-?\d+\.?\d*$/"
+                        onKeyPress="if(this.value.length==100) return false;" style="  padding-left: 10px; display: flex; align-items: center;
+                      height: 39px; border-radius: 10px;border: 0.5px solid #8D959B;background: #FFF;" type="number">
+                        <!-- 没有数据 -->
+                    </div>
+                </div>
+                <div style="display: flex; width: 100%; flex-direction: column;">
+                    <span style="font-weight: bold;">金额</span>
+                    <div style="height: 5px;"></div>
+                    <input id="amout_number" pattern="/^-?\d+\.?\d*$/"
+                        onKeyPress="if(this.value.length==100) return false;" style="padding-left: 10px; font-size: 18px; font-weight: bold;
+                      height: 39px; border-radius: 10px;border: 0.5px solid #8D959B;background: #FFF;" type="number"
+                        placeholder="请输入金额">
+                </div>
+                <button id="withdraw_money_user"
+                    style="border-radius: var(--1, 8px); width: 100%; height: 45px; color: #FFF; margin-top: 10px;
+                background: var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%));border: none; font-weight: bold; font-size: 18px;">提现</button>
+            </div>
+
+            <!-- box alipay -->
+            <div id="showAlipay"
+                style="font-size: 18px; display: flex; flex-direction: column; width: 85%; justify-content: center; align-items: center; gap: 10px; margin-top: 20px;">
+
+                <div style="display: flex; width: 100%; flex-direction: column;">
+                    <span style="font-weight: bold;">姓名</span>
+                    <div style="height: 5px;"></div>
+
+                    <select name="alipay" id="alipaySelect"
+                        style="font-weight: bold; font-size: 18px; width: 100%; height: 39px; border-radius: 10px;border: 0.5px solid #8D959B;background: #FFF;">
+                        <!-- <option value="">没有数据</option> -->
+
+                    </select>
+                </div>
+
+                <div style="display: flex; width: 100%; flex-direction: column;">
+                    <span style="font-weight: bold;">支付宝账号</span>
+                    <div style="height: 5px;"></div>
+                    <span id="card_number_alipay"
+                        style="display: flex; align-items: center; font-size: 18px; padding-left: 10px; height: 39px; border-radius: 10px;border: 0.5px solid #8D959B;background: #FFF;">
+                        <!-- 没有数据 -->
+                    </span>
+                </div>
+
+                <div style="display: flex; width: 100%; flex-direction: column;">
+                    <span style="font-weight: bold;">金额</span>
+                    <div style="height: 5px;"></div>
+                    <input id="amout_number2" pattern="/^-?\d+\.?\d*$/"
+                        onKeyPress="if(this.value.length==100) return false;"
+                        style="font-weight: bold; font-size: 18px; padding-left: 10px; height: 39px; border-radius: 10px;border: 0.5px solid #8D959B;background: #FFF;"
+                        type="number" placeholder="请输入金额">
+                </div>
+                <button id="withdraw_money_user2"
+                    style="border-radius: var(--1, 8px); width: 100%; height: 42px; color: #FFF; margin-top: 10px;
+                background: var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%));border: none; font-size: 18px; font-weight: bold;">提现</button>
+            </div>
+
+            <!-- box alipay -->
+            <div id="showConvert"
+                style="font-size: 18px; display: flex; flex-direction: column; width: 85%; justify-content: center; align-items: center; gap: 10px; margin-top: 20px;">
+
+
+                <div style="display: flex; width: 100%; flex-direction: column;">
+                    <span style="font-weight: bold;">请输入转入金额</span>
+                    <div style="height: 5px;"></div>
+                    <input id="amout_number3" pattern="/^-?\d+\.?\d*$/"
+                        onKeyPress="if(this.value.length==100) return false;"
+                        style="font-weight: bold; font-size: 18px; padding-left: 10px; height: 39px; border-radius: 10px;border: 0.5px solid #8D959B;background: #FFF;"
+                        type="number" placeholder="0">
+                    <div style="height: 10px;"></div>
+                    <span style="font-weight: bold;" id="convert_max">全部转入</span>
+                </div>
+                <button id="withdraw_money_user3"
+                    style="border-radius: var(--1, 8px); width: 100%; height: 42px; color: #FFF; margin-top: 10px;
+               background: var(--00, linear-gradient(270deg, #EA372A 0%, #FD5E43 96.28%));border: none; font-size: 18px; font-weight: bold;">提现</button>
+            </div>
+
+            <div style="height: 10px;"></div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    var earnObj = new earn();
+    earnObj.init();
+
+    function earn() {
+        var myScroll;
+        var TypeWallet;
+        var CheckNobank;
+        var CheckNoAlipay;
+        // limit input 
+        var limitInputBank;
+        var limitInputAlipay;
+
+        this.init = function () {
+            pageInit("earnPage");
+            headerInit("earn", "收益提现")
+            $("#earn_Page").css({ "width": w, "height": h });
+            $("#scroller_earn").css({ "width": w, "height": h - headH, "overflow": "hidden" });
+
+            myScroll = new IScroll('#scroller_earn', { probeType: 1, mouseWheel: true });
+
+
+            $('#earn_header_right_right').html('<img  id="earn_header_png" style="width:28px;">')
+            $('#earn_header_right_right').addClass("flexCenter")
+            $('#earn_header_png').attr("src", picRes['withdraw_history.png'])
+
+            $("#showBank").show();
+            $("#showAlipay").hide();
+            $("#showConvert").hide();
+            // แสดงเนื้อหาของ "latest events" เมื่อหน้าเว็บโหลดเสร็จ
+            $("#bank-card").addClass("selected-tab");
+            $("#Alipay").removeClass("selected-tab");
+            $("#earn_convert").removeClass("selected-tab");
+            // เมื่อคลิกที่ "latest events" tab
+            $("#bank-card").click(function () {
+
+                $("#showBank").show();  // แสดงเนื้อหาของ "latest events"
+                $("#showAlipay").hide();   // ซ่อนเนื้อหาของ "News Center"
+                $("#showConvert").hide();
+
+                // เพิ่มเอฟเฟกต์สีแดงขีดเส้นใต้
+                $("#bank-card").addClass("selected-tab");
+                $("#alipay").removeClass("selected-tab");
+                $("#earn_convert").removeClass("selected-tab");
+
+                if (CheckNobank == 'No_data') {
+                    msgObj.show('您当前还没有绑定支付方式，请添加支付方式', function () {
+                        pageShow('bank_cardPage')
+                        bank_cardObj.call()
+                        msgObj.unShow()
+                    }, function () {
+                        //  walletObj.call()
+                        // pageUnShow("earnPage")
+                    })
+                }
+            });
+
+            // เมื่อคลิกที่ "News Center" tab
+            $("#alipay").unbind().click(function () {
+
+                $("#showBank").hide();  // ซ่อนเนื้อหาของ "latest events"
+                $("#showAlipay").show();   // แสดงเนื้อหาของ "News Center"
+                $("#showConvert").hide();
+
+                $("#bank-card").removeClass("selected-tab");
+                $("#alipay").addClass("selected-tab");
+                $("#earn_convert").removeClass("selected-tab");
+                if (CheckNoAlipay == 'No_data') {
+                    msgObj.show('您当前还没有绑定支付方式，请添加支付方式', function () {
+                        pageShow('alipay_cardPage')
+                        alipay_cardObj.call()
+                        msgObj.unShow()
+                    }, function () {
+                        // walletObj.call()
+                        // pageUnShow("earnPage")
+                    })
+                }
+            });
+
+            $("#earn_convert").unbind().click(function () {
+
+                $("#showBank").hide();  // ซ่อนเนื้อหาของ "latest events"
+                $("#showAlipay").hide();   // แสดงเนื้อหาของ "News Center"
+                $("#showConvert").show();
+
+                $("#bank-card").removeClass("selected-tab");
+                $("#alipay").removeClass("selected-tab");
+                $("#earn_convert").addClass("selected-tab");
+            });
+
+            $("#convert_max").unbind().click(function () {
+                $("#amout_number3").val(parseFloat($('#earn_show_balance').text()));
+
+            });
+
+            $("#card_number ,#amout_number,#card_number2,#amout_number2,#amout_number3").keypress(function (event) {
+                var ew = event.which;
+                if (48 <= ew && ew <= 57)
+                    return true;
+                return false;
+            });
+
+
+            $("#withdraw_money_user").unbind().click(function () {
+                withdrawFuntion("bank");
+            });
+
+            $("#withdraw_money_user2").unbind().click(function () {
+                withdrawFuntion("alipay");
+            });
+
+            $("#withdraw_money_user3").unbind().click(function () {
+                convertFuntion();
+            });
+
+            $("#earn_header_right_right").unbind().click(function () {
+                pageShow('withdraw_historyPage');
+                withdraw_historyObj.loopWithdraw(TypeWallet)
+            });
+
+            $("#earn_header_left").click(function () {
+                cleanInput();
+                CheckNobank = "nocheck"
+                CheckNoAlipay = "nocheck"
+                // $("#bank-card").click();
+
+            });
+
+        }
+
+
+        function withdrawFuntion(Type) {
+
+            var setLimitInput
+
+            if (Type == "bank") {
+                var amount = parseFloat($("#amout_number").val())
+                setlimitInput = limitInputBank
+            }
+            if (Type == "alipay") {
+                var amount = parseFloat($("#amout_number2").val())
+                setlimitInput = limitInputAlipay
+            }
+
+            if (amount == '') {
+                msgPageObj.show('请填写正确的信息')
+                return;
+            }
+
+            if (amount < setlimitInput) {// 提款金额限制
+                msgPageObj.show('最小提款金额为'+setlimitInput+'元');
+                return;
+            }
+
+            if (amount >= setlimitInput) {
+                msgObj.show('确定要提款 ' + amount + ' 元吗？', function () {
+                    msgObj.unShow()
+                    // postWithdraw(Type)
+                    get2FATrade(Type)
+                });
+
+            }
+        }
+
+
+        function get2FATrade(type, amount) {
+            var Token = localStorage.getItem('token')
+            var obj = JSON.parse(Token);
+            $.ajax({
+                type: "get",
+                url: API_SERVER + "/v1/twoFA",
+                headers: {
+                    'Authorization': 'Bearer ' + obj.token
+                },
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+
+                success: function (data) {
+                    loaderObj.show();
+                    if (data.result.status == false) {
+                        loaderObj.unShow();
+
+                        msgObj.show('您尚未开启交易密码', function () {
+                            msgObj.unShow()
+                            settingObj.call()
+                            pageShow('settingPage')
+                        })
+                    }
+
+                    if (data.result.status == true) {
+                        loaderObj.unShow();
+                        msgObj.show(
+                            '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width: 100%;"><div id="Trade2FA" style="margin-bottom:20px">请输入交易密码</div><input style="width:100%;height:30px;font-size: 19px;" id="Trade2FA_Input" type="password" placeholder="请输入交易密码" /></div>', function () {
+                                msgObj.unShow();
+                                verify2faTrade(type, amount)
+
+                            }, function () {
+                                msgObj.unShow();
+
+                            });
+
+                        // $("#Trade2FA_Input").keypress(function (event) {
+                        //     var ew = event.which;
+                        //     if (48 <= ew && ew <= 57)
+                        //         return true;
+                        //     return false;
+                        // });
+                    }
+
+                },
+                error: function (xmlhttprequest, error) {
+                    console.log(error, xmlhttprequest);
+                }
+            })
+        }
+
+        function verify2faTrade(type, amount) {
+            var getToken = localStorage.getItem('token')
+            var token = JSON.parse(getToken)
+            var InputPassword = $("#Trade2FA_Input").val()
+            var mData = {
+                "password": InputPassword,
+            }
+            $.ajax({
+                type: "post",
+                url: API_SERVER + "/v1/twoFA/verify",
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                data: JSON.stringify(mData),
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                beforeSend: function (xmlhttprequest) { },
+                success: function (data) {
+                    loaderObj.unShow();
+
+                    if (data.code == 0) {
+                        msgObj.unShow()
+                        setTimeout(() => {
+                            if (type == 'convert') {
+                                postConvert(amount)
+                            } else {
+                                postWithdraw(type)
+                            }
+                        }, 500)
+                    }
+                    else {
+                        msgPageObj.show(getStatusCode(data.code))
+                    }
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+                    cleanInput();
+                },
+            });
+        }
+
+        function cleanInput() {
+            $("#amout_number").val("")
+            $("#amout_number2").val("")
+            $("#amout_number3").val("")
+        }
+
+        function postWithdraw(Type) {
+            var getToken = window.localStorage.getItem('token')
+            var token = JSON.parse(getToken);
+
+            if (Type == "bank") {
+                var amount = parseFloat($("#amout_number").val())
+                paymentId = parseFloat($("#bankSelect option:selected").val());
+            }
+            if (Type == "alipay") {
+                var amount = parseFloat($("#amout_number2").val())
+                paymentId = parseFloat($("#alipaySelect option:selected").val());
+            }
+
+            console.log("Amount:" + amount, "Payment id:" + paymentId);
+
+            var mData = {
+                "id": paymentId,
+                "type": TypeWallet,
+                "amount": amount,
+                "remark": ""
+            };
+
+            $.ajax({
+                type: "post",
+                url: API_SERVER + "/v1/bankInfo/apply/withdraw",
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                data: JSON.stringify(mData),
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                beforeSend: function (xmlhttprequest) { },
+                success: function (data) {
+
+                    loaderObj.unShow();
+                    if (data.code == 0) {
+                        cleanInput();
+                        msgPageObj.show('提现成功')
+                        walletObj.getWallet(TypeWallet);
+                    }
+                    else {
+                        msgPageObj.show(getStatusCode(data.code))
+
+                    }
+
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+                    cleanInput();
+                },
+
+            });
+        }
+
+        function convertFuntion() {
+            var amount = $("#amout_number3").val()
+            var max_convert = parseFloat($('#earn_show_balance').text())
+
+            if (amount == '') {
+                msgPageObj.show('请填写正确的信息')
+                return;
+            }
+            if (amount > max_convert) {
+                msgPageObj.show('输入的金额不能超过 ' + max_convert + ' RMB')
+                return;
+            }
+            if (amount <= max_convert && amount != '') {
+                // postConvert(amount)
+                get2FATrade('convert', amount)
+            }
+        }
+
+        function postConvert(amount) {
+            var getToken = window.localStorage.getItem('token')
+            var token = JSON.parse(getToken);
+
+            var mData = {
+                "from": TypeWallet,
+                "to": 30,
+                "amount": amount,
+            };
+
+            $.ajax({
+                type: "post",
+                url: API_SERVER + "/v1/wallet/convert",
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                data: JSON.stringify(mData),
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                beforeSend: function (xmlhttprequest) { },
+                success: function (data) {
+
+                    loaderObj.unShow();
+                    if (data.code == 0) {
+                        cleanInput();
+                        msgPageObj.show('提现成功')
+                        walletObj.getWallet(TypeWallet);
+                    }
+                    else {
+                        msgPageObj.show(getStatusCode(data.code))
+                    }
+
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+                    cleanInput();
+                },
+
+            });
+        }
+
+        // เปลี่ยน Type wallet
+        this.wallgetType = function (type) {
+            TypeWallet = type
+
+            if (type == 30 || type == 25) {
+                $('#earn_convert').hide();
+                $('#earn_convert').css({ 'display': 'none' });
+                $("#earn_convert").removeClass("selected-tab");
+            } else {
+                $('#earn_convert').show();
+                $('#earn_convert').css({ 'display': 'flex' });
+            }
+            console.log("withdraw type:" + type);
+        }
+
+
+
+        this.getFinancialPayments = function () {
+            str = ""
+            str2 = ""
+            bank_detail = []
+            collect_Bank = []
+
+            alipay_detail = []
+            collect_Alipay = []
+
+            var getToken = window.localStorage.getItem("token");
+            var token = JSON.parse(getToken);
+
+
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/financialOrganization',
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+
+                    // Bank selection
+                    var Bank_card = data.result.filter(data => data.type === 10);
+                    collect_Bank.push(Bank_card)
+
+                    if (collect_Bank[0].length == 0) {
+                        str += "<option ></option>"
+                        $("#bankSelect").html(str);
+                        $("#card_name").text('');
+                        $("#card_number").text('');
+                        CheckNobank = 'No_data';
+                    }
+                    else if (collect_Bank[0].length != 0) {
+                        CheckNobank = "nocheck"
+                        $.each(collect_Bank[0], function (index, data) {
+                            str += "<option value='" + data.id + "'>" + data.bankName + "</option>"
+                            bank_detail.push({ "id": data.id, "acc": data.cardName, "num": data.cardNumber })
+                        })
+                        $("#bankSelect").html(str)
+
+                        $("#bankSelect").unbind().change(function () {
+                            appendBank()
+                        })
+                        function appendBank() {
+                            var bankVal = parseFloat($("#bankSelect").val())
+                            var bankValCheck = bank_detail.filter(data => data.id === bankVal);
+                            if (bankValCheck) {
+                                $("#card_name").text(bankValCheck[0].acc)
+                                $("#card_number").text(bankValCheck[0].num)
+                            }
+                        }
+                        appendBank()
+                    }
+
+                    // Alipay select
+                    var Alipay_card = data.result.filter(data => data.type === 20);
+                    collect_Alipay.push(Alipay_card)
+
+                    console.log(collect_Alipay[0].length, collect_Alipay[0]);
+
+                    if (collect_Alipay[0].length == 0) {
+                        str2 += "<option ></option>"
+                        $("#alipaySelect").html(str2);
+                        $("#card_number_alipay").text("")
+                        CheckNoAlipay = 'No_data';
+                    }
+                    else if (collect_Alipay[0].length != 0) {
+                        CheckNoAlipay = "nocheck"
+                        $.each(collect_Alipay[0], function (index, data) {
+                            str2 += "<option value='" + data.id + "' >" + data.cardName + "</option>"
+                            alipay_detail.push({ "id": data.id, "num": data.cardNumber })
+                        })
+                        $("#alipaySelect").html(str2)
+                        $("#alipaySelect").unbind().change(function () {
+                            appendAlipay()
+                        })
+
+                        function appendAlipay() {
+                            var alipayVal = parseFloat($("#alipaySelect").val())
+                            var alipayValCheck = alipay_detail.filter(data => data.id === alipayVal);
+                            if (alipayValCheck) {
+                                $("#card_number_alipay").text(alipayValCheck[0].num)
+                            }
+                        }
+                        appendAlipay()
+
+                    }
+
+                    // $("#bank-card").click()
+                    if (data.code != 0) {
+                        msgPageObj.show(getStatusCode(data.code))
+                    }
+                },
+
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+                },
+            })
+        }
+
+        this.getLimitInput = function (data) {
+
+            limitInputBank = data[5]
+            limitInputAlipay = data[4]
+
+        }
+
+        this.call = function () {
+            checkPayMentMethod();
+            earnObj.getFinancialPayments()
+            // setTimeout(() => {
+            //     $("#bank-card").click()
+            // }, 300);
+            $('#earn_Page').transition({
+                x: w
+            }, 0);
+
+
+        }
+
+
+
+        // 显示或隐藏支付
+        function checkPayMentMethod() {
+
+
+
+
+
+            var getToken = localStorage.getItem('token');
+            var token = JSON.parse(getToken);
+
+            $.ajax({
+                type: "get",
+                url: API_SERVER + "/v1/payments/method",
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                data: null,
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                beforeSend: function (xmlhttprequest) { },
+                success: function (data) {
+                    if (data.code == 0) {
+                        var arr = data.result;
+                        // 显示消息当没有提款方式时
+                        if (arr[1] == 0 && arr[0] == 0) {
+                            $("#noWithdrawalMethodMessage").css({ "display": "block" });
+                            $("#earn_convert").css({ "display": "none" });
+                        } else if (arr[1] == 0 && arr[0] == 1) {
+                            $("#noWithdrawalMethodMessage").css({ "display": "none" });
+                        } else if (arr[1] == 1 && arr[0] == 0) {
+                            $("#noWithdrawalMethodMessage").css({ "display": "none" });
+                        } else {
+                            $("#noWithdrawalMethodMessage").css({ "display": "none" });
+                        }
+
+                        // 显示或隐藏 Alipay
+                        if (arr[1] == 1) {
+                            $("#alipay").css({ "display": "flex" });
+                            $("#showAlipay").css({ "display": "flex" });
+
+
+
+                            $("#alipay").click();
+
+
+                        } else {
+                            $("#alipay").css({ "display": "none" });
+                            $("#showAlipay").css({ "display": "none" });
+
+
+
+                        }
+                        // 显示或隐藏 Bank Card
+                        if (arr[0] == 1) {
+                            $("#bank-card").css({ "display": "flex" });
+                            $("#showBank").css({ "display": "flex" });
+
+
+
+                            $("#bank-card").click();
+
+
+
+                        } else {
+                            $("#bank-card").css({ "display": "none" });
+                            $("#showBank").css({ "display": "none" });
+
+
+                        }
+
+
+
+
+                        myScroll.refresh();
+                    }
+                },
+                error: function (xmlhttprequest, error) {
+
+                },
+                complete: function () { }
+            });
+
+        }
+
+
+
+    }
+
+</script>

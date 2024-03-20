@@ -1,0 +1,1071 @@
+<style>
+    .selected-tab {
+        border-bottom: 2px solid red;
+        color: #EA372A;
+        /* สีแดงขีดเส้นใต้ */
+    }
+
+    .selected-tab-chind {
+        color: #fff;
+        background-color: #EA372A;
+        border-radius: 4px;
+        padding: 5px 8px;
+        text-align: center;
+    }
+
+    .selected-tab-chind-default {
+        color: #828486;
+        background-color: #FFFFFF;
+        border-radius: 4px;
+        padding: 5px 8px;
+        text-align: center;
+    }
+
+
+    /* swiper-slide img {
+        height: 150px;
+        border-radius: 20px;
+        object-fit: cover;
+    } */
+    .swiper-slide-content {
+        margin-left: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .image-item {
+        height: 85px;
+        width: 125px;
+        padding: 5px;
+        border-radius: 10px;
+    }
+
+    .image-item-video {
+        height: 95px;
+        width: 155px;
+        padding: 5px;
+        border-radius: 10.5px;
+    }
+
+    .center-swiper {
+        display: flex;
+        align-items: center;
+        /* justify-content: center; */
+    }
+
+    #code {
+        text-align: center;
+        width: 100%;
+        height: 30px;
+        border: 1px solid #000;
+        border-radius: 5px;
+        opacity: 0.3;
+        background: #D9D9D9;
+    }
+</style>
+
+<div class="menuPage bg-my" id="home2Page" style="position: absolute;overflow: hidden; background: #F5F5F5;">
+
+
+    <div id="scrollerMy" style="height: auto;">
+
+        <div style="position: relative; height: auto; ">
+            <div
+                style="width: 100%; display: flex; flex-direction: column;  align-items: center; height: 230px; background-size: cover; background-repeat: no-repeat; background-position: center; background-image: url('./pic/bg/BG-home.png');">
+
+
+                <div
+                    style="text-align: center; gap: 10px; display: flex; flex-direction: column; padding-top: 50px;color: #FFF0E5;">
+
+                    <div style="font-family: Inter; font-size: 18px;font-weight: 400; "><img src="./pic/bg/icon.png"
+                            style="height: 60px;"></div>
+                </div>
+            </div>
+
+
+            <div
+                style="width: 100%; margin-left: auto; margin-right: auto; margin-top: -80px; position: relative; justify-content: center; align-items: center;  ">
+                <!-- <div style="position: absolute; top: 20px; color: #FFF0E5;">Computing power future new technology</div> -->
+                <div class="slideshow-container">
+                    <!-- Full-width images with number and caption text -->
+                    <swiper-container class="mySwiper" pagination="true" pagination-clickable="true"
+                        autoplay-delay="5000" autoplay-disable-on-interaction="false" loop="false" initial-slide="0"
+                        style="border-radius: 8px; overflow: hidden;">
+                        <swiper-slide id="videoOpen"
+                            style="height: auto;  width:95%; border-radius: 8px; overflow: hidden;display: flex;justify-content: center;">
+                            <img src="./pic/home/bg-video.png" style="width:95%; height: auto; border-radius: 8px;">
+                        </swiper-slide>
+                        <swiper-slide
+                            style="height: auto;  width:95%; border-radius: 8px; overflow: hidden;display: flex;justify-content: center;">
+                            <img src="./pic/home/bg-new-ui.jpg" style="width:95%; height: auto; border-radius: 8px;">
+                        </swiper-slide>
+
+
+                        <!-- 
+                        <swiper-slide style="height: auto;  width:100%; border-radius: 8px; overflow: hidden;">
+                            <img src="./pic/home/banner03.jpg" style=" width:100%; height: auto; border-radius: 8px;">
+                        </swiper-slide>
+                        <swiper-slide style="height: auto;  width:100%; border-radius: 8px; overflow: hidden;">
+                            <img src="./pic/home/banner04.jpg" style=" width:100%; height: auto; border-radius: 8px;">
+                        </swiper-slide> -->
+                    </swiper-container>
+                </div>
+
+
+
+            </div>
+        </div>
+        <div style="width: 100%; display: flex; justify-content: center; flex-direction: column;align-items: center; ">
+
+
+
+            <div id="openPopup"
+                style=" border-radius: 10px; width: 95%;
+                background: #FFF;margin:10px 0px ;
+                box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.08); padding: 10px 0px; border-radius: 8px; height: 25px; display: flex;">
+                <div class="flexCenter" style="margin-left: 10px;">
+
+                    <img style="width: 20px;height: 20px; " src="./pic/home/not.png" alt="">
+                </div>
+                <swiper-container id="informationHeader" class="mySwiper" centered-slides="true" autoplay-delay="2500"
+                    noSwiping="true" autoplay-disable-on-interaction="false" loop="false" direction="vertical" style="overflow: hidden; text-align: left;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                ">
+                    <swiper-slide>
+
+                    </swiper-slide>
+                </swiper-container>
+            </div>
+            <!-- mod -->
+            <div style="width: 100%;height: 15px;"></div>
+            <div
+                style="background: linear-gradient(180deg, #ffd2ce 0%, #f7f7f74d 20.49%, #f7f7f7 100%);box-shadow: 2px -3px 7px 3px rgba(92, 122, 181, 0.25);padding:15px 12px;border-radius: 5px;width: 88%;display:flex;justify-content: center;flex-direction: column;">
+
+                <div style="display: flex; gap: 60px;font-size: 17px; ">
+                    <div style="letter-spacing: 2px;" id="news-center-tab">学习中心</div>
+                    <div style="letter-spacing: 2px;" id="latest-events-tab">活动中心</div>
+                </div>
+
+                <!-- new1 -->
+                <div style="display: flex; flex-direction: column; font-weight: 700; gap: 10px; margin-top: 30px;"
+                    id="event">
+                    <!-- content1 -->
+                    <div style="display: flex; align-items: center;">
+                        <img style="height: 48px; margin-right: 10px;" src="./pic/home/en01.png" alt="item">
+                        <div style="display: flex; flex-direction: column;width: 60%;">
+                            <span style="font-size: 16px;">每日签到</span>
+                            <span style="color:  #5E6683; font-weight: normal;display: none;">每天签到：奖励1元0.1龙力值</span>
+                        </div>
+                        <div style=" display: flex; justify-content: center; align-items: center;">
+                            <button
+                                style="  display: flex; border-radius: 15px; justify-content: center; width: 70px; background: linear-gradient(281deg, #EA372A 48.76%, #F83D3D 86.99%); border: none; color: #FFF; padding: 6px;font-size: 17px;"
+                                class="checkin_btn">签到</button>
+                        </div>
+                    </div>
+
+                    <div class="line_app" style="width:100%; margin: 5px 0;"></div>
+
+                    <!-- content2 -->
+                    <div style="display: flex; align-items: center;">
+                        <img style="height: 48px; margin-right: 10px;" src="./pic/home/en02.png" alt="item">
+                        <div style="display: flex; flex-direction: column;width: 60%;">
+                            <span style="font-size: 16px;">前5000名注册</span>
+                            <span style="font-size: 16px;">总奖励：40万算力券</span>
+                            <span style="color:  #5E6683; font-weight: normal;">超级会员身份</span>
+                        </div>
+                        <div style=" display: flex; justify-content: center; align-items: center;">
+                            <button
+                                style="  display: flex; border-radius: 15px; justify-content: center; width: 70px; background: linear-gradient(281deg, #EA372A 48.76%, #F83D3D 86.99%); border: none; color: #FFF; padding: 6px;font-size: 16px;"
+                                id="first">领取</button>
+                        </div>
+                    </div>
+                    <div class="line_app" style="width:100%; margin: 5px 0;"></div>
+
+                    <!-- Content3 -->
+                    <div style="display: flex; align-items: center;">
+                        <img style="height: 48px; margin-right: 10px;" src="./pic/home/en03.png" alt="item">
+                        <div style="display: flex; flex-direction: column;width: 60%;">
+                            <span style="font-size: 16px;">参加线上会议，领取奖励</span>
+                            <span style="color:  #5E6683; font-weight: normal;">输入兑换码</span>
+                        </div>
+                        <div style=" display: flex; justify-content: center; align-items: center;">
+                            <button
+                                style="  display: flex; border-radius: 15px; justify-content: center; width: 70px; background: linear-gradient(281deg, #EA372A 48.76%, #F83D3D 86.99%); border: none; color: #FFF; padding: 6px;font-size: 16px;"
+                                id="receive">领取</button>
+                        </div>
+                    </div>
+                    <div class="line_app" style="width:100%; margin: 5px 0;"></div>
+
+                    <!-- Content4 -->
+                    <div style="display: flex; align-items: center;">
+                        <img style="height: 48px; margin-right: 10px;" src="./pic/home/en04.png" alt="item">
+                        <div style="display: flex; flex-direction: column;width: 60%;">
+                            <!-- <span>团队工资领取</span> -->
+                            <span style="font-size: 16px;">会员等级奖励</span>
+                            <span style="color:  #5E6683; font-weight: normal;">直推激活人数达到即可领取</span>
+                        </div>
+                        <div style=" display: flex; justify-content: center; align-items: center;">
+                            <button
+                                style="  display: flex; border-radius: 15px; justify-content: center; width: 70px; background: linear-gradient(281deg, #EA372A 48.76%, #F83D3D 86.99%); border: none; color: #FFF; padding: 6px;font-size: 16px;"
+                                id="team_salary_go">领取</button>
+
+                        </div>
+                    </div>
+                    <div class="line_app" style="width:100%; margin: 5px 0;"></div>
+
+                    <!-- Content5 -->
+                    <div style="display: flex; align-items: center;">
+                        <img style="height: 48px; margin-right: 10px;" src="./pic/home/en05.png" alt="item">
+                        <div style="display: flex; flex-direction: column;width: 60%;">
+                            <span style="font-size: 16px;">日激活奖励</span>
+                            <span style="color:  #5E6683; font-weight: normal;">直推日激活人数达到即可领取</span>
+                        </div>
+                        <div style=" display: flex; justify-content: center; align-items: center;">
+                            <button
+                                style="  display: flex; border-radius: 15px; justify-content: center; width: 70px; background: linear-gradient(281deg, #EA372A 48.76%, #F83D3D 86.99%); border: none; color: #FFF; padding: 6px;font-size: 16px;"
+                                id="receive_daily">领取</button>
+                        </div>
+                    </div>
+                    <div class="line_app" style="width:100%; margin: 5px 0;"></div>
+
+                    <!-- Content6 -->
+                    <div style="display: flex; align-items: center;">
+                        <img style="height: 48px; margin-right: 10px;" src="./pic/home/en06.png" alt="item">
+                        <div style="display: flex; flex-direction: column; width: 60%;">
+                            <span style="font-size: 16px;">邀约注册奖励</span>
+                            <span style="color:  #5E6683; font-weight: normal;">邀请注册人数达到即可获得</span>
+                        </div>
+                        <div style=" display: flex; justify-content: center; align-items: center;">
+                            <button
+                                style="  display: flex; border-radius: 15px; justify-content: center; width: 70px; background: linear-gradient(281deg, #EA372A 48.76%, #F83D3D 86.99%); border: none; color: #FFF; padding: 6px;font-size: 16px;"
+                                id="invitation_registration">领取</button>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!-- new2 -->
+                <div style="display: flex;flex-direction: column;padding-top: 10px;margin-top: 30px;">
+
+                    <!-- Add more news content here -->
+                    <div style="display: flex; align-items: center;justify-content: space-between; gap: 10px; "
+                        id="tab-groud">
+                        <!-- <div class="tab selected-tab-chind" data-tab="1" id="tab1">最新新闻</div>
+                        <div class="tab selected-tab-chind-default" data-tab="2" id="tab2">政策标准
+                        </div>
+                        <div class="tab selected-tab-chind-default" data-tab="3" id="tab3">文件发布
+                        </div>
+                        <div class="tab selected-tab-chind-default" data-tab="4" id="tab4">算力建设
+                        </div> -->
+
+                    </div>
+
+                </div>
+                <div style="display: flex; flex-direction: column; padding-top: 10px;" id="news"> </div>
+            </div>
+
+
+        </div>
+
+
+        <div style=" height: 20px;"></div>
+
+
+
+
+    </div>
+
+    <!-- popup -->
+
+    <!-- popupVideo -->
+    <div id="popupVideo"
+        style="display: none; flex-direction: column; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8);  ">
+        <div id="Video"
+            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);  width: 90%;  z-index: 4;">
+            <video id="videoToPlay" controls autoplay="false" playsInline preload="none" allow="fullscreen"
+                style="width: 100%; height: auto;">
+                <source src="./video/video02.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+    <div id="popupVideo1"
+        style="display: none; flex-direction: column; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8);  ">
+        <div id="Video1"
+            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);  width: 90%;  z-index: 4;">
+            <video id="videoToPlay1" controls autoplay="false" playsInline preload="none" allow="fullscreen"
+                style="width: 100%; height: auto;">
+                <source src="./video/v001.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+</div>
+<div id="newsPopup"
+    style="display: flex; flex-direction: column; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6);   z-index: 999;">
+
+    <div id="popupNews"
+        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);  width: 90%; height: 70%; z-index: 4; ">
+        <!-- <div id="closeNewsPopup"
+            style="justify-content: center; text-align: center;  z-index: 999; color: #457BFF; display: flex; align-items: center; border: none; border-radius: 5px; cursor: pointer;">
+
+            <img src="./pic/icons/close.png" style="width: 32px;">
+        </div> -->
+        <!-- <div> -->
+
+        <!-- Full-width images with number and caption text -->
+        <!-- <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" autoplay-delay="5000"
+            autoplay-disable-on-interaction="false" loop="false" style=" overflow: hidden; height: 70vh; ">
+            <swiper-slide style="overflow: hidden; " class="flexCenter">
+
+                <img src="./pic/home/slider1_2.png" style="height: 100%; ">
+
+            </swiper-slide>
+
+      
+        </swiper-container> -->
+        <!-- </div> -->
+        <!-- <div id="closeNewsPopup"
+        style="justify-content: center; position: absolute;top: -35px;right: 40%; text-align: center; z-index: 999; color: #457BFF; display: flex; align-items: center; border: none; border-radius: 5px; cursor: pointer;">
+     
+        <img src="./pic/icons/close.png" style="width: 40px;">
+    </div> -->
+        <div style="  position: relative;height: 100%;" class="flexTop_c">
+            <img src="./pic/home/popup.png" style="width: 100%; position: absolute; height: 100%;">
+            <div style="height: 27%;"></div>
+            <div style="width: 100%; height: 60%; overflow: hidden;" id="scrollNew" class="flexTop_c">
+
+                <div id="videoNew" style="width: 85%; "></div>
+                <!-- <div style="width: 85%;  z-index: 99;">
+                    <div>
+                        汇聚民族智慧共创智慧中国
+                    </div>
+                    <br>
+                    <div>
+                        尊敬的会员，您好！
+                    </div>
+                    <br>
+                    <div style="width: 100%;"class="flexTop_c">
+                        <div style="width: 90%;"class="flexTop_c">
+                            &emsp;&emsp; 积极响应国家号召，顺应时代发展
+                            趋势，"汇聚智慧力量，共创智慧中
+                            国"。霎川•智慧中国平台感谢所有会员
+                            的支持和信任，为智慧中国建设提供
+                            强劲动力！
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: right; margin-top: 5px;">
+                        霎川•智慧中国宣 
+                    </div>
+                    <div style="text-align: right;">
+                        2024年1月19日
+                    </div>
+                    <div >
+                        <img src="./pic/home/popnew.jpg"style="width: 100%;" alt="">
+                    </div>
+                </div> -->
+            </div>
+            <div class="flexCenter" style="z-index: 999;width: 90% ; margin-top: 11px;gap: 40px; ">
+                <button class="clickclose"
+                    style="border-radius: 15px; padding: 8px 25px; background-color: #EA372A;color: white; border: none;">关闭公告</button>
+                <button class="clickclose"
+                    style="border-radius: 15px; padding: 8px 25px;background-color: #0079FF;color: white; border: none;">我已知晓</button>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- video -->
+<div id="Popup_v"
+    style="display:none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; justify-content: center; background:rgba(54, 43, 43, 0.781); z-index: 999;">
+    <div style="position: absolute;  top: 50%; left: 50%; transform: translate(-50%, -50%); width: 97%; ">
+        <div style="padding: 10px 5px;font-weight: bold; font-size: 14px; color: #457BFF;">
+            <video id="videobanner" controls autoplay="false" playsInline preload="none" allow="fullscreen"
+                style="width: 100%; height: auto;">
+                <source src="./video/banner.mp4" type="video/mp4">
+            </video>
+            <div
+                style="justify-content: center; text-align: center; color: #EA372A; display: flex; align-items: center;gap: 10px; padding: 10px 10px;  border: none; border-radius: 5px; cursor: pointer;">
+                <div id="closeVideo"
+                    style="justify-content: center; text-align: center; color: #EA372A; display: flex; align-items: center; gap: 10px; background-color: #dbdbdb; border-radius: 10px;padding: 6px 26px; ">
+                    <img id="iconclose" alt="close" style="height: 35px;" loading="lazy">
+                    <span id="close_video" style="font-weight: bold;">关闭</span>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    var home2Obj = new home2();
+    home2Obj.init();
+    var video = document.getElementById("videoToPlay");
+    var video1 = document.getElementById("videoToPlay1");
+
+    function home2() {
+
+        var myScroll;
+        
+
+        this.init = function () {
+            // getAnnouncement()
+
+            $("#home2Page").css({ "width": w, "height": h - menuH + 20, "position": "absolute", "left": (-1.0) * w, "top": 0 });
+            document.getElementById('videobanner').pause();
+            $('#iconclose').attr('src', picRes['close_announce.png'])
+            $('#from_the_world').attr("src", picRes['from_the_world.png'])
+            $('#from_the_world2').attr("src", picRes['from_the_world2.png'])
+            $('#from_the_world3').attr("src", picRes['from_the_world3.png'])
+
+            myScroll = new IScroll('#scrollNew', { probeType: 1, mouseWheel: true });
+            setTimeout(() => {
+                myScroll = new IScroll('#home2Page', { probeType: 1, mouseWheel: true });
+            }, 500);
+            // loadList();
+
+            $(".checkin_btn").unbind().click(function () {
+
+                pageShow("checkinPage");
+            });
+            $("#team_salary_go").unbind().click(function () {
+
+                // pageShow("team_salaryPage");
+                // team_salaryObj.call();
+
+                pageShow("levelPage");
+                levelObj.call();
+
+
+
+            });
+
+            $("#videoOpen").click(function () {
+
+                $("#Popup_v").css({ "display": "flex" });
+                document.getElementById('videobanner').play();
+            })
+            $("#closeVideo").click(function () {
+                $("#Popup_v").css({ "display": "none", })
+
+                document.getElementById('videobanner').pause();
+            })
+            $("#first").unbind().click(function () {
+                home2Obj.first();
+
+            });
+
+            $("#receive_daily").unbind().click(function () {
+                pageShow("receive_dailyPage");
+                receive_dailyObj.call()
+
+            });
+            $("#invitation_registration").unbind().click(function () {
+                pageShow("invitation_registrationPage");
+                invitation_registrationObj.call()
+
+
+            });
+
+            $("#receive").unbind().click(function () {
+                msgObj.show(
+                    '<div><div style="flex-direction: column; width:100%;height:auto;display:flex;align-content: flex-start;justify-content: center;">' +
+                    '<span>输入兑换码 </span>' + '</div>' + `<div style="height:20px;"></div>` +
+                    '<input onkeydown="home2Obj.filterInput(event)" id="code"   type="text"/></div>' +
+                    `<div style="height:5px;"></div>` +
+                    `</div>`, function () {
+                        home2Obj.redempiontcode();
+                        msgObj.unShow()
+                    });
+            });
+
+
+            $("#event").show();
+            $("#tab-groud").hide();
+            $("#news").hide(); // แสดงเนื้อหาของ "latest events" เมื่อหน้าเว็บโหลดเสร็จ
+            $("#latest-events-tab").addClass("selected-tab");
+            $("#news-center-tab").removeClass("selected-tab");
+
+
+            // เมื่อคลิกที่ "latest events" tab
+            $("#latest-events-tab").unbind().click(function () {
+
+                // แสดงเนื้อหาของ "latest events"
+                $("#tab-groud").hide();
+                $("#event").show();  // แสดงเนื้อหาของ "latest events"
+                $("#news").hide();   // ซ่อนเนื้อหาของ "News Center"
+
+                // เพิ่มเอฟเฟกต์สีแดงขีดเส้นใต้
+                $("#latest-events-tab").addClass("selected-tab");
+                $("#news-center-tab").removeClass("selected-tab");
+
+                // myScroll = new IScroll('#home2Page', { probeType: 1, mouseWheel: true });
+            });
+
+
+            // เมื่อคลิกที่ "News Center" tab
+            $("#news-center-tab").unbind().click(function () {
+                $("#tab3").trigger("click");
+
+                $("#tab-groud").show();
+                $("#event").hide();
+                $("#news").show();
+
+                // myScroll = new IScroll('#home2Page', { probeType: 1, mouseWheel: true });
+                // เพิ่มเอฟเฟกต์สีแดงขีดเส้นใต้
+
+                $("#latest-events-tab").removeClass("selected-tab");
+                $("#news-center-tab").addClass("selected-tab");
+
+            });
+
+            // $("#tab1").click(function () {
+            //     $("#news").show();
+            //     $("#tab1").addClass("selected-tab-chind");
+            //     $("#tab1").removeClass("selected-tab-chind-default");
+            //     $("#tab2").addClass("selected-tab-chind-default");
+            //     $("#tab3").addClass("selected-tab-chind-default");
+            //     $("#tab4").addClass("selected-tab-chind-default");
+            //     myScroll = new IScroll('#home2Page', { probeType: 1, mouseWheel: true });
+            // });
+            // $("#tab2").click(function () {
+            //     $("#news").hide();
+            //     $("#tab2").addClass("selected-tab-chind");
+            //     $("#tab2").removeClass("selected-tab-chind-default");
+            //     $("#tab1").addClass("selected-tab-chind-default");
+            //     $("#tab3").addClass("selected-tab-chind-default");
+            //     $("#tab4").addClass("selected-tab-chind-default");
+            //     myScroll = new IScroll('#home2Page', { probeType: 1, mouseWheel: true });
+            // });
+            // $("#tab3").click(function () {
+            //     $("#news").hide();
+            //     $("#tab3").addClass("selected-tab-chind");
+            //     $("#tab3").removeClass("selected-tab-chind-default");
+            //     $("#tab2").addClass("selected-tab-chind-default");
+            //     $("#tab1").addClass("selected-tab-chind-default");
+            //     $("#tab4").addClass("selected-tab-chind-default");
+            //     myScroll = new IScroll('#home2Page', { probeType: 1, mouseWheel: true });
+            // });
+            // $("#tab4").click(function () {
+            //     $("#news").hide();
+            //     $("#tab4").addClass("selected-tab-chind");
+            //     $("#tab4").removeClass("selected-tab-chind-default");
+            //     $("#tab1").addClass("selected-tab-chind-default");
+            //     $("#tab3").addClass("selected-tab-chind-default");
+            //     $("#tab2").addClass("selected-tab-chind-default");
+            //     myScroll = new IScroll('#home2Page', { probeType: 1, mouseWheel: true });
+            // });
+            // $(".tab").unbind().click(function () {
+
+            //     var tabNumber = $(this).data("tab");
+
+            //     // Hide all tabs and remove/add classes accordingly
+            //     $(".tab").removeClass("selected-tab-chind selected-tab-chind-default");
+            //     $("#news").hide();
+
+            //     // Show or hide content based on the tab clicked
+            //     if (tabNumber === 1) {
+            //         $("#news").show();
+            //     }
+
+
+            //     // Add classes to the clicked tab
+            //     $(this).addClass("selected-tab-chind");
+
+            //     // Add default classes to other tabs
+            //     $(".tab").not(this).addClass("selected-tab-chind-default");
+
+            //     // Initialize or reinitialize IScroll
+            //     myScroll = new IScroll('#home2Page', { probeType: 1, mouseWheel: true });
+            // });
+
+
+
+
+
+
+
+
+
+            $('#openPopup').unbind().click(function () {
+                // loaderObj.show()
+                pageShow("informationListPage");
+                informationListObj.init();               
+                informationListObj.getAnnouncement_view();
+            })
+            $("#closeNewsPopup").unbind().click(function () {
+                $("#popupNews").css({ "display": "none", })
+                $("#newsPopup").css({ "display": "none", })
+            })
+            $(".clickclose").unbind().click(function () {
+                $("#popupNews").css({ "display": "none", })
+                $("#newsPopup").css({ "display": "none", })
+            })
+            $('#popupVideo').unbind().click(function () {
+                $("#popupVideo").css({ "display": "none", })
+                video.pause();
+            })
+            $('#popupVideo1').unbind().click(function () {
+                $("#popupVideo1").css({ "display": "none", })
+                video1.pause();
+            })
+
+
+
+        }
+
+        this.call = function () {
+
+            $("#home2Page").transition({
+                x: w
+            }, 0);
+            $("#latest-events-tab").trigger("click");
+            checkinObj.call();
+            getAnnouncement()
+            myScroll.refresh();
+            CheckMathCoupon();
+            getnewgroup();
+            // mySwiper.slideTo(0);
+            $("#tab3").trigger("click");
+
+
+        }
+
+
+        // var jsonData = [
+        //     {
+        //         "id": 0,
+        //         "name": "最新新闻"
+        //     },
+        //     {
+        //         "id": 3,
+        //         "name": "政策标准"
+        //     },
+        //     {
+        //         "id": 4,
+        //         "name": "文件发布"
+        //     },
+        //     {
+        //         "id": 6,
+        //         "name": "算力建设"
+        //     }
+        // ];
+
+
+
+
+        this.getNewpopup = function (item) {
+
+        }
+
+        function getAnnouncement() {
+            var getToken = window.localStorage.getItem('token');
+            var token = JSON.parse(getToken);
+
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/announcement',
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+                    var str = ""
+                    var announcementHTML = "";
+
+                    $.each(data.result, function (index, announcement) {
+                        announcementHTML += `
+                        
+                
+                
+                <swiper-slide style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; justify-content: flex-start; align-items: center;">
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;margin: 0 8px; " > 
+                             <span style="width: 55px;">公告：</span>${announcement.title}\n</div>
+            </swiper-slide>`
+                    })
+
+                    $(`#informationHeader`).html(announcementHTML)
+                    // 
+
+                    var Datenew = moment(data.result[0].date).format("YYYY-MM-DD");
+                    // <div style=" font-size: 16px;" >
+                    //     尊敬的会员，您好！
+                    // </div>
+                    str += ` 
+                    
+                        <div style="z-index: 99;">
+                    <div style="font-weight: bold; font-size: 20px;">
+                       ${data.result[0].title}
+                    </div>
+                    <br>
+                    
+                   
+                    <div style="width: 100%;"class="flexTop_c">
+                        <div style="width: 100%;font-size: 16px;align-items: flex-start;"class="flexTop_c">
+                            &emsp;&emsp;  ${data.result[0].content}
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: right; margin-top: 5px;font-size: 16px;">
+                        中国算力项目组宣
+                    </div>
+                    <div style="text-align: right;font-size: 16px;">
+                      ${Datenew}
+                    </div>
+                   
+                </div>
+                
+                <hr>`
+
+                    $('#videoNew').html(str);
+                    // myScroll = new IScroll('#scrollNew', { probeType: 1, mouseWheel: true });
+                    myScroll.refresh();
+                },
+
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError') + ': ' + error);
+                },
+            });
+        }
+
+        function CheckMathCoupon() {
+            var getToken = window.localStorage.getItem('token');
+            var token = JSON.parse(getToken);
+
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/profile/check-math-coupon',
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+                    console.log(data.result);
+                    if (data.result == true) {
+                        console.log(data.result);
+                        $("#first").css({ "background": "#918e8e", }).off()
+                    }
+                    else {
+                        $("#first").css({ "background": "linear-gradient(281deg, #EA372A 48.76%, #F83D3D 86.99%), #918e8e" });
+                    }
+
+                },
+
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError') + ': ' + error);
+                },
+            });
+        }
+
+        function getnewgroup() {
+            var str = '';
+            // var data = { result: jsonData }; // Use jsonData as a placeholder for the actual data
+            var getToken = window.localStorage.getItem('token');
+            var token = JSON.parse(getToken);
+
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/news/group',
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+                    if (data.result.length > 0) {
+                        // Iterate through the result array
+                        data.result.forEach(function (group) {
+                            // Use backticks for template literals
+                            var tabClass = (group.id === 0) ? 'selected-tab-chind' : 'selected-tab-chind-default';
+                            str += `<div class="tab ${tabClass}" data-tab="${group.id}" id="tab${group.id}">${group.name}</div>`;
+                        });
+
+                        // Set the HTML content of the "news" element
+                        $("#tab-groud").html(str);
+                        $("#tab3").trigger("click");
+                        // Assuming this is for initializing a scroll, make sure you have the necessary libraries loaded
+                        // myScroll = new IScroll('#home2Page', { probeType: 1, mouseWheel: true });
+
+                        // Add click event listener to each tab
+                        home2Obj.news()
+
+
+                    } else {
+                        // Handle the case when there are no results
+                        str += `<div class="tab selected-tab-chind" data-tab="null" id="tabnull">null</div>`;
+
+                        // Set the HTML content of the "news" element
+                        $("#tab-groud").html(str);
+                    }
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'));
+                }
+            })
+        }
+
+
+        this.news = function () {
+
+
+            var collect_id = [];
+            var getToken = window.localStorage.getItem('token');
+            var token = JSON.parse(getToken);
+
+            $.ajax({
+                type: 'get',
+                url: API_SERVER + '/v1/news',
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+                    if (data.code == 0) {
+                        if (data.result.length == 0) {
+                            str += '<div style="height: 50px;" class="flexCenter">没有数据</div>';
+                            $("#news").html(str);
+                            // myScroll = new IScroll('#home2Page', { probeType: 1, mouseWheel: true });
+                            myScroll.refresh();
+                        }
+
+                        if (data.result.length != 0) {
+                            // Filter the data based on tabId
+
+                            $(".tab").unbind().on("click", function () {
+                                // Remove both classes from all tabs
+                                $(".tab").removeClass("selected-tab-chind selected-tab-chind-default");
+
+                                // Add the "selected-tab-chind" class to the clicked tab
+                                $(this).addClass("selected-tab-chind");
+
+                                // Add the "selected-tab-chind-default" class to other tabs
+                                $(".tab").not(this).addClass("selected-tab-chind-default");
+
+                                // Get the data-tab attribute value of the clicked tab
+                                var tabId = $(this).data("tab");
+
+                                selectNews(tabId);
+
+                                // Perform some action based on the clicked tab, for example, show content related to the tab
+                                console.log("Tab clicked: " + tabId);
+                            });
+
+                            // Set the default selected tab to be the one with data-tab="2"
+
+                            // 触发第一个标签的点击事件（模拟点击）
+                            $("#tab3").click();
+
+                            function selectNews(tabId) {
+                                var filteredData = []
+                                var str = '';
+                                filteredData = data.result.filter(news => news.group === tabId);
+
+                                $('#news').html("");
+                                for (var i = 0; i <= 1; i++) {
+                                    var dataNew = [
+                                        {
+                                            id: 1,
+                                            title: "中国算力行动计划",
+                                            title1: "工业和信息化部等六部门印发《算力基础设施高质量发展行动计划》",
+                                            des: "2023-10-3"
+                                        },
+                                        {
+                                            id: 2,
+                                            title: "中国算力一体化平台",
+                                            title1: "打造全国算力基建、算力劵发放、算力信息发布、数据挖掘一体化服务平台",
+                                            des: "2023-10-3"
+                                        }
+
+                                    ]
+                                    if (tabId == 3) {
+
+                                        str += '<div style=" height: 5px;"></div>'
+                                        str += '<div style="display: flex; align-items: center; justify-content: space-between;">'
+
+                                        // สลับตำแหน่งรูปและข้อมูล
+                                        str += '<div style="display: flex; flex-direction: column; flex: 1; text-align: start;">'
+                                        str += '<div style="height: 10px;"></div>'
+                                        str += '<span style="font-size: 16px; text-align:start; " >' + dataNew[i].title + '</span>'
+                                        str += '<span style="font-size: 14px; color: #A4A4A4;text-align:start; " >' + dataNew[i].title1 + '</span>'
+                                        str += '<div style="height: 15px;"></div>'
+                                        str += '<span style="color: #A4A4A4; font-size: 14px;">' + dataNew[i].des + '</span>'
+                                        str += '</div>'
+
+                                        str += '<div class="openVideo' + dataNew[i].id + '" style="position: relative;" ><img class="image-item-video" src="./pic/home/an' + dataNew[i].id + '.png" alt="item"> <img style="position: absolute; height: 45px; left: 50%; top: 25%; transform: translateX(-50%);" src="./pic/home/cover.png" alt="item"></div> '
+
+                                        str += '</div>'
+                                        str += '<div style=" height: 5px;"></div>'
+                                        str += '<div class="line_app" style="width:100%; margin: 5px 0;"></div>';
+
+                                    }
+
+
+                                }
+
+                                $.each(filteredData, function (index, newsData) {
+                                    var newDate = moment(newsData.time).format("YYYY-MM-DD HH:mm");
+                                    str += '<div style=" height: 5px;"></div>'
+                                    str += '<div id="news_' + newsData.id + '" style="display: flex; align-items: center; justify-content: space-between;">'
+                                    str += '<div style="display: flex; flex-direction: column; flex: 1; text-align: start;">'
+                                    str += '<div style="height: 10px;"></div>'
+                                    str += '<span style="font-size: 16px; text-align:start; " >' + newsData.title + '</span>'
+                                    str += '<div style="height: 15px;"></div>'
+                                    str += '<span style="color: #A4A4A4; font-size: 14px;">' + newDate + '</span>'
+                                    str += '</div>'
+                                    str += '<img loading="lazy" class="image-item" src="' + (API_SERVER + newsData.image + '?Authorization=' + token.token) + '" alt="item">'
+                                    str += '</div>'
+
+                                    str += '<div style=" height: 5px;"></div>'
+                                    str += '<div class="line_app" style="width:100%; margin: 5px 0;"></div>'
+
+                                    collect_id.push({ "id": newsData.id, "img": newsData.image, "title": newsData.title, "time": newsData.time });
+
+                                });
+
+                                $('#news').html(str);
+                                $(".openVideo1").unbind().click(function () {
+                                    $("#popupVideo").css({ "display": "flex", });
+                                    video.play();
+
+                                })
+                                $(".openVideo2").unbind().click(function () {
+                                    $("#popupVideo1").css({ "display": "flex", });
+                                    video1.play();
+
+                                })
+                                // myScroll = new IScroll('#home2Page', { probeType: 1, mouseWheel: true });
+                                myScroll.refresh();
+
+                                $.each(collect_id, function (index, newsData) {
+                                    $(`#news_${newsData.id}`).unbind().click(function () {
+                                        pageShow("newsPage");
+                                        console.log(newsData.time);
+                                        newsObj.showNews(newsData.id, newsData.img, newsData.title, newsData.time);
+                                    });
+                                });
+                            }
+                        }
+                    } else {
+                        msgPageObj.show(getStatusCode(data.code));
+                        msgObj.unShow();
+                    }
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'));
+                },
+            });
+        };
+
+
+        this.first = function () {
+            var getToken = localStorage.getItem('token')
+            var token = JSON.parse(getToken)
+            $.ajax({
+                type: "post",
+                url: API_SERVER + `/v1/profile/math-coupon`,
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                success: function (data) {
+                    loaderObj.unShow();
+                    if (data.code == 0) {
+                        //msgPageObj.show(getStatusCode(data.code))
+                        //msgPageObj.show('恭喜您！获得40万算力券奖励！');
+                        msgPageObj.show('恭喜您，成功领取算力券!')
+                        msgObj.unShow();
+                    }
+                    else {
+                        if (data.code = 4089) {
+                            msgPageObj.show('无法重复领取奖励！');
+                            msgObj.unShow();
+                        } else {
+                            msgPageObj.show(getStatusCode(data.code))
+                            msgObj.unShow()
+                        }
+
+                    }
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+                },
+            });
+        }
+
+        //线上会议，领取奖励
+        this.redempiontcode = function () {
+            var getToken = localStorage.getItem('token')
+            var token = JSON.parse(getToken)
+            var code = $("#code").val()
+            $.ajax({
+                type: "post",
+                url: API_SERVER + `/v1/profile/active-code/${code}`,
+                headers: {
+                    'Authorization': 'Bearer ' + token.token,
+                },
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                timeout: 100000,
+                beforeSend: function (xmlhttprequest) { },
+                success: function (data) {
+                    loaderObj.unShow();
+                    if (data.code == 0) {
+                        //msgPageObj.show(getStatusCode(data.code))
+                        msgPageObj.show('兑换成功');
+                        msgObj.unShow()
+
+                    } else if (data.code == 4089) {
+                        msgPageObj.show('会议兑换码不可重复兑换')
+                        msgObj.unShow()
+                    } else if (data.code== 4099 ) {
+                        msgPageObj.show('当日兑换次数已达上限')
+                        msgObj.unShow()
+                    } else {
+                        msgPageObj.show(getStatusCode(data.code))
+                        msgObj.unShow()
+                    }
+                },
+                error: function (xmlhttprequest, error) {
+                    loaderObj.unShow();
+                    msgPageObj.show(NSLang('sys.serverError'))
+
+                },
+
+            });
+        }
+
+
+
+        function loadList() {
+            myScroll = new IScroll('#home2Page', { probeType: 1, mouseWheel: true });
+
+            // myScroll.on('scroll', function () {
+            //     console.log("====>" + this.y);
+            // });
+
+            myScroll.on('scrollEnd', function () {
+                console.log('====' + (new Date()));
+            });
+            myScroll.refresh();
+            // home2Obj.news();
+        }
+
+    }
+</script>
